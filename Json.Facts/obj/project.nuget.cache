@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "azcTV3Dyb1h/kkxvaaucXfEr+87ohf/uPnYwqUZbsWSx1v3Bc0C6AAkpH44TCDF6tE6WFS2SFBsIIfNMSDx2Xw==",
+  "dgSpecHash": "ch7cAZUaW9t5aN4mJe7ruUU9zpp7xtaQyT8uGwPce+/x8KR2IeqXzix7Ialdu5fDTuIbRbVM/Uu4zz1tMO0tSA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\horia\\OneDrive\\JuniorMind\\Module 2\\Json.Start\\Json.Facts\\Json.Facts.csproj",
+  "projectFilePath": "C:\\Users\\horia\\OneDrive\\Gits\\horiah26\\HanganHoriaJuniorMind\\Json.Facts\\Json.Facts.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\horia\\.nuget\\packages\\coverlet.collector\\1.2.0\\coverlet.collector.1.2.0.nupkg.sha512",
     "C:\\Users\\horia\\.nuget\\packages\\microsoft.codecoverage\\16.5.0\\microsoft.codecoverage.16.5.0.nupkg.sha512",

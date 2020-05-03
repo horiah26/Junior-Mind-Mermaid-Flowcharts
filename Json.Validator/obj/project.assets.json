@@ -3762,11 +3762,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\horia\\OneDrive\\JuniorMind\\Module 2\\Json.Start\\Json.Validator\\Json.csproj",
+      "projectUniqueName": "C:\\Users\\horia\\OneDrive\\Gits\\horiah26\\HanganHoriaJuniorMind\\Json.Validator\\Json.csproj",
       "projectName": "Json",
-      "projectPath": "C:\\Users\\horia\\OneDrive\\JuniorMind\\Module 2\\Json.Start\\Json.Validator\\Json.csproj",
+      "projectPath": "C:\\Users\\horia\\OneDrive\\Gits\\horiah26\\HanganHoriaJuniorMind\\Json.Validator\\Json.csproj",
       "packagesPath": "C:\\Users\\horia\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\horia\\OneDrive\\JuniorMind\\Module 2\\Json.Start\\Json.Validator\\obj\\",
+      "outputPath": "C:\\Users\\horia\\OneDrive\\Gits\\horiah26\\HanganHoriaJuniorMind\\Json.Validator\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\horia\\AppData\\Roaming\\NuGet\\NuGet.Config",

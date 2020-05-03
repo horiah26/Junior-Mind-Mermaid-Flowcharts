@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\horia\\OneDrive\\JuniorMind\\Module 2\\Json.Start\\Json.Facts\\Json.Facts.csproj": {}
+    "C:\\Users\\horia\\OneDrive\\Gits\\horiah26\\HanganHoriaJuniorMind\\Json.Facts\\Json.Facts.csproj": {}
   },
   "projects": {
-    "C:\\Users\\horia\\OneDrive\\JuniorMind\\Module 2\\Json.Start\\Json.Facts\\Json.Facts.csproj": {
+    "C:\\Users\\horia\\OneDrive\\Gits\\horiah26\\HanganHoriaJuniorMind\\Json.Facts\\Json.Facts.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\horia\\OneDrive\\JuniorMind\\Module 2\\Json.Start\\Json.Facts\\Json.Facts.csproj",
+        "projectUniqueName": "C:\\Users\\horia\\OneDrive\\Gits\\horiah26\\HanganHoriaJuniorMind\\Json.Facts\\Json.Facts.csproj",
         "projectName": "Json.Facts",
-        "projectPath": "C:\\Users\\horia\\OneDrive\\JuniorMind\\Module 2\\Json.Start\\Json.Facts\\Json.Facts.csproj",
+        "projectPath": "C:\\Users\\horia\\OneDrive\\Gits\\horiah26\\HanganHoriaJuniorMind\\Json.Facts\\Json.Facts.csproj",
         "packagesPath": "C:\\Users\\horia\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\horia\\OneDrive\\JuniorMind\\Module 2\\Json.Start\\Json.Facts\\obj\\",
+        "outputPath": "C:\\Users\\horia\\OneDrive\\Gits\\horiah26\\HanganHoriaJuniorMind\\Json.Facts\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\horia\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -27,8 +27,8 @@
         "frameworks": {
           "netcoreapp3.1": {
             "projectReferences": {
-              "C:\\Users\\horia\\OneDrive\\JuniorMind\\Module 2\\Json.Start\\Json.Validator\\Json.csproj": {
-                "projectPath": "C:\\Users\\horia\\OneDrive\\JuniorMind\\Module 2\\Json.Start\\Json.Validator\\Json.csproj"
+              "C:\\Users\\horia\\OneDrive\\Gits\\horiah26\\HanganHoriaJuniorMind\\Json.Validator\\Json.csproj": {
+                "projectPath": "C:\\Users\\horia\\OneDrive\\Gits\\horiah26\\HanganHoriaJuniorMind\\Json.Validator\\Json.csproj"
               }
             }
           }
@@ -82,14 +82,14 @@
         }
       }
     },
-    "C:\\Users\\horia\\OneDrive\\JuniorMind\\Module 2\\Json.Start\\Json.Validator\\Json.csproj": {
+    "C:\\Users\\horia\\OneDrive\\Gits\\horiah26\\HanganHoriaJuniorMind\\Json.Validator\\Json.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\horia\\OneDrive\\JuniorMind\\Module 2\\Json.Start\\Json.Validator\\Json.csproj",
+        "projectUniqueName": "C:\\Users\\horia\\OneDrive\\Gits\\horiah26\\HanganHoriaJuniorMind\\Json.Validator\\Json.csproj",
         "projectName": "Json",
-        "projectPath": "C:\\Users\\horia\\OneDrive\\JuniorMind\\Module 2\\Json.Start\\Json.Validator\\Json.csproj",
+        "projectPath": "C:\\Users\\horia\\OneDrive\\Gits\\horiah26\\HanganHoriaJuniorMind\\Json.Validator\\Json.csproj",
         "packagesPath": "C:\\Users\\horia\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\horia\\OneDrive\\JuniorMind\\Module 2\\Json.Start\\Json.Validator\\obj\\",
+        "outputPath": "C:\\Users\\horia\\OneDrive\\Gits\\horiah26\\HanganHoriaJuniorMind\\Json.Validator\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\horia\\AppData\\Roaming\\NuGet\\NuGet.Config",

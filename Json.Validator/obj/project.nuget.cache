@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "ZcHWn+SsuyTmOfdleXQGgdFnY+vvC0RSx5pKBRso+v44F+JPoZlwU2m1oFLcx+rtocj325L0IFH5bRfBtJDZQQ==",
+  "dgSpecHash": "qHYnRYMOteL6GE7abCFbnVETSxIXZTvh+xxVerftIsvGqw01SqZAapW9zkT6107QvLk1VvtDrarSHSwAaQFqvA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\horia\\OneDrive\\JuniorMind\\Module 2\\Json.Start\\Json.Validator\\Json.csproj",
+  "projectFilePath": "C:\\Users\\horia\\OneDrive\\Gits\\horiah26\\HanganHoriaJuniorMind\\Json.Validator\\Json.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\horia\\.nuget\\packages\\microsoft.codeanalysis.fxcopanalyzers\\2.9.8\\microsoft.codeanalysis.fxcopanalyzers.2.9.8.nupkg.sha512",
     "C:\\Users\\horia\\.nuget\\packages\\microsoft.codeanalysis.versioncheckanalyzer\\2.9.8\\microsoft.codeanalysis.versioncheckanalyzer.2.9.8.nupkg.sha512",

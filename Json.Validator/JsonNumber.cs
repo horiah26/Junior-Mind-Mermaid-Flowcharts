@@ -11,13 +11,29 @@ namespace Json
                 return false;
             }
 
-            if (input[0] == '0' && input.Length != 1)
+            if (MultipleDots(input))
             {
                 return false;
             }
 
-            int number;
-            return int.TryParse(input, out number);
+            if (input[0] == '0' && input.Length != 1 && input.IndexOf(".") != 1)
+            {
+                return false;
+            }
+
+            if (input[input.Length - 1] == '.')
+            {
+                return false;
+            }
+
+            double number;
+            return double.TryParse(input, out number);
+        }
+
+        static bool MultipleDots(string input)
+        {
+            const int maxDots = 2;
+            return input.Length - input.Replace(".", "").Length >= maxDots;
         }
     }
 }
