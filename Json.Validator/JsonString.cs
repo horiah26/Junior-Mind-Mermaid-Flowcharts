@@ -11,6 +11,19 @@ namespace Json
                 return false;
             }
 
+            for (int i = 0; i < input.Length; i++)
+            {
+                if (char.IsControl(input[i]))
+                {
+                    return false;
+                }
+            }
+
+            if (input == "\"")
+            {
+                return false;
+            }
+
             return input[0] == '"' && input[input.Length - 1] == '"';
         }
     }
