@@ -6,7 +6,7 @@ namespace Json
     {
         public static bool IsJsonString(string input)
         {
-            throw new NotImplementedException();
+            return input[0] == '"' && input[input.Length - 1] == '"';
         }
     }
 }

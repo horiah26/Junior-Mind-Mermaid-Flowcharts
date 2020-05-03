@@ -5,7 +5,7 @@ namespace Json.Facts
 {
     public class JsonStringFacts
     {
-        [Fact(Skip = "Remove this Skip as you implement")]
+        [Fact]
         public void IsWrappedInDoubleQuotes()
         {
             Assert.True(IsJsonString(Quoted("abc")));
