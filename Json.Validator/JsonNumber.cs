@@ -7,22 +7,27 @@ namespace Json
     {
         public static bool IsJsonNumber(string input)
         {
-            return !HasLetters(input);
-        }
-
-        static bool HasLetters(string input)
-        {
-            const string forbiddenLetters = "abcdfghijklmnopqrstuvwxyz";
-
-            foreach (char c in input)
+            if (string.IsNullOrEmpty(input))
             {
-                if (forbiddenLetters.IndexOf(c) != -1)
-                {
-                    return true;
-                }
+                return false;
             }
 
-            return false;
+            return !HasLetters(input);
+
+            static bool HasLetters(string input)
+            {
+                const string forbiddenLetters = "abcdfghijklmnopqrstuvwxyz";
+
+                foreach (char c in input)
+                {
+                    if (forbiddenLetters.IndexOf(c) != -1)
+                    {
+                        return true;
+                    }
+                }
+
+                return false;
+            }
         }
     }
 }
