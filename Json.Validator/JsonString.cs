@@ -33,12 +33,7 @@ namespace Json
                 return false;
             }
 
-            if (!CheckPositionOfSlash(input))
-            {
-                return false;
-            }
-
-            return input[0] == '"' && input[input.Length - 1] == '"';
+            return CheckPositionOfSlash(input) && input[0] == '"' && input[input.Length - 1] == '"';
         }
 
         static bool NotCharacterEscape(char letter)
