@@ -21,7 +21,7 @@ namespace Json
 
             foreach (char c in input)
             {
-                if (forbiddenLetters.IndexOf(c) == 1)
+                if (forbiddenLetters.IndexOf(c) != -1)
                 {
                     return true;
                 }
