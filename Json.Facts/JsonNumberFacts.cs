@@ -6,7 +6,7 @@ namespace Json.Facts
 {
     public class JsonNumberFacts
     {
-        [Fact(Skip = "Remove this Skip as you implement")]
+        [Fact]
         public void CanBeZero()
         {
             Assert.True(IsJsonNumber("0"));

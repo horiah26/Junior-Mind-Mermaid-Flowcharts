@@ -6,7 +6,8 @@ namespace Json
     {
         public static bool IsJsonNumber(string input)
         {
-            throw new NotImplementedException();
+            const string numbers = "0123456789";
+            return numbers.IndexOf(input) != -1;
         }
     }
 }
