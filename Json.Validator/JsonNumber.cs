@@ -21,6 +21,21 @@ namespace Json
 
             foreach (char c in input)
             {
+                if (forbiddenLetters.IndexOf(c) == 1)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        static bool HasNumbers(string input)
+        {
+            const string forbiddenLetters = "abcdfghijklmnopqrstuvwxyz";
+
+            foreach (char c in input)
+            {
                 if (forbiddenLetters.IndexOf(c) == -1)
                 {
                     return true;
