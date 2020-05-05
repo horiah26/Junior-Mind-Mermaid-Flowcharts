@@ -34,6 +34,8 @@ namespace Json
         {
             const string forbiddenLetters = "abcdfghijklmnopqrstuvwxyz";
 
+            input = input.ToLower();
+
             foreach (char c in input)
             {
                 if (forbiddenLetters.IndexOf(c) != -1)
