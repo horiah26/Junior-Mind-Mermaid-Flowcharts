@@ -22,6 +22,11 @@ namespace Json
                 return false;
             }
 
+            if (HasMultipleDots(input))
+            {
+                return false;
+            }
+
             return !HasLetters(input);
         }
 
@@ -38,6 +43,11 @@ namespace Json
             }
 
             return false;
+        }
+
+        static bool HasMultipleDots(string input)
+        {
+            return input.Length - input.Replace(".", "").Length > 1;
         }
     }
 }
