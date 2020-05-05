@@ -12,7 +12,7 @@ namespace Json.Facts
             Assert.True(IsJsonNumber("0"));
         }
 
-        [Fact(Skip = "Remove this Skip as you implement")]
+        [Fact]
         public void DoesNotContainLetters()
         {
             Assert.False(IsJsonNumber("a"));
