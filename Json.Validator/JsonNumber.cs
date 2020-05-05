@@ -12,6 +12,11 @@ namespace Json
                 return false;
             }
 
+            if (input[0] == '0' && input.Length > 1)
+            {
+                return false;
+            }
+
             return !HasLetters(input);
 
             static bool HasLetters(string input)
