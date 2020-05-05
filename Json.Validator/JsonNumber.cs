@@ -18,21 +18,21 @@ namespace Json
             }
 
             return !HasLetters(input);
+        }
 
-            static bool HasLetters(string input)
+        static bool HasLetters(string input)
+        {
+            const string forbiddenLetters = "abcdfghijklmnopqrstuvwxyz";
+
+            foreach (char c in input)
             {
-                const string forbiddenLetters = "abcdfghijklmnopqrstuvwxyz";
-
-                foreach (char c in input)
+                if (forbiddenLetters.IndexOf(c) != -1)
                 {
-                    if (forbiddenLetters.IndexOf(c) != -1)
-                    {
-                        return true;
-                    }
+                    return true;
                 }
-
-                return false;
             }
+
+            return false;
         }
     }
 }
