@@ -12,6 +12,11 @@ namespace Json
                 return false;
             }
 
+            if (input[input.Length - 1] == '.')
+            {
+                return false;
+            }
+
             if (input[0] == '0' && input.Length > 1 && input.IndexOf('.') == -1)
             {
                 return false;
