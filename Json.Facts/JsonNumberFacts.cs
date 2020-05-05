@@ -127,7 +127,7 @@ namespace Json.Facts
             Assert.False(IsJsonNumber("22e3x3"));
         }
 
-        [Fact(Skip = "Remove this Skip as you implement")]
+        [Fact]
         public void DoesNotHaveTwoExponents()
         {
             Assert.False(IsJsonNumber("22e323e33"));

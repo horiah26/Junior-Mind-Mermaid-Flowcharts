@@ -22,7 +22,7 @@ namespace Json
                 return false;
             }
 
-            if (HasMultipleDots(input))
+            if (HasMultipleDotsOrExponents(input))
             {
                 return false;
             }
@@ -47,9 +47,9 @@ namespace Json
             return false;
         }
 
-        static bool HasMultipleDots(string input)
+        static bool HasMultipleDotsOrExponents(string input)
         {
-            return input.Length - input.Replace(".", "").Length > 1;
+            return input.Length - input.Replace(".", "").Length > 1 || input.Length - input.Replace("e", "").Length > 1;
         }
     }
 }
