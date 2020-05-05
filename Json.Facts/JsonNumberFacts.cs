@@ -121,7 +121,7 @@ namespace Json.Facts
             Assert.True(IsJsonNumber("12.34E3"));
         }
 
-        [Fact(Skip = "Remove this Skip as you implement")]
+        [Fact]
         public void TheExponentDoesNotAllowLetters()
         {
             Assert.False(IsJsonNumber("22e3x3"));
