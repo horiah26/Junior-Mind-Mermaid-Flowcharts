@@ -12,7 +12,7 @@ namespace Json
                 return false;
             }
 
-            if (input[input.Length - 1] == '.')
+            if (!char.IsLetterOrDigit(input[input.Length - 1]))
             {
                 return false;
             }
@@ -23,6 +23,16 @@ namespace Json
             }
 
             if (HasMultipleDotsOrExponents(input))
+            {
+                return false;
+            }
+
+            if (ExponentAsLastChar(input))
+            {
+                return false;
+            }
+
+            if (DotAfterExponent(input))
             {
                 return false;
             }
@@ -50,6 +60,17 @@ namespace Json
         static bool HasMultipleDotsOrExponents(string input)
         {
             return input.Length - input.Replace(".", "").Length > 1 || input.Length - input.Replace("e", "").Length > 1;
+        }
+
+        static bool ExponentAsLastChar(string input)
+        {
+            input = input.ToLower();
+            return input[input.Length - 1] == 'e';
+        }
+
+        static bool DotAfterExponent(string input)
+        {
+            return input.LastIndexOf('.') > input.LastIndexOf('e') && input.IndexOf('.') != -1 && input.IndexOf('e') != -1;
         }
     }
 }
