@@ -47,7 +47,7 @@ namespace SoccerTeamTests.cs
             SoccerTeam Team = new SoccerTeam("FCSB", 12);
             SoccerTeam Team2 = new SoccerTeam("FCSB", 15);
 
-            Assert.True(Team.Compare(Team2));
+            Assert.True(Team.HasFewerPoints(Team2));
         }
 
         [Fact]
@@ -56,7 +56,7 @@ namespace SoccerTeamTests.cs
             SoccerTeam Team = new SoccerTeam("FCSB", 12);
             SoccerTeam Team2 = new SoccerTeam("FCSB", 15);
 
-            Assert.False(Team2.Compare(Team));
+            Assert.False(Team2.HasFewerPoints(Team));
         }
     }
 }

@@ -20,19 +20,37 @@ namespace RankingBoard
 
         public void Match(SoccerTeam Team1, SoccerTeam Team2, int goalsByTeam1, int GoalsByTeam2)
         {
-            Team1.UpdatePoints(goalsByTeam1);
-            Team2.UpdatePoints(GoalsByTeam2);
+            if (goalsByTeam1 > GoalsByTeam2)
+            {
+                Team1.UpdatePoints(3);
+            }
+            else if (goalsByTeam1 < GoalsByTeam2)
+            {
+                Team2.UpdatePoints(3);
+            }
+            else
+            {
+                Team1.UpdatePoints(1);
+                Team2.UpdatePoints(1);
+            } 
         }
 
-
-        public bool IsFirstTeam(SoccerTeam Team)
+        public int Position(SoccerTeam team)
         {
-            return Team.IsEqual(teams[0]);
+            for (int i = 0; i < teams.Length; i++)
+            {
+                if (teams[i].IsEqual(team))
+                {
+                    return i;
+                }
+            }
+
+            return -1;
         }
 
-        public bool IsLastTeam(SoccerTeam Team)
-        {
-            return Team.IsEqual(teams[teams.Length - 1]);
+        public SoccerTeam TeamInPosition(int position)
+        {          
+            return teams[position];    
         }
 
         private void BubbleSort()
@@ -41,31 +59,14 @@ namespace RankingBoard
             {
                 for (int j = 0; j < teams.Length - i - 1; j++)
                 {
-                    if (teams[j].Compare(teams[j + 1]))
+                    if (teams[j].HasFewerPoints(teams[j+1]))
                     {
-                        Swap(j, j + 1);
+                        SoccerTeam temp = teams[j];
+                        teams[j] = teams[j + 1];
+                        teams[j + 1] = temp;
                     }
                 }
             }
-        }
-
-        private void Swap(int firstIndex, int secondIndex)
-        {
-            (int minIndex, int maxIndex) = GetMinMaxIndex(firstIndex, secondIndex);
-
-            SoccerTeam temp = teams[minIndex];
-            teams[minIndex] = teams[maxIndex];
-            teams[maxIndex] = temp;
-        }
-
-        private (int minIndex, int maxIndex) GetMinMaxIndex(int firstIndex, int secondIndex)
-        {
-            if (firstIndex > secondIndex)
-            {
-                return (secondIndex, firstIndex);
-            }
-
-            return (firstIndex, secondIndex);
         }
     }
 

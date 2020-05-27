@@ -15,7 +15,7 @@ namespace SoccerRanking
             this.Points = points;
         }
 
-        public bool Compare(SoccerTeam that)
+        public bool HasFewerPoints(SoccerTeam that)
         {
             return this.Points < that.Points;
         }
