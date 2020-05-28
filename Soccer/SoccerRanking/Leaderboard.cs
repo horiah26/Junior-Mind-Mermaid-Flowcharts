@@ -55,25 +55,22 @@ namespace RankingBoard
 
         private void BubbleSort()
         {
-            for (int i = 0; i < teams.Length; i++)
+            bool swapped;
+            do
             {
-                bool swapped = false;
-                for (int j = 0; j < teams.Length - i - 1; j++)
+                swapped = false;
+
+                for (int j = 0; j < teams.Length - 1; j++)
                 {
-                    if (teams[j].HasFewerPoints(teams[j+1]))
+                    if (teams[j].HasFewerPoints(teams[j + 1]))
                     {
                         SoccerTeam temp = teams[j];
                         teams[j] = teams[j + 1];
                         teams[j + 1] = temp;
                         swapped = true;
                     }
-                }           
-
-                if (!swapped)
-                {
-                    break;
                 }
-            }
+            } while (swapped);
         }
     }
 
