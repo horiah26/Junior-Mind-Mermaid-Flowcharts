@@ -4,6 +4,11 @@ using System.Text;
 
 namespace Range
 {
+    interface IPattern
+    {
+        bool Match(string text);
+    }
+
     class Character
     {
         readonly char pattern;
