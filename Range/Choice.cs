@@ -13,7 +13,7 @@ namespace Range
 
     public class Choice : IPattern
     {
-        public IPattern[] Patterns;
+        IPattern[] Patterns;
 
         public Choice(params IPattern[] patterns)
         {
@@ -24,13 +24,13 @@ namespace Range
         {
             foreach (var pattern in Patterns)
             {
-                if (pattern.Match(text) == false)
+                if (pattern.Match(text) == true)
                 {
-                    return false;                    
+                    return true;                    
                 }
             }
 
-            return true;
+            return false;
         }
     }
 }

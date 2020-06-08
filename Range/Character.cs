@@ -4,12 +4,8 @@ using System.Text;
 
 namespace Range
 {
-    interface IPattern
-    {
-        bool Match(string text);
-    }
 
-    class Character
+    public class Character : IPattern
     {
         readonly char pattern;
 

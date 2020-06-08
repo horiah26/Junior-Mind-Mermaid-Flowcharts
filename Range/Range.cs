@@ -6,7 +6,7 @@ using System.Threading;
 
 namespace Range
 {
-    public class Range
+    public class Range : IPattern
     {
         private char start;
         private char end;
@@ -21,7 +21,7 @@ namespace Range
         {
             if(String.IsNullOrEmpty(text))
             {
-                throw new System.ArgumentException("Parameter cannot be null or empty");
+                return false;
             }
 
             if(text[0] >= start && text[0] <= end)
