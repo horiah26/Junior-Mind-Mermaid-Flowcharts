@@ -14,13 +14,21 @@ namespace Range
             this.pattern = pattern;
         }
 
-        public bool Match(string text)
+        Match match = new Match(true, "");
+
+        IMatch IPattern.Match(string text)
         {
             if (string.IsNullOrEmpty(text))
-                return false;
+            {
+                match.IsFalse();
+                return match;
+            }
 
-            return text[0] == pattern;
+            text[0] == pattern ? match.IsTrue() : match.IsFalse()
+
+
+            return match;
+             
         }
     }
-
 }

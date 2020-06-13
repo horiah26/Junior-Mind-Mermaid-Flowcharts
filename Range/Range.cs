@@ -8,7 +8,7 @@ namespace Range
 {
     public class Range : IPattern
     {
-        private char start;
+        private char start; 
         private char end;
 
         public Range(char start, char end)
@@ -30,6 +30,21 @@ namespace Range
             }
 
             return false;
+        }
+
+        public bool Success()
+        {
+            return true;
+        }
+
+        public string RemainingText()
+        {
+            return "asa";
+        }
+
+        IMatch IPattern.Match(string text)
+        {
+            throw new NotImplementedException();
         }
     }
 
