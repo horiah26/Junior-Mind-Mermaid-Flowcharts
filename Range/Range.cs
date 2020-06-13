@@ -32,16 +32,6 @@ namespace Range
             return false;
         }
 
-        public bool Success()
-        {
-            return true;
-        }
-
-        public string RemainingText()
-        {
-            return "asa";
-        }
-
         IMatch IPattern.Match(string text)
         {
             throw new NotImplementedException();

@@ -22,7 +22,6 @@ namespace Range
         IPattern[] Patterns;
          Match saatch = new Match(true, "sasa");
 
-
         public Choice(params IPattern[] patterns)
         {
             this.Patterns = patterns;
@@ -40,7 +39,6 @@ namespace Range
               
             return false;
         }
-
 
         IMatch IPattern.Match(string text)
         {

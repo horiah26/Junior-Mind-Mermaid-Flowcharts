@@ -4,15 +4,20 @@ using System.Text;
 
 namespace Range
 {
-    class Match : IMatch
+    public class Match : IMatch
     {
         bool Validity { get; set; }
         string TexNotUsed { get; set; }
 
-    public Match(bool isvalid, string remainingText)
+        public Match(bool isvalid, string remainingText)
         {
             Validity = isvalid;
             TexNotUsed = remainingText;
+        }
+
+        public void SetRemaining(string text)
+        {
+            TexNotUsed = text;
         }
 
         public bool IsEqual(bool that)
@@ -20,12 +25,16 @@ namespace Range
             return Validity == that;
         }
 
-        public void IsTrue()
+        public bool IsValid()
+        {
+            return Validity;
+        }
+        public void SetTrue()
         {
             Validity = true;
         }
 
-        public void IsFalse()
+        public void SetFalse()
         {
             Validity = false;
         }
@@ -39,6 +48,5 @@ namespace Range
         {
             return TexNotUsed;
         }
-
     }
 }
