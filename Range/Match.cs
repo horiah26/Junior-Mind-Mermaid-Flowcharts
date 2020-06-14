@@ -20,15 +20,6 @@ namespace Range
             TexNotUsed = text;
         }
 
-        public bool IsEqual(bool that)
-        {
-            return Validity == that;
-        }
-
-        public bool IsValid()
-        {
-            return Validity;
-        }
         public void SetTrue()
         {
             Validity = true;
@@ -48,5 +39,7 @@ namespace Range
         {
             return TexNotUsed;
         }
+
+
     }
 }

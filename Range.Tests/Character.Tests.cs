@@ -25,7 +25,7 @@ namespace Range.Tests
         public void ReturnsText()
         {
             var character = new Character('a');
-            Assert.Equal(character.Match("abc").RemainingText(), "bc");
+            Assert.Equal("bc", character.Match("abc").RemainingText());
         }
     }
 }

@@ -14,7 +14,7 @@ namespace Range.Tests
             new Range('1', '9')
         );
 
-            Assert.True(digit.Match("012"));
+            Assert.True(digit.Match("012").Success());
         }
 
         [Fact]
@@ -25,7 +25,7 @@ namespace Range.Tests
             new Range('1', '9')
         );
 
-            Assert.True(digit.Match("12"));
+            Assert.True(digit.Match("12").Success());
         }
 
         [Fact]
@@ -36,7 +36,7 @@ namespace Range.Tests
             new Range('1', '9')
         );
 
-            Assert.True(digit.Match("92"));
+            Assert.True(digit.Match("92").Success());
         }
 
         [Fact]
@@ -47,7 +47,7 @@ namespace Range.Tests
             new Range('1', '9')
         );
 
-            Assert.False(digit.Match("a9"));
+            Assert.False(digit.Match("a9").Success());
         }
 
         [Fact]
@@ -58,7 +58,7 @@ namespace Range.Tests
             new Range('1', '9')
         );
 
-            Assert.False(digit.Match(""));
+            Assert.False(digit.Match("").Success());
         }
 
         [Fact]
@@ -69,7 +69,7 @@ namespace Range.Tests
             new Range('1', '9')
         );
 
-            Assert.False(digit.Match(null));
+            Assert.False(digit.Match(null).Success());
         }
 
         [Fact]
@@ -86,7 +86,7 @@ namespace Range.Tests
             new Range('A', 'F'))
             );
 
-            Assert.True(hex.Match("012"));
+            Assert.True(hex.Match("012").Success());
         }
 
         [Fact]
@@ -103,7 +103,7 @@ namespace Range.Tests
             new Range('A', 'F'))
             );
 
-            Assert.True(hex.Match("12"));
+            Assert.True(hex.Match("12").Success());
         }
 
         [Fact]
@@ -120,7 +120,7 @@ namespace Range.Tests
             new Range('A', 'F'))
             );
 
-            Assert.True(hex.Match("92"));
+            Assert.True(hex.Match("92").Success());
         }
 
         [Fact]
@@ -137,7 +137,7 @@ namespace Range.Tests
             new Range('A', 'F'))
             );
 
-            Assert.True(hex.Match("a9"));
+            Assert.True(hex.Match("a9").Success());
         }
 
         [Fact]
@@ -154,7 +154,7 @@ namespace Range.Tests
             new Range('A', 'F'))
             );
 
-            Assert.True(hex.Match("f8"));
+            Assert.True(hex.Match("f8").Success());
         }
 
         [Fact]
@@ -171,7 +171,7 @@ namespace Range.Tests
             new Range('A', 'F'))
             );
 
-            Assert.True(hex.Match("A9"));
+            Assert.True(hex.Match("A9").Success());
         }
 
         [Fact]
@@ -188,7 +188,7 @@ namespace Range.Tests
             new Range('A', 'F'))
             );
 
-            Assert.True(hex.Match("F8"));
+            Assert.True(hex.Match("F8").Success());
         }
 
         [Fact]
@@ -205,7 +205,7 @@ namespace Range.Tests
             new Range('A', 'F'))
             );
 
-            Assert.False(hex.Match("g8"));
+            Assert.False(hex.Match("g8").Success());
         }
 
         [Fact]
@@ -222,7 +222,7 @@ namespace Range.Tests
             new Range('A', 'F'))
             );
 
-            Assert.False(hex.Match("G8"));
+            Assert.False(hex.Match("G8").Success());
         }
 
         [Fact]
@@ -239,7 +239,7 @@ namespace Range.Tests
             new Range('A', 'F'))
             );
 
-           Assert.False(hex.Match(""));
+           Assert.False(hex.Match("").Success());
         }
 
         [Fact]
@@ -256,7 +256,7 @@ namespace Range.Tests
             new Range('A', 'F'))
             );
 
-            Assert.False(hex.Match(null));
+            Assert.False(hex.Match(null).Success());
         }
 
     }

@@ -20,29 +20,29 @@ namespace Range
     public class Choice : IPattern
     {
         IPattern[] Patterns;
-         Match saatch = new Match(true, "sasa");
+         Match match = new Match(false, "");
 
         public Choice(params IPattern[] patterns)
         {
             this.Patterns = patterns;
         }
 
-        public bool Match(string text)
+        public IMatch Match(string text)
         {
             foreach (var pattern in Patterns)
             {
-                if (pattern.Match(text) == saatch)
+                if (pattern.Match(text).Success() == true)
                 {
-                    return true;                    
+                    match.SetTrue();
+                }
+                else if (string.IsNullOrEmpty(text))
+                {
+                     match.SetFalse();
+                     return match;                    
                 }
             }
-              
-            return false;
-        }
 
-        IMatch IPattern.Match(string text)
-        {
-            return saatch;
+            return match;
         }
     }
 }

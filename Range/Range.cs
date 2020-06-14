@@ -10,32 +10,28 @@ namespace Range
     {
         private char start; 
         private char end;
+        Match match = new Match(false, "");
 
         public Range(char start, char end)
         {
             this.start = start;
             this.end = end;
         }
-
-        public bool Match(string text)
+        public IMatch Match(string text)
         {
-            if(String.IsNullOrEmpty(text))
+            if (String.IsNullOrEmpty(text))
             {
-                return false;
+                match.SetFalse();
             }
 
-            if(text[0] >= start && text[0] <= end)
+            if (text[0] >= start && text[0] <= end)
             {
-                return true;
+                match.SetTrue();
             }
 
-            return false;
-        }
-
-        IMatch IPattern.Match(string text)
-        {
-            throw new NotImplementedException();
+            return match;
         }
     }
+    
 
 }
