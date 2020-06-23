@@ -15,19 +15,9 @@ namespace JSON
 
         public IMatch Match(string text)
         {
-            if (string.IsNullOrEmpty(text))
-            {
-                return new Match(false, text);
-            }
-            foreach(char c in accepted)
-            {
-                if (text[0] == c)
-                {
-                    return new Match(true, text.Substring(1));
-                }
-            }
-
-            return new Match(false, text);            
+            return !string.IsNullOrEmpty(text) && accepted.Contains(text[0])
+                    ? new Match(true, text.Substring(1))
+                    : new Match(false, text);
         }
     }
 }
