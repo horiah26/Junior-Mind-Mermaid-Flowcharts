@@ -3,7 +3,7 @@ using System.ComponentModel;
 using System.Text.RegularExpressions;
 using Xunit;
 
-namespace Range.Tests
+namespace JSON.Tests
 {
     public class CharacterTests
     {
@@ -19,13 +19,6 @@ namespace Range.Tests
         {
             var character = new Character('a');
             Assert.False(character.Match("bac").Success());
-        }
-
-        [Fact]
-        public void ReturnsText()
-        {
-            var character = new Character('a');
-            Assert.Equal("bc", character.Match("abc").RemainingText());
-        }
+        } 
     }
 }

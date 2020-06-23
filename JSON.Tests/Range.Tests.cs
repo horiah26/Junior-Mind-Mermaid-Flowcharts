@@ -2,7 +2,7 @@ using System;
 using System.ComponentModel;
 using Xunit;
 
-namespace Range.Tests
+namespace JSON.Tests
 {
     public class RangeTests
     {
