@@ -94,5 +94,23 @@ namespace JSON.Tests
             Assert.False(False.Match(null).Success());
             Assert.Null(False.Match(null).RemainingText());
         }
+
+        [Fact]
+        public void Test11()
+        {
+            var empty = new Text("");
+
+            Assert.True(empty.Match("true").Success());
+            Assert.Equal("true", empty.Match("true").RemainingText());
+        }
+
+        [Fact]
+        public void Test12()
+        {
+            var empty = new Text("");
+
+            Assert.False(empty.Match(null).Success());
+            Assert.Null(empty.Match(null).RemainingText());
+        }
     }
 }
