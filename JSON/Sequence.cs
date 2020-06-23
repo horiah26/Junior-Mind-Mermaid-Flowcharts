@@ -16,17 +16,12 @@ namespace JSON
 
         public IMatch Match(string text)
         {
-            Match originalMatch = new Match(false, text);
-            Match match = new Match(true, text);
-
-            if (string.IsNullOrEmpty(text))
-            {
-                return new Match(false, text);
-            }
+            IMatch originalMatch = new Match(false, text);
+            IMatch match = new Match(true, text);
 
             foreach (IPattern pattern in patterns)
             {
-                match = (Match)pattern.Match(match.RemainingText());
+                match = pattern.Match(match.RemainingText());
 
                 if (!match.Success())
                 {
