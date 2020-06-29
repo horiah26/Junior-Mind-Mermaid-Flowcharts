@@ -68,5 +68,14 @@ namespace JSON.Tests
             Assert.Equal("ab", digits.Match("ab").RemainingText());
         }
 
+        [Fact]
+        public void Test8()
+        {
+            var digits = new Many(new Text("abc"));
+
+            Assert.True(digits.Match("abcabcabcabc").Success());
+            Assert.Equal("", digits.Match("abcabcabcabc").RemainingText());
+        }
+
     }
 }

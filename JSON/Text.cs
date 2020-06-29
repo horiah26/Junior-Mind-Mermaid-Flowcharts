@@ -14,7 +14,7 @@ namespace JSON
 
         public IMatch Match(string text)
         {
-            return  !string.IsNullOrEmpty(text) && prefix.Length <= text.Length && prefix == text.Substring(0, prefix.Length) 
+            return  !string.IsNullOrEmpty(text) && text.StartsWith(prefix) 
             ? new Match(true, text.Substring(prefix.Length))
             : new Match(false, text);
         }
