@@ -5,154 +5,156 @@ namespace JSON.Tests
 {
     public class NumberTests
     {
+        Number number = new Number();
+
         [Fact]
         public void CanBeZero()
         {
-            Number number = new Number();
             Assert.True(number.Match("0").Success());
+            Assert.Equal("", number.Match("0").RemainingText());
         }
 
         [Fact]
         public void DoesNotContainLetters()
         {
-            Number number = new Number();
             Assert.False(number.Match("a").Success());
+            Assert.Equal("a", number.Match("a").RemainingText());
         }
 
         [Fact]
         public void CanHaveASingleDigit()
         {
-            Number number = new Number();
             Assert.True(number.Match("7").Success());
+            Assert.Equal("", number.Match("7").RemainingText());
         }
 
         [Fact]
         public void CanHaveMultipleDigits()
         {
-            Number number = new Number();
             Assert.True(number.Match("70").Success());
+            Assert.Equal("", number.Match("70").RemainingText());
         }
 
         [Fact]
         public void IsNotNull()
         {
-            Number number = new Number();
             Assert.False(number.Match(null).Success());
+            Assert.Null(number.Match(null).RemainingText());
         }
 
         [Fact]
         public void IsNotAnEmptyString()
         {
-            Number number = new Number();
             Assert.False(number.Match(string.Empty).Success()); ;
         }
 
         [Fact]
         public void CanStartWithZeroReturnsRemaining()
         {
-            Number number = new Number();
             Assert.True(number.Match("07").Success());
-            Assert.Equal("7", number.Match("07").RemainingText());
+            Assert.Equal("", number.Match("07").RemainingText());
         }
 
         [Fact]
         public void CanBeNegative()
         {
-            Number number = new Number();
             Assert.True(number.Match("-26").Success());
+            Assert.Equal("", number.Match("-26").RemainingText());
         }
 
-        //[Fact(Skip = "Remove this Skip as you implement")]
-        //public void CanBeMinusZero()
-        //{
-        //    Assert.True(IsJsonNumber("-0"));
-        //}
+        [Fact]
+        public void CanBeMinusZero()
+        {
+            Assert.True(number.Match("-0").Success());
+            Assert.Equal("", number.Match("-0").RemainingText());
+        }
 
-        //[Fact(Skip = "Remove this Skip as you implement")]
-        //public void CanBeFractional()
-        //{
-        //    Assert.True(IsJsonNumber("12.34"));
-        //}
+        [Fact]
+        public void CanBeFractional()
+        {
+            Assert.True(number.Match("12.34").Success());
+            Assert.Equal("", number.Match("12.34").RemainingText());
+        }
 
-        //[Fact(Skip = "Remove this Skip as you implement")]
-        //public void TheFractionCanHaveLeadingZeros()
-        //{
-        //    Assert.True(IsJsonNumber("0.00000001"));
-        //    Assert.True(IsJsonNumber("10.00000001"));
-        //}
+        [Fact]
+        public void TheFractionCanHaveLeadingZeros()
+        {
+            Assert.Equal("", number.Match("0.00000001").RemainingText());
+            Assert.Equal("", number.Match("10.00000001").RemainingText());
+        }
 
-        //[Fact(Skip = "Remove this Skip as you implement")]
-        //public void DoesNotEndWithADot()
-        //{
-        //    Assert.False(IsJsonNumber("12."));
-        //}
+        [Fact]
+        public void DotRemainsIfEndsWithDot()
+        {
+            Assert.Equal(".", number.Match("12.").RemainingText());
+        }
 
-        //[Fact(Skip = "Remove this Skip as you implement")]
-        //public void DoesNotHaveTwoFractionParts()
-        //{
-        //    Assert.False(IsJsonNumber("12.34.56"));
-        //}
+        [Fact]
+        public void DoesNotHaveTwoFractionParts()
+        {
+            Assert.Equal(".56", number.Match("12.34.56").RemainingText());
+        }
 
-        //[Fact(Skip = "Remove this Skip as you implement")]
-        //public void TheDecimalPartDoesNotAllowLetters()
-        //{
-        //    Assert.False(IsJsonNumber("12.3x"));
-        //}
+        [Fact]
+        public void TheDecimalPartDoesNotAllowLetters()
+        {
+            Assert.Equal("x", number.Match("12.3x").RemainingText());
+        }
 
-        //[Fact(Skip = "Remove this Skip as you implement")]
-        //public void CanHaveAnExponent()
-        //{
-        //    Assert.True(IsJsonNumber("12e3"));
-        //}
+        [Fact]
+        public void CanHaveAnExponent()
+        {
+            Assert.Equal("",number.Match("12e3").RemainingText());
+        }
 
-        //[Fact(Skip = "Remove this Skip as you implement")]
-        //public void TheExponentCanStartWithCapitalE()
-        //{
-        //    Assert.True(IsJsonNumber("12E3"));
-        //}
+        [Fact]
+        public void TheExponentCanStartWithCapitalE()
+        {
+            Assert.Equal("", number.Match("12E3").RemainingText());
+        }
 
-        //[Fact(Skip = "Remove this Skip as you implement")]
-        //public void TheExponentCanHavePositive()
-        //{
-        //    Assert.True(IsJsonNumber("12e+3"));
-        //}
+        [Fact]
+        public void TheExponentCanHavePositive()
+        {
+            Assert.Equal("", number.Match("12e+3").RemainingText());
+        }
 
-        //[Fact(Skip = "Remove this Skip as you implement")]
+        //[Fact]
         //public void TheExponentCanBeNegative()
         //{
-        //    Assert.True(IsJsonNumber("61e-9"));
+        //    Assert.True(number.Match("61e-9"));
         //}
 
-        //[Fact(Skip = "Remove this Skip as you implement")]
+        //[Fact]
         //public void CanHaveFractionAndExponent()
         //{
-        //    Assert.True(IsJsonNumber("12.34E3"));
+        //    Assert.True(number.Match("12.34E3"));
         //}
 
-        //[Fact(Skip = "Remove this Skip as you implement")]
+        //[Fact]
         //public void TheExponentDoesNotAllowLetters()
         //{
-        //    Assert.False(IsJsonNumber("22e3x3"));
+        //    Assert.False(number.Match("22e3x3"));
         //}
 
-        //[Fact(Skip = "Remove this Skip as you implement")]
+        //[Fact]
         //public void DoesNotHaveTwoExponents()
         //{
-        //    Assert.False(IsJsonNumber("22e323e33"));
+        //    Assert.False(number.Match("22e323e33"));
         //}
 
-        //[Fact(Skip = "Remove this Skip as you implement")]
+        //[Fact]
         //public void TheExponentIsAlwaysComplete()
         //{
-        //    Assert.False(IsJsonNumber("22e"));
-        //    Assert.False(IsJsonNumber("22e+"));
-        //    Assert.False(IsJsonNumber("23E-"));
+        //    Assert.False(number.Match("22e"));
+        //    Assert.False(number.Match("22e+"));
+        //    Assert.False(number.Match("23E-"));
         //}
 
-        //[Fact(Skip = "Remove this Skip as you implement")]
+        //[Fact]
         //public void TheExponentIsAfterTheFraction()
         //{
-        //    Assert.False(IsJsonNumber("22e3.3"));
+        //    Assert.False(number.Match("22e3.3"));
         //}
 
     }
