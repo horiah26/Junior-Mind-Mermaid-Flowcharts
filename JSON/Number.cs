@@ -10,18 +10,17 @@ namespace JSON
 
         public Number()
         {
-            IPattern num = new Range('0', '9');
+            var digits = new OneOrMore(new Range('0', '9'));
 
-            IPattern sign = new Optional(new Any("-+"));
-            IPattern dot = new Optional(new Character('.'));
-            IPattern numbers = new OneOrMore(num);
+            var dot = new Character('.');
 
-            IPattern fractional = new Optional(new Sequence(dot, numbers));
+            var eLetter = new Any("Ee");
+            var sign = new Optional(new Any("-+"));
 
-            IPattern exponent = new Optional(new Sequence( new Any("Ee"), sign, numbers));
+            var fractional = new Optional(new Sequence(dot, digits));
+            var exponent = new Optional(new Sequence(eLetter, sign, digits));
 
-
-            pattern = new Sequence(sign, numbers, fractional, exponent);                           
+            pattern = new Sequence(sign, digits, fractional, exponent);                           
         }
 
         public IMatch Match(string text)

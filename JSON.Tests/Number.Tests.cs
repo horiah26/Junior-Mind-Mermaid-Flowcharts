@@ -45,7 +45,7 @@ namespace JSON.Tests
         [Fact]
         public void IsNotAnEmptyString()
         {
-            Assert.False(number.Match(string.Empty).Success()); ;
+            Assert.False(number.Match(string.Empty).Success());
         }
 
         [Fact]
@@ -104,7 +104,7 @@ namespace JSON.Tests
         [Fact]
         public void CanHaveAnExponent()
         {
-            Assert.Equal("",number.Match("12e3").RemainingText());
+            Assert.Equal("", number.Match("12e3").RemainingText());
         }
 
         [Fact]
@@ -119,43 +119,43 @@ namespace JSON.Tests
             Assert.Equal("", number.Match("12e+3").RemainingText());
         }
 
-        //[Fact]
-        //public void TheExponentCanBeNegative()
-        //{
-        //    Assert.True(number.Match("61e-9"));
-        //}
+        [Fact]
+        public void TheExponentCanBeNegative()
+        {
+            Assert.Equal("", number.Match("61e-9").RemainingText());
+        }
 
-        //[Fact]
-        //public void CanHaveFractionAndExponent()
-        //{
-        //    Assert.True(number.Match("12.34E3"));
-        //}
+        [Fact]
+        public void CanHaveFractionAndExponent()
+        {
+            Assert.Equal("", number.Match("12.34E3").RemainingText());
+        }
 
-        //[Fact]
-        //public void TheExponentDoesNotAllowLetters()
-        //{
-        //    Assert.False(number.Match("22e3x3"));
-        //}
+        [Fact]
+        public void TheExponentDoesNotAllowLetters()
+        {
+            Assert.Equal("x3", number.Match("22e3x3").RemainingText());
+        }
 
-        //[Fact]
-        //public void DoesNotHaveTwoExponents()
-        //{
-        //    Assert.False(number.Match("22e323e33"));
-        //}
+        [Fact]
+        public void DoesNotHaveTwoExponents()
+        {
+            Assert.Equal("e33", number.Match("22e323e33").RemainingText());
+        }
 
-        //[Fact]
-        //public void TheExponentIsAlwaysComplete()
-        //{
-        //    Assert.False(number.Match("22e"));
-        //    Assert.False(number.Match("22e+"));
-        //    Assert.False(number.Match("23E-"));
-        //}
+        [Fact]
+        public void TheExponentIsAlwaysComplete()
+        {
+            Assert.Equal("e", number.Match("22e").RemainingText());
+            Assert.Equal("e+", number.Match("22e+").RemainingText());
+            Assert.Equal("E-", number.Match("22E-").RemainingText());
+        }
 
-        //[Fact]
-        //public void TheExponentIsAfterTheFraction()
-        //{
-        //    Assert.False(number.Match("22e3.3"));
-        //}
+        [Fact]
+        public void TheExponentIsAfterTheFraction()
+        {
+            Assert.Equal(".3", number.Match("22e3.3").RemainingText());
+        }
 
     }
 }
