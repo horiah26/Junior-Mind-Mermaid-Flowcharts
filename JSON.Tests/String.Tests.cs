@@ -55,18 +55,11 @@ namespace JSON.Tests
             Assert.Equal("\"a\nb\rc\"", str.Match("\"a\nb\rc\"").RemainingText());
         }
 
-        //[Fact]
-        //public void CanContainLargeUnicodeCharacters()
-        //{
-        //    Assert.Equal("", str.Match("⛅⚾").RemainingText());
-        //   // Assert.True(IsJsonString(Quoted("⛅⚾")));
-        //}
-
-        //[Fact]
-        //public void CanContainEscapedQuotationMark()
-        //{
-        //    Assert.Equal("", str.Match("\"\\\"a\\\" b\"").RemainingText());
-        //}
+        [Fact]
+        public void CanNotContainEscapedQuotationMark()
+        {
+            Assert.Equal("", str.Match("\"\\\"a\\\" b\"").RemainingText());
+        }
 
         [Fact]
         public void CanContainEscapedReverseSolidus()
