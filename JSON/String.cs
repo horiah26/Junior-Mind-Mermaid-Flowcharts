@@ -12,10 +12,6 @@ namespace JSON
         {
             var comma = new Text("\"");
 
-            var letter = new Choice(new Range('a', 'z'), new Range('A', 'Z'));
-
-            var digits = new Range('0', '9');
-
             var hexadecimal = new Choice(new Range('a', 'f'), new Range('A', 'F'), new Range('0', '9'));
 
             var unicode = new Sequence(new Text("\\u"), hexadecimal, hexadecimal, hexadecimal, hexadecimal);
@@ -23,7 +19,7 @@ namespace JSON
             var codepoints = new Choice(new Range('#','['),
                                         new Range(']','~'),
                                         new Character('!'));
-            var specials = 
+            var elements = 
                 new Choice(
                  unicode,
                  codepoints,
@@ -37,9 +33,7 @@ namespace JSON
                  new Text("\\t"),
                  new Text(" "));
 
-            var elements = new Many(new Choice(letter, specials, digits));
-
-            pattern = new Sequence(comma, elements, comma);
+            pattern = new Sequence(comma, new Many(elements), comma);
         }
 
         public IMatch Match(string text)
