@@ -6,7 +6,7 @@ namespace JSON.Tests
     public class OptionalTests
     {
         [Fact]
-        public void Test1()
+        public void WorksForOneInstance()
         {
             var a = new Optional(new Character('a'));
 
@@ -15,7 +15,7 @@ namespace JSON.Tests
         }
 
         [Fact]
-        public void Test2()
+        public void RemovesOnlyFirstInstance()
         {
             var a = new Optional(new Character('a'));
 
@@ -24,7 +24,7 @@ namespace JSON.Tests
         }
 
         [Fact]
-        public void Test3()
+        public void ReturnsTrueWhenNoInstance()
         {
             var a = new Optional(new Character('a'));
 
@@ -33,7 +33,7 @@ namespace JSON.Tests
         }
 
         [Fact]
-        public void Test4()
+        public void ReturnsTrueToEmptyString()
         {
             var a = new Optional(new Character('a'));
 
@@ -42,7 +42,7 @@ namespace JSON.Tests
         }
 
         [Fact]
-        public void Test5()
+        public void ReturnsTrueToNull()
         {
             var a = new Optional(new Character('a'));
 
@@ -51,7 +51,7 @@ namespace JSON.Tests
         }
 
         [Fact]
-        public void Test6()
+        public void ReturnsTrueToNoInstance()
         {
             var sign = new Optional(new Character('-'));
 
@@ -60,7 +60,7 @@ namespace JSON.Tests
         }
 
         [Fact]
-        public void Test7()
+        public void WorksForSign()
         {
             var sign = new Optional(new Character('-'));
 

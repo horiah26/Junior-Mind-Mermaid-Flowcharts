@@ -7,7 +7,7 @@ namespace JSON
     {
         static void Main(string[] args)
         {
-            string text = System.IO.File.ReadAllText(@"D:\Code\HanganHoria\JSON\Text1.txt");
+            string text = System.IO.File.ReadAllText(@"C:\Code\HanganHoriaJuniorMind\JSON\Text1.txt");
 
             var value = new Value();
 

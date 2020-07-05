@@ -6,7 +6,7 @@ namespace JSON.Tests
     public class OneOrManyTests
     {        
         [Fact]
-        public void Test1()
+        public void WorksForRepeatingInstances()
         {
             var a = new OneOrMore(new Range('0', '9'));
 
@@ -15,7 +15,7 @@ namespace JSON.Tests
         }
 
         [Fact]
-        public void Test2()
+        public void WorksForOneInstance()
         {
             var a = new OneOrMore(new Range('0', '9'));
 
@@ -24,7 +24,7 @@ namespace JSON.Tests
         }
 
         [Fact]
-        public void Test3()
+        public void ReturnsFalseToNoInstance()
         {
             var a = new OneOrMore(new Range('0', '9'));
 
@@ -33,7 +33,7 @@ namespace JSON.Tests
         }
 
         [Fact]
-        public void Test4()
+        public void ReturnsFalseToEmptyString()
         {
             var a = new OneOrMore(new Range('0', '9'));
 
@@ -42,12 +42,12 @@ namespace JSON.Tests
         }
 
         [Fact]
-        public void Test5()
+        public void ReturnsFalseToNull()
         {
             var a = new OneOrMore(new Range('0', '9'));
 
             Assert.False(a.Match(null).Success());
-            Assert.Null( a.Match(null).RemainingText());
+            Assert.Null(a.Match(null).RemainingText());
         }
     }
 }

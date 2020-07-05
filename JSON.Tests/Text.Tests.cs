@@ -6,7 +6,7 @@ namespace JSON.Tests
     public class TextTests
     {
         [Fact]
-        public void Test1()
+        public void WorksForOneWord()
         {
             var True = new Text("true");
 
@@ -15,7 +15,7 @@ namespace JSON.Tests
         }
 
         [Fact]
-        public void Test2()
+        public void ReturnsRemainingText()
         {
             var True = new Text("true");
 
@@ -24,7 +24,7 @@ namespace JSON.Tests
         }
 
         [Fact]
-        public void Test3()
+        public void ReturnsFalseForWrongText()
         {
             var True = new Text("true");
 
@@ -33,7 +33,7 @@ namespace JSON.Tests
         }
 
         [Fact]
-        public void Test4()
+        public void ReturnsFalseForEmptyString()
         {
             var True = new Text("");
 
@@ -42,7 +42,7 @@ namespace JSON.Tests
         }
 
         [Fact]
-        public void Test5()
+        public void ReturnsFalseForNull()
         {
             var True = new Text(null);
 
@@ -51,7 +51,7 @@ namespace JSON.Tests
         }
 
         [Fact]
-        public void Test6()
+        public void WorksForOneWord2()
         {
             var False = new Text("false");
 
@@ -60,7 +60,7 @@ namespace JSON.Tests
         }
 
         [Fact]
-        public void Test7()
+        public void ReturnsRemainingText2()
         {
             var False = new Text("false");
 
@@ -69,7 +69,7 @@ namespace JSON.Tests
         }
 
         [Fact]
-        public void Test8()
+        public void ReturnsFalseForWrongText2()
         {
             var False = new Text("false");
 
@@ -78,7 +78,7 @@ namespace JSON.Tests
         }
 
         [Fact]
-        public void Test9()
+        public void ReturnsFalseForEmptyTextAndString()
         {
             var False = new Text("");
 
@@ -87,7 +87,7 @@ namespace JSON.Tests
         }
 
         [Fact]
-        public void Test10()
+        public void ReturnsFalseToNull()
         {
             var False = new Text(null);
 
@@ -96,7 +96,7 @@ namespace JSON.Tests
         }
 
         [Fact]
-        public void Test11()
+        public void EmptyTextReturnsTrue()
         {
             var empty = new Text("");
 
@@ -105,7 +105,7 @@ namespace JSON.Tests
         }
 
         [Fact]
-        public void Test12()
+        public void EmptyTextReturnsFalseToNull()
         {
             var empty = new Text("");
 

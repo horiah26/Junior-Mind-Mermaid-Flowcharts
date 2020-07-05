@@ -7,7 +7,7 @@ namespace JSON.Tests
     public class ChoiceTests
     {
         [Fact]
-        public void Test1()
+        public void ReturnsTrueCharacterRange()
         {
             var digit = new Choice(
             new Character('0'),
@@ -18,7 +18,7 @@ namespace JSON.Tests
         }
 
         [Fact]
-        public void Test2()
+        public void ReturnsTrueCharacterRange2()
         {
             var digit = new Choice(
             new Character('0'),
@@ -29,7 +29,7 @@ namespace JSON.Tests
         }
 
         [Fact]
-        public void Test3()
+        public void ReturnsTrueCharacterRange3()
         {
             var digit = new Choice(
             new Character('0'),
@@ -40,7 +40,7 @@ namespace JSON.Tests
         }
 
         [Fact]
-        public void Test4()
+        public void ReturnsFalseToBadCharacter()
         {
             var digit = new Choice(
             new Character('0'),
@@ -51,7 +51,7 @@ namespace JSON.Tests
         }
 
         [Fact]
-        public void Test5()
+        public void ReturnsFalseEmptyString()
         {
             var digit = new Choice(
             new Character('0'),
@@ -62,7 +62,7 @@ namespace JSON.Tests
         }
 
         [Fact]
-        public void Test6()
+        public void ReturnsFalseNullString()
         {
             var digit = new Choice(
             new Character('0'),
@@ -73,7 +73,7 @@ namespace JSON.Tests
         }
 
         [Fact]
-        public void HexTest1()
+        public void ReturnsTrueInDoubleChoiceCharacter()
         {
             var digit = new Choice(
             new Character('0'),
@@ -90,7 +90,7 @@ namespace JSON.Tests
         }
 
         [Fact]
-        public void HexTest2()
+        public void ReturnsTrueInDoubleChoiceCharacterWithRemainingText()
         {
             var digit = new Choice(
             new Character('0'),
@@ -107,7 +107,7 @@ namespace JSON.Tests
         }
 
         [Fact]
-        public void HexTest3()
+        public void ReturnsTrueInDoubleChoiceCharacterWithoutRemainingText()
         {
             var digit = new Choice(
             new Character('0'),
@@ -124,7 +124,7 @@ namespace JSON.Tests
         }
 
         [Fact]
-        public void HexTest4()
+        public void ReturnsDigitAndLetterWithoutRemainingText()
         {
             var digit = new Choice(
             new Character('0'),
@@ -141,7 +141,7 @@ namespace JSON.Tests
         }
 
         [Fact]
-        public void HexTest5()
+        public void ReturnsDigitAndLetterWithoutRemainingText2()
         {
             var digit = new Choice(
             new Character('0'),
@@ -158,7 +158,7 @@ namespace JSON.Tests
         }
 
         [Fact]
-        public void HexTest6()
+        public void ReturnsDigitAndUppercaseLetterWithoutRemainingText()
         {
             var digit = new Choice(
             new Character('0'),
@@ -175,7 +175,7 @@ namespace JSON.Tests
         }
 
         [Fact]
-        public void HexTest7()
+        public void ReturnsUppercaseLetterAndNumber()
         {
             var digit = new Choice(
             new Character('0'),
@@ -192,7 +192,7 @@ namespace JSON.Tests
         }
 
         [Fact]
-        public void HexTest8()
+        public void ReturnsLowercaseLetterAndNumber()
         {
             var digit = new Choice(
             new Character('0'),
@@ -209,7 +209,7 @@ namespace JSON.Tests
         }
 
         [Fact]
-        public void HexTest9()
+        public void ReturnsUppercaseLetterAndNumber()
         {
             var digit = new Choice(
             new Character('0'),
@@ -226,7 +226,7 @@ namespace JSON.Tests
         }
 
         [Fact]
-        public void HexTest10()
+        public void ReturnsFalseToEmptyString()
         {
             var digit = new Choice(
             new Character('0'),
@@ -243,7 +243,7 @@ namespace JSON.Tests
         }
 
         [Fact]
-        public void HexTest11()
+        public void ReturnsFalseToNull()
         {
             var digit = new Choice(
             new Character('0'),

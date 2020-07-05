@@ -7,7 +7,7 @@ namespace JSON.Tests
     public class SequenceTests
     {
         [Fact]
-        public void Test1()
+        public void CharacterSequenceWorks()
         {
             var ab = new Sequence(
                 new Character('a'),
@@ -19,7 +19,7 @@ namespace JSON.Tests
         }
 
         [Fact]
-        public void Test2()
+        public void ReturnsFullTextWhenSequenceElementIsFalse()
         {
             var ab = new Sequence(
                 new Character('a'),
@@ -31,7 +31,7 @@ namespace JSON.Tests
         }
 
         [Fact]
-        public void Test3()
+        public void ReturnsFalseWhenNoElementMatches()
         {
             var ab = new Sequence(
                 new Character('a'),
@@ -43,7 +43,7 @@ namespace JSON.Tests
         }
 
         [Fact]
-        public void Test4()
+        public void ReturnsFalseToEmtpyString()
         {
             var ab = new Sequence(
                 new Character('a'),
@@ -55,7 +55,7 @@ namespace JSON.Tests
         }
 
         [Fact]
-        public void Test5()
+        public void ReturnsFalseToNull()
         {
             var ab = new Sequence(
                 new Character('a'),
@@ -67,7 +67,7 @@ namespace JSON.Tests
         }
 
         [Fact]
-        public void Test6()
+        public void CanInsertSequenceInSequence()
         {
             var ab = new Sequence(
                 new Character('a'),
@@ -84,24 +84,7 @@ namespace JSON.Tests
         }
 
         [Fact]
-        public void Test7()
-        {
-            var ab = new Sequence(
-                new Character('a'),
-                new Character('b')
-            );
-
-            var abc = new Sequence(
-                ab,
-                new Character('c')
-            );
-
-            Assert.True(abc.Match("abcd").Success());
-            Assert.Equal("d", abc.Match("abcd").RemainingText());
-        }
-
-        [Fact]
-        public void Test8()
+        public void SequenceInSequenceReturnsFalseWhenOneDoesNotMatch()
         {
             var ab = new Sequence(
                 new Character('a'),
@@ -118,7 +101,7 @@ namespace JSON.Tests
         }
 
         [Fact]
-        public void Test9()
+        public void SequenceInSequenceReturnsFalseWhenSecondSequenceDoesNotMatch()
         {
             var ab = new Sequence(
                 new Character('a'),
@@ -135,7 +118,7 @@ namespace JSON.Tests
         }
 
         [Fact]
-        public void Test10()
+        public void SequenceInSequenceReturnsFalseToEmptyString()
         {
             var ab = new Sequence(
                 new Character('a'),
@@ -152,7 +135,7 @@ namespace JSON.Tests
         }
 
         [Fact]
-        public void Test11()
+        public void SequenceInSequenceReturnsFalseToNull()
         {
             var ab = new Sequence(
                 new Character('a'),
@@ -169,7 +152,7 @@ namespace JSON.Tests
         }
 
         [Fact]
-        public void Test12()
+        public void UniccodeWOrks()
         {
 
             var hex = new Choice(
@@ -193,7 +176,7 @@ namespace JSON.Tests
         }
 
         [Fact]
-        public void Test13()
+        public void UnicodeWIthFollowingCharactersWorks()
         {
 
             var hex = new Choice(
@@ -217,7 +200,7 @@ namespace JSON.Tests
         }
 
         [Fact]
-        public void Test14()
+        public void UnicodeWithSpaceAfterWorks()
         {
 
             var hex = new Choice(
@@ -241,7 +224,7 @@ namespace JSON.Tests
         }
 
         [Fact]
-        public void Test15()
+        public void ReturnsFalseToUnicodeMissingFromString()
         {
 
             var hex = new Choice(
@@ -265,7 +248,7 @@ namespace JSON.Tests
         }
 
         [Fact]
-        public void Test16()
+        public void ReturnsFalseToNull2()
         {
 
             var hex = new Choice(

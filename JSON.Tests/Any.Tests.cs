@@ -6,7 +6,7 @@ namespace JSON.Tests
     public class AnyTests
     {
         [Fact]
-        public void Test1()
+        public void MatchesLowercaseLetter()
         {
             var e = new Any("eE");
 
@@ -15,7 +15,7 @@ namespace JSON.Tests
         }
 
         [Fact]
-        public void Test2()
+        public void MatchesUppercaseLetter()
         {
             var e = new Any("eE");
 
@@ -24,7 +24,7 @@ namespace JSON.Tests
         }
 
         [Fact]
-        public void Test3()
+        public void ReturnsFalseWhenDoesntMatch()
         {
             var e = new Any("eE");
 
@@ -33,7 +33,7 @@ namespace JSON.Tests
         }
 
         [Fact]
-        public void Test4()
+        public void ReturnsFalseEmptyString()
         {
             var e = new Any("eE");
 
@@ -42,7 +42,7 @@ namespace JSON.Tests
         }
 
         [Fact]
-        public void Test5()
+        public void ReturnsFalseNullString()
         {
             var e = new Any("eE");
 
@@ -51,7 +51,7 @@ namespace JSON.Tests
         }
 
         [Fact]
-        public void Test6()
+        public void WorksForSigns()
         {
             var e = new Any("+-");
 
@@ -60,7 +60,7 @@ namespace JSON.Tests
         }
 
         [Fact]
-        public void Test7()
+        public void WorksForSigns2()
         {
             var e = new Any("+-");
 
@@ -69,7 +69,7 @@ namespace JSON.Tests
         }
 
         [Fact]
-        public void Test8()
+        public void ReturnsFalseWhenSignNotPresent()
         {
             var e = new Any("+-");
 
@@ -77,7 +77,7 @@ namespace JSON.Tests
             Assert.Equal("2", e.Match("2").RemainingText());
         }
         [Fact]
-        public void Test9()
+        public void ReturnsFalseEmptyString2()
         {
             var e = new Any("+-");
 
@@ -86,9 +86,9 @@ namespace JSON.Tests
         }
 
         [Fact]
-        public void Test10()
+        public void ReturnsFalseNullString2()
         {
-            var e = new Any("eE");
+            var e = new Any("+-");
 
             Assert.False(e.Match(null).Success());
             Assert.Null(e.Match(null).RemainingText());

@@ -6,7 +6,7 @@ namespace JSON.Tests
     public class ManyTests
     {
         [Fact]
-        public void Test1()
+        public void WorksForOneInstance()
         {
             var a = new Many(new Character('a'));
 
@@ -15,7 +15,7 @@ namespace JSON.Tests
         }
 
         [Fact]
-        public void Test2()
+        public void WorksForManyInstances()
         {
             var a = new Many(new Character('a'));
 
@@ -24,7 +24,7 @@ namespace JSON.Tests
         }
 
         [Fact]
-        public void Test3()
+        public void ReturnsTrueWhenNoInstancesDone()
         {
             var a = new Many(new Character('a'));
 
@@ -33,7 +33,7 @@ namespace JSON.Tests
         }
 
         [Fact]
-        public void Test4()
+        public void ReturnsTrueToEmptyString()
         {
             var a = new Many(new Character('a'));
 
@@ -42,7 +42,7 @@ namespace JSON.Tests
         }
 
         [Fact]
-        public void Test5()
+        public void ReturnsTrueToNull()
         {
             var a = new Many(new Character('a'));
 
@@ -51,7 +51,7 @@ namespace JSON.Tests
         }
 
         [Fact]
-        public void Test6()
+        public void StopsWhenReachesOtherValues()
         {
             var digits = new Many(new Range('0', '9'));
 
@@ -60,7 +60,7 @@ namespace JSON.Tests
         }
 
         [Fact]
-        public void Test7()
+        public void ReturnTrueWhenOutOfRange()
         {
             var digits = new Many(new Range('0', '9'));
 
@@ -69,7 +69,7 @@ namespace JSON.Tests
         }
 
         [Fact]
-        public void Test8()
+        public void WorksForRepeatingString()
         {
             var digits = new Many(new Text("abc"));
 

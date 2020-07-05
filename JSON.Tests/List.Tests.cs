@@ -6,7 +6,7 @@ namespace JSON.Tests
     public class ListTests
     {
         [Fact]
-        public void Test1()
+        public void WorksForSimpleNumberList()
         {
             var a = new List(new Range('0', '9'), new Character(','));
   
@@ -15,7 +15,7 @@ namespace JSON.Tests
         }
 
         [Fact]
-        public void Test2()
+        public void WorksForOneExtraSeparator()
         {
             var a = new List(new Range('0', '9'), new Character(','));
 
@@ -24,7 +24,7 @@ namespace JSON.Tests
         }
 
         [Fact]
-        public void Test3()
+        public void WorksForOneElementWithoutSeparator()
         {
             var a = new List(new Range('0', '9'), new Character(','));
 
@@ -33,7 +33,7 @@ namespace JSON.Tests
         }
 
         [Fact]
-        public void Test4()
+        public void ReturnsTrueIfNoElementOrSeparator()
         {
             var a = new List(new Range('0', '9'), new Character(','));
 
@@ -42,7 +42,7 @@ namespace JSON.Tests
         }
 
         [Fact]
-        public void Test5()
+        public void ReturnsTrueToEmptyString()
         {
             var a = new List(new Range('0', '9'), new Character(','));
 
@@ -51,7 +51,7 @@ namespace JSON.Tests
         }
 
         [Fact]
-        public void Test6()
+        public void ReturnsTrueToNull()
         {
             var a = new List(new Range('0', '9'), new Character(','));
 
@@ -60,7 +60,7 @@ namespace JSON.Tests
         }
 
         [Fact]
-        public void Test7()
+        public void WorksForDifferentEscapeSeparators()
         {
             var digits = new OneOrMore(new Range('0', '9'));
             var whitespace = new Many(new Any(" \r\n\t"));
@@ -72,7 +72,7 @@ namespace JSON.Tests
         }
 
         [Fact]
-        public void Test8()
+        public void WorksForOneElementAndAnEscapeSeparator()
         {
             var digits = new OneOrMore(new Range('0', '9'));
             var whitespace = new Many(new Any(" \r\n\t"));
@@ -84,7 +84,7 @@ namespace JSON.Tests
         }
 
         [Fact]
-        public void Test9()
+        public void ReturnsTrueWhenCharacterAndSeparatorNotPresent()
         {
             var digits = new OneOrMore(new Range('0', '9'));
             var whitespace = new Many(new Any(" \r\n\t"));
