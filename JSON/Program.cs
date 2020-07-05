@@ -7,20 +7,13 @@ namespace JSON
     {
         static void Main(string[] args)
         {
+            string text = System.IO.File.ReadAllText(@"D:\Code\HanganHoria\JSON\Text1.txt");
 
-            Console.WriteLine(("\"\\\"a\\\" b\""));
-            Console.WriteLine((@"\""a\"" b"));
-            Console.WriteLine(@"a \\ b");
-            Console.WriteLine("a \\\\ b");
-            Console.WriteLine("a \\/ b");
-            Console.WriteLine("\"a \\/ b\"");
-            Console.WriteLine(@"a \b b");
-            Console.WriteLine();
-            Console.WriteLine("\"a\n b \rc\"");
-            Console.WriteLine(@"a\");
-            Console.WriteLine("\"a\\\"");
-            Console.WriteLine(@"a\u");
-            Console.WriteLine("\"a\\u\"");
+            var value = new Value();
+
+            Console.WriteLine(string.IsNullOrEmpty(value.Match(text).RemainingText()) ? "JSON is Valid!" : "JSON not Valid!");
+
+
         }
     }
 }
