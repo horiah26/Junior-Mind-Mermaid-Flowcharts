@@ -13,21 +13,14 @@
             var unicode = new Sequence(new Text("\\u"), hexadecimal, hexadecimal, hexadecimal, hexadecimal);
 
             var codepoints = new Choice(new Range('#','['),
-                                        new Range(']','~'),
-                                        new Character('!'));
-            var elements = 
-                new Choice(
-                 unicode,
-                 codepoints,
-                 new Text("\\\\ "),
-                 new Text("\\\""),
-                 new Text("\\/"),
-                 new Text("\\b"),
-                 new Text("\\f"),
-                 new Text("\\n"),
-                 new Text("\\r"),
-                 new Text("\\t"),
-                 new Text(" "));
+                                        new Range(']', (char)ushort.MaxValue),
+                                        new Any("! "));
+
+            var elements = new Choice(unicode,
+                                      codepoints,
+                                      new Text("\\\\"),
+                                      new Text("\\\""),
+                                      new Sequence(new Text("\\"), new Any("bfnrt/")));
 
             pattern = new Sequence(comma, new Many(elements), comma);
         }

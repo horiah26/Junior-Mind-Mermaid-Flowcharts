@@ -48,10 +48,10 @@ namespace JSON.Tests
         }
 
         [Fact]
-        public void CanStartWithZeroReturnsRemaining()
+        public void CanNotStartWithZeroReturnsRemaining()
         {
             Assert.True(number.Match("07").Success());
-            Assert.Equal("", number.Match("07").RemainingText());
+            Assert.Equal("7", number.Match("07").RemainingText());
         }
 
         [Fact]
