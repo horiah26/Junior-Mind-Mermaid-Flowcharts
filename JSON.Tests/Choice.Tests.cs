@@ -1,5 +1,3 @@
-using System;
-using System.ComponentModel;
 using Xunit;
 
 namespace JSON.Tests
@@ -209,7 +207,7 @@ namespace JSON.Tests
         }
 
         [Fact]
-        public void ReturnsUppercaseLetterAndNumber()
+        public void ReturnsUppercaseLetterAndNumber2()
         {
             var digit = new Choice(
             new Character('0'),

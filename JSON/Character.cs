@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace JSON
+﻿namespace JSON
 {
     public class Character : IPattern
     {
@@ -15,7 +11,7 @@ namespace JSON
 
         public IMatch Match(string text)
         {
-            return !string.IsNullOrEmpty(text) && text[0] == pattern
+           return !string.IsNullOrEmpty(text) && text[0] == pattern
            ? new Match(true, text.Substring(1))
            : new Match(false, text);
         }

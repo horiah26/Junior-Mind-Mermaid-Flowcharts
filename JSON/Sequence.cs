@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Text;
-
-namespace JSON
+﻿namespace JSON
 {
     public class Sequence : IPattern
     {

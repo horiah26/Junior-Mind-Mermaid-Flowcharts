@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace JSON
+﻿namespace JSON
 {
     public class Value : IPattern
     {

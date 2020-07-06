@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Runtime.InteropServices.ComTypes;
-using System.Text;
-using System.Threading;
-
-namespace JSON
+﻿namespace JSON
 {
     public class Range : IPattern
     {

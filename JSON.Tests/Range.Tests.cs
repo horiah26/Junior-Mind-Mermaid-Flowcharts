@@ -1,5 +1,3 @@
-using System;
-using System.ComponentModel;
 using Xunit;
 
 namespace JSON.Tests

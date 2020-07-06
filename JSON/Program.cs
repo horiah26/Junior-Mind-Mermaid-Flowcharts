@@ -1,5 +1,4 @@
-﻿using JSON;
-using System;
+﻿using System;
 
 namespace JSON
 {
@@ -7,13 +6,11 @@ namespace JSON
     {
         static void Main(string[] args)
         {
-            string text = System.IO.File.ReadAllText(@"C:\Code\HanganHoriaJuniorMind\JSON\Text1.txt");
+            string text = System.IO.File.ReadAllText(args[0]);
 
             var value = new Value();
 
             Console.WriteLine(string.IsNullOrEmpty(value.Match(text).RemainingText()) ? "JSON is Valid!" : "JSON not Valid!");
-
-
         }
     }
 }

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace JSON
+﻿namespace JSON
 {
     public class Text : IPattern
     {
@@ -14,7 +10,7 @@ namespace JSON
 
         public IMatch Match(string text)
         {
-            return  !string.IsNullOrEmpty(text) && text.StartsWith(prefix) 
+            return !string.IsNullOrEmpty(text) && text.StartsWith(prefix) 
             ? new Match(true, text.Substring(prefix.Length))
             : new Match(false, text);
         }
