@@ -18,9 +18,7 @@
 
             var elements = new Choice(unicode,
                                       codepoints,
-                                      new Text("\\\\"),
-                                      new Text("\\\""),
-                                      new Sequence(new Text("\\"), new Any("bfnrt/")));
+                                      new Sequence(new Character('\\'), new Any("bfnrt/\\\"")));
 
             pattern = new Sequence(comma, new Many(elements), comma);
         }

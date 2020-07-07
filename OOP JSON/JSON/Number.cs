@@ -5,22 +5,21 @@
         private readonly IPattern pattern;
 
         public Number()
-        {            
-            var eLetter = new Any("Ee");
-            var dot = new Character('.');
-            var signs = new Optional(new Any("+-"));
-            var minus = new Optional(new Character('-'));
+        {
             var digits = new OneOrMore(new Range('0', '9'));
+            var dot = new Character('.');
+            var eLetter = new Any("Ee");
+            var minus = new Optional(new Character('-'));
+            var signs = new Optional(new Any("-+"));
 
             var fractional = new Optional(new Sequence(dot, digits));
 
             var exponent = new Optional(new Sequence(eLetter, signs, digits));
 
-            var number = new Choice(new Sequence(new Range('1', '9'), new Optional(digits), fractional),
-                                    new Sequence(new Text("0."), digits),
-                                    new Character('0'));     
+            var integer = new Choice(new Sequence(new Range('1', '9'), digits),
+                                     new Range('0', '9'));
 
-            pattern = new Sequence(minus, number, exponent);
+            pattern = new Sequence(minus, integer, fractional, exponent);
         }
 
         public IMatch Match(string text)
