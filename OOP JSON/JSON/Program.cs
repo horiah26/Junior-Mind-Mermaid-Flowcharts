@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.InteropServices;
 
 namespace JSON
 {
@@ -8,9 +9,9 @@ namespace JSON
         {
             string text = System.IO.File.ReadAllText(args[0]);
 
-            var value = new Value();
+            var sudoku = new SudokuStructure();
 
-            Console.WriteLine(string.IsNullOrEmpty(value.Match(text).RemainingText()) ? "JSON is Valid!" : "JSON not Valid!");
+            Console.WriteLine(string.IsNullOrEmpty(sudoku.Match(text).RemainingText()) ? "JSON is Valid!" : "JSON not Valid!");
         }
     }
 }
