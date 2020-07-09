@@ -20,7 +20,6 @@
                                    element,
                                    element);
 
-
             var matrix = new Sequence(row, newLine,
                                       row, newLine,
                                       row, newLine,
