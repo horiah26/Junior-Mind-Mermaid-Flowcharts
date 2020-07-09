@@ -7,17 +7,20 @@ namespace OOP2
 {
     public class IntArray
     {
-        private int[] array = new int[0];
+        private int[] array = new int[4];
+
+        private int emptyPosition = -1;
 
         public IntArray()
         {
-            this.array = new int[0];
+            this.array = new int[4];
         }
 
         public void Add(int element)
         {
-            Array.Resize(ref array, array.Length + 1);
-            array[array.Length - 1] = element;
+            ResizeIfNeeded();
+
+            array[emptyPosition] = element;
         }
 
         public int Count()
@@ -55,9 +58,9 @@ namespace OOP2
 
         public void Insert(int index, int element)
         {
-            Array.Resize(ref array, array.Length + 1);
+            ResizeIfNeeded();
 
-            for(int i = array.Length - 1; i > index; i--)
+            for (int i = array.Length - 1; i > index; i--)
             {
                 array[i] = array[i - 1];
             }
@@ -68,6 +71,7 @@ namespace OOP2
         public void Clear()
         {
             array = new int[0];
+            emptyPosition = -1;
         }
 
         public void Remove(int element)
@@ -80,6 +84,8 @@ namespace OOP2
                     break;
                 }
             }
+
+            emptyPosition--;
         }
 
         public void RemoveAt(int index)
@@ -89,7 +95,17 @@ namespace OOP2
                 array[i] = array[i + 1];                
             }
 
-            Array.Resize(ref array, array.Length - 1);
+            emptyPosition--;
+        }
+
+        private void ResizeIfNeeded()
+        {
+            emptyPosition++;
+
+            if (emptyPosition == array.Length)
+            {
+                Array.Resize(ref array, array.Length * 2);
+            }
         }
     }
 }
