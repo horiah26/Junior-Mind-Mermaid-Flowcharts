@@ -9,7 +9,7 @@ namespace OOP2.Tests
         public void CreateArrayWith4Elements()
         {
             var array = new IntArray();
-            Assert.Equal(4, array.Count());
+            Assert.Equal(4, array.Count);
         }
 
         [Fact]
@@ -19,8 +19,8 @@ namespace OOP2.Tests
 
             array.Add(1);
 
-            Assert.Equal(4, array.Count());
-            Assert.Equal(1, array.Element(0));
+            Assert.Equal(4, array.Count);
+            Assert.Equal(1, array[0]);
         }
 
         [Fact]
@@ -32,11 +32,11 @@ namespace OOP2.Tests
             array.Add(7);
             array.Add(6);
 
-            Assert.Equal(4, array.Count());
+            Assert.Equal(4, array.Count);
 
-            Assert.Equal(3, array.Element(0));
-            Assert.Equal(7, array.Element(1));
-            Assert.Equal(6, array.Element(2));
+            Assert.Equal(3, array[0]);
+            Assert.Equal(7, array[1]);
+            Assert.Equal(6, array[2]);
 
         }
 
@@ -55,7 +55,7 @@ namespace OOP2.Tests
             array.Add(8);
             array.Add(9);
 
-            Assert.Equal(16, array.Count());
+            Assert.Equal(16, array.Count);
         }
 
         [Fact]
@@ -69,13 +69,13 @@ namespace OOP2.Tests
             array.Add(10);
             array.Add(13);
 
-            Assert.Equal(8, array.Count());
+            Assert.Equal(8, array.Count);
 
-            Assert.Equal(3, array.Element(0));
-            Assert.Equal(7, array.Element(1));
-            Assert.Equal(6, array.Element(2));
-            Assert.Equal(10, array.Element(3));
-            Assert.Equal(13, array.Element(4));
+            Assert.Equal(3, array[0]);
+            Assert.Equal(7, array[1]);
+            Assert.Equal(6, array[2]);
+            Assert.Equal(10, array[3]);
+            Assert.Equal(13, array[4]);
 
         }
 
@@ -89,9 +89,9 @@ namespace OOP2.Tests
             array.Add(7);
             array.Add(6);
 
-            Assert.Equal(3, array.Element(0));
-            Assert.Equal(7, array.Element(1));
-            Assert.Equal(6, array.Element(2));
+            Assert.Equal(3, array[0]);
+            Assert.Equal(7, array[1]);
+            Assert.Equal(6, array[2]);
         }
 
         [Fact]
@@ -102,11 +102,11 @@ namespace OOP2.Tests
             array.Add(3);
             array.Add(10);
 
-            array.SetElement(0, 7);
-            array.SetElement(1, 5);
+            array[0] = 7;
+            array[1] = 5;
 
-            Assert.Equal(7, array.Element(0));
-            Assert.Equal(5, array.Element(1));
+            Assert.Equal(7, array[0]);
+            Assert.Equal(5, array[1]);
         }
 
         [Fact]
@@ -156,12 +156,12 @@ namespace OOP2.Tests
 
             array.Insert(1, 5);
 
-            Assert.Equal(4, array.Count());
+            Assert.Equal(4, array.Count);
 
-            Assert.Equal(3, array.Element(0));
-            Assert.Equal(5, array.Element(1));
-            Assert.Equal(10, array.Element(2));
-            Assert.Equal(24, array.Element(3));
+            Assert.Equal(3, array[0]);
+            Assert.Equal(5, array[1]);
+            Assert.Equal(10, array[2]);
+            Assert.Equal(24, array[3]);
         }
 
         [Fact]
@@ -177,7 +177,7 @@ namespace OOP2.Tests
 
             array.Clear();
 
-            Assert.Equal(0, array.Count());
+            Assert.Equal(0, array.Count);
         }
 
         [Fact]
@@ -194,7 +194,7 @@ namespace OOP2.Tests
             array.Remove(10);
 
             Assert.Equal(1, array.IndexOf(24));
-            Assert.Equal(8, array.Count());
+            Assert.Equal(8, array.Count);
         }
 
         [Fact]
@@ -211,7 +211,7 @@ namespace OOP2.Tests
             array.RemoveAt(2);
 
             Assert.Equal(2, array.IndexOf(35));
-            Assert.Equal(8, array.Count());
+            Assert.Equal(8, array.Count);
         }
     }
 }

@@ -16,26 +16,19 @@ namespace OOP2
             this.array = new int[4];
         }
 
+        public int Count => array.Length;
+
+        public int this[int index]
+        {
+            get => array[index];
+            set => array[index] = value;
+        }
+
         public void Add(int element)
         {
             ResizeIfNeeded();
 
             array[emptyPosition] = element;
-        }
-
-        public int Count()
-        {
-            return array.Length;
-        }
-
-        public int Element(int index)
-        {
-            return array[index];
-        }
-
-        public void SetElement(int index, int element)
-        {
-            array[index] = element;
         }
 
         public bool Contains(int element)
