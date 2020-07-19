@@ -303,7 +303,6 @@ namespace OOP2.Tests
             Assert.Equal(0, array.Count);
         }
 
-
         [Fact]
         public void CanRemoveElementByName()
         {
