@@ -7,9 +7,9 @@ namespace OOP2
 {
     public class IntArray
     {
-        private int[] array = new int[4];
+        protected int[] array = new int[4];
 
-        private int emptyPosition = -1;
+        protected int lastElementPosition = -1;
 
         public IntArray()
         {
@@ -18,17 +18,17 @@ namespace OOP2
 
         public int Count => array.Length;
 
-        public int this[int index]
+        public virtual int this[int index]
         {
             get => array[index];
             set => array[index] = value;
         }
 
-        public void Add(int element)
+        public virtual void Add(int element)
         {
             ResizeIfNeeded();
 
-            array[emptyPosition] = element;
+            array[lastElementPosition] = element;
         }
 
         public bool Contains(int element)
@@ -49,7 +49,7 @@ namespace OOP2
             return -1;
         }
 
-        public void Insert(int index, int element)
+        public virtual void Insert(int index, int element)
         {
             ResizeIfNeeded();
 
@@ -64,7 +64,7 @@ namespace OOP2
         public void Clear()
         {
             array = new int[0];
-            emptyPosition = -1;
+            lastElementPosition = -1;
         }
 
         public void Remove(int element)
@@ -78,7 +78,7 @@ namespace OOP2
                 }
             }
 
-            emptyPosition--;
+            lastElementPosition--;
         }
 
         public void RemoveAt(int index)
@@ -88,14 +88,14 @@ namespace OOP2
                 array[i] = array[i + 1];                
             }
 
-            emptyPosition--;
+            lastElementPosition--;
         }
 
         private void ResizeIfNeeded()
         {
-            emptyPosition++;
+            lastElementPosition++;
 
-            if (emptyPosition == array.Length)
+            if (lastElementPosition == array.Length)
             {
                 Array.Resize(ref array, array.Length * 2);
             }

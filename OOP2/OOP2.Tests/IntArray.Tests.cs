@@ -76,7 +76,6 @@ namespace OOP2.Tests
             Assert.Equal(6, array[2]);
             Assert.Equal(10, array[3]);
             Assert.Equal(13, array[4]);
-
         }
 
 
@@ -111,18 +110,6 @@ namespace OOP2.Tests
 
         [Fact]
         public void ReturnsTrueIfContainsValue()
-        {
-            var array = new IntArray();
-
-            array.Add(3);
-            array.Add(10);
-            array.Add(24);
-
-            Assert.True(array.Contains(10));
-        }
-
-        [Fact]
-        public void CanCheckExistant()
         {
             var array = new IntArray();
 
