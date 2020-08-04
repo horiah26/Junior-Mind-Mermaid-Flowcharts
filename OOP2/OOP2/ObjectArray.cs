@@ -1,10 +1,11 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 
 namespace OOP2
 {
-    public class ObjectArray
+    public class ObjectArray : IEnumerable
     {
         protected object[] array = new object[4];
 
@@ -14,7 +15,7 @@ namespace OOP2
         {
             this.array = new object[4];
         }
-
+        
         public int Count => array.Length;
 
         public virtual object this[int index]
@@ -98,6 +99,11 @@ namespace OOP2
             {
                 Array.Resize(ref array, array.Length * 2);
             }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return array.GetEnumerator();
         }
     }
 }

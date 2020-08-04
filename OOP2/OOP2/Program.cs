@@ -6,15 +6,20 @@ namespace OOP2
     {
         static void Main(string[] args)
         {
-            var array = new SortedIntArray();
+            var array = new ObjectArray();
 
-            array.Insert(0, 3);
-            array.Insert(1, 6);
-            array.Insert(2, 7);
+            array.Add(3);
+            array.Add(6);
+            array.Add(7);
 
             for (int i = 0; i < array.Count; i++)
             {
                 Console.WriteLine(array[i]);
+            }
+
+            foreach (var a in array)
+            {
+                Console.WriteLine(a);
             }
         }
     }
