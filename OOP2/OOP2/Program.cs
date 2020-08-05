@@ -12,11 +12,6 @@ namespace OOP2
             array.Add(6);
             array.Add(7);
 
-            for (int i = 0; i < array.Count; i++)
-            {
-                Console.WriteLine(array[i]);
-            }
-
             foreach (var a in array)
             {
                 Console.WriteLine(a);
