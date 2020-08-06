@@ -33,7 +33,7 @@ namespace OOP2
 
         public bool Contains(T element)
         {
-            return (IndexOf(element) == -1 ? false : true);
+            return (IndexOf(element) != -1);
         }
 
         public int IndexOf(T element)
