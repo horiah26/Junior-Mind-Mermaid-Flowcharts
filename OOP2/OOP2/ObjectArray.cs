@@ -103,10 +103,7 @@ namespace OOP2
 
         public IEnumerator GetEnumerator()
         {
-            for (int i = 0; i < Count; i++)
-            {
-                yield return array[i];
-            }
+            return new ObjectEnumerator(this);
         }
     }
 }
