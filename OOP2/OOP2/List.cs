@@ -18,9 +18,9 @@ namespace OOP2
 
         public int Count => listArray.Length;
 
-        public bool IsReadOnly => throw new NotImplementedException();
+        public bool IsReadOnly{ get; private set; }
 
-        public virtual T this[int index]
+    public virtual T this[int index]
         {
             get => listArray[index];
             set => listArray[index] = value;

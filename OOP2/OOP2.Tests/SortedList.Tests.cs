@@ -186,7 +186,7 @@ namespace OOP2.Tests
             array.Add(10);
             array.Add(24);
 
-            Assert.True(array.Contains(10));
+            Assert.Contains(10, array);
         }
 
         [Fact]
@@ -198,7 +198,7 @@ namespace OOP2.Tests
             array.Add('b');
             array.Add('c');
 
-            Assert.True(array.Contains('b'));
+            Assert.Contains('b', array);
         }
 
         [Fact]
@@ -246,7 +246,7 @@ namespace OOP2.Tests
 
             array.Clear();
 
-            Assert.Equal(0, array.Count);
+            Assert.Empty(array);
         }
 
         [Fact]
