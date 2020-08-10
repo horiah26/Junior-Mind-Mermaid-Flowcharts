@@ -209,5 +209,68 @@ namespace OOP2.Tests
             Assert.Equal(2, array.IndexOf(35));
             Assert.Equal(8, array.Count);
         }
+
+        [Fact]
+        public void CanCopyToArray()
+        {
+            var listArray = new List<int>();
+
+            listArray.Add(3);
+            listArray.Add(10);
+            listArray.Add(24);
+            listArray.Add(35);
+            listArray.Add(15);
+
+            var array = new int[8];
+
+            listArray.CopyTo(array, 0);
+
+            Assert.Equal(3, array[0]);
+            Assert.Equal(10, array[1]);
+            Assert.Equal(24, array[2]);
+            Assert.Equal(35, array[3]);
+            Assert.Equal(15, array[4]);
+        }
+
+        [Fact]
+        public void CanCopyToArrayNonZeroIndex()
+        {
+            var listArray = new List<int>();
+
+            listArray.Add(3);
+            listArray.Add(10);
+            listArray.Add(24);
+            listArray.Add(35);
+            listArray.Add(15);
+
+            var array = new int[16];
+
+            listArray.CopyTo(array, 3);
+
+            Assert.Equal(3, array[3]);
+            Assert.Equal(10, array[4]);
+            Assert.Equal(24, array[5]);
+            Assert.Equal(35, array[6]);
+            Assert.Equal(15, array[7]);
+        }
+
+        [Fact]
+        public void CanRemoveFirstOccurence()
+        {
+            var listArray = new List<int>();
+
+            listArray.Add(3);
+            listArray.Add(10);
+            listArray.Add(24);
+            listArray.Add(35);
+            listArray.Add(15);
+
+            listArray.Remove(10);
+
+            Assert.Equal(3, listArray[0]);
+            Assert.Equal(24, listArray[1]);
+            Assert.Equal(35, listArray[2]);
+            Assert.Equal(15, listArray[3]);
+        }
     }
-} 
+}

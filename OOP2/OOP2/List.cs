@@ -5,7 +5,7 @@ using System.Text;
 
 namespace OOP2
 {
-    public class List<T> : IEnumerable
+    public class List<T> : IList<T>
     {        
         protected T[] listArray;
 
@@ -17,6 +17,8 @@ namespace OOP2
         }
 
         public int Count => listArray.Length;
+
+        public bool IsReadOnly => throw new NotImplementedException();
 
         public virtual T this[int index]
         {
@@ -94,6 +96,37 @@ namespace OOP2
             {
                 yield return listArray[i];
             }
+        }
+
+        public void CopyTo(T[] array, int arrayIndex)
+        {
+            if(array.Length - arrayIndex >= Count && arrayIndex >= 0 && array != null)
+            {
+                for (int i = 0; i < Count; i++)
+                {
+                    array[arrayIndex + i] = listArray[i];
+                }
+            }
+            else
+            {
+                throw new System.ArgumentException("Wrong Array dimension or Index");
+            }
+        }
+
+        bool ICollection<T>.Remove(T item)
+        {
+            if (IndexOf(item) != -1)
+            {
+                RemoveAt(IndexOf(item));
+                return true;
+            }
+
+            return false;
+        }
+
+        IEnumerator<T> IEnumerable<T>.GetEnumerator()
+        {
+            yield return (T)listArray.GetEnumerator();
         }
     }
 }
