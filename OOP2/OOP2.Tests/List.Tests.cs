@@ -173,7 +173,7 @@ namespace OOP2.Tests
 
             array.Clear();
 
-            Assert.Equal(0, array.Count);
+            Assert.Empty(array);
         }
 
         [Fact]

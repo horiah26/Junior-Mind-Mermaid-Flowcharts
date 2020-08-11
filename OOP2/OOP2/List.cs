@@ -66,7 +66,6 @@ namespace OOP2
             if(IndexOf(element) != -1)
             {
                 RemoveAt(IndexOf(element));
-                lastElementPosition--;
             }
         }     
         
