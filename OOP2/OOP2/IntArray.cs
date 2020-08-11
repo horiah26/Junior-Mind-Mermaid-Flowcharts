@@ -77,8 +77,6 @@ namespace OOP2
                     break;
                 }
             }
-
-            lastElementPosition--;
         }
 
         public void RemoveAt(int index)
