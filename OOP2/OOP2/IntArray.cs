@@ -1,22 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Text;
 
 namespace OOP2
 {
     public class IntArray
     {
-        protected int[] array = new int[4];
+        private int[] array;
 
-        protected int lastElementPosition = -1;
+        public int Count { get; private set; }
 
         public IntArray()
         {
             this.array = new int[4];
         }
-
-        public int Count => array.Length;
 
         public virtual int this[int index]
         {
@@ -27,73 +22,69 @@ namespace OOP2
         public virtual void Add(int element)
         {
             ResizeIfNeeded();
+            array[Count] = element;
+            Count++;
 
-            array[lastElementPosition] = element;
         }
 
         public bool Contains(int element)
         {
-            return Array.Exists(array, item => item == element);
+            return IndexOf(element) != -1;
         }
 
         public int IndexOf(int element)
         {
-            for (int i = 0; i < array.Length; i++)
-            {
-                if (array[i] == element) 
-                {
-                    return i;
-                }
-            }
-
-            return -1;
+            int index = Array.IndexOf(array, element);
+            return (index >= 0 && index < Count) ? index : -1;
         }
 
         public virtual void Insert(int index, int element)
         {
             ResizeIfNeeded();
-
-            for (int i = array.Length - 1; i > index; i--)
-            {
-                array[i] = array[i - 1];
-            }
+            shiftRight(array, index);
 
             array[index] = element;
+            Count++;          
         }
 
         public void Clear()
         {
-            array = new int[0];
-            lastElementPosition = -1;
+            Count = 0;
         }
 
         public void Remove(int element)
         {
-            for (int i = 0; i < array.Length; i++)
+            if(IndexOf(element) != -1)
             {
-                if (array[i] == element)
-                {
-                    RemoveAt(i);
-                    break;
-                }
-            }
+                RemoveAt(IndexOf(element));
+            }            
         }
 
         public void RemoveAt(int index)
         {
+            shiftLeft(array, index);
+            Count--;
+        }
+
+        private void shiftLeft(int[] array, int index)
+        {
             for (int i = index; i < array.Length - 1; i++)
             {
-                array[i] = array[i + 1];                
+                array[i] = array[i + 1];
             }
+        }
 
-            lastElementPosition--;
+        private void shiftRight(int[] array, int index)
+        {
+            for (int i = array.Length - 1; i > index; i--)
+            {
+                array[i] = array[i - 1];
+            }
         }
 
         private void ResizeIfNeeded()
-        {
-            lastElementPosition++;
-
-            if (lastElementPosition == array.Length)
+        {  
+            if (Count >= array.Length)
             {
                 Array.Resize(ref array, array.Length * 2);
             }

@@ -6,21 +6,19 @@ using System.Text;
 namespace OOP2
 {
     public class List<T> : IList<T>
-    {        
-        protected T[] listArray;
+    {
+        private T[] listArray;
 
-        protected int lastElementPosition = -1;
+        public int Count { get; private set; }
+
+        public bool IsReadOnly { get; private set; }
 
         public List()
         {
             listArray = new T[4];
         }
 
-        public int Count => listArray.Length;
-
-        public bool IsReadOnly{ get; private set; }
-
-    public virtual T this[int index]
+        public virtual T this[int index]
         {
             get => listArray[index];
             set => listArray[index] = value;
@@ -29,8 +27,8 @@ namespace OOP2
         public virtual void Add(T element)
         {
             ResizeIfNeeded();
-
-            listArray[lastElementPosition] = element;
+            listArray[Count] = element;
+            Count++;
         }
 
         public bool Contains(T element)
@@ -40,92 +38,91 @@ namespace OOP2
 
         public int IndexOf(T element)
         {
-            return Array.IndexOf(listArray, element);
+            int index = Array.IndexOf(listArray, element);
+            return (index >= 0 && index < Count) ? index : -1;
         }
 
         public virtual void Insert(int index, T element)
         {
             ResizeIfNeeded();
-
-            for (int i = listArray.Length - 1; i > index; i--)
-            {
-                listArray[i] = listArray[i - 1];
-            }
+            shiftRight(listArray, index);
 
             listArray[index] = element;
+            Count++;
         }
 
         public void Clear()
         {
-            listArray = new T[0];
-            lastElementPosition = -1;
+            Count = 0;
         }
 
-        public void Remove(T element)
-        {
-            if(IndexOf(element) != -1)
-            {
-                RemoveAt(IndexOf(element));
-            }
-        }     
-        
         public void RemoveAt(int index)
         {
-            for (int i = index; i < listArray.Length - 1; i++)
-            {
-                listArray[i] = listArray[i + 1];
-            }
-
-            lastElementPosition--;
+            shiftLeft(listArray, index);
+            Count--;
         }
 
         private void ResizeIfNeeded()
         {
-            lastElementPosition++;
-
-            if (lastElementPosition == listArray.Length)
+            if (Count >= listArray.Length)
             {
                 Array.Resize(ref listArray, listArray.Length * 2);
             }
         }
 
-        public IEnumerator GetEnumerator()
-        {
-            for (int i = 0; i < Count; i++)
-            {
-                yield return listArray[i];
-            }
-        }
 
         public void CopyTo(T[] array, int arrayIndex)
         {
-            if(array.Length - arrayIndex >= Count && arrayIndex >= 0 && array != null)
+            if(array.Length - arrayIndex <= Count || arrayIndex < 0 || array == null)
+            {
+                throw new ArgumentException("Wrong Array dimension or Index");
+            }
+            else
             {
                 for (int i = 0; i < Count; i++)
                 {
                     array[arrayIndex + i] = listArray[i];
-                }
-            }
-            else
-            {
-                throw new System.ArgumentException("Wrong Array dimension or Index");
+                }               
             }
         }
 
-        bool ICollection<T>.Remove(T item)
+        public bool Remove(T element)
         {
-            if (IndexOf(item) != -1)
+            if (IndexOf(element) != -1)
             {
-                RemoveAt(IndexOf(item));
+                RemoveAt(IndexOf(element));
                 return true;
             }
-
             return false;
         }
 
         IEnumerator<T> IEnumerable<T>.GetEnumerator()
         {
-            yield return (T)listArray.GetEnumerator();
+            for (int i = 0; i < Count; i++)
+            {
+                yield return listArray[i];
+            }            
+        }
+
+        public IEnumerator GetEnumerator() 
+        {
+            return listArray.GetEnumerator();
+        }
+
+        private void shiftLeft(T[] array, int index)
+        {
+            for (int i = index; i < array.Length - 1; i++)
+            {
+                array[i] = array[i + 1];
+            }
+        }
+
+        private void shiftRight(T[] array, int index)
+        {
+            for (int i = array.Length - 1; i > index; i--)
+            {
+                array[i] = array[i - 1];
+            }
         }
     }
 }

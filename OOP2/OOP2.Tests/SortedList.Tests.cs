@@ -9,7 +9,7 @@ namespace OOP2.Tests
         public void CreateListWith4Elements()
         {
             var array = new SortedList<int>();
-            Assert.Equal(4, array.Count);
+            Assert.Empty(array);
         }
 
         [Fact]
@@ -19,7 +19,7 @@ namespace OOP2.Tests
             array.Add(1);
             array.Add(2);
 
-            Assert.Equal(4, array.Count);
+            Assert.Equal(2, array.Count);
             Assert.Equal(1, array[0]);
             Assert.Equal(2, array[1]);
         }
@@ -31,7 +31,7 @@ namespace OOP2.Tests
             array.Add("1");
             array.Add("2");
 
-            Assert.Equal(4, array.Count);
+            Assert.Equal(2, array.Count);
             Assert.Equal("1", array[0]);
             Assert.Equal("2", array[1]);
         }
@@ -44,8 +44,7 @@ namespace OOP2.Tests
             array.Add("3");
             array.Add("2");
 
-
-            Assert.Equal(4, array.Count);
+            Assert.Equal(3, array.Count);
             Assert.Equal("2", array[0]);
             Assert.Equal("3", array[1]);
             Assert.Equal("7", array[2]);
@@ -98,7 +97,7 @@ namespace OOP2.Tests
 
             array.Insert(1, 'b');
 
-            Assert.Equal(8, array.Count);
+            Assert.Equal(6, array.Count);
 
             Assert.Equal('a', array[0]);
             Assert.Equal('b', array[1]);
@@ -125,7 +124,7 @@ namespace OOP2.Tests
             array.Add(8);
             array.Add(9);
 
-            Assert.Equal(16, array.Count);
+            Assert.Equal(9, array.Count);
         }
 
         [Fact]
@@ -139,7 +138,7 @@ namespace OOP2.Tests
             array.Add(10);
             array.Add(13);
 
-            Assert.Equal(8, array.Count);
+            Assert.Equal(5, array.Count);
 
             Assert.Equal(3, array[0]);
             Assert.Equal(6, array[1]);
@@ -263,7 +262,7 @@ namespace OOP2.Tests
             array.Remove(10);
 
             Assert.Equal(2, array.IndexOf(24));
-            Assert.Equal(8, array.Count);
+            Assert.Equal(4, array.Count);
         }
 
         [Fact]
@@ -281,7 +280,7 @@ namespace OOP2.Tests
             array.RemoveAt(3);
 
             Assert.Equal(3, array.IndexOf(35));
-            Assert.Equal(8, array.Count);
+            Assert.Equal(4, array.Count);
         }
     }
 } 

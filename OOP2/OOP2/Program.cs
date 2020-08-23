@@ -6,21 +6,21 @@ namespace OOP2
     {
         static void Main(string[] args)
         {
+            var listArray = new List<int>();
 
-            var array = new SortedList<char>();
-            array.Add('d');
-            array.Add('e');
-            array.Add('c');
-            array.Add('a');
-            array.Add('g');
+            listArray.Add(3);
+            listArray.Add(10);
+            listArray.Add(24);
+            listArray.Add(35);
+            listArray.Add(15);
 
-            array.Insert(1, 'b');
+            listArray.Clear();
 
-
-            for (int i = 0; i< array.Count; i++)
+           foreach(var v in listArray)
             {
-                Console.WriteLine(array[i]);
+                Console.WriteLine(v);
             }
+
         }
     }
 }

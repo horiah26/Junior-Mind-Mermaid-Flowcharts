@@ -9,7 +9,7 @@ namespace OOP2.Tests
         public void CreateArrayWith4Elements()
         {
             var array = new IntArray();
-            Assert.Equal(4, array.Count);
+            Assert.Equal(0, array.Count);
         }
 
         [Fact]
@@ -19,7 +19,7 @@ namespace OOP2.Tests
 
             array.Add(1);
 
-            Assert.Equal(4, array.Count);
+            Assert.Equal(1, array.Count);
             Assert.Equal(1, array[0]);
         }
 
@@ -32,7 +32,7 @@ namespace OOP2.Tests
             array.Add(7);
             array.Add(6);
 
-            Assert.Equal(4, array.Count);
+            Assert.Equal(3, array.Count);
 
             Assert.Equal(3, array[0]);
             Assert.Equal(7, array[1]);
@@ -41,43 +41,23 @@ namespace OOP2.Tests
         }
 
         [Fact]
-        public void ArrayDoublesAt9Elements()
-        {
-            var array = new IntArray();
-
-            array.Add(1);
-            array.Add(2);
-            array.Add(3);
-            array.Add(4);
-            array.Add(5);
-            array.Add(6);
-            array.Add(7);
-            array.Add(8);
-            array.Add(9);
-
-            Assert.Equal(16, array.Count);
-        }
-
-        [Fact]
-        public void ArrayDoublesSize()
+        public void CanRemoveNonexistentElement()
         {
             var array = new IntArray();
 
             array.Add(3);
             array.Add(7);
             array.Add(6);
-            array.Add(10);
-            array.Add(13);
 
-            Assert.Equal(8, array.Count);
+            array.Remove(5);
+
+            Assert.Equal(3, array.Count);
 
             Assert.Equal(3, array[0]);
             Assert.Equal(7, array[1]);
             Assert.Equal(6, array[2]);
-            Assert.Equal(10, array[3]);
-            Assert.Equal(13, array[4]);
-        }
 
+        }
 
         [Fact]
         public void ElementsAddedAreCorrect()
@@ -181,7 +161,7 @@ namespace OOP2.Tests
             array.Remove(10);
 
             Assert.Equal(1, array.IndexOf(24));
-            Assert.Equal(8, array.Count);
+            Assert.Equal(4, array.Count);
         }
 
         [Fact]
@@ -198,7 +178,7 @@ namespace OOP2.Tests
             array.RemoveAt(2);
 
             Assert.Equal(2, array.IndexOf(35));
-            Assert.Equal(8, array.Count);
+            Assert.Equal(4, array.Count);
         }
     }
 }
