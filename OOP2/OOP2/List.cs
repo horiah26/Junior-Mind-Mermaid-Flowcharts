@@ -109,7 +109,7 @@ namespace OOP2
 
         private void ShiftLeft(T[] array, int index)
         {
-            for (int i = index; i < array.Length - 1; i++)
+            for (int i = index; i < Count; i++)
             {
                 array[i] = array[i + 1];
             }
@@ -117,7 +117,7 @@ namespace OOP2
 
         private void ShiftRight(T[] array, int index)
         {
-            for (int i = array.Length - 1; i > index; i--)
+            for (int i = Count; i > index; i--)
             {
                 array[i] = array[i - 1];
             }
