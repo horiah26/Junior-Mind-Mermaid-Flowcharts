@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Reflection.Metadata;
 
 namespace OOP2
@@ -12,6 +13,11 @@ namespace OOP2
         public int Count { get; private set; }
 
         public bool IsReadOnly { get; private set; }
+
+        public ReadOnlyCollection<T> ReadOnlyList()
+        {
+                return Array.AsReadOnly(listArray);
+        }
 
         public List()
         {

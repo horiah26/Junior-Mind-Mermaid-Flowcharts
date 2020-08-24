@@ -6,11 +6,27 @@ namespace OOP2.Tests
     public class ListTests
     {
         [Fact]
+        public void CanReadReadonlyList()
+        {
+            var array = new List<int>
+            {
+                1,
+                2
+            };
+
+            var readonlyArray = array.ReadOnlyList();
+
+            Assert.Equal(1, readonlyArray[0]);
+            Assert.Equal(2, readonlyArray[1]);
+        }
+
+        [Fact]
         public void ThrowsInsertWrongIndexException()
         {
             var array = new List<int>();
             array.Add(1);
             array.Add(2);
+
 
             Assert.Throws<ArgumentOutOfRangeException>(() => array.Insert(4, 1));
         }
