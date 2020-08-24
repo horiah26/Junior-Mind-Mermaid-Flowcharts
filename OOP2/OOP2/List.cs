@@ -96,17 +96,9 @@ namespace OOP2
 
         public IEnumerator<T> GetEnumerator()
         {
-            int countIndex = 0;
-
-            foreach (T element in listArray)
+            for (int i = 0; i< Count; i++)
             {
-                if (countIndex == Count)
-                {
-                    break;
-                }
-
-                countIndex++;
-                yield return element;
+                yield return listArray[i];
             }
         }
 
