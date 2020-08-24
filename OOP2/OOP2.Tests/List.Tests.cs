@@ -6,6 +6,48 @@ namespace OOP2.Tests
     public class ListTests
     {
         [Fact]
+        public void ThrowsInsertWrongIndexException()
+        {
+            var array = new List<int>();
+            array.Add(1);
+            array.Add(2);
+
+            Assert.Throws<ArgumentOutOfRangeException>(() => array.Insert(4, 1));
+        }
+
+        [Fact]
+        public void ThrowsCopyToWrongArrayDimensionException()
+        {
+            var listArray = new List<int>();
+
+            listArray.Add(3);
+            listArray.Add(10);
+            listArray.Add(24);
+            listArray.Add(35);
+            listArray.Add(15);
+
+            var array = new int[3];
+
+            Assert.Throws<ArgumentOutOfRangeException>(() => listArray.CopyTo(array, 0));
+        }
+
+        [Fact]
+        public void ThrowsCopyToWrongIndexException()
+        {
+            var listArray = new List<int>();
+
+            listArray.Add(3);
+            listArray.Add(10);
+            listArray.Add(24);
+            listArray.Add(35);
+            listArray.Add(15);
+
+            var array = new int[3];
+
+            Assert.Throws<ArgumentOutOfRangeException>(() => listArray.CopyTo(array, 13));
+        }
+
+        [Fact]
         public void CreateListWith4Elements()
         {
             var array = new List<int>();
