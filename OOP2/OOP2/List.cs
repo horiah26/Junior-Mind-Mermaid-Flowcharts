@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Reflection.Metadata;
 
 namespace OOP2
 {
@@ -10,7 +11,7 @@ namespace OOP2
 
         public int Count { get; private set; }
 
-        public bool IsReadOnly { get; private set; }
+        public bool IsReadOnly { get; private set; } = false;
 
         public List()
         {
@@ -25,6 +26,8 @@ namespace OOP2
 
         public virtual void Add(T element)
         {
+            CheckReadOnly();
+            
             ResizeIfNeeded();
             listArray[Count] = element;
             Count++;
@@ -43,6 +46,9 @@ namespace OOP2
 
         public virtual void Insert(int index, T element)
         {
+            CheckIndex(index);
+            CheckReadOnly();
+                        
             ResizeIfNeeded();
             ShiftRight(listArray, index);
 
@@ -57,6 +63,8 @@ namespace OOP2
 
         public void RemoveAt(int index)
         {
+            CheckIndex(index);
+
             ShiftLeft(listArray, index);
             Count--;
         }
@@ -71,26 +79,35 @@ namespace OOP2
 
         public void CopyTo(T[] array, int arrayIndex)
         {
-            if(array.Length - arrayIndex <= Count || arrayIndex < 0 || array == null)
+            if (array == null)
             {
-                throw new ArgumentException("Wrong Array dimension or Index");
+                throw new ArgumentNullException("Array is null");
             }
-            else
+            else if(arrayIndex < 0)
             {
-                for (int i = 0; i < Count; i++)
-                {
-                    array[arrayIndex + i] = listArray[i];
-                }               
+                throw new ArgumentOutOfRangeException("Index must be greater than 0");
             }
+            else if (array.Length - arrayIndex <= Count)
+            {
+                throw new ArgumentOutOfRangeException("The number of elements in the source T[] array is greater than the available space from arrayIndex to the end of the destination array.");
+            }           
+            
+            for (int i = 0; i < Count; i++)
+            {
+                array[arrayIndex + i] = listArray[i];
+            }           
         }
 
         public bool Remove(T element)
         {
+            CheckReadOnly();
+
             if (IndexOf(element) != -1)
             {
                 RemoveAt(IndexOf(element));
                 return true;
             }
+
             return false;
         }
 
@@ -120,6 +137,22 @@ namespace OOP2
             for (int i = Count; i > index; i--)
             {
                 array[i] = array[i - 1];
+            }
+        }
+
+        private void CheckIndex(int index)
+        {
+            if (index < 0 || index > Count)
+            {
+                throw new ArgumentOutOfRangeException("index is not a valid index in the IList<T>.");
+            }
+        }
+
+        private void CheckReadOnly()
+        {
+            if (IsReadOnly)
+            {
+                throw new NotSupportedException("List is read only and cannot be modified.");
             }
         }
     }
