@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Text;
 
 namespace OOP2
 {
@@ -45,7 +44,7 @@ namespace OOP2
         public virtual void Insert(int index, T element)
         {
             ResizeIfNeeded();
-            shiftRight(listArray, index);
+            ShiftRight(listArray, index);
 
             listArray[index] = element;
             Count++;
@@ -58,7 +57,7 @@ namespace OOP2
 
         public void RemoveAt(int index)
         {
-            shiftLeft(listArray, index);
+            ShiftLeft(listArray, index);
             Count--;
         }
 
@@ -69,7 +68,6 @@ namespace OOP2
                 Array.Resize(ref listArray, listArray.Length * 2);
             }
         }
-
 
         public void CopyTo(T[] array, int arrayIndex)
         {
@@ -96,20 +94,28 @@ namespace OOP2
             return false;
         }
 
-        IEnumerator<T> IEnumerable<T>.GetEnumerator()
+        public IEnumerator<T> GetEnumerator()
         {
-            for (int i = 0; i < Count; i++)
+            int countIndex = 0;
+
+            foreach (T element in listArray)
             {
-                yield return listArray[i];
-            }            
+                if (countIndex == Count)
+                {
+                    break;
+                }
+
+                countIndex++;
+                yield return element;
+            }
         }
 
-        public IEnumerator GetEnumerator() 
+        IEnumerator IEnumerable.GetEnumerator()
         {
-            return listArray.GetEnumerator();
+            return GetEnumerator();
         }
 
-        private void shiftLeft(T[] array, int index)
+        private void ShiftLeft(T[] array, int index)
         {
             for (int i = index; i < array.Length - 1; i++)
             {
@@ -117,7 +123,7 @@ namespace OOP2
             }
         }
 
-        private void shiftRight(T[] array, int index)
+        private void ShiftRight(T[] array, int index)
         {
             for (int i = array.Length - 1; i > index; i--)
             {

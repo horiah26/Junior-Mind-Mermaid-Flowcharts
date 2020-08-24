@@ -14,7 +14,6 @@ namespace OOP2
             listArray.Add(35);
             listArray.Add(15);
 
-            listArray.Clear();
 
            foreach(var v in listArray)
             {
