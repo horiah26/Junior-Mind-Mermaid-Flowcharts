@@ -14,7 +14,7 @@ namespace OOP2.Tests
                 2
             };
 
-            var readonlyArray = array.ReadOnlyList();
+            var readonlyArray = new ReadOnlyList<int>(array);
 
             Assert.Equal(1, readonlyArray[0]);
             Assert.Equal(2, readonlyArray[1]);

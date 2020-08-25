@@ -14,8 +14,10 @@ namespace OOP2
             listArray.Add(35);
             listArray.Add(15);
 
+            var readList = new ReadOnlyList<int>(listArray);
+            readList.Insert(1,1);
 
-           foreach(var v in listArray)
+           foreach (var v in readList)
             {
                 Console.WriteLine(v);
             }

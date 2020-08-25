@@ -14,9 +14,9 @@ namespace OOP2
 
         public bool IsReadOnly { get; private set; }
 
-        public ReadOnlyCollection<T> ReadOnlyList()
+        public ReadOnlyList<T> ReadOnlyCopy()
         {
-                return Array.AsReadOnly(listArray);
+            return new ReadOnlyList<T>(this);
         }
 
         public List()
@@ -65,11 +65,13 @@ namespace OOP2
         public void Clear()
         {
             Count = 0;
+            CheckReadOnly();
         }
 
         public void RemoveAt(int index)
         {
             CheckIndex(index);
+            CheckReadOnly();
 
             ShiftLeft(listArray, index);
             Count--;
@@ -117,19 +119,6 @@ namespace OOP2
             return false;
         }
 
-        public IEnumerator<T> GetEnumerator()
-        {
-            for (int i = 0; i< Count; i++)
-            {
-                yield return listArray[i];
-            }
-        }
-
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return GetEnumerator();
-        }
-
         private void ShiftLeft(T[] array, int index)
         {
             for (int i = index; i < Count; i++)
@@ -160,6 +149,19 @@ namespace OOP2
             {
                 throw new NotSupportedException("List is read only and cannot be modified.");
             }
+        }
+
+        public IEnumerator<T> GetEnumerator()
+        {
+            for (int i = 0; i < Count; i++)
+            {
+                yield return listArray[i];
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
         }
     }
 }
