@@ -73,8 +73,7 @@ namespace OOP2
 
         private Exception ExceptionReadOnly()
         {
-            throw new ReadOnlyException("List is read only and cannot be modified.");
-   
+            throw new ReadOnlyException("List is read only and cannot be modified.");   
         }
     }
 }

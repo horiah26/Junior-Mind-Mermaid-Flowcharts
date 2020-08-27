@@ -4,7 +4,7 @@ using System.Text;
 
 namespace OOP2
 {
-    class Node<T>
+    public class Node<T>
     {
         public T data;
         public Node<T> Next{ get; set; }
@@ -31,6 +31,5 @@ namespace OOP2
             Next = nextNode;
             nextNode.Previous = this;
         }
-
     }
 }
