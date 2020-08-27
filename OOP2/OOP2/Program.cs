@@ -6,21 +6,13 @@ namespace OOP2
     {
         static void Main(string[] args)
         {
-            var listArray = new List<int>();
+            var linkedList = new LinkedList<int>();
 
-            listArray.Add(3);
-            listArray.Add(10);
-            listArray.Add(24);
-            listArray.Add(35);
-            listArray.Add(15);
 
-            var readList = new ReadOnlyList<int>(listArray);
-            readList.Insert(1,1);
+            linkedList.Add(3);
 
-           foreach (var v in readList)
-            {
-                Console.WriteLine(v);
-            }
+            Console.WriteLine(linkedList.sentinel.Next.Next.data);
+
 
         }
     }
