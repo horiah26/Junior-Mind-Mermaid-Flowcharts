@@ -37,6 +37,18 @@ namespace OOP2
             Count++;
         }
 
+        public void AddFirst(T element)
+        {
+            if (Count == 0)
+            {
+                new Node<T>(element).Link(sentinel, sentinel);
+            }
+            else
+            {
+                new Node<T>(element).Link(sentinel, First);
+            }
+        }
+
         public void Clear()
         {
             Count = 0;

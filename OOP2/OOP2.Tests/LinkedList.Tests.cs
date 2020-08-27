@@ -14,8 +14,8 @@ namespace OOP2.Tests
             linkedList.Add(1);
 
             Assert.Equal(0, linkedList.sentinel.data);
-            Assert.Equal(1, linkedList.sentinel.Next.data);
-            Assert.Equal(0, linkedList.sentinel.Next.Next.data);            
+            Assert.Equal(1, linkedList.First.data);
+            Assert.Equal(0, linkedList.First.Next.data);            
         }
 
         [Fact]
@@ -25,12 +25,12 @@ namespace OOP2.Tests
 
             linkedList.Add(1);
 
-            Assert.Equal(1, linkedList.sentinel.Next.data);
+            Assert.Equal(1, linkedList.First.data);
 
             linkedList.Add(2);   
 
-            Assert.Equal(1, linkedList.sentinel.Next.data);
-            Assert.Equal(2, linkedList.sentinel.Next.Next.data);            
+            Assert.Equal(1, linkedList.First.data);
+            Assert.Equal(2, linkedList.First.Next.data);            
         }
 
         [Fact]
@@ -100,73 +100,91 @@ namespace OOP2.Tests
         [Fact]
         public void CanCopyToArray()
         {
+            var linkedList = new LinkedList<int>
             {
-                var linkedList = new LinkedList<int>
-                {
-                    1,
-                    2,
-                    3
-                };
+                1,
+                2,
+                3
+            };
 
-                var array = new int[8];
+            var array = new int[8];
 
-                linkedList.CopyTo(array, 4);
+            linkedList.CopyTo(array, 4);
 
-                Assert.Equal(1, array[4]);
-                Assert.Equal(2, array[5]);
-                Assert.Equal(3, array[6]);
-            }
+            Assert.Equal(1, array[4]);
+            Assert.Equal(2, array[5]);
+            Assert.Equal(3, array[6]);
         }
 
         [Fact]
         public void RemovesFirst()
-        {
+        {            
+            var linkedList = new LinkedList<int>
             {
-                var linkedList = new LinkedList<int>
-                {
-                    1,
-                    2,
-                    3,
-                    4,
-                    5
-                };
+                1,
+                2,
+                3,
+                4,
+                5
+            };
 
-                linkedList.RemoveFirst();
+            linkedList.RemoveFirst();
 
-                Assert.Equal(2, linkedList.First.data);
-                Assert.Equal(3, linkedList.First.Next.data);
-                Assert.Equal(5, linkedList.Last.data);
+            Assert.Equal(2, linkedList.First.data);
+            Assert.Equal(3, linkedList.First.Next.data);
+            Assert.Equal(5, linkedList.Last.data);
 
-                linkedList.RemoveFirst();
+            linkedList.RemoveFirst();
 
-                Assert.Equal(3, linkedList.First.data);
-                Assert.Equal(5, linkedList.Last.data);
-            }
+            Assert.Equal(3, linkedList.First.data);
+            Assert.Equal(5, linkedList.Last.data);            
         }
 
         [Fact]
         public void RemovesLast()
         {
+            var linkedList = new LinkedList<int>
             {
-                var linkedList = new LinkedList<int>
-                {
-                    1,
-                    2,
-                    3,
-                    1,
-                };
+                1,
+                2,
+                3,
+                1,
+            };
 
-                linkedList.RemoveLast();
+            linkedList.RemoveLast();
 
-                Assert.Equal(1, linkedList.First.data);
-                Assert.Equal(2, linkedList.First.Next.data);
-                Assert.Equal(3, linkedList.Last.data);
+            Assert.Equal(1, linkedList.First.data);
+            Assert.Equal(2, linkedList.First.Next.data);
+            Assert.Equal(3, linkedList.Last.data);
 
-                linkedList.RemoveLast();
+            linkedList.RemoveLast();
 
-                Assert.Equal(1, linkedList.First.data);
-                Assert.Equal(2, linkedList.Last.data);
-            }
+            Assert.Equal(1, linkedList.First.data);
+            Assert.Equal(2, linkedList.Last.data);           
+        }
+
+        [Fact]
+        public void CanAddFirst()
+        {
+            var linkedList = new LinkedList<int>
+            {
+                1,
+                2,
+                3,
+                1,
+            };
+
+            linkedList.AddFirst(6);
+
+            Assert.Equal(6, linkedList.First.data);
+            Assert.Equal(1, linkedList.First.Next.data);
+            Assert.Equal(1, linkedList.Last.data);
+
+            linkedList.AddFirst(100);
+
+            Assert.Equal(100, linkedList.First.data);
+            Assert.Equal(6, linkedList.First.Next.data);
+            Assert.Equal(1, linkedList.Last.data);
         }
     }
 }
