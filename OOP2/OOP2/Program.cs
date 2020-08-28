@@ -1,4 +1,6 @@
 ﻿using System;
+using System.ComponentModel;
+using System.Runtime.ExceptionServices;
 
 namespace OOP2
 {
@@ -6,16 +8,6 @@ namespace OOP2
     {
         static void Main()
         {
-            var linkedList = new LinkedList<int>();
-
-            
-            Console.WriteLine(linkedList.sentinel.data);
-            linkedList.Add(1);
-            Console.WriteLine(linkedList.sentinel.Next.data);
- 
-           
-            linkedList.Add(2);
-            Console.WriteLine(linkedList.sentinel.Next.Next.data);
         }
     }
 }

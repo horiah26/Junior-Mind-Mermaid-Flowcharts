@@ -5,7 +5,6 @@ namespace OOP2.Tests
 {
     public class LinkedListTests
     {
-
         [Fact]
         public void CanAddOneElementAndListIsCircular()
         {            
@@ -13,9 +12,25 @@ namespace OOP2.Tests
 
             linkedList.Add(1);
 
-            Assert.Equal(0, linkedList.sentinel.data);
+            Assert.Equal(0, linkedList.First.Previous.data);
             Assert.Equal(1, linkedList.First.data);
-            Assert.Equal(0, linkedList.First.Next.data);            
+            Assert.Equal(0, linkedList.First.Next.data);
+        }
+
+        [Fact]
+        public void CanInitializeWithArray()
+        {
+            string[] words =
+                { "the", "fox", "jumps", "over", "the", "dog" };
+            LinkedList<string> sentence = new LinkedList<string>(words);
+
+            Assert.Equal("the", sentence.First.data);
+            Assert.Equal("fox", sentence.First.Next.data);
+            Assert.Equal("jumps", sentence.First.Next.Next.data);
+            Assert.Equal("over", sentence.Last.Previous.Previous.data);
+            Assert.Equal("the", sentence.Last.Previous.data);
+            Assert.Equal("dog", sentence.Last.data);
+
         }
 
         [Fact]
@@ -46,7 +61,13 @@ namespace OOP2.Tests
             linkedList.Clear();
 
             Assert.Empty(linkedList);
-            Assert.Throws<NullReferenceException>(() => linkedList.sentinel.Next.data);            
+            Assert.Throws<NullReferenceException>(() => linkedList.First.data);
+            Assert.Throws<NullReferenceException>(() => linkedList.Last.data);
+
+            linkedList.Add(1);
+
+            Assert.Equal(1, linkedList.First.data);
+            Assert.Equal(1, linkedList.Last.data);
         }
 
         [Fact]
@@ -185,6 +206,68 @@ namespace OOP2.Tests
             Assert.Equal(100, linkedList.First.data);
             Assert.Equal(6, linkedList.First.Next.data);
             Assert.Equal(1, linkedList.Last.data);
+        }
+
+        [Fact]
+        public void CanAddBefore()
+        {
+            string[] words =
+                { "the", "fox", "jumps", "over", "the", "dog" };
+            LinkedList<string> sentence = new LinkedList<string>(words);
+
+            var node = sentence.Find("fox");
+
+            sentence.AddBefore(node, "red");
+
+            Assert.Equal("red", sentence.First.Next.data);
+            Assert.Equal("fox", sentence.First.Next.Next.data);
+
+        }
+
+        [Fact]
+        public void CanAddAfter()
+        {
+            string[] words =
+                { "the", "fox", "jumps", "over", "the", "dog" };
+            LinkedList<string> sentence = new LinkedList<string>(words);
+
+            var node = sentence.Find("fox");
+
+            sentence.AddAfter(node, "quickly");
+
+            Assert.Equal("quickly", sentence.First.Next.Next.data);
+            Assert.Equal("jumps", sentence.First.Next.Next.Next.data);
+
+        }
+
+        [Fact]
+        public void CanFindFirst()
+        {
+            string[] words =
+                { "the", "fox", "jumps", "over", "the", "dog" };
+            LinkedList<string> sentence = new LinkedList<string>(words);
+
+            var node = sentence.Find("fox");
+            Assert.Equal(sentence.First.Next, node);
+
+
+            var node2 = sentence.Find("the");
+            Assert.Equal(sentence.First, node2);
+        }
+
+        [Fact]
+        public void CanFindLast()
+        {
+            string[] words =
+                { "the", "fox", "jumps", "over", "the", "dog" };
+            LinkedList<string> sentence = new LinkedList<string>(words);
+
+            var node = sentence.FindLast("fox");
+            Assert.Equal(sentence.First.Next, node);
+
+
+            var node2 = sentence.FindLast("the");
+            Assert.Equal(sentence.Last.Previous, node2);
         }
     }
 }
