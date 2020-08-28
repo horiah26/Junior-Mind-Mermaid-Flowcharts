@@ -148,7 +148,7 @@ namespace OOP2
 
         public void RemoveLast()
         {
-            sentinel.Link(sentinel.Previous.Previous);
+            sentinel.Link(sentinel.Previous.Previous, sentinel.Next);
         }
 
         public Node<T> Find(T element)

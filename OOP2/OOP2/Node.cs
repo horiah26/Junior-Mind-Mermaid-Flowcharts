@@ -17,12 +17,6 @@ namespace OOP2
             Previous = null;
         }
 
-        public void Link(Node<T> previousNode)
-        {
-            previousNode.Next = this;
-            Previous = previousNode;
-        }
-
         public void Link(Node<T> previousNode, Node<T> nextNode)
         {
             previousNode.Next = this;
