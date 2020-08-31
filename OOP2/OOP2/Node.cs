@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace OOP2
+﻿namespace OOP2
 {
     public class Node<T>
     {
@@ -24,6 +20,12 @@ namespace OOP2
 
             Next = nextNode;
             nextNode.Previous = this;
+        }
+
+        public void Remove()
+        {
+            Previous.Next = Next;
+            Next.Previous = Previous;        
         }
     }
 }

@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Text;
 
 namespace OOP2
 {
@@ -13,7 +11,7 @@ namespace OOP2
 
         public ObjectArray()
         {
-            this.array = new object[4];
+            array = new object[4];
         }
         
         public int Count => array.Length;

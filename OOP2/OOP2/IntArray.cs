@@ -10,7 +10,7 @@ namespace OOP2
 
         public IntArray()
         {
-            this.array = new int[4];
+            array = new int[4];
         }
 
         public virtual int this[int index]

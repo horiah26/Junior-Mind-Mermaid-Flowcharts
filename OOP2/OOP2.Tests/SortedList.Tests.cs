@@ -1,4 +1,3 @@
-using System;
 using Xunit;
 
 namespace OOP2.Tests

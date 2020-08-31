@@ -18,13 +18,50 @@ namespace OOP2.Tests
         }
 
         [Fact]
+        public void CanAddNode()
+        {
+            var linkedList = new LinkedList<int>();
+            var node = new Node<int>(5);
+            linkedList.Add(node);
+
+            Assert.Equal(0, linkedList.First.Previous.data);
+            Assert.Equal(5, linkedList.First.data);
+            Assert.Equal(0, linkedList.First.Next.data);
+        }
+
+        [Fact]
+        public void CanAddLast()
+        {
+            var linkedList = new LinkedList<int>();
+            linkedList.Add(1);
+            linkedList.Add(4);
+
+            linkedList.AddLast(5);
+
+            Assert.Equal(5, linkedList.Last.data);
+        }
+
+        [Fact]
+        public void CanAddLastNode()
+        {
+            var linkedList = new LinkedList<int>();
+            var node = new Node<int>(5);
+
+            linkedList.Add(1);
+            linkedList.Add(4);
+            linkedList.AddLast(node);
+
+            Assert.Equal(5, linkedList.Last.data);
+        }
+
+        [Fact]
         public void CanInitializeWithArray()
         {
             string[] words =
                 { "the", "fox", "jumps", "over", "the", "dog" };
             LinkedList<string> sentence = new LinkedList<string>(words);
 
-            Assert.Equal("the", sentence.First.data);
+            Assert.Equal("dog", sentence.Last.data);
             Assert.Equal("fox", sentence.First.Next.data);
             Assert.Equal("jumps", sentence.First.Next.Next.data);
             Assert.Equal("over", sentence.Last.Previous.Previous.data);
@@ -61,9 +98,7 @@ namespace OOP2.Tests
             linkedList.Clear();
 
             Assert.Empty(linkedList);
-            Assert.Throws<NullReferenceException>(() => linkedList.First.data);
-            Assert.Throws<NullReferenceException>(() => linkedList.Last.data);
-
+      
             linkedList.Add(1);
 
             Assert.Equal(1, linkedList.First.data);
@@ -80,13 +115,35 @@ namespace OOP2.Tests
                 3
             };
 
-
-            Assert.Contains(1, linkedList);
-            Assert.Contains(2, linkedList);
-            Assert.Contains(3, linkedList);
+            Assert.True(linkedList.Contains(1));
+            Assert.True(linkedList.Contains(2));
+            Assert.True(linkedList.Contains(3));
 
             Assert.DoesNotContain(4, linkedList);
             Assert.DoesNotContain(0, linkedList);            
+        }
+
+        [Fact]
+        public void CanRemoveNode()
+        {
+            var linkedList = new LinkedList<int>
+            {
+                1,
+                2,
+                3,
+                4,
+                5
+            };
+
+            var secondNode = linkedList.First.Next;
+            linkedList.Remove(secondNode);
+
+            Assert.True(linkedList.Contains(1));
+            Assert.True(linkedList.Contains(3));
+            Assert.True(linkedList.Contains(4));
+            Assert.True(linkedList.Contains(5));
+
+            Assert.DoesNotContain(2, linkedList);
         }
 
         [Fact]
@@ -221,7 +278,22 @@ namespace OOP2.Tests
 
             Assert.Equal("red", sentence.First.Next.data);
             Assert.Equal("fox", sentence.First.Next.Next.data);
+        }
 
+        [Fact]
+        public void CanAddBeforeNode()
+        {
+            string[] words =
+                { "the", "fox", "jumps", "over", "the", "dog" };
+            LinkedList<string> sentence = new LinkedList<string>(words);
+
+            var node = sentence.Find("fox");
+            var newNode = new Node<string>("red");
+
+            sentence.AddBefore(node, newNode);
+
+            Assert.Equal("red", sentence.First.Next.data);
+            Assert.Equal("fox", sentence.First.Next.Next.data);
         }
 
         [Fact]
@@ -234,6 +306,23 @@ namespace OOP2.Tests
             var node = sentence.Find("fox");
 
             sentence.AddAfter(node, "quickly");
+
+            Assert.Equal("quickly", sentence.First.Next.Next.data);
+            Assert.Equal("jumps", sentence.First.Next.Next.Next.data);
+
+        }
+
+        [Fact]
+        public void CanAddAfterNode()
+        {
+            string[] words =
+                { "the", "fox", "jumps", "over", "the", "dog" };
+            LinkedList<string> sentence = new LinkedList<string>(words);
+            
+            var node = sentence.Find("fox");
+            var newNode = new Node<string>("quickly");
+
+            sentence.AddAfter(node, newNode);
 
             Assert.Equal("quickly", sentence.First.Next.Next.data);
             Assert.Equal("jumps", sentence.First.Next.Next.Next.data);
@@ -258,8 +347,7 @@ namespace OOP2.Tests
         [Fact]
         public void CanFindLast()
         {
-            string[] words =
-                { "the", "fox", "jumps", "over", "the", "dog" };
+            string[] words = { "the", "fox", "jumps", "over", "the", "dog" };
             LinkedList<string> sentence = new LinkedList<string>(words);
 
             var node = sentence.FindLast("fox");
@@ -268,6 +356,44 @@ namespace OOP2.Tests
 
             var node2 = sentence.FindLast("the");
             Assert.Equal(sentence.Last.Previous, node2);
+        }
+
+        [Fact]
+        public void ThrowsExceptionWhenRemovingUnLinkedNode()
+        {
+            string[] words = { "the", "fox", "jumps", "over", "the", "dog" };
+
+            LinkedList<string> sentence = new LinkedList<string>(words);
+
+            Node<string> unLinkedNode = new Node<string> ("water");
+
+            Assert.Throws<InvalidOperationException>(() => sentence.Remove(unLinkedNode));
+        }
+
+        [Fact]
+        public void ThrowsExceptionWhenAddingNodeInAnotherList()
+        {
+            string[] words = { "the", "fox", "jumps", "over", "the", "dog" };            
+            LinkedList<string> sentence = new LinkedList<string>(words);
+
+            string[] otherWords = { "car", "house", "kids", "sky", "ball", "cat" };
+            LinkedList<string> anotherSentence = new LinkedList<string>(otherWords);
+
+            var linkedNode = anotherSentence.First;
+
+            Assert.Throws<InvalidOperationException>(() => sentence.Add(linkedNode));
+        }
+
+        [Fact]
+        public void ThrowsExceptionWhenNodeIsNull()
+        {
+            string[] words = { "the", "fox", "jumps", "over", "the", "dog" };
+
+            LinkedList<string> sentence = new LinkedList<string>(words);
+
+            Node<string> nullNode = null;
+
+            Assert.Throws<NullReferenceException>(() => sentence.Add(nullNode));
         }
     }
 }

@@ -1,31 +1,31 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics.Tracing;
-using System.Linq;
-using System.Runtime.ExceptionServices;
 
 namespace OOP2
 {
     public class LinkedList<T> : ICollection<T>
     {
-        private readonly Node<T> sentinel = new Node<T>(default);
+        private Node<T> sentinel = new Node<T>(default);
+
         public int Count { get; private set; }
         public bool IsReadOnly { get; }
 
-        public Node<T> First => Count != 0 ? sentinel.Next : throw NullNodeException();
-        public Node<T> Last => Count != 0 ? sentinel.Previous : throw NullNodeException();
-        
+        public Node<T> First => Count != 0 ? sentinel.Next : throw new NullReferenceException("Linked List is Empty");
+        public Node<T> Last => Count != 0 ? sentinel.Previous : throw new NullReferenceException("Linked List is Empty");
+
         public LinkedList()
         {
-            Count = 0;
             sentinel.Next = sentinel;
             sentinel.Previous = sentinel;
         }
 
         public LinkedList(T[] array)
         {
-            foreach (T element in array)
+            sentinel.Next = sentinel;
+            sentinel.Previous = sentinel;
+
+            foreach(var element in array)
             {
                 Add(element);
             }
@@ -33,57 +33,70 @@ namespace OOP2
 
         public void Add(T element)
         {
-            if(Count == 0)
-            {
-                new Node<T>(element).Link(sentinel, sentinel);
-            }
-            else
-            {
-                new Node<T>(element).Link(sentinel.Previous, sentinel);
-            }
-
-            Count++;
-        }
-
-        public void AddLast(T element)
-        {
-            Add(element);
+            AddLast(element);
         }
 
         public void Add(Node<T> node)
         {
-            if (Count == 0)
-            {
-                node.Link(sentinel, sentinel);
-            }
-            else
-            {
-                node.Link(sentinel.Previous, sentinel);
-            }
+            AddLast(node);
+        }
 
+        public void AddLast(T element)
+        {
+            AddLast(new Node<T>(element)); 
+        }
+
+        public void AddLast(Node<T> node)
+        {
+            CheckIfNull(node);
+            CheckLinkedToAnotherList(node);
+
+            Insert(sentinel.Previous, node, sentinel);
             Count++;
         }
 
         public void AddFirst(T element)
         {
-            if (Count == 0)
-            {
-                new Node<T>(element).Link(sentinel, sentinel);
-            }
-            else
-            {
-                new Node<T>(element).Link(sentinel, First);
-            }
+            AddFirst(new Node<T>(element));
+        }
+
+        public void AddFirst(Node<T> node)
+        {
+            CheckIfNull(node);
+            CheckLinkedToAnotherList(node);
+
+            Insert(sentinel, node, sentinel.Next);
+            Count++;
         }
 
         public void AddAfter(Node<T> node, T element)
         {
-            new Node<T>(element).Link(node, node.Next);
+            AddAfter(node, new Node<T>(element));
+        }
+
+        public void AddAfter(Node<T> node, Node<T> newNode)
+        {
+            CheckIfNull(node);
+            CheckInList(node);
+            CheckIfNull(newNode);
+
+            Insert(node, newNode, node.Next);
+            Count++;
         }
 
         public void AddBefore(Node<T> node, T element)
         {
-            new Node<T>(element).Link(node.Previous, node);
+            AddBefore(node, new Node<T>(element));
+        }
+
+        public void AddBefore(Node<T> node, Node<T> newNode)
+        {
+            CheckIfNull(node);
+            CheckInList(node);
+            CheckIfNull(newNode);
+
+            Insert(node.Previous, newNode, node);
+            Count++;
         }
 
         public void Clear()
@@ -93,8 +106,9 @@ namespace OOP2
 
         public bool Contains(T element)
         {
-            return Find(element) != null; 
+            return Find(element) != null;
         }
+
 
         public void CopyTo(T[] array, int arrayIndex)
         {
@@ -122,24 +136,25 @@ namespace OOP2
 
         public bool Remove(T data)
         {
-            Node<T> enumNode = sentinel;
+           return Remove(Find(data));
+        }
 
-            for (int i = 0; i < Count; i++)
+        public bool Remove(Node<T> node)
+        {            
+            CheckIfNull(node);
+            CheckInList(node);
+
+            Node<T> foundNode = Finder(node, ForwardSearch());
+
+            if(foundNode != null)
             {
-                enumNode = enumNode.Next;
-
-                if (enumNode.data.Equals(data))
-                {
-                    enumNode.Previous.Next = enumNode.Next;
-                    enumNode.Next.Previous = enumNode.Previous;
-
-                    Count--;
-                    return true;
-                }
+                foundNode.Remove();
+                Count--;
+                return true;
             }
 
-            return false;
-        }
+            return false;                
+        }                  
 
         public void RemoveFirst()
         {
@@ -149,44 +164,48 @@ namespace OOP2
         public void RemoveLast()
         {
             sentinel.Link(sentinel.Previous.Previous, sentinel.Next);
+            Count--;
         }
 
         public Node<T> Find(T element)
         {
-            return (Finder(element, "First"));
+            return Finder(element, ForwardSearch());
         }
 
         public Node<T> FindLast(T element)
         {
-            return (Finder(element, "Last"));
+            return Finder(element, BackwardSearch());
         }
 
-        public Node<T> Finder(T element, string startPoint)
+        private Node<T> Finder(T element, IEnumerable<Node<T>> searchDirection)
         {
-            Node<T> enumNode = sentinel;
-
-            for (int i = 0; i < Count; i++)
+            foreach (Node<T> node in searchDirection)
             {
-                if (startPoint == "First")
+                if (node.data.Equals(element))
                 {
-                    enumNode = enumNode.Next;
-                }
-                else if (startPoint == "Last")
-                {
-                    enumNode = enumNode.Previous;
-                }
-                else
-                {
-                    throw new ArgumentException("Start point can only be First or Last");
-                }
-
-                if (enumNode.data.Equals(element))
-                {
-                    return enumNode;
+                    return node;
                 }
             }
 
             return null;
+        }
+
+        private Node<T> Finder(Node<T> nodeToFind, IEnumerable<Node<T>> searchDirection)
+        {
+            foreach (Node<T> node in searchDirection)
+            {
+                if (node.Equals(nodeToFind))
+                {
+                    return node;
+                }
+            }
+
+            return null;
+        }
+
+        private void Insert(Node<T> previousNode, Node<T> newnode, Node<T> nextNode)
+        {
+            newnode.Link(previousNode, nextNode);
         }
 
         public IEnumerator<T> GetEnumerator()
@@ -205,9 +224,43 @@ namespace OOP2
             return GetEnumerator();
         }
 
-        private Exception NullNodeException()
+        private IEnumerable<Node<T>> ForwardSearch()
         {
-            throw new NullReferenceException("Node is null");
+            for (Node<T> node = sentinel.Next; node != sentinel; node = node.Next)
+            {
+                yield return node;
+            }
+        }
+        private IEnumerable<Node<T>> BackwardSearch()
+        {
+            for (Node<T> node = sentinel.Previous; node != sentinel; node = node.Previous)
+            {
+                yield return node;
+            }
+        }
+
+        private void CheckIfNull(Node<T> node)
+        {
+            if (node == null)
+            {
+                throw new NullReferenceException("Node is null");
+            }
+        }
+
+        private void CheckInList(Node<T> node)
+        {
+            if (Finder(node, ForwardSearch()) == null)
+            {
+                throw new InvalidOperationException("Node is not in the current LinkedList<T>.");
+            }
+        }
+
+        private void CheckLinkedToAnotherList(Node<T> node)
+        {
+            if (node.Previous != null || node.Next != null)
+            {
+                throw new InvalidOperationException("Node is linked to another LinkedList<T>.");
+            }
         }
     }
 }
