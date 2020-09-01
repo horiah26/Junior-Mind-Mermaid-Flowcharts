@@ -33,55 +33,42 @@ namespace OOP2
 
         public void Add(T element)
         {
-            AddLast(element);
+            AddBefore(sentinel, new Node<T>(element));
         }
 
         public void Add(Node<T> node)
         {
-            AddLast(node);
+            AddBefore(sentinel, node);
         }
 
         public void AddLast(T element)
         {
-            AddLast(new Node<T>(element)); 
+            AddBefore(sentinel, new Node<T>(element));
         }
 
         public void AddLast(Node<T> node)
         {
-            CheckIfNull(node);
-            CheckLinkedToAnotherList(node);
-
-            Insert(sentinel.Previous, node, sentinel);
-            Count++;
+            AddBefore(sentinel, node);
         }
 
         public void AddFirst(T element)
         {
-            AddFirst(new Node<T>(element));
+            AddBefore(First, new Node<T>(element));
         }
 
         public void AddFirst(Node<T> node)
         {
-            CheckIfNull(node);
-            CheckLinkedToAnotherList(node);
-
-            Insert(sentinel, node, sentinel.Next);
-            Count++;
+            AddBefore(First, node);
         }
 
         public void AddAfter(Node<T> node, T element)
         {
-            AddAfter(node, new Node<T>(element));
+            AddBefore(node.Next, new Node<T>(element));
         }
 
         public void AddAfter(Node<T> node, Node<T> newNode)
         {
-            CheckIfNull(node);
-            CheckInList(node);
-            CheckIfNull(newNode);
-
-            Insert(node, newNode, node.Next);
-            Count++;
+            AddBefore(node.Next, newNode);
         }
 
         public void AddBefore(Node<T> node, T element)
@@ -94,8 +81,10 @@ namespace OOP2
             CheckIfNull(node);
             CheckInList(node);
             CheckIfNull(newNode);
+            CheckLinkedToAnotherList(newNode);
 
-            Insert(node.Previous, newNode, node);
+            newNode.Link(node.Previous, node);
+
             Count++;
         }
 
@@ -108,7 +97,6 @@ namespace OOP2
         {
             return Find(element) != null;
         }
-
 
         public void CopyTo(T[] array, int arrayIndex)
         {
@@ -139,32 +127,25 @@ namespace OOP2
            return Remove(Find(data));
         }
 
-        public bool Remove(Node<T> node)
-        {            
-            CheckIfNull(node);
-            CheckInList(node);
-
-            Node<T> foundNode = Finder(node, ForwardSearch());
-
-            if(foundNode != null)
-            {
-                foundNode.Remove();
-                Count--;
-                return true;
-            }
-
-            return false;                
-        }                  
-
         public void RemoveFirst()
         {
-            Remove(First.data);
+            Remove(First);
         }
 
         public void RemoveLast()
         {
-            sentinel.Link(sentinel.Previous.Previous, sentinel.Next);
+            Remove(Last);
+        }
+
+        public bool Remove(Node<T> node)
+        {
+            CheckIfNull(node);
+            CheckInList(node);          
+
+            node.Remove();
+
             Count--;
+            return true;
         }
 
         public Node<T> Find(T element)
@@ -203,11 +184,6 @@ namespace OOP2
             return null;
         }
 
-        private void Insert(Node<T> previousNode, Node<T> newnode, Node<T> nextNode)
-        {
-            newnode.Link(previousNode, nextNode);
-        }
-
         public IEnumerator<T> GetEnumerator()
         {
             Node<T> enumNode = sentinel;
@@ -231,6 +207,7 @@ namespace OOP2
                 yield return node;
             }
         }
+
         private IEnumerable<Node<T>> BackwardSearch()
         {
             for (Node<T> node = sentinel.Previous; node != sentinel; node = node.Previous)
@@ -249,7 +226,7 @@ namespace OOP2
 
         private void CheckInList(Node<T> node)
         {
-            if (Finder(node, ForwardSearch()) == null)
+            if (Finder(node, ForwardSearch()) == null && node != sentinel)
             {
                 throw new InvalidOperationException("Node is not in the current LinkedList<T>.");
             }
