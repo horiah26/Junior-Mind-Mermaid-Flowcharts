@@ -33,7 +33,7 @@ namespace OOP2
 
         public void Add(T element)
         {
-            AddBefore(sentinel, new Node<T>(element));
+            Add(new Node<T>(element));
         }
 
         public void Add(Node<T> node)
@@ -43,7 +43,7 @@ namespace OOP2
 
         public void AddLast(T element)
         {
-            AddBefore(sentinel, new Node<T>(element));
+            AddLast(new Node<T>(element));
         }
 
         public void AddLast(Node<T> node)
@@ -53,17 +53,17 @@ namespace OOP2
 
         public void AddFirst(T element)
         {
-            AddBefore(First, new Node<T>(element));
+            AddFirst(new Node<T>(element));
         }
 
         public void AddFirst(Node<T> node)
         {
-            AddBefore(First, node);
+            AddBefore(sentinel.Next, node);
         }
 
         public void AddAfter(Node<T> node, T element)
         {
-            AddBefore(node.Next, new Node<T>(element));
+            AddAfter(node, new Node<T>(element));
         }
 
         public void AddAfter(Node<T> node, Node<T> newNode)

@@ -86,6 +86,16 @@ namespace OOP2.Tests
         }
 
         [Fact]
+        public void AddFirstWorksOnEmptyList()
+        {
+            var linkedList = new LinkedList<int>();
+
+            linkedList.AddFirst(1);
+
+            Assert.Equal(1, linkedList.First.data);
+        }
+
+        [Fact]
         public void Clears()
         {            
             var linkedList = new LinkedList<int>
