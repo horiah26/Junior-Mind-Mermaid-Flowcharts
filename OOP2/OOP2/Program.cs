@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace OOP2
 {
@@ -6,19 +7,24 @@ namespace OOP2
     {
         static void Main()
         {
-            var dictionary = new Dictionary<int, string>(5);
+            Dictionary<int, string> dictionary = new Dictionary<int, string>(5);
 
-            dictionary.Add(0, "a");
+            dictionary.Add(3, "a");
+            dictionary.Add(4, "b");
+            dictionary.Add(5, "c");
 
-            dictionary.Add(10, "b");
-            dictionary.Add(15, "b");
+            var array = new KeyValuePair<int, string>[3];
+            Console.WriteLine("array count" + array.Length);
+            Console.WriteLine("dictionary count" + dictionary.Count);
 
-            foreach (var key in dictionary.Keys)
+            dictionary.CopyTo(array, 0);
+
+            Console.WriteLine("array count 2" + array.Length);
+            foreach (var v in array)
             {
-                Console.WriteLine(key);
+                Console.WriteLine(v);
             }
 
-            Console.WriteLine(dictionary.elements[dictionary.buckets[0]].Next);
         }
     }
 }

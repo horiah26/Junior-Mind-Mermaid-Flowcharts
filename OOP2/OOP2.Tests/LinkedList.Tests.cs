@@ -125,9 +125,9 @@ namespace OOP2.Tests
                 3
             };
 
-            Assert.True(linkedList.Contains(1));
-            Assert.True(linkedList.Contains(2));
-            Assert.True(linkedList.Contains(3));
+            Assert.Contains(1, linkedList);
+            Assert.Contains(2, linkedList);
+            Assert.Contains(3, linkedList);
 
             Assert.DoesNotContain(4, linkedList);
             Assert.DoesNotContain(0, linkedList);            
@@ -148,10 +148,10 @@ namespace OOP2.Tests
             var secondNode = linkedList.First.Next;
             linkedList.Remove(secondNode);
 
-            Assert.True(linkedList.Contains(1));
-            Assert.True(linkedList.Contains(3));
-            Assert.True(linkedList.Contains(4));
-            Assert.True(linkedList.Contains(5));
+            Assert.Contains(1, linkedList);
+            Assert.Contains(3, linkedList);
+            Assert.Contains(4, linkedList);
+            Assert.Contains(5, linkedList);
 
             Assert.DoesNotContain(2, linkedList);
         }
