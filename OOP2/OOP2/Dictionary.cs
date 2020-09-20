@@ -5,55 +5,31 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace OOP2
 {
-    public class Element<TKey, TValue>
-    {
-        public TKey Key;
-        public TValue Value;
-        public int Next = -1;
-
-        public Element(TKey Key, TValue Value)
-        {
-            this.Key = Key;
-            this.Value = Value;
-        }
-
-        public Element(TKey Key, TValue Value, int Next)
-        {
-            this.Key = Key;
-            this.Value = Value;
-            this.Next = Next;
-        }
-    }
-
     public class Dictionary<TKey, TValue> : IDictionary<TKey, TValue>
     {
         private int[] buckets;
         private Element<TKey, TValue>[] elements;
+
+        public Dictionary(int bucketSize)
+        {
+            buckets = new int[bucketSize];
+            elements = new Element<TKey, TValue>[bucketSize];
+
+            Array.Fill(buckets, -1);
+        }
 
         public TValue this[TKey key] 
         { 
             get
             {
                 var element = FindByKey(key);
-                CheckElementNull(element);
-
                 return element.Value;
             }            
             set 
             {
                 var element = FindByKey(key);
-                CheckElementNull(element);
-
                 element.Value = value;
             }
-        }
-
-        public Dictionary(int bucketSize)
-        {
-            buckets = new int[bucketSize];     
-            elements = new Element<TKey, TValue>[bucketSize];
-
-            Array.Fill(buckets, -1);
         }
 
         public ICollection<TKey> Keys
@@ -92,7 +68,7 @@ namespace OOP2
 
         public void Add(KeyValuePair<TKey, TValue> item)
         {
-            Add(new Element<TKey, TValue>(item.Key, item.Value));
+            Add(item.Key, item.Value);
         }
 
         public void Add(Element<TKey, TValue> element)
@@ -102,8 +78,9 @@ namespace OOP2
 
         public void Add(TKey key, TValue value)
         {
-            ResizeIfNeeded();
+            CheckIfNull(key);
             CheckIfDuplicate(key);
+            EnsureCapacity();
 
             int freeIndex = FindFreeIndex();
             int bucketNumber = GetBucket(key);
@@ -116,7 +93,7 @@ namespace OOP2
 
         private int GetBucket(TKey key)
         {
-            return Math.Abs(key.GetHashCode()) % 5;
+            return Math.Abs(key.GetHashCode()) % buckets.Length;
         }
 
         private int FindFreeIndex()
@@ -136,20 +113,25 @@ namespace OOP2
         {
             Count = 0;
             Array.Fill(buckets, -1);
+            Array.Fill(elements, null);
         }
 
-        public bool Contains(Element<TKey, TValue> item)
+        public bool Contains(Element<TKey, TValue> element)
         {
-            return (FindByKey(item.Key) != null && FindByKey(item.Key).Value.Equals(item.Value));
+            CheckIfNull(element.Key);
+            return (FindByKey(element.Key) != null && FindByKey(element.Key).Value.Equals(element.Value));
         }
 
         public bool Contains(KeyValuePair<TKey, TValue> item)
         {
+            CheckIfNull(item.Key);
             return Contains(new Element<TKey, TValue>(item.Key, item.Value));
         }
 
         private Element<TKey, TValue> FindByKey(TKey key)
         {
+            CheckIfNull(key);
+
             int bucketNumber = GetBucket(key);
             int currentIndex = buckets[bucketNumber];
 
@@ -169,15 +151,28 @@ namespace OOP2
 
         public bool ContainsKey(TKey key)
         {
+            CheckIfNull(key);
             return FindByKey(key) != null;
+        }
+
+        public bool ContainsValue(TValue value)
+        {
+            return Values.Contains(value);
+        }
+
+        public bool Remove(KeyValuePair<TKey, TValue> item)
+        {
+            if (FindByKey(item.Key).Value.Equals(item.Value))
+            {
+                return Remove(item.Key);
+            }
+
+            return false;
         }
 
         public bool Remove(TKey key)
         {
-            if(FindByKey(key) == null)
-            {
-                return false;
-            }
+            CheckIfNull(key);
 
             int bucketNumber = GetBucket(key);
             int valueInBucket = buckets[bucketNumber];
@@ -240,30 +235,11 @@ namespace OOP2
             }
         }
 
-        public IEnumerator<KeyValuePair<TKey, TValue>> GetEnumerator()
-        {
-            for (int i = 0; i < elements.Length; i++)
-            {
-                if (elements[i] != null)
-                {
-                    yield return new KeyValuePair<TKey, TValue>(elements[i].Key, elements[i].Value);
-                }
-            }
-        }
-
-        public bool Remove(KeyValuePair<TKey, TValue> item)
-        {
-            if (FindByKey(item.Key).Value.Equals(item.Value))
-            {
-                return Remove(item.Key);                
-            }
-
-            return false;
-        }
-
         public bool TryGetValue(TKey key, [MaybeNullWhen(false)] out TValue value)
         {
-            if(FindByKey(key) != null)
+            CheckIfNull(key);
+
+            if (FindByKey(key) != null)
             {
                 value = FindByKey(key).Value;
                 return true;
@@ -278,7 +254,18 @@ namespace OOP2
             return GetEnumerator();
         }
 
-        public void ResizeIfNeeded()
+        public IEnumerator<KeyValuePair<TKey, TValue>> GetEnumerator()
+        {
+            for (int i = 0; i < elements.Length; i++)
+            {
+                if (elements[i] != null)
+                {
+                    yield return new KeyValuePair<TKey, TValue>(elements[i].Key, elements[i].Value);
+                }
+            }
+        }
+
+        public void EnsureCapacity()
         {
             if (elements.Length == Count)
             {
@@ -286,11 +273,11 @@ namespace OOP2
             }
         }
 
-        private void CheckElementNull(Element<TKey, TValue> element)
+        private void CheckIfNull(TKey key)
         {
-            if (element == null)
+            if (key == null)
             {
-                throw new ArgumentNullException("Key not found in Dictionary");
+                throw new ArgumentNullException("Key is null");
             };
         }
 
