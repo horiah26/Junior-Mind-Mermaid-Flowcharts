@@ -27,7 +27,7 @@ namespace OOP2.Tests
             dictionary.Add(0, "a");
 
             dictionary.ContainsKey(0);
-            dictionary.Contains(new Element<int, string>(0, "a"));
+            dictionary.Contains(new KeyValuePair<int, string>(0, "a"));
             Assert.True(dictionary.Count == 1);
         }
 
@@ -38,7 +38,7 @@ namespace OOP2.Tests
             dictionary.Add("key", "a");
 
             dictionary.ContainsKey("key");
-            dictionary.Contains(new Element<string, string>("key", "a"));
+            dictionary.Contains(new KeyValuePair<string, string>("key", "a"));
             Assert.True(dictionary.Count == 1);
         }
 
@@ -52,21 +52,6 @@ namespace OOP2.Tests
         }
 
         [Fact]
-        public void DictionaryDoublesSize()
-        {
-            var dictionary = new Dictionary<int, string>(5);
-            dictionary.Add(0, "a");
-            dictionary.Add(1, "b");
-            dictionary.Add(2, "c");
-            dictionary.Add(3, "d");
-            dictionary.Add(4, "e");
-            dictionary.Add(5, "f");
-            dictionary.Add(6, "g");
-
-            Assert.True(dictionary.Count == 7);
-        }
-
-        [Fact]
         public void Clears()
         {
             Dictionary<int, string> dictionary = new Dictionary<int, string>(5);
@@ -77,6 +62,63 @@ namespace OOP2.Tests
             dictionary.Clear();
 
             Assert.Empty(dictionary);
+        }
+
+        [Fact]
+        public void CanGetValueWithIndexer()
+        {
+            Dictionary<int, string> dictionary = new Dictionary<int, string>(5);
+
+            dictionary.Add(1, "a");
+            dictionary.Add(2, "b");
+            dictionary.Add(3, "c");
+
+            Assert.Equal("a", dictionary[1]);
+        }
+
+        [Fact]
+        public void CanAddWithIndexer()
+        {
+            Dictionary<int, string> dictionary = new Dictionary<int, string>(5);
+
+            dictionary.Add(1, "a");
+            dictionary.Add(2, "b");
+            dictionary.Add(3, "c");
+            dictionary[4] = "d";
+
+            Assert.True(dictionary.ContainsKey(4));
+            Assert.Contains(new KeyValuePair<int, string>(4, "d"), dictionary);
+        }
+
+        [Fact]
+        public void CanAddAfterClear()
+        {
+            Dictionary<int, string> dictionary = new Dictionary<int, string>(5);
+
+            dictionary.Add(new KeyValuePair<int, string>(0, "a"));
+            dictionary.Add(new KeyValuePair<int, string>(1, "b"));
+            dictionary.Add(new KeyValuePair<int, string>(2, "c"));
+            dictionary.Add(new KeyValuePair<int, string>(3, "d"));
+             
+            dictionary.Clear();
+
+            dictionary.Add(1, "b");
+
+            Assert.Contains(new KeyValuePair<int, string>(1, "b"), dictionary);
+            Assert.DoesNotContain(new KeyValuePair<int, string>(0, "a"), dictionary);
+            Assert.DoesNotContain(new KeyValuePair<int, string>(2, "c"), dictionary);
+
+            dictionary.Add(2, "c");
+
+            Assert.Contains(new KeyValuePair<int, string>(1, "b"), dictionary);
+            Assert.DoesNotContain(new KeyValuePair<int, string>(0, "a"), dictionary);
+            Assert.Contains(new KeyValuePair<int, string>(2, "c"), dictionary);
+
+            dictionary.Remove(1);
+
+            Assert.DoesNotContain(new KeyValuePair<int, string>(1, "b"), dictionary);
+            Assert.DoesNotContain(new KeyValuePair<int, string>(0, "a"), dictionary);
+            Assert.Contains(new KeyValuePair<int, string>(2, "c"), dictionary);
         }
 
         [Fact]
@@ -96,35 +138,19 @@ namespace OOP2.Tests
         }
 
         [Fact]
-        public void ContainsValueWorks()
-        {
-            Dictionary<int, string> dictionary = new Dictionary<int, string>(5);
-
-            dictionary.Add(1, "a");
-            dictionary.Add(2, "b");
-            dictionary.Add(3, "c");
-
-            Assert.True(dictionary.ContainsValue("a"));
-            Assert.True(dictionary.ContainsValue("b"));
-            Assert.True(dictionary.ContainsValue("c"));
-
-            Assert.False(dictionary.ContainsValue("d"));
-        }
-
-        [Fact]
         public void ContainsWorks()
         {
             Dictionary<int, string> dictionary = new Dictionary<int, string>(5);
 
-            dictionary.Add(new Element<int, string>(0, "a"));
-            dictionary.Add(new Element<int, string>(1, "b"));
-            dictionary.Add(new Element<int, string>(2, "c"));
+            dictionary.Add(new KeyValuePair<int, string>(0, "a"));
+            dictionary.Add(new KeyValuePair<int, string>(1, "b"));
+            dictionary.Add(new KeyValuePair<int, string>(2, "c"));
 
-            Assert.True(dictionary.Contains(new Element<int, string>(0, "a")));
-            Assert.True(dictionary.Contains(new Element<int, string>(1, "b")));
-            Assert.True(dictionary.Contains(new Element<int, string>(2, "c")));
+            Assert.Contains(new KeyValuePair<int, string>(0, "a"), dictionary);
+            Assert.Contains(new KeyValuePair<int, string>(1, "b"), dictionary);
+            Assert.Contains(new KeyValuePair<int, string>(2, "c"), dictionary);
 
-            Assert.False(dictionary.Contains(new Element<int, string>(4, "a")));
+            Assert.DoesNotContain(new KeyValuePair<int, string>(4, "a"), dictionary);
         }
 
         [Fact]
@@ -132,17 +158,17 @@ namespace OOP2.Tests
         {
             Dictionary<int, string> dictionary = new Dictionary<int, string>(5);
 
-            dictionary.Add(new Element<int, string>(0, "a"));
-            dictionary.Add(new Element<int, string>(1, "b"));
-            dictionary.Add(new Element<int, string>(2, "c"));
+            dictionary.Add(new KeyValuePair<int, string>(0, "a"));
+            dictionary.Add(new KeyValuePair<int, string>(1, "b"));
+            dictionary.Add(new KeyValuePair<int, string>(2, "c"));
 
             dictionary.Remove(0);
 
-            Assert.False(dictionary.Contains(new Element<int, string>(0, "a")));
-            Assert.True(dictionary.Contains(new Element<int, string>(1, "b")));
-            Assert.True(dictionary.Contains(new Element<int, string>(2, "c")));
+            Assert.DoesNotContain(new KeyValuePair<int, string>(0, "a"), dictionary);
+            Assert.Contains(new KeyValuePair<int, string>(1, "b"), dictionary);
+            Assert.Contains(new KeyValuePair<int, string>(2, "c"), dictionary);
 
-            Assert.False(dictionary.Contains(new Element<int, string>(4, "a")));
+            Assert.DoesNotContain(new KeyValuePair<int, string>(4, "a"), dictionary);
         }
 
         [Fact]
@@ -150,17 +176,17 @@ namespace OOP2.Tests
         {
             Dictionary<int, string> dictionary = new Dictionary<int, string>(5);
 
-            dictionary.Add(new Element<int, string>(0, "a"));
-            dictionary.Add(new Element<int, string>(10, "b"));
-            dictionary.Add(new Element<int, string>(20, "c"));
+            dictionary.Add(new KeyValuePair<int, string>(0, "a"));
+            dictionary.Add(new KeyValuePair<int, string>(10, "b"));
+            dictionary.Add(new KeyValuePair<int, string>(20, "c"));
 
             dictionary.Remove(10);
 
-            Assert.True(dictionary.Contains(new Element<int, string>(0, "a")));
-            Assert.False(dictionary.Contains(new Element<int, string>(10, "b")));
-            Assert.True(dictionary.Contains(new Element<int, string>(20, "c")));
+            Assert.Contains(new KeyValuePair<int, string>(0, "a"), dictionary);
+            Assert.DoesNotContain(new KeyValuePair<int, string>(10, "b"), dictionary);
+            Assert.Contains(new KeyValuePair<int, string>(20, "c"), dictionary);
 
-            Assert.False(dictionary.Contains(new Element<int, string>(40, "a")));
+            Assert.DoesNotContain(new KeyValuePair<int, string>(40, "a"), dictionary);
         }
 
         [Fact]
@@ -168,17 +194,17 @@ namespace OOP2.Tests
         {
             Dictionary<int, string> dictionary = new Dictionary<int, string>(5);
 
-            dictionary.Add(new Element<int, string>(0, "a"));
-            dictionary.Add(new Element<int, string>(1, "b"));
-            dictionary.Add(new Element<int, string>(2, "c"));
+            dictionary.Add(new KeyValuePair<int, string>(0, "a"));
+            dictionary.Add(new KeyValuePair<int, string>(1, "b"));
+            dictionary.Add(new KeyValuePair<int, string>(2, "c"));
 
             dictionary.Remove(2);
 
-            Assert.True(dictionary.Contains(new Element<int, string>(0, "a")));
-            Assert.True(dictionary.Contains(new Element<int, string>(1, "b")));
-            Assert.False(dictionary.Contains(new Element<int, string>(2, "c")));
+            Assert.Contains(new KeyValuePair<int, string>(0, "a"), dictionary);
+            Assert.Contains(new KeyValuePair<int, string>(1, "b"), dictionary);
+            Assert.DoesNotContain(new KeyValuePair<int, string>(2, "c"), dictionary);
 
-            Assert.False(dictionary.Contains(new Element<int, string>(4, "a")));
+            Assert.DoesNotContain(new KeyValuePair<int, string>(4, "a"), dictionary);
         }
 
         [Fact]
@@ -186,20 +212,20 @@ namespace OOP2.Tests
         {
             Dictionary<int, string> dictionary = new Dictionary<int, string>(5);
 
-            dictionary.Add(new Element<int, string>(0, "a"));
-            dictionary.Add(new Element<int, string>(1, "b"));
-            dictionary.Add(new Element<int, string>(2, "c"));
-            dictionary.Add(new Element<int, string>(3, "d"));
+            dictionary.Add(new KeyValuePair<int, string>(0, "a"));
+            dictionary.Add(new KeyValuePair<int, string>(1, "b"));
+            dictionary.Add(new KeyValuePair<int, string>(2, "c"));
+            dictionary.Add(new KeyValuePair<int, string>(3, "d"));
 
             dictionary.Remove(2);
             dictionary.Remove(0);
             dictionary.Remove(1);
 
-            Assert.False(dictionary.Contains(new Element<int, string>(0, "a")));
-            Assert.False(dictionary.Contains(new Element<int, string>(1, "b")));
-            Assert.False(dictionary.Contains(new Element<int, string>(2, "c")));
+            Assert.DoesNotContain(new KeyValuePair<int, string>(0, "a"), dictionary);
+            Assert.DoesNotContain(new KeyValuePair<int, string>(1, "b"), dictionary);
+            Assert.DoesNotContain(new KeyValuePair<int, string>(2, "c"), dictionary);
 
-            Assert.True(dictionary.Contains(new Element<int, string>(3, "d")));
+            Assert.Contains(new KeyValuePair<int, string>(3, "d"), dictionary);
         }
 
         [Fact]
@@ -207,17 +233,17 @@ namespace OOP2.Tests
         {
             Dictionary<int, string> dictionary = new Dictionary<int, string>(5);
 
-            dictionary.Add(new Element<int, string>(0, "a"));
-            dictionary.Add(new Element<int, string>(1, "b"));
-            dictionary.Add(new Element<int, string>(2, "c"));
+            dictionary.Add(new KeyValuePair<int, string>(0, "a"));
+            dictionary.Add(new KeyValuePair<int, string>(1, "b"));
+            dictionary.Add(new KeyValuePair<int, string>(2, "c"));
 
             Assert.False(dictionary.Remove(11));
 
-            Assert.True(dictionary.Contains(new Element<int, string>(0, "a")));
-            Assert.True(dictionary.Contains(new Element<int, string>(1, "b")));
-            Assert.True(dictionary.Contains(new Element<int, string>(2, "c")));
+            Assert.Contains(new KeyValuePair<int, string>(0, "a"), dictionary);
+            Assert.Contains(new KeyValuePair<int, string>(1, "b"), dictionary);
+            Assert.Contains(new KeyValuePair<int, string>(2, "c"), dictionary);
 
-            Assert.False(dictionary.Contains(new Element<int, string>(4, "a")));
+            Assert.DoesNotContain(new KeyValuePair<int, string>(4, "a"), dictionary);
         }
 
         [Fact]
@@ -225,22 +251,66 @@ namespace OOP2.Tests
         {
             Dictionary<int, string> dictionary = new Dictionary<int, string>(5);
 
-            dictionary.Add(new Element<int, string>(0, "a"));
-            dictionary.Add(new Element<int, string>(1, "b"));
-            dictionary.Add(new Element<int, string>(2, "c"));
+            dictionary.Add(new KeyValuePair<int, string>(0, "a"));
+            dictionary.Add(new KeyValuePair<int, string>(1, "b"));
+            dictionary.Add(new KeyValuePair<int, string>(2, "c"));
 
             dictionary.Remove(1);
 
-            dictionary.Add(new Element<int, string>(3, "f"));
+            dictionary.Add(new KeyValuePair<int, string>(3, "f"));
 
-            Assert.True(dictionary.Contains(new Element<int, string>(0, "a")));        
-            Assert.True(dictionary.Contains(new Element<int, string>(2, "c")));
-            Assert.True(dictionary.Contains(new Element<int, string>(3, "f")));
+            Assert.Contains(new KeyValuePair<int, string>(0, "a"), dictionary);        
+            Assert.Contains(new KeyValuePair<int, string>(2, "c"), dictionary);
+            Assert.Contains(new KeyValuePair<int, string>(3, "f"), dictionary);
 
-            Assert.False(dictionary.Contains(new Element<int, string>(1, "b")));
-            Assert.False(dictionary.Contains(new Element<int, string>(4, "a")));
+            Assert.DoesNotContain(new KeyValuePair<int, string>(1, "b"), dictionary);
+            Assert.DoesNotContain(new KeyValuePair<int, string>(4, "a"), dictionary);
 
             Assert.Equal(3, dictionary.Count);
+        }
+
+        [Fact]
+        public void CanAddAndRemoveSuccesively()
+        {
+            Dictionary<int, string> dictionary = new Dictionary<int, string>(5);
+
+            dictionary.Add(new KeyValuePair<int, string>(1, "a"));
+            dictionary.Add(new KeyValuePair<int, string>(2, "b"));
+            dictionary.Add(new KeyValuePair<int, string>(3, "c"));
+            dictionary.Add(new KeyValuePair<int, string>(4, "d"));
+            dictionary.Add(new KeyValuePair<int, string>(5, "e"));
+
+            dictionary.Remove(4);
+
+            Assert.Contains(new KeyValuePair<int, string>(1, "a"), dictionary);
+            Assert.Contains(new KeyValuePair<int, string>(2, "b"), dictionary);
+            Assert.Contains(new KeyValuePair<int, string>(3, "c"), dictionary);
+            Assert.DoesNotContain(new KeyValuePair<int, string>(4, "d"), dictionary);
+            Assert.Contains(new KeyValuePair<int, string>(5, "e"), dictionary);
+
+            dictionary.Remove(2);
+
+            Assert.Contains(new KeyValuePair<int, string>(1, "a"), dictionary);
+            Assert.DoesNotContain(new KeyValuePair<int, string>(2, "b"), dictionary);
+            Assert.Contains(new KeyValuePair<int, string>(3, "c"), dictionary);
+            Assert.DoesNotContain(new KeyValuePair<int, string>(4, "d"), dictionary);
+            Assert.Contains(new KeyValuePair<int, string>(5, "e"), dictionary);
+
+            dictionary.Add(6, "f");
+
+            Assert.Contains(new KeyValuePair<int, string>(1, "a"), dictionary);
+            Assert.Contains(new KeyValuePair<int, string>(6, "f"), dictionary);
+            Assert.Contains(new KeyValuePair<int, string>(3, "c"), dictionary);
+            Assert.DoesNotContain(new KeyValuePair<int, string>(4, "d"), dictionary);
+            Assert.Contains(new KeyValuePair<int, string>(5, "e"), dictionary);
+
+            dictionary.Add(7, "g");
+
+            Assert.Contains(new KeyValuePair<int, string>(1, "a"), dictionary);
+            Assert.Contains(new KeyValuePair<int, string>(6, "f"), dictionary);
+            Assert.Contains(new KeyValuePair<int, string>(3, "c"), dictionary);
+            Assert.Contains(new KeyValuePair<int, string>(7, "g"), dictionary);
+            Assert.Contains(new KeyValuePair<int, string>(5, "e"), dictionary);
         }
 
         [Fact]
@@ -269,7 +339,7 @@ namespace OOP2.Tests
             dictionary.Add(5, "c");
 
             var values = dictionary.Values;
-
+            Assert.Equal(3, values.Count);
             Assert.True(values.Contains("a"));
             Assert.True(values.Contains("b"));
             Assert.True(values.Contains("c"));
@@ -288,9 +358,9 @@ namespace OOP2.Tests
 
             dictionary.CopyTo(array, 0);
 
-            Assert.Equal(array[0], new KeyValuePair<int, string>(3, "a"));
-            Assert.Equal(array[1], new KeyValuePair<int, string>(4, "b"));
-            Assert.Equal(array[2], new KeyValuePair<int, string>(5, "c"));
+            Assert.Equal(array[0], new KeyValuePair<int, string>(5, "c"));
+            Assert.Equal(array[1], new KeyValuePair<int, string>(3, "a"));
+            Assert.Equal(array[2], new KeyValuePair<int, string>(4, "b"));
         }
 
         [Fact]
@@ -306,9 +376,9 @@ namespace OOP2.Tests
 
             dictionary.CopyTo(array, 2);
 
-            Assert.Equal(array[2], new KeyValuePair<int, string>(3, "a"));
-            Assert.Equal(array[3], new KeyValuePair<int, string>(4, "b"));
-            Assert.Equal(array[4], new KeyValuePair<int, string>(5, "c"));
+            Assert.Equal(array[3], new KeyValuePair<int, string>(3, "a"));
+            Assert.Equal(array[4], new KeyValuePair<int, string>(4, "b"));
+            Assert.Equal(array[2], new KeyValuePair<int, string>(5, "c"));
         }
 
         [Fact]
@@ -356,23 +426,27 @@ namespace OOP2.Tests
         }
 
         [Fact]
-        public void ThrowsExceptionAddNullElement()
-        {
-            Dictionary<string, string> dictionary = new Dictionary<string, string>(5);
-            Element<string, string> nullElement = null;
-                
-
-            Assert.Throws<NullReferenceException>(() => dictionary.Add(nullElement));
-        }
-
-        [Fact]
         public void ThrowsExceptionKeyDuplicate()
         {
             Dictionary<string, string> dictionary = new Dictionary<string, string>(5);
 
             dictionary.Add("a", "alfa");
 
-            Assert.Throws<ArgumentException>(() => dictionary.Add(new Element<string, string>("a", "alfa")));
+            Assert.Throws<ArgumentException>(() => dictionary.Add(new KeyValuePair<string, string>("a", "alfa")));
+        }
+
+        [Fact]
+        public void ThrowsExceptionFullDictionary()
+        {
+            Dictionary<string, string> dictionary = new Dictionary<string, string>(5);
+
+            dictionary.Add("a", "a");
+            dictionary.Add("b", "b");
+            dictionary.Add("c", "c");
+            dictionary.Add("d", "d"); 
+            dictionary.Add("e", "e");
+
+            Assert.Throws<ArgumentOutOfRangeException>(() => dictionary.Add(new KeyValuePair<string, string>("g", "g")));
         }
     }
 } 

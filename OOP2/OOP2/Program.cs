@@ -9,22 +9,16 @@ namespace OOP2
         {
             Dictionary<int, string> dictionary = new Dictionary<int, string>(5);
 
-            dictionary.Add(3, "a");
-            dictionary.Add(4, "b");
-            dictionary.Add(5, "c");
+            dictionary.Add(new KeyValuePair<int, string>(0, "a"));
+            dictionary.Add(new KeyValuePair<int, string>(1, "b"));
+            dictionary.Add(new KeyValuePair<int, string>(2, "c"));
+            dictionary.Add(new KeyValuePair<int, string>(3, "d"));
 
-            var array = new KeyValuePair<int, string>[3];
-            Console.WriteLine("array count" + array.Length);
-            Console.WriteLine("dictionary count" + dictionary.Count);
+            dictionary.Clear();
 
-            dictionary.CopyTo(array, 0);
+            dictionary.Add(1, "b");
 
-            Console.WriteLine("array count 2" + array.Length);
-            foreach (var v in array)
-            {
-                Console.WriteLine(v);
-            }
-
+            dictionary.Add(2, "c");
         }
     }
 }

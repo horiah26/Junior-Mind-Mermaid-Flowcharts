@@ -8,27 +8,51 @@ namespace OOP2
     public class Dictionary<TKey, TValue> : IDictionary<TKey, TValue>
     {
         private int[] buckets;
+        private int freeIndex;
         private Element<TKey, TValue>[] elements;
 
-        public Dictionary(int bucketSize)
+        public Dictionary(int bucketSize = 5)
         {
             buckets = new int[bucketSize];
             elements = new Element<TKey, TValue>[bucketSize];
-
-            Array.Fill(buckets, -1);
+            InitializeArray();
         }
 
-        public TValue this[TKey key] 
-        { 
+        private void InitializeArray()
+        {
+            freeIndex = 0;
+            Array.Fill(buckets, -1);
+
+            for (int i = 0; i < elements.Length; i++)
+            {
+                elements[i] = new Element<TKey, TValue>(default, default);
+                elements[i].Next = i + 1;
+            }
+
+            elements[elements.Length - 1].Next = -1;
+        }
+
+        public TValue this[TKey key]
+        {
             get
             {
-                var element = FindByKey(key);
-                return element.Value;
-            }            
-            set 
+                if(FindIndex(key, out var unusedIndex) == -1)
+                {
+                    throw new ArgumentException("Key not found in Dictionary");
+                }
+
+                var index = FindIndex(key, out unusedIndex);
+                return elements[index].Value;
+            }
+            set
             {
-                var element = FindByKey(key);
-                element.Value = value;
+                if (FindIndex(key, out var unusedIndex) == -1)
+                {
+                    Add(new KeyValuePair<TKey, TValue>(key, value));
+                }
+
+                var index = FindIndex(key, out  unusedIndex);
+                elements[index].Value = value;
             }
         }
 
@@ -36,14 +60,14 @@ namespace OOP2
         {
             get
             {
-                List<TKey> KeyList = new List<TKey>();
+                List<TKey> keyList = new List<TKey>();
 
                 foreach (KeyValuePair<TKey, TValue> element in this)
                 {
-                    KeyList.Add(element.Key);
+                    keyList.Add(element.Key);
                 }
 
-                return KeyList;
+                return keyList;
             }
         }
 
@@ -53,7 +77,7 @@ namespace OOP2
             {
                 List<TValue> ValueList = new List<TValue>();
 
-                foreach (KeyValuePair<TKey, TValue> element in this)
+                foreach (var element in this)
                 {
                     ValueList.Add(element.Value);
                 }
@@ -71,24 +95,30 @@ namespace OOP2
             Add(item.Key, item.Value);
         }
 
-        public void Add(Element<TKey, TValue> element)
-        {
-            Add(element.Key, element.Value);
-        }
-
         public void Add(TKey key, TValue value)
         {
+            CheckIfFull();
             CheckIfNull(key);
             CheckIfDuplicate(key);
-            EnsureCapacity();
 
-            int freeIndex = FindFreeIndex();
             int bucketNumber = GetBucket(key);
+            int tempIndex = elements[freeIndex].Next;
 
-            elements[freeIndex] = new Element<TKey, TValue>(key, value, buckets[bucketNumber]);
+            elements[freeIndex] = new Element<TKey, TValue>(key, value); 
+            elements[freeIndex].Next = buckets[bucketNumber];
+
             buckets[bucketNumber] = freeIndex;
 
+            freeIndex = tempIndex;
             Count++;
+        }
+
+        private void CheckIfFull()
+        {
+            if(Count == elements.Length)
+            {
+                throw new ArgumentOutOfRangeException("Dictionary is full");
+            }
         }
 
         private int GetBucket(TKey key)
@@ -96,115 +126,84 @@ namespace OOP2
             return Math.Abs(key.GetHashCode()) % buckets.Length;
         }
 
-        private int FindFreeIndex()
-        {
-            for (int i = 0; i < elements.Length; i++)
-            {
-                if (elements[i] == null)
-                {
-                    return i;
-                }
-            }
-
-            return -1;
-        }
-
         public void Clear()
         {
             Count = 0;
-            Array.Fill(buckets, -1);
-            Array.Fill(elements, null);
-        }
-
-        public bool Contains(Element<TKey, TValue> element)
-        {
-            CheckIfNull(element.Key);
-            return (FindByKey(element.Key) != null && FindByKey(element.Key).Value.Equals(element.Value));
+            InitializeArray();
         }
 
         public bool Contains(KeyValuePair<TKey, TValue> item)
         {
             CheckIfNull(item.Key);
-            return Contains(new Element<TKey, TValue>(item.Key, item.Value));
-        }
+            int index = FindIndex(item.Key, out int unusedIndex);
 
-        private Element<TKey, TValue> FindByKey(TKey key)
-        {
-            CheckIfNull(key);
-
-            int bucketNumber = GetBucket(key);
-            int currentIndex = buckets[bucketNumber];
-
-            while (currentIndex != -1)
+            if(index != -1)
             {
-                if (elements[currentIndex].Key.Equals(key))
-                {
-                    return elements[currentIndex];
-                }
-
-                currentIndex = elements[currentIndex].Next;
-            }
-
-            Element<TKey, TValue> nullElement = null;
-            return nullElement;
-        }
-
-        public bool ContainsKey(TKey key)
-        {
-            CheckIfNull(key);
-            return FindByKey(key) != null;
-        }
-
-        public bool ContainsValue(TValue value)
-        {
-            return Values.Contains(value);
-        }
-
-        public bool Remove(KeyValuePair<TKey, TValue> item)
-        {
-            if (FindByKey(item.Key).Value.Equals(item.Value))
-            {
-                return Remove(item.Key);
+                return elements[index].Value.Equals(item.Value);
             }
 
             return false;
+        }
+
+        private int FindIndex(TKey key, out int previousIndex)
+        {
+            CheckIfNull(key);
+            previousIndex = -1;
+
+            for (int currentIndex = buckets[GetBucket(key)]; currentIndex != -1; currentIndex = elements[currentIndex].Next)
+            {
+                if (elements[currentIndex].Key.Equals(key))
+                {
+                    return currentIndex;
+                }
+
+                previousIndex = currentIndex;
+            }
+
+            return -1;
         }
 
         public bool Remove(TKey key)
         {
             CheckIfNull(key);
 
-            int bucketNumber = GetBucket(key);
-            int valueInBucket = buckets[bucketNumber];
+            int index = FindIndex(key, out var previousIndex);
 
-            Element<TKey, TValue> currentElement = elements[valueInBucket];
-            Element<TKey, TValue> previousElement = null;                          
-
-            while (!currentElement.Key.Equals(key) && currentElement.Next != -1)
+            if (index == -1)
             {
-                previousElement = currentElement;
-                currentElement = elements[currentElement.Next];
+                return false;
             }
 
-            if (currentElement.Key.Equals(key))
+            if (previousIndex == -1)
             {
-                if (previousElement == null)
-                {
-                    elements[buckets[valueInBucket]] = null;
-                    buckets[bucketNumber] = -1;
-                }
-                else
-                {
-                    int tempNext = currentElement.Next;
-
-                    elements[previousElement.Next] = null;
-                    previousElement.Next = tempNext;
-                }
-
-                Count--;
-                return true;
+                buckets[GetBucket(key)] = elements[index].Next;
             }
-          
+            else
+            {
+                elements[previousIndex].Next = elements[index].Next;
+            }
+
+            elements[index].Next = freeIndex;
+            freeIndex = index;
+            Count--;
+            return true;
+        }
+
+        public bool ContainsKey(TKey key)
+        {
+            CheckIfNull(key);
+            return FindIndex(key, out var unusedIndex) != -1;
+        }
+
+        public bool Remove(KeyValuePair<TKey, TValue> item)
+        {
+            int index = FindIndex(item.Key, out var unusedIndex);
+
+            if (elements[index].Value.Equals(item.Value))
+            {
+                return Remove(item.Key);
+            }
+
             return false;
         }
 
@@ -223,15 +222,12 @@ namespace OOP2
                 throw new ArgumentOutOfRangeException("The number of elements in the source T[] array is greater than the available space from arrayIndex to the end of the destination array.");
             }
 
-            int arrayPosition = 0;
+            int positionIndex = -1;
 
-            for (int i = 0; i < elements.Length; i++)
+            foreach(var element in this)
             {
-                if(elements[i] != null)
-                {
-                    array[arrayPosition + arrayIndex] = new KeyValuePair<TKey, TValue>(elements[i].Key, elements[i].Value);
-                    arrayPosition++;
-                }
+                positionIndex++;
+                array[positionIndex + arrayIndex] = new KeyValuePair<TKey, TValue>(element.Key, element.Value);
             }
         }
 
@@ -239,9 +235,11 @@ namespace OOP2
         {
             CheckIfNull(key);
 
-            if (FindByKey(key) != null)
+            int index = FindIndex(key, out var unusedIndex);
+
+            if (index != -1)
             {
-                value = FindByKey(key).Value;
+                value = elements[index].Value;
                 return true;
             }
 
@@ -256,20 +254,18 @@ namespace OOP2
 
         public IEnumerator<KeyValuePair<TKey, TValue>> GetEnumerator()
         {
-            for (int i = 0; i < elements.Length; i++)
+            foreach(var valueInBucket in buckets)
             {
-                if (elements[i] != null)
-                {
-                    yield return new KeyValuePair<TKey, TValue>(elements[i].Key, elements[i].Value);
-                }
-            }
-        }
+                if(valueInBucket != -1)
+                {                    
+                    var index = valueInBucket;
 
-        public void EnsureCapacity()
-        {
-            if (elements.Length == Count)
-            {
-                Array.Resize(ref elements, Count * 2);
+                    while (index != -1)
+                    {
+                        yield return new KeyValuePair<TKey, TValue>(elements[index].Key, elements[index].Value);
+                        index = elements[index].Next;
+                    }                    
+                }
             }
         }
 
@@ -278,12 +274,12 @@ namespace OOP2
             if (key == null)
             {
                 throw new ArgumentNullException("Key is null");
-            };
+            }
         }
 
         private void CheckIfDuplicate(TKey key)
         {
-            if (FindByKey(key) != null)
+            if (FindIndex(key, out var unusedIndex) != -1)
             {
                 throw new ArgumentException("An element with this key already exists in the dictionary");
             }
