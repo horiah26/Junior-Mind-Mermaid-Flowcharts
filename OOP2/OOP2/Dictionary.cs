@@ -18,20 +18,6 @@ namespace OOP2
             InitializeArray();
         }
 
-        private void InitializeArray()
-        {
-            freeIndex = 0;
-            Array.Fill(buckets, -1);
-
-            for (int i = 0; i < elements.Length; i++)
-            {
-                elements[i] = new Element<TKey, TValue>(default, default);
-                elements[i].Next = i + 1;
-            }
-
-            elements[elements.Length - 1].Next = -1;
-        }
-
         public TValue this[TKey key]
         {
             get
@@ -128,8 +114,22 @@ namespace OOP2
 
         public void Clear()
         {
-            Count = 0;
             InitializeArray();
+        }
+
+        private void InitializeArray()
+        {
+            Count = 0;
+            freeIndex = 0;
+            Array.Fill(buckets, -1);
+
+            for (int i = 0; i < elements.Length; i++)
+            {
+                elements[i] = new Element<TKey, TValue>(default, default);
+                elements[i].Next = i + 1;
+            }
+
+            elements[^1].Next = -1;
         }
 
         public bool Contains(KeyValuePair<TKey, TValue> item)
@@ -255,17 +255,15 @@ namespace OOP2
         public IEnumerator<KeyValuePair<TKey, TValue>> GetEnumerator()
         {
             foreach(var valueInBucket in buckets)
-            {
-                if(valueInBucket != -1)
-                {                    
-                    var index = valueInBucket;
+            {              
+                var index = valueInBucket;
 
-                    while (index != -1)
-                    {
-                        yield return new KeyValuePair<TKey, TValue>(elements[index].Key, elements[index].Value);
-                        index = elements[index].Next;
-                    }                    
-                }
+                while (index != -1)
+                {
+                    yield return new KeyValuePair<TKey, TValue>(elements[index].Key, elements[index].Value);
+                    index = elements[index].Next;
+                }                    
+                
             }
         }
 
