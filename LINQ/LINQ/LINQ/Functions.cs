@@ -41,11 +41,6 @@ namespace LINQ
         {
             CheckIfNull(source);
 
-            if (source.Count() == 0)
-            {
-                throw new InvalidOperationException("Source is Empty");
-            }
-
             foreach (var item in source)
             {
                 if (predicate(item))
@@ -122,11 +117,12 @@ namespace LINQ
             CheckIfNull(first);
             CheckIfNull(second);
 
-            var smallestSize = first.Count() < second.Count() ? first.Count() : second.Count();
+            var firstEnumerator = first.GetEnumerator();
+            var secondEnumerator = second.GetEnumerator();
 
-            for (int i = 0; i < smallestSize; i++)
+            while (firstEnumerator.MoveNext() && secondEnumerator.MoveNext())
             {
-                yield return resultSelector(first.ElementAt(i), second.ElementAt(i));
+                yield return resultSelector(firstEnumerator.Current, secondEnumerator.Current);
             }
         }
 
@@ -272,33 +268,7 @@ namespace LINQ
             CheckIfNull(source);
             CheckIfNull(keySelector);
 
-            var dictionary = new Dictionary<TKey, List<TSource>>((IDictionary<TKey, List<TSource>>)comparer);
-
-            foreach (var item in source)
-            {
-                var key = keySelector(item);
-
-                if (dictionary.ContainsKey(key))
-                {
-                    dictionary[key].Add(item);
-                }
-                else
-                {
-                    dictionary.Add(key, new List<TSource> { item });
-                }
-            }
-
-            var orderedList = new List<TSource>();
-
-            foreach (var item in dictionary)
-            {
-                foreach(var subItem in item.Value)
-                {
-                    orderedList.Add(subItem);
-                }
-            }
-
-            return (IOrderedEnumerable<TSource>)orderedList;
+            return new CustomOrderedEnumerable<TSource, TKey>(source, keySelector, comparer);
         }
 
         public static IOrderedEnumerable<TSource> ThenBy<TSource, TKey>(
@@ -315,7 +285,64 @@ namespace LINQ
             {
                 throw new ArgumentNullException("Argument is null");
             }
+        }
 
-        }      
+        private class CustomOrderedEnumerable<TSource, TKey> : IOrderedEnumerable<TSource>
+        {
+            private readonly IEnumerable<TSource> source;
+            private readonly Func<TSource, TKey> keySelector;
+            private readonly IComparer<TKey> comparer;
+
+            public CustomOrderedEnumerable(IEnumerable<TSource> source, Func<TSource, TKey> keySelector, IComparer<TKey> comparer)
+            {
+                this.source = source;
+                this.keySelector = keySelector;
+                this.comparer = comparer;
+            }
+
+            public IOrderedEnumerable<TSource> CreateOrderedEnumerable<TKey>(Func<TSource, TKey> keySelector, IComparer<TKey> comparer, bool descending)
+            {
+                return new CustomOrderedEnumerable<TSource, TKey>(source, keySelector, comparer);
+            }
+
+            public IEnumerator<TSource> GetEnumerator()
+            {
+                var dictionary = new SortedDictionary<TKey, List<TSource>>(comparer);
+
+                foreach (var item in source)
+                {
+                    var key = keySelector(item);
+
+                    if (dictionary.ContainsKey(key))
+                    {
+                        dictionary[key].Add(item);
+                    }
+                    else
+                    {
+                        dictionary.Add(key, new List<TSource> { item });
+                    }
+                }
+
+                var orderedList = new List<TSource>();
+
+                foreach (var item in dictionary)
+                {
+                    foreach (var subItem in item.Value)
+                    {
+                        orderedList.Add(subItem);
+                    }
+                }
+
+                foreach (var item in orderedList)
+                {
+                    yield return item;
+                }
+            }
+
+            System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
+            {
+                return GetEnumerator();
+            }
+        }
     }    
 }
