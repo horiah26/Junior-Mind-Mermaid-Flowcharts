@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace LINQ
+namespace LINQExercises
 {
     public class Stock
     {

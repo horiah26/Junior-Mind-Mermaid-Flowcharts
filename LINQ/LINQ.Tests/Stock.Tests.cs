@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using Xunit;
 
-namespace LINQ.Tests
+namespace LINQExercises.Tests
 {
     public class StockTests
     {
