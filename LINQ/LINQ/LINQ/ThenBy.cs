@@ -12,7 +12,7 @@ namespace LINQExercises
             Func<TSource, TKey> keySelector,
             IComparer<TKey> comparer)
         {            
-            var linkerComparer = new LinkerComparer<TSource, TKey>(new List<CustomComparer<TSource, TKey>>());
+            var linkerComparer = new LinkerComparer<TSource>(new List<IComparer<TSource>>());
             var customSource = new CustomOrderedEnumerable<TSource, TKey>(source, linkerComparer);
 
             return customSource.CreateOrderedEnumerable(keySelector, comparer, false);
@@ -35,23 +35,18 @@ namespace LINQExercises
             }
         }
 
-        public class LinkerComparer<TSource, TKey> : IComparer<TSource>
+        public class LinkerComparer<TSource> : IComparer<TSource>
         {
-            List<CustomComparer<TSource, TKey>> comparers;
+            List<IComparer<TSource>> comparers;
 
-            public LinkerComparer(List<CustomComparer<TSource, TKey>> comparers)
+            public LinkerComparer(List<IComparer<TSource>> comparers)
             {
                 this.comparers = comparers;
             }
 
-            public LinkerComparer(LinkerComparer<TSource, TKey> linkerComparer, CustomComparer<TSource, TKey> newComparer)
+            public LinkerComparer(LinkerComparer<TSource> linkerComparer, IComparer<TSource> newComparer)
             {
                 comparers = linkerComparer.comparers;
-                comparers.Add(newComparer);
-            }
-
-            public void AddComparer(CustomComparer<TSource, TKey> newComparer)
-            {
                 comparers.Add(newComparer);
             }
 
@@ -76,9 +71,9 @@ namespace LINQExercises
         private class CustomOrderedEnumerable<TSource, TKey> : IOrderedEnumerable<TSource>
         {
             private readonly IEnumerable<TSource> source;
-            private LinkerComparer<TSource, TKey> linkerComparer;
+            LinkerComparer<TSource> linkerComparer = new LinkerComparer<TSource>(new List<IComparer<TSource>> ());
 
-            public CustomOrderedEnumerable(IEnumerable<TSource> source, LinkerComparer<TSource, TKey> linkerComparer)
+            public CustomOrderedEnumerable(IEnumerable<TSource> source, LinkerComparer<TSource> linkerComparer)
             {
                 this.source = source;
                 this.linkerComparer = linkerComparer;
@@ -86,8 +81,8 @@ namespace LINQExercises
 
             public IOrderedEnumerable<TSource> CreateOrderedEnumerable<TKey>(Func<TSource, TKey> keySelector, IComparer<TKey> comparer, bool descending)
             {
-                CustomComparer<TSource, TKey> customComparer = new CustomComparer<TSource, TKey>(keySelector, comparer);
-                var newLinkerComparer = new LinkerComparer<TSource, TKey>(linkerComparer, customComparer);
+                IComparer<TSource> customComparer = new CustomComparer<TSource, TKey>(keySelector, comparer);
+                var newLinkerComparer = new LinkerComparer<TSource>(linkerComparer, customComparer);
 
                 return new CustomOrderedEnumerable<TSource, TKey>(source, newLinkerComparer);
             }
