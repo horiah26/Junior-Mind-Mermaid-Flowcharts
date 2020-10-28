@@ -50,9 +50,7 @@ namespace LINQExercises
 
             public int Compare([AllowNull] TSource x, [AllowNull] TSource y)
             {
-                int comparerResult = 0;
-
-                comparerResult = mainComparer.Compare(x, y);
+                int comparerResult = mainComparer.Compare(x, y);
 
                 if (comparerResult != 0)
                 {
