@@ -37,29 +37,29 @@ namespace LINQExercises
 
         public class LinkerComparer<TSource> : IComparer<TSource>
         {
-            IComparer<TSource>[] comparersPair = new IComparer<TSource>[2];
+            IComparer<TSource> mainComparer;
+            IComparer<TSource> secondComparer;
 
             public LinkerComparer() {}                   
 
             public LinkerComparer(IComparer<TSource> linkerComparer, IComparer<TSource> newComparer)
             {
-                comparersPair[0] = linkerComparer;
-                comparersPair[1] = newComparer;
+                mainComparer = linkerComparer;
+                secondComparer = newComparer;
             }
 
             public int Compare([AllowNull] TSource x, [AllowNull] TSource y)
             {
                 int comparerResult = 0;
 
-                foreach (var comparer in comparersPair)
-                {
-                    comparerResult = comparer.Compare(x, y);
+                comparerResult = mainComparer.Compare(x, y);
 
-                    if (comparerResult != 0)
-                    {
-                        return comparerResult;
-                    }
+                if (comparerResult != 0)
+                {
+                    return comparerResult;
                 }
+
+                comparerResult = secondComparer.Compare(x, y);
 
                 return comparerResult;
             }
