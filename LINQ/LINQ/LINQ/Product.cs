@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace LINQExercises
+namespace LINQ
 {
     public class Product
     {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace LINQExercises
+namespace LINQ
 {
     public class Stock
     {
@@ -25,10 +25,7 @@ namespace LINQExercises
                 throw new InvalidOperationException("Product already exists. Please use Refill function");
             }
 
-            if(product.Quantity < 0)
-            {
-                throw new InvalidOperationException("Quantity cannot be negative");
-            }
+            CheckPositiveQuantity(product.Quantity);
 
             products.Add(product.Name, product);
         }
@@ -40,16 +37,10 @@ namespace LINQExercises
 
         public void Refill(string name, int quantity)
         {
+            CheckProductExists(name);
+            CheckPositiveQuantity(quantity);
+
             products[name].Add(quantity);
-        }
-
-        public void Substract(string name, int quantity)
-        {
-            CheckIfPossible(name, quantity);
-
-            products[name].Substract(quantity);
-
-            LowStockAlert(name, products[name].Quantity);
         }
 
         public void Substract(Product product, int quantity)
@@ -57,8 +48,20 @@ namespace LINQExercises
             Substract(product.Name, quantity);
         }
 
+        public void Substract(string name, int quantity)
+        {
+            CheckProductExists(name);
+            CheckIfPossible(name, quantity);
+
+            products[name].Substract(quantity);
+
+            LowStockAlert(name, products[name].Quantity);
+        }
+
         public void RemoveProduct(Product product)
         {
+            CheckProductExists(product.Name);
+
             products = products.Where(prod => !prod.Equals(product)).ToDictionary(prod => prod.Key, prod => prod.Value);
         }
 
@@ -87,6 +90,22 @@ namespace LINQExercises
             if(products[Product].Quantity - quantity < 0)
             {
                 throw new InvalidOperationException("Insufficient stock");
+            }
+        }
+
+        private void CheckPositiveQuantity(int quantity)
+        {
+            if (quantity <= 0)
+            {
+                throw new InvalidOperationException("Product quantity must be higher than 0");
+            }
+        }
+
+        private void CheckProductExists(string productName)
+        {
+            if (!products.ContainsKey(productName))
+            {
+                throw new InvalidOperationException("Product does not exist");
             }
         }
     }

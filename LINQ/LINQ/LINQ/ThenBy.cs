@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Diagnostics.CodeAnalysis;
 
-namespace LINQExercises
+namespace LINQ
 {
     static class ThenByClass
     {
