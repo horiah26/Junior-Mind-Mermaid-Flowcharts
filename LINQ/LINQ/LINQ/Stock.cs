@@ -25,8 +25,6 @@ namespace LINQ
                 throw new InvalidOperationException("Product already exists. Please use Refill function");
             }
 
-            CheckPositiveQuantity(product.Quantity);
-
             products.Add(product.Name, product);
         }
 
@@ -38,7 +36,6 @@ namespace LINQ
         public void Refill(string name, int quantity)
         {
             CheckProductExists(name);
-            CheckPositiveQuantity(quantity);
 
             products[name].Add(quantity);
         }
@@ -90,14 +87,6 @@ namespace LINQ
             if(products[Product].Quantity - quantity < 0)
             {
                 throw new InvalidOperationException("Insufficient stock");
-            }
-        }
-
-        private void CheckPositiveQuantity(int quantity)
-        {
-            if (quantity <= 0)
-            {
-                throw new InvalidOperationException("Product quantity must be higher than 0");
             }
         }
 
