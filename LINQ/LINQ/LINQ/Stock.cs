@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 
 namespace LINQ
 {
@@ -8,6 +9,16 @@ namespace LINQ
     {
         public Dictionary<string, Product> products;
 
+        private Action<string, int> callback;
+
+        private int[] callbackThreshold;
+        
+        public void AddCallback(Action<string, int> callback, int[] callbackThreshold)
+        {
+            this.callback = callback;
+            this.callbackThreshold = callbackThreshold;
+        }
+            
         public int this[string key]
         {
             get => products.Single(prod => prod.Key == key).Value.Quantity;
@@ -50,9 +61,11 @@ namespace LINQ
             CheckProductExists(name);
             CheckIfPossible(name, quantity);
 
+            int oldQuantity = products[name].Quantity;
+
             products[name].Substract(quantity);
 
-            LowStockAlert(name, products[name].Quantity);
+            LowStockAlert(name, oldQuantity, products[name].Quantity);
         }
 
         public void RemoveProduct(Product product)
@@ -67,18 +80,22 @@ namespace LINQ
             return products.Aggregate(0, (total, nextProduct) => total + nextProduct.Value.Quantity);
         }
 
-        private void LowStockAlert(string name, int quantity)
+        private void LowStockAlert(string name, int oldQuantity, int newQuantity)
         {
-            int[] callbackThresholds = { 10, 5, 2};
+            if(callbackThreshold != null && callback != null)
+            {
+                int value;
 
-            try
-            {
-                Action<int> Callback = nr => Console.WriteLine("There are now fewer than {0} items of the product {1} in the stock.", callbackThresholds.Last(x => x > quantity), name);
-                Callback(quantity);
-            }
-            catch (InvalidOperationException)
-            {
-                return;
+                try
+                {
+                    value = callbackThreshold.Last(threshold => newQuantity < threshold && oldQuantity >= threshold);
+                }
+                catch (InvalidOperationException)
+                {
+                    return;
+                }
+
+                callback(name, value);
             }
         }
 

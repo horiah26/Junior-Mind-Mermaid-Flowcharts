@@ -11,6 +11,8 @@ namespace LINQ
 
         public Product(string name, int quantity)
         {
+            CheckIfPositive(quantity);
+
             Name = name;
             Quantity = quantity;
         }

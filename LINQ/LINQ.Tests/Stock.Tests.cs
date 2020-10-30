@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using Xunit;
 
-namespace LINQExercises.Tests
+namespace LINQ.Tests
 {
     public class StockTests
     {
@@ -132,10 +132,83 @@ namespace LINQExercises.Tests
 
             Assert.Throws<InvalidOperationException>(() => stock.Refill("Product 1", -3));
             Assert.Throws<InvalidOperationException>(() => stock.Substract("Product 1", -3));
+            Assert.Throws<InvalidOperationException>(() => new Product("Product 2", -5));
+        }
 
-            var product2 = new Product("Product 2", -5);
+        [Fact]
+        public void ThrowsCallbackWhenProductQuantityBelowThreshold()
+        {
+            var stock = new Stock();
+            var product1 = new Product("Product 1", 15);
 
-            Assert.Throws<InvalidOperationException>(() => stock.AddProduct(product2));
+            stock.AddProduct(product1);
+
+            string resultOfAction ="";
+
+            int[] threshold = new int[] { 10, 5, 2 };
+
+            void LowQuantityTest(string name, int quantity)
+            {
+                resultOfAction = "Product '" + name + "' has fewer than " + quantity + " items left" ;
+            }
+
+            stock.AddCallback(LowQuantityTest, threshold);
+
+            stock.Substract(product1, 6);
+            Assert.Equal("Product 'Product 1' has fewer than 10 items left", resultOfAction);
+        }
+
+        [Fact]
+        public void ThrowsCallbackWhenProductQuantityBelowThresholdMultipleTimes()
+        {
+            var stock = new Stock();
+            var product1 = new Product("Product 1", 15);
+
+            stock.AddProduct(product1);
+
+            string resultOfAction = "";
+
+            void LowQuantityTest(string name, int quantity)
+            {
+                resultOfAction = "Product '" + name + "' has fewer than " + quantity + " items left";
+            }
+
+            int[] threshold = new int[] { 10, 5, 2 };
+
+            stock.AddCallback(LowQuantityTest, threshold);
+
+            stock.Substract(product1, 1);
+            Assert.Equal("", resultOfAction);
+
+            stock.Substract(product1, 5);
+            Assert.Equal("Product 'Product 1' has fewer than 10 items left", resultOfAction);
+
+            stock.Substract(product1, 1);
+            Assert.Equal("Product 'Product 1' has fewer than 10 items left", resultOfAction);
+
+            stock.Substract(product1, 1);
+            Assert.Equal("Product 'Product 1' has fewer than 10 items left", resultOfAction);
+
+            stock.Substract(product1, 1);
+            Assert.Equal("Product 'Product 1' has fewer than 10 items left", resultOfAction);
+
+            stock.Substract(product1, 1);
+            Assert.Equal("Product 'Product 1' has fewer than 10 items left", resultOfAction);
+
+            stock.Substract(product1, 1);
+            Assert.Equal("Product 'Product 1' has fewer than 5 items left", resultOfAction);
+
+            stock.Substract(product1, 1);
+            Assert.Equal("Product 'Product 1' has fewer than 5 items left", resultOfAction);
+
+            stock.Substract(product1, 1);
+            Assert.Equal("Product 'Product 1' has fewer than 5 items left", resultOfAction);
+
+            stock.Substract(product1, 1);
+            Assert.Equal("Product 'Product 1' has fewer than 2 items left", resultOfAction);
+
+            stock.Substract(product1, 1);
+            Assert.Equal("Product 'Product 1' has fewer than 2 items left", resultOfAction);
         }
     }
 }
