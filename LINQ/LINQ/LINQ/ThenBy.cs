@@ -37,8 +37,8 @@ namespace LINQ
 
         public class LinkerComparer<TSource> : IComparer<TSource>
         {
-            IComparer<TSource> mainComparer;
-            IComparer<TSource> secondComparer;
+            readonly IComparer<TSource> mainComparer;
+            readonly IComparer<TSource> secondComparer;
 
             public LinkerComparer() {}                   
 
@@ -66,7 +66,7 @@ namespace LINQ
         private class CustomOrderedEnumerable<TSource, TKey> : IOrderedEnumerable<TSource>
         {
             private readonly IEnumerable<TSource> source;
-            private IComparer<TSource> linkerComparer;
+            private readonly IComparer<TSource> linkerComparer;
 
             public CustomOrderedEnumerable(IEnumerable<TSource> source, IComparer<TSource> linkerComparer)
             {

@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using Xunit;
 
 namespace LINQ.Tests
@@ -152,7 +151,7 @@ namespace LINQ.Tests
                 resultOfAction = "Product '" + name + "' has fewer than " + quantity + " items left" ;
             }
 
-            stock.AddCallback(LowQuantityTest, threshold);
+            stock.AddStockAlert(new StockCallback(LowQuantityTest, threshold));
 
             stock.Substract(product1, 6);
             Assert.Equal("Product 'Product 1' has fewer than 10 items left", resultOfAction);
@@ -175,7 +174,7 @@ namespace LINQ.Tests
 
             int[] threshold = new int[] { 10, 5, 2 };
 
-            stock.AddCallback(LowQuantityTest, threshold);
+            stock.AddStockAlert(new StockCallback(LowQuantityTest, threshold));
 
             stock.Substract(product1, 1);
             Assert.Equal("", resultOfAction);

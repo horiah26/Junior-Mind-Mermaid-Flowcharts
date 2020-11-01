@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
 
 namespace LINQ
 {
@@ -9,16 +8,8 @@ namespace LINQ
     {
         public Dictionary<string, Product> products;
 
-        private Action<string, int> callback;
+        private IStockAlert stockAlert;
 
-        private int[] callbackThreshold;
-        
-        public void AddCallback(Action<string, int> callback, int[] callbackThreshold)
-        {
-            this.callback = callback;
-            this.callbackThreshold = callbackThreshold;
-        }
-            
         public int this[string key]
         {
             get => products.Single(prod => prod.Key == key).Value.Quantity;
@@ -27,6 +18,11 @@ namespace LINQ
         public Stock(int size = 5)
         {
             products = new Dictionary<string, Product>(size);
+        }
+
+        public void AddStockAlert(IStockAlert stockAlert)
+        {
+            this.stockAlert = stockAlert;
         }
 
         public void AddProduct(Product product)
@@ -65,7 +61,10 @@ namespace LINQ
 
             products[name].Substract(quantity);
 
-            LowStockAlert(name, oldQuantity, products[name].Quantity);
+            if (stockAlert != null)
+            {
+                stockAlert.Alert(name, oldQuantity, products[name].Quantity);
+            }
         }
 
         public void RemoveProduct(Product product)
@@ -78,25 +77,6 @@ namespace LINQ
         public int TotalQuantity()
         {
             return products.Aggregate(0, (total, nextProduct) => total + nextProduct.Value.Quantity);
-        }
-
-        private void LowStockAlert(string name, int oldQuantity, int newQuantity)
-        {
-            if(callbackThreshold != null && callback != null)
-            {
-                int value;
-
-                try
-                {
-                    value = callbackThreshold.Last(threshold => newQuantity < threshold && oldQuantity >= threshold);
-                }
-                catch (InvalidOperationException)
-                {
-                    return;
-                }
-
-                callback(name, value);
-            }
         }
 
         private void CheckIfPossible(string Product, int quantity)
