@@ -60,11 +60,7 @@ namespace LINQ
             int oldQuantity = products[name].Quantity;
 
             products[name].Substract(quantity);
-
-            if (stockAlert != null)
-            {
-                stockAlert.Alert(name, oldQuantity, products[name].Quantity);
-            }
+            this.ExtendedStockAlert(name, oldQuantity, products[name].Quantity);
         }
 
         public void RemoveProduct(Product product)
