@@ -138,22 +138,8 @@ namespace LINQ.Tests
         [Fact]
         public void ThrowsCallbackWhenProductQuantityBelowThreshold()
         {
-            var stock = new Stock();
-            var product1 = new Product("Product 1", 15);
-
-            stock.AddProduct(product1);
-
-            string resultOfAction = stock.ExtendedStockAlert("Product 1", 13, 9);
-
-            Assert.Equal("Product 'Product 1' has fewer than 10 items left", resultOfAction);
-        }
-
-        [Fact]
-        public void CallbackWorks()
-        {
-            static void ExtendedStockAlert(string name, int oldQuantity, int newQuantity,  bool actionDone)
+            static void ExtendedStockAlert(Stock stock, string name, int oldQuantity, int newQuantity)
             {
-                actionDone = false;
                 int[] callbackThresholds = new int[] { 10, 5, 2 };
 
                 int value = -1;
@@ -164,25 +150,51 @@ namespace LINQ.Tests
                 }
                 catch (InvalidOperationException)
                 {
+                    stock.previousSubstractionTriggeredAlert = false;
                     return;
                 }
 
-                if(value < 0)
+                if (value < 0)
                 {
+                    stock.previousSubstractionTriggeredAlert = false;
                     return;
                 }
 
-                actionDone = true;
+                stock.previousSubstractionTriggeredAlert = true;
 
-                Console.WriteLine("Product '" + name + "' has fewer than " + value + " items left");            
+                Console.WriteLine("Product '" + name + "' has fewer than " + value + " items left");
             }
 
             var stock = new Stock();
             var product1 = new Product("Product 1", 15);
+            var action = new Action<Stock, string, int, int>(ExtendedStockAlert);
 
-            stock.SetAlert(new Action<string, int, int, bool>(ExtendedStockAlert));
+            stock.AddProduct(product1);
+            stock.SetAlert(action);
 
-            stock.AddProduct(product1); // mai trebuie sa fac un bool cumva sa returneze true; caut C# test Action; fac un bool in stock pe care il activeaza actionu
+            stock.Substract(product1, 2);//13
+            Assert.False(stock.previousSubstractionTriggeredAlert);
+
+            stock.Substract(product1, 2);//11
+            Assert.False(stock.previousSubstractionTriggeredAlert);
+
+            stock.Substract(product1, 2);//9
+            Assert.True(stock.previousSubstractionTriggeredAlert);
+
+            stock.Substract(product1, 2);//7
+            Assert.False(stock.previousSubstractionTriggeredAlert);
+
+            stock.Substract(product1, 2);//5
+            Assert.False(stock.previousSubstractionTriggeredAlert);
+
+            stock.Substract(product1, 2);//3
+            Assert.True(stock.previousSubstractionTriggeredAlert);
+
+            stock.Substract(product1, 2);//1
+            Assert.True(stock.previousSubstractionTriggeredAlert);
+
+            stock.Substract(product1, 1);//0
+            Assert.False(stock.previousSubstractionTriggeredAlert);
         }
     }
 }
