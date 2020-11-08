@@ -1,5 +1,6 @@
 using System;
 using Xunit;
+using System.Linq;
 
 namespace LINQ.Tests
 {
@@ -147,5 +148,41 @@ namespace LINQ.Tests
             Assert.Equal("Product 'Product 1' has fewer than 10 items left", resultOfAction);
         }
 
+        [Fact]
+        public void CallbackWorks()
+        {
+            static void ExtendedStockAlert(string name, int oldQuantity, int newQuantity,  bool actionDone)
+            {
+                actionDone = false;
+                int[] callbackThresholds = new int[] { 10, 5, 2 };
+
+                int value = -1;
+
+                try
+                {
+                    value = callbackThresholds.Last(threshold => newQuantity < threshold && oldQuantity >= threshold);
+                }
+                catch (InvalidOperationException)
+                {
+                    return;
+                }
+
+                if(value < 0)
+                {
+                    return;
+                }
+
+                actionDone = true;
+
+                Console.WriteLine("Product '" + name + "' has fewer than " + value + " items left");            
+            }
+
+            var stock = new Stock();
+            var product1 = new Product("Product 1", 15);
+
+            stock.SetAlert(new Action<string, int, int, bool>(ExtendedStockAlert));
+
+            stock.AddProduct(product1); // mai trebuie sa fac un bool cumva sa returneze true; caut C# test Action; fac un bool in stock pe care il activeaza actionu
+        }
     }
 }

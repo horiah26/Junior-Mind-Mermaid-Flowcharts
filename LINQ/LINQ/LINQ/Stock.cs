@@ -8,7 +8,9 @@ namespace LINQ
     {
         public Dictionary<string, Product> products;
 
-        private IStockAlert stockAlert;
+        private Action<string, int, int, bool> alertAction;
+
+        bool alertActivated { get; }
 
         public int this[string key]
         {
@@ -20,9 +22,9 @@ namespace LINQ
             products = new Dictionary<string, Product>(size);
         }
 
-        public void AddStockAlert(IStockAlert stockAlert)
+        public void SetAlert(Action<string, int, int, bool> alertAction)
         {
-            this.stockAlert = stockAlert;
+            this.alertAction = alertAction;
         }
 
         public void AddProduct(Product product)
@@ -60,7 +62,10 @@ namespace LINQ
             int oldQuantity = products[name].Quantity;
 
             products[name].Substract(quantity);
-            Console.WriteLine(this.ExtendedStockAlert(name, oldQuantity, products[name].Quantity));
+            bool done;
+
+            alertAction(name, oldQuantity, products[name].Quantity, done);
+            Console.WriteLine(done);
         }
 
         public void RemoveProduct(Product product)
