@@ -144,7 +144,7 @@ namespace LINQ.Tests
 
             bool alertTriggered = false;
 
-            Action<int, int> action = (oldQuantity, newQuantity) => alertTriggered = true;
+            Action<string, int> action = (name, tresholdValue) => alertTriggered = true;
             
             stock.SetAlert(action);
             Assert.False(alertTriggered);

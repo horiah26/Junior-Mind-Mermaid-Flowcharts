@@ -8,7 +8,7 @@ namespace LINQ
     {
         public Dictionary<string, Product> products;
 
-        private Action<int, int> action;
+        private Action<string, int> action;
 
         public int this[string key]
         {
@@ -20,7 +20,7 @@ namespace LINQ
             products = new Dictionary<string, Product>(size);
         }
 
-        public void SetAlert(Action<int, int> action)
+        public void SetAlert(Action<string, int> action)
         {
             this.action = action;
         }
@@ -61,7 +61,7 @@ namespace LINQ
 
             products[name].Substract(quantity);
 
-            Callback(oldQuantity, products[name].Quantity);
+            Callback(name, oldQuantity, products[name].Quantity);
         }
 
         public void RemoveProduct(Product product)
@@ -76,7 +76,7 @@ namespace LINQ
             return products.Aggregate(0, (total, nextProduct) => total + nextProduct.Value.Quantity);
         }
 
-        private void Callback(int oldQuantity, int newQuantity)
+        private void Callback(string name, int oldQuantity, int newQuantity)
         {
             int[] callbackThresholds = new int[] { 10, 5, 2 };
 
@@ -96,7 +96,7 @@ namespace LINQ
                 return;
             }
 
-            action?.Invoke(oldQuantity, newQuantity);
+            action?.Invoke(name, value);
         }
 
         private void CheckIfPossible(string Product, int quantity)
