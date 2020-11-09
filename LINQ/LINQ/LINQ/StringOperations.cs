@@ -31,6 +31,24 @@ namespace LINQ
             return input.Aggregate(0, (total, nextCharacter) => total + nextCharacter);
         }
 
+        public static int MostCommonChar(string input)
+        {
+            NullInputException(input);
+
+            char character;
+
+            try
+            {
+                character = input.GroupBy(character => character).OrderBy(group => group.Count()).Last().Key;
+            }
+            catch (InvalidOperationException)
+            {
+                return default;
+            }
+
+            return character;
+        }
+
         private static void NullInputException(string word)
         {
             if (word == null)

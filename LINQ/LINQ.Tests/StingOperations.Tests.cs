@@ -19,5 +19,12 @@ namespace LINQ.Tests
             string text = "abcabe";
             Assert.Equal(590, StringOperations.StringToInt(text));
         }
+
+        [Fact]
+        public void MostCommonCharWorks()
+        {
+            string text = "abcabeb";
+            Assert.Equal('b', StringOperations.MostCommonChar(text));
+        }
     }
 }
