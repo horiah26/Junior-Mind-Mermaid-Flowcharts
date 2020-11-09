@@ -80,18 +80,9 @@ namespace LINQ
         {
             int[] callbackThresholds = new int[] { 10, 5, 2 };
 
-            int value = -1;
-
-            try
-            {
-                value = callbackThresholds.Last(threshold => newQuantity < threshold && oldQuantity >= threshold);
-            }
-            catch (InvalidOperationException)
-            {
-                return;
-            }
-
-            if (value < 0)
+            int value = callbackThresholds.LastOrDefault(threshold => newQuantity < threshold && oldQuantity >= threshold);
+           
+            if (value == 0)
             {
                 return;
             }
