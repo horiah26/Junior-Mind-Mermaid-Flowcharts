@@ -8,9 +8,7 @@ namespace LINQ
     {
         public Dictionary<string, Product> products;
 
-        private Action<Stock, string, int, int> alertAction;
-
-        public bool previousSubstractionTriggeredAlert { get;  set; }
+        private Action<int, int> action;
 
         public int this[string key]
         {
@@ -22,9 +20,9 @@ namespace LINQ
             products = new Dictionary<string, Product>(size);
         }
 
-        public void SetAlert(Action<Stock, string, int, int> alertAction)
+        public void SetAlert(Action<int, int> action)
         {
-            this.alertAction = alertAction;
+            this.action = action;
         }
 
         public void AddProduct(Product product)
@@ -63,7 +61,7 @@ namespace LINQ
 
             products[name].Substract(quantity);
 
-            alertAction?.Invoke(this, name, oldQuantity, products[name].Quantity);
+            Callback(oldQuantity, products[name].Quantity);
         }
 
         public void RemoveProduct(Product product)
@@ -76,6 +74,29 @@ namespace LINQ
         public int TotalQuantity()
         {
             return products.Aggregate(0, (total, nextProduct) => total + nextProduct.Value.Quantity);
+        }
+
+        private void Callback(int oldQuantity, int newQuantity)
+        {
+            int[] callbackThresholds = new int[] { 10, 5, 2 };
+
+            int value = -1;
+
+            try
+            {
+                value = callbackThresholds.Last(threshold => newQuantity < threshold && oldQuantity >= threshold);
+            }
+            catch (InvalidOperationException)
+            {
+                return;
+            }
+
+            if (value < 0)
+            {
+                return;
+            }
+
+            action?.Invoke(oldQuantity, newQuantity);
         }
 
         private void CheckIfPossible(string Product, int quantity)

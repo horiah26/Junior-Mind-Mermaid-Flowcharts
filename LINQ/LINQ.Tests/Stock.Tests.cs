@@ -137,64 +137,23 @@ namespace LINQ.Tests
 
         [Fact]
         public void ThrowsCallbackWhenProductQuantityBelowThreshold()
-        {
-            static void ExtendedStockAlert(Stock stock, string name, int oldQuantity, int newQuantity)
-            {
-                int[] callbackThresholds = new int[] { 10, 5, 2 };
-
-                int value = -1;
-
-                try
-                {
-                    value = callbackThresholds.Last(threshold => newQuantity < threshold && oldQuantity >= threshold);
-                }
-                catch (InvalidOperationException)
-                {
-                    stock.previousSubstractionTriggeredAlert = false;
-                    return;
-                }
-
-                if (value < 0)
-                {
-                    stock.previousSubstractionTriggeredAlert = false;
-                    return;
-                }
-
-                stock.previousSubstractionTriggeredAlert = true;
-
-                Console.WriteLine("Product '" + name + "' has fewer than " + value + " items left");
-            }
-
+        {         
             var stock = new Stock();
             var product1 = new Product("Product 1", 15);
-            var action = new Action<Stock, string, int, int>(ExtendedStockAlert);
-
             stock.AddProduct(product1);
+
+            bool alertTriggered = false;
+
+            Action<int, int> action = (oldQuantity, newQuantity) => alertTriggered = true;
+            
             stock.SetAlert(action);
+            Assert.False(alertTriggered);
 
-            stock.Substract(product1, 2);//13
-            Assert.False(stock.previousSubstractionTriggeredAlert);
+            stock.Substract(product1, 5);
+            Assert.False(alertTriggered);
 
-            stock.Substract(product1, 2);//11
-            Assert.False(stock.previousSubstractionTriggeredAlert);
-
-            stock.Substract(product1, 2);//9
-            Assert.True(stock.previousSubstractionTriggeredAlert);
-
-            stock.Substract(product1, 2);//7
-            Assert.False(stock.previousSubstractionTriggeredAlert);
-
-            stock.Substract(product1, 2);//5
-            Assert.False(stock.previousSubstractionTriggeredAlert);
-
-            stock.Substract(product1, 2);//3
-            Assert.True(stock.previousSubstractionTriggeredAlert);
-
-            stock.Substract(product1, 2);//1
-            Assert.True(stock.previousSubstractionTriggeredAlert);
-
-            stock.Substract(product1, 1);//0
-            Assert.False(stock.previousSubstractionTriggeredAlert);
+            stock.Substract(product1, 1);
+            Assert.True(alertTriggered);
         }
     }
 }
