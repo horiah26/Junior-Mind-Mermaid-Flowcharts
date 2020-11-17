@@ -25,6 +25,19 @@ namespace LINQ
             return character;
         }
 
+        public static Tuple<int, int> CountVowelsConsonants(string input)
+        {
+            NullInputException(input);
+
+            const string vowels = "aeiou";
+            const string misc = " .,;?!'";
+
+            var vowelsCount = input.ToLower().Where(x => vowels.Contains(x)).Count();
+            var consonantsCount = input.ToLower().Where(x => !vowels.Contains(x) && !misc.Contains(x)).Count();
+
+            return new Tuple<int, int>(vowelsCount, consonantsCount);
+        }
+
         public static int StringToInt(string input)
         {
             NullInputException(input);
@@ -47,6 +60,15 @@ namespace LINQ
             }
 
             return character;
+        }
+
+        public static IEnumerable<string> SubstringPalindromes(string input)
+        {
+             return Enumerable.Range(0, input.Length)
+                    .SelectMany(a => Enumerable.Range(1, input.Length - a), (origin, size) => (origin, size))
+                    .Select(t => input.Substring(t.origin, t.size))
+                    .Where(s => s.SequenceEqual(s.Reverse()))
+                    .OrderByDescending(c => c.Length);
         }
 
         private static void NullInputException(string word)
