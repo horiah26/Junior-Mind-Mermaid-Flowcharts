@@ -17,8 +17,8 @@ namespace LINQ.Tests
         [Fact]
         public void StringToIntWorks()
         {
-            string text = "abcabe";
-            Assert.Equal(590, StringOperations.StringToInt(text));
+            string text = "-875";
+            Assert.Equal(-875, StringOperations.StringToInt(text));
         }
 
         [Fact]
@@ -33,7 +33,7 @@ namespace LINQ.Tests
         {
             string text = "abcabeb";
 
-            Assert.Equal(new Tuple<int, int>(3,4), StringOperations.CountVowelsConsonants(text));
+            Assert.Equal((3,4), StringOperations.CountVowelsConsonants(text));
         }
 
         [Fact]
@@ -41,7 +41,7 @@ namespace LINQ.Tests
         {
             string text = "Ana are mere!";
 
-            Assert.Equal(new Tuple<int, int>(6, 4), StringOperations.CountVowelsConsonants(text));
+            Assert.Equal((6, 4), StringOperations.CountVowelsConsonants(text));
         }
 
         [Fact]

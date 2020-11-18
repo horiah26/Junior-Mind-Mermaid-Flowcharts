@@ -2,80 +2,73 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace LINQ
 {
     public static class StringOperations
-    {     
+    {
         public static char FirstUniqueChar(string input)
         {
-            NullInputException(input);
+            EnusureIsNotNull(input, nameof(input));
 
             char character;
 
-            try
-            {
-               character = input.GroupBy(character => character).First(groupOfChars => groupOfChars.Count() == 1).Key;
-            }
-            catch(InvalidOperationException)
-            {
-                return default;
-            }
-
+            character = input.GroupBy(character => character).FirstOrDefault(groupOfChars => groupOfChars.Count() == 1).Key;
+         
             return character;
         }
 
-        public static Tuple<int, int> CountVowelsConsonants(string input)
+        public static (int, int) CountVowelsConsonants(string input)
         {
-            NullInputException(input);
+            EnusureIsNotNull(input, nameof(input));
 
             const string vowels = "aeiou";
-            const string misc = " .,;?!'";
 
-            var vowelsCount = input.ToLower().Where(x => vowels.Contains(x)).Count();
-            var consonantsCount = input.ToLower().Where(x => !vowels.Contains(x) && !misc.Contains(x)).Count();
+            var trimmedString = Regex.Replace(input, @"[^0-9a-zA-Z]+", "");
 
-            return new Tuple<int, int>(vowelsCount, consonantsCount);
+            (int, int) accumulator = (0, 0);
+
+            return trimmedString.ToLower().Aggregate(accumulator, (accumulator, character) 
+                   => vowels.Contains(character) ? (accumulator.Item1 + 1, accumulator.Item2) : (accumulator.Item1, accumulator.Item2 + 1));
         }
 
         public static int StringToInt(string input)
         {
-            NullInputException(input);
-            return input.Aggregate(0, (total, nextCharacter) => total + nextCharacter);
+            EnusureIsNotNull(input, nameof(input)); 
+
+            int sign = 1;
+            
+            if (input[0].Equals('-'))
+            {
+                sign = -1;
+                input = input.Substring(1);
+            }
+
+            return input.Aggregate(0, (total, next) => total * 10 + next - '0') * sign;
         }
 
         public static int MostCommonChar(string input)
         {
-            NullInputException(input);
+            EnusureIsNotNull(input, nameof(input));
 
-            char character;
-
-            try
-            {
-                character = input.GroupBy(character => character).OrderBy(group => group.Count()).Last().Key;
-            }
-            catch (InvalidOperationException)
-            {
-                return default;
-            }
-
-            return character;
+            return input.GroupBy(character => character).OrderBy(group => group.Count()).Last().Key;
         }
 
         public static IEnumerable<string> SubstringPalindromes(string input)
         {
-             return Enumerable.Range(0, input.Length)
-                    .SelectMany(a => Enumerable.Range(1, input.Length - a), (origin, size) => (origin, size))
-                    .Select(t => input.Substring(t.origin, t.size))
-                    .Where(s => s.SequenceEqual(s.Reverse()))
-                    .OrderByDescending(c => c.Length);
+            return Enumerable.Range(0, input.Length)
+                   .SelectMany(a => Enumerable.Range(1, input.Length - a), (origin, size) => (origin, size))
+                   .Select(t => input.Substring(t.origin, t.size))
+                   .Where(s => s.SequenceEqual(s.Reverse()))
+                   .OrderByDescending(c => c.Length);
         }
 
-        private static void NullInputException(string word)
+        private static void EnusureIsNotNull(string input, string name)
         {
-            if (word == null)
+            if (input == null)
             {
-                throw new ArgumentNullException(nameof(word));
+                throw new ArgumentNullException(name);
             }
         }
     }

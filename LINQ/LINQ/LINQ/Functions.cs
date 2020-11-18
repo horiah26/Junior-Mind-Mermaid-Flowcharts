@@ -37,20 +37,20 @@ namespace LINQ
             return false;
         }
 
-        public static TSource First<TSource>(this IEnumerable<TSource> source, Func<TSource, bool> predicate)
-        {
-            CheckIfNull(source);
+        //public static TSource First<TSource>(this IEnumerable<TSource> source, Func<TSource, bool> predicate)
+        //{
+        //    CheckIfNull(source);
 
-            foreach (var item in source)
-            {
-                if (predicate(item))
-                {
-                    return item;
-                }
-            }
+        //    foreach (var item in source)
+        //    {
+        //        if (predicate(item))
+        //        {
+        //            return item;
+        //        }
+        //    }
 
-            throw new InvalidOperationException("Element not found");
-        }
+        //    throw new InvalidOperationException("Element not found");
+        //}
 
         public static IEnumerable<TResult> Select<TSource, TResult>(this IEnumerable<TSource> source, Func<TSource, TResult> selector)
         {
