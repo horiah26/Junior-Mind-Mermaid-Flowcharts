@@ -26,10 +26,10 @@ namespace LINQ
 
             var trimmedString = Regex.Replace(input, @"[^0-9a-zA-Z]+", "");
 
-            (int, int) accumulator = (0, 0);
+            (int vowels, int consonants) accumulator = (0, 0);
 
             return trimmedString.ToLower().Aggregate(accumulator, (accumulator, character) 
-                   => vowels.Contains(character) ? (accumulator.Item1 + 1, accumulator.Item2) : (accumulator.Item1, accumulator.Item2 + 1));
+                   => vowels.Contains(character) ? (accumulator.vowels + 1, accumulator.consonants) : (accumulator.vowels, accumulator.consonants + 1));
         }
 
         public static int StringToInt(string input)
