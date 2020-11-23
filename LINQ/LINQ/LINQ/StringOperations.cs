@@ -32,17 +32,21 @@ namespace LINQ
                    => vowels.Contains(character) ? (accumulator.vowels + 1, accumulator.consonants) : (accumulator.vowels, accumulator.consonants + 1));
         }
 
-        public static int StringToInt(string input)
+        public static int StringToInt(this string input)
         {
             EnusureIsNotNull(input, nameof(input)); 
 
             int sign = 1;
-            
-            if (input[0].Equals('-'))
+
+            if (input.FirstOrDefault().Equals('-'))
             {
                 sign = -1;
                 input = input.Substring(1);
             }
+            else if (input.FirstOrDefault().Equals('+'))
+            {
+                input = input.Substring(1);
+            }                   
 
             return input.Aggregate(0, (total, next) => total * 10 + next - '0') * sign;
         }
@@ -55,6 +59,15 @@ namespace LINQ
         }
 
         public static IEnumerable<string> SubstringPalindromes(string input)
+        {
+            return Enumerable.Range(0, input.Length)
+                   .SelectMany(a => Enumerable.Range(1, input.Length - a), (origin, size) => (origin, size))
+                   .Select(t => input.Substring(t.origin, t.size))
+                   .Where(s => s.SequenceEqual(s.Reverse()))
+                   .OrderByDescending(c => c.Length);
+        }
+
+        public static IEnumerable<string> SubstringsSum(string input)
         {
             return Enumerable.Range(0, input.Length)
                    .SelectMany(a => Enumerable.Range(1, input.Length - a), (origin, size) => (origin, size))
