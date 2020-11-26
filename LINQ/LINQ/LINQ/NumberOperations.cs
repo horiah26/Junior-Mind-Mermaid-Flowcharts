@@ -22,7 +22,7 @@ namespace LINQ
 
             return Enumerable.Range(1, n)
                              .Aggregate(seed, (total, x) => total
-                             .SelectMany(result => new[] { result + "+" + x + " ", result + "-" + x + " " }))
+                             .SelectMany(result => new[] { result + "+" + x + " ", result + "-" + x + " "}))
                              .Where(plusMinusRow => plusMinusRow.PlusMinusStringToInt() == k)
                              .Select(row => row.Trim());
         }
@@ -30,6 +30,18 @@ namespace LINQ
         private static int PlusMinusStringToInt(this string input)
         {
             return input.Split(' ').Aggregate(0, (total, next) => total + next.StringToInt());
+        }
+
+        public static IEnumerable<(int, int, int)> PythagorasTrios(int[] numbers)
+        {
+            IEnumerable<(int, int, int)> seed = new List<(int, int, int)> {};
+
+            return Enumerable.Range(0, numbers.Length)
+                  .SelectMany(a => Enumerable.Range(0, numbers.Length), (a, b) => (a, b))
+                  .SelectMany(pair => Enumerable.Range(0, numbers.Length), (pair, c) => (pair.a, pair.b, c))
+                  .Select(trio => (numbers[trio.a], numbers[trio.b], numbers[trio.c]))
+                  .Where(trio => Math.Pow(trio.Item3, 2) == Math.Pow(trio.Item2, 2) + Math.Pow(trio.Item1, 2))
+                  .Aggregate(seed, (total, next) => total.Contains((next.Item2, next.Item1, next.Item3)) ? total : total.Append(next));
         }
     }
 }

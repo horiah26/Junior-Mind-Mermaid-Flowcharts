@@ -27,5 +27,15 @@ namespace LINQ.Tests
             item => Assert.Equal("+1 +2 +3 -4", item),
             item => Assert.Equal("-1 +2 -3 +4", item));
         }
+
+        [Fact]
+        public void PythagorasTriosWorks()
+        {
+            int[] numbers = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+
+            Assert.Collection(NumberOperations.PythagorasTrios(numbers),
+            item => Assert.Equal((3, 4, 5), item),
+            item => Assert.Equal((6, 8, 10), item));
+        }
     }
 }

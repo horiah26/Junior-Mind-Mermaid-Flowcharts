@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using System;
+using System.Collections.Generic;
 
 namespace LINQ
 {
@@ -7,14 +8,6 @@ namespace LINQ
     {
         static void Main(string[] args)
         {
-            var a = NumberOperations.PlusMinusMix(4, 2);
-
-            foreach(var v in a)
-            {
-                Console.WriteLine(v);
-            }
-
-            Console.WriteLine();
         }
     }
 }
