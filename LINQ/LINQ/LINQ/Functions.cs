@@ -59,7 +59,7 @@ namespace LINQ
 
             foreach (var item in source)
             {
-               yield return selector(item);
+                yield return selector(item);
             }
         }
 

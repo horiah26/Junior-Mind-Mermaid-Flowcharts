@@ -10,7 +10,7 @@ namespace LINQ
         public static IEnumerable<int[]> SegmentsSmallerThan(int[] input, int max)
         {
             return Enumerable.Range(0, input.Length)
-                .SelectMany(a => Enumerable.Range(0, input.Length + 1 - a), (origin, size) => (origin, size))
+                .SelectMany(a => Enumerable.Range(1, input.Length - a), (origin, size) => (origin, size))
                 .Where(s => s.size > 0)
                 .Select(s => input.Skip(s.origin).Take(s.size).ToArray())
                 .Where(s => s.Sum() <= max);
@@ -22,7 +22,7 @@ namespace LINQ
 
             return Enumerable.Range(1, n)
                              .Aggregate(seed, (total, x) => total
-                             .SelectMany(result => new[] { result + "+" + x + " ", result + "-" + x + " "}))
+                             .SelectMany(result => new[] { result + "+" + x + " ", result + "-" + x + " " }))
                              .Where(plusMinusRow => plusMinusRow.PlusMinusStringToInt() == k)
                              .Select(row => row.Trim());
         }
@@ -34,7 +34,7 @@ namespace LINQ
 
         public static IEnumerable<(int, int, int)> PythagorasTrios(int[] numbers)
         {
-            IEnumerable<(int, int, int)> seed = new List<(int, int, int)> {};
+            IEnumerable<(int, int, int)> seed = new List<(int, int, int)> { };
 
             return Enumerable.Range(0, numbers.Length)
                   .SelectMany(a => Enumerable.Range(0, numbers.Length), (a, b) => (a, b))
