@@ -14,7 +14,7 @@ namespace LINQ
             char character;
 
             character = input.GroupBy(character => character).FirstOrDefault(groupOfChars => groupOfChars.Count() == 1).Key;
-         
+
             return character;
         }
 
@@ -28,13 +28,13 @@ namespace LINQ
 
             (int vowels, int consonants) accumulator = (0, 0);
 
-            return trimmedString.ToLower().Aggregate(accumulator, (accumulator, character) 
+            return trimmedString.ToLower().Aggregate(accumulator, (accumulator, character)
                    => vowels.Contains(character) ? (accumulator.vowels + 1, accumulator.consonants) : (accumulator.vowels, accumulator.consonants + 1));
         }
 
         public static int StringToInt(this string input)
         {
-            EnusureIsNotNull(input, nameof(input)); 
+            EnusureIsNotNull(input, nameof(input));
 
             int sign = 1;
 
@@ -46,7 +46,7 @@ namespace LINQ
             else if (input.FirstOrDefault().Equals('+'))
             {
                 input = input.Substring(1);
-            }                   
+            }
 
             return input.Aggregate(0, (total, next) => total * 10 + next - '0') * sign;
         }

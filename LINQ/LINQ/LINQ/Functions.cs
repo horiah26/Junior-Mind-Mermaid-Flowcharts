@@ -70,7 +70,7 @@ namespace LINQ
 
             foreach (var item in source)
             {
-                foreach(var subItem in selector(item))
+                foreach (var subItem in selector(item))
                 {
                     yield return subItem;
                 }
@@ -159,7 +159,7 @@ namespace LINQ
             {
                 var outerKey = outerKeySelector(outerElement);
 
-                foreach(var innerElement in inner)
+                foreach (var innerElement in inner)
                 {
                     var innerKey = innerKeySelector(innerElement);
 
@@ -236,8 +236,8 @@ namespace LINQ
             Func<TSource, TElement> elementSelector,
             Func<TKey, IEnumerable<TElement>, TResult> resultSelector,
             IEqualityComparer<TKey> comparer)
-        { 
-            var dictionary = new Dictionary<TKey, List<TElement>> (comparer);
+        {
+            var dictionary = new Dictionary<TKey, List<TElement>>(comparer);
 
             foreach (var item in source)
             {
@@ -250,11 +250,11 @@ namespace LINQ
                 }
                 else
                 {
-                    dictionary.Add(key, new List<TElement>{ element });
+                    dictionary.Add(key, new List<TElement> { element });
                 }
             }
 
-            foreach(var item in dictionary)
+            foreach (var item in dictionary)
             {
                 yield return (resultSelector(item.Key, item.Value));
             }
@@ -281,7 +281,7 @@ namespace LINQ
 
         static private void CheckIfNull(object item)
         {
-            if(item == null)
+            if (item == null)
             {
                 throw new ArgumentNullException("Argument is null");
             }
@@ -344,5 +344,5 @@ namespace LINQ
                 return GetEnumerator();
             }
         }
-    }    
+    }
 }

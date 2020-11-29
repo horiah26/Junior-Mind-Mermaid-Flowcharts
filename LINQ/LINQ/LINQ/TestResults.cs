@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Linq;
 
 namespace LINQ
@@ -22,7 +20,7 @@ namespace LINQ
 
         public static IEnumerable<TestResults> BestFamilyScore(IEnumerable<TestResults> results)
         {
-            return results.GroupBy(x => x.FamilyId).Select(x => x.Last());
+            return results.GroupBy(x => x.FamilyId).Select(x => x.Aggregate(x.First(), (best, next) => next.Score > best.Score ? best = next : best));
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace LINQ
@@ -7,7 +8,8 @@ namespace LINQ
     {
         public static IEnumerable<string> TopWordsInText(string text)
         {
-            return text.Replace(".", "").Replace(",", "").Split(" ").GroupBy(x => x).OrderByDescending(x => x.Count()).Select(x => x.Key);
+            char[] splitChars = new char[] { '.', ',', ' ' };
+            return text.Split(splitChars, StringSplitOptions.RemoveEmptyEntries).GroupBy(x => x).OrderByDescending(x => x.Count()).Select(x => x.Key);
         }
     }
 }
