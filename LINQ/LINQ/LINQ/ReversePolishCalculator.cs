@@ -20,12 +20,12 @@ namespace LINQ
                                                                                     .Single();
         }
 
-        static double ApplyOperand(IEnumerable<double> accumulated, string operand)
+        static double ApplyOperand(IEnumerable<double> lastTwo, string operand)
         {
-            if (accumulated.Count() >= 2)
+            if (lastTwo.Count() == 2)
             {
-                double first = accumulated.First();
-                double second = accumulated.Last();
+                double first = lastTwo.First();
+                double second = lastTwo.Last();
 
                 switch (operand)
                 {
