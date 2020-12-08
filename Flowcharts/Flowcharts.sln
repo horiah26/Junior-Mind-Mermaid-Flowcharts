@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30621.155
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Flowcharts", "Flowcharts\Flowcharts.csproj", "{3EFDD1F0-B94A-4BEB-B6A6-E37EBD542DC7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Flowcharts", "Flowcharts\Flowcharts.csproj", "{3EFDD1F0-B94A-4BEB-B6A6-E37EBD542DC7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Flowcharts.Tests", "Flowcharts.Tests\Flowcharts.Tests.csproj", "{249DCF6B-AE02-4FC6-AB6D-302E28CD1E7C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{3EFDD1F0-B94A-4BEB-B6A6-E37EBD542DC7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3EFDD1F0-B94A-4BEB-B6A6-E37EBD542DC7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3EFDD1F0-B94A-4BEB-B6A6-E37EBD542DC7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{249DCF6B-AE02-4FC6-AB6D-302E28CD1E7C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{249DCF6B-AE02-4FC6-AB6D-302E28CD1E7C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{249DCF6B-AE02-4FC6-AB6D-302E28CD1E7C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{249DCF6B-AE02-4FC6-AB6D-302E28CD1E7C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
