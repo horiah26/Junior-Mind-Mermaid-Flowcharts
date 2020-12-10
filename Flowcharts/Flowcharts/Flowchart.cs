@@ -1,12 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Xml;
+using System.Linq;
 
 namespace Flowcharts
 {
     public class Flowchart
     {
-        private Dictionary<string, Element> dictionary;
+        private Dictionary<string, Element> dictionary = new Dictionary<string, Element> { };
         public string FileName { get; private set; }
         public MemoryStream MemoryStream;
 
@@ -20,12 +21,12 @@ namespace Flowcharts
             this.MemoryStream = MemoryStream;
         }
 
-        private readonly List<(int x, int y, string text)> listOfSpecs = new List<(int x, int y, string text)> { };
-        private readonly List<(Element fromElement, Element toElement)> listOfArrows = new List<(Element, Element)> { };
+        private readonly List<Arrow> arrows = new List<Arrow> { };
 
         public void AddPair(int x1, int y1, string text1, int x2, int y2, string text2)
         {
             XmlWriter xmlWriter;
+
             if (FileName == null)
             {
                 xmlWriter = XmlWriter.Create(MemoryStream);
@@ -38,26 +39,26 @@ namespace Flowcharts
 
             InitializeSVG(ref xmlWriter);
 
-            listOfSpecs.Add((x1, y1, text1));
-            listOfSpecs.Add((x2, y2, text2));
-
-            dictionary = new Dictionary<string, Element> { };
-
-            foreach (var (x, y, text) in listOfSpecs)
+            if (!dictionary.ContainsKey(text1))
             {
-                if (!dictionary.ContainsKey(text))
-                {
-                    dictionary.Add(text, new Element(xmlWriter, x, y, text));
-                }
+                dictionary.Add(text1, new Element(xmlWriter, x1, y1, text1));
+            }
+            if (!dictionary.ContainsKey(text2))
+            {
+                dictionary.Add(text2, new Element(xmlWriter, x2, y2, text2));
             }
 
-            listOfArrows.Add((dictionary[text1], dictionary[text2]));
+            arrows.Add(new Arrow(xmlWriter, dictionary[text1], dictionary[text2]));
 
-            foreach (var (fromElement, toElement) in listOfArrows)
+            foreach (var element in dictionary)
             {
-                new Arrow(xmlWriter, fromElement, toElement);
+                element.Value.Draw();
             }
-      
+            foreach (var arrow in arrows)
+            {
+                arrow.Draw();
+            }
+              
             xmlWriter.WriteEndDocument(); 
             xmlWriter.Close();
 

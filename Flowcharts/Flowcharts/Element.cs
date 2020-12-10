@@ -13,16 +13,29 @@ namespace Flowcharts
         private readonly int unitWIdth = 300;
         private readonly int unitHeight = 150;
 
-        public Element(XmlWriter xmlWriter, int x, int y, string text)
-        {
-            CheckLength(text);
+        readonly XmlWriter xmlWriter;
+        public int X { get; private set; }
+        public int Y { get; private set; }
+        public string Text { get; private set; }
 
+        public Element(XmlWriter xmlWriter, int X, int Y, string Text)
+        {
+            CheckLength(Text);
+
+            this.xmlWriter = xmlWriter;
+            this.X = X;
+            this.Y = Y;
+            this.Text = Text;
+        }
+
+        public void Draw()
+        {
             int linesOfText = 0;
 
-            string[] splitLines = SplitWords(text, ref linesOfText);
+            string[] splitLines = SplitWords(Text, ref linesOfText);
 
-            DrawBox(xmlWriter,x,y,text, linesOfText);
-            WriteText(xmlWriter, x, y, splitLines);
+            DrawBox(xmlWriter, X, Y, Text, linesOfText);
+            WriteText(xmlWriter, X, Y, splitLines);
         }
 
         private void DrawBox(XmlWriter xmlWriter, int x, int y, string text, int linesOfText)
