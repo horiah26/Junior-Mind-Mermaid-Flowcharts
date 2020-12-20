@@ -12,8 +12,8 @@ namespace Flowcharts.Tests
             MemoryStream stream = new MemoryStream();
 
             var flowchart = new Flowchart(stream);
-
-            flowchart.AddPair(0, 0, "A", 1, 0, "B");
+            flowchart.AddPair( "A",  "B");
+            flowchart.Draw();
 
             XmlReader reader = XmlReader.Create(stream);
 
@@ -60,7 +60,9 @@ namespace Flowcharts.Tests
 
             var flowchart = new Flowchart(stream);
 
-            flowchart.AddPair(0, 0, "Lorem ipsum dolor sit amet, consectetur", 1, 0, "B");
+            flowchart.AddPair( "Lorem ipsum dolor sit amet, consectetur",  "B");
+
+            flowchart.Draw();
 
             XmlReader reader = XmlReader.Create(stream);
 
