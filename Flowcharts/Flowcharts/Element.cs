@@ -15,8 +15,8 @@ namespace Flowcharts
         private readonly int unitHeight = 150;
 
         readonly XmlWriter xmlWriter;
-        public int X { get; private set; }
-        public double Y { get; private set; }
+        public int X { get; set; }
+        public double Y { get; set; }
         public string Text { get; private set; }
 
         public List<Element> parentElements = new List<Element> { };
@@ -33,7 +33,6 @@ namespace Flowcharts
             this.Text = Text;
 
             X = Column;
-            Y = Row;
         }
 
         public void AddPrevious(Element previous)
@@ -71,7 +70,7 @@ namespace Flowcharts
 
         public void UpdateRow()
         {
-            Y = Row;
+            Y = Math.Round(Row);
         }
 
         public void UpdateColumn()
