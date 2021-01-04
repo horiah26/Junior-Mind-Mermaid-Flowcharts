@@ -4,7 +4,7 @@ using Xunit;
 
 namespace Flowcharts.Tests
 {
-    public class UnitTest1
+    public class FlowchartTests
     {        
         [Fact]
         public void CanAddAPair()

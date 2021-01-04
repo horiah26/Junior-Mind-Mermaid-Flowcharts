@@ -23,7 +23,7 @@ namespace Flowcharts
         public List<Element> childElements = new List<Element> { };
 
         public int Column = 0;
-        public double Row = 0;
+        public int Row = 0;
 
         public Element(XmlWriter xmlWriter, string Text)
         {
@@ -68,9 +68,14 @@ namespace Flowcharts
             }
         }
 
+        public void SetRow(int Row)
+        {
+            this.Row = Row;
+        }
+
         public void UpdateRow()
         {
-            Y = Math.Round(Row);
+            Y = Row;
         }
 
         public void UpdateColumn()

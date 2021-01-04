@@ -11,41 +11,29 @@ namespace Flowcharts
     {
         static void Main()
         {
+
             var flowchart = new Flowchart("test");
-            flowchart.AddPair("A", "B");
-            flowchart.AddPair("A", "C");
-            flowchart.AddPair("A", "D");
-            flowchart.AddPair("B", "ER");
 
-            flowchart.AddPair("B", " sadas dcasdqaedaw asdcasdasedwa sadas aeda sdfa a");
-            flowchart.AddPair("D", " sadas dcasdqaedaw asdcasdasedwa sadas aeda sdfa a");
-            flowchart.AddPair(" sadas dcasdqaedaw asdcasdasedwa sadas aeda sdfa a", "E");
-            flowchart.AddPair(" sadas dcasdqaedaw asdcasdasedwa sadas aeda sdfa a", "F");
-
-
-            //flowchart.AddPair(" sadas dcasdqaedaw asdcasdasedwa sadas aeda sdfa a", "eq2");
-            flowchart.AddPair("F", "eq");
-            flowchart.AddPair("F", "eq2");
-            flowchart.AddPair("F", "eq3");
-            flowchart.AddPair(" sadas dcasdqaedaw asdcasdasedwa sadas aeda sdfa a", "G");
-            flowchart.AddPair("G", "da");
-            flowchart.AddPair("G", "lol");
-            flowchart.AddPair("G", "eq");
-            flowchart.AddPair("G", "lol2");
-            flowchart.AddPair("G", "eq2");
-            flowchart.AddPair("newA", "newB");
-
-            flowchart.AddPair("newB", "S");
-            flowchart.AddPair("newB", "G");
-            flowchart.AddPair("newE", "q");
-            flowchart.AddPair("newE", "qw");
-            flowchart.AddPair("newE", "qww");
-            flowchart.AddPair("newE", "newB");
-            flowchart.AddPair("q", "S");
-                 
+            flowchart.AddPair("a", "q");
+            flowchart.AddPair("a", "u");
+            flowchart.AddPair("a", "b");
+            flowchart.AddPair("b", "c");
+            flowchart.AddPair("b", "d");
+            flowchart.AddPair("b", "e");
+            flowchart.AddPair("b", "f");
+            flowchart.AddPair("d", "g");
+            flowchart.AddPair("d", "h");
+            flowchart.AddPair("e", "w");
+            flowchart.AddPair("e", "y");
+            flowchart.AddPair("e", "x");
+            flowchart.AddPair("l", "f");
+            flowchart.AddPair("m", "f");
+            flowchart.AddPair("w", "v");
+            flowchart.AddPair("h", "v"); 
+            flowchart.AddPair("w", "z");
+            flowchart.AddPair("h", "z");
 
             flowchart.Draw();
-
         }
     }
 }
