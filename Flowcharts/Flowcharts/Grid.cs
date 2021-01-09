@@ -11,23 +11,23 @@ namespace Flowcharts
 
         public Element[,] elementGrid;
 
-        public Grid() 
+        public Grid()
         {
             elementGrid = new Element[rowSize, columnSize];
         }
 
         public void Add(Element element, int row, int column)
-        {           
+        {
             if (column >= columnSize)
             {
-                elementGrid = ResizeArray(elementGrid, rowSize, column + 1 );
+                elementGrid = ResizeArray(elementGrid, rowSize, column + 1);
             }
             if (row >= rowSize)
             {
-                elementGrid = ResizeArray(elementGrid, row + 1, columnSize );
-            }           
+                elementGrid = ResizeArray(elementGrid, row + 1, columnSize);
+            }
 
-            if(elementGrid[row, column] != null)
+            if (elementGrid[row, column] != null)
             {
                 throw new InvalidOperationException("Element occupied");
             }
@@ -39,14 +39,14 @@ namespace Flowcharts
         {
             foreach (Element element in elementGrid)
             {
-                if(element != null)
+                if (element != null)
                 {
                     yield return element;
                 }
             }
         }
 
-        public (int,int) Dimensions()
+        public (int, int) Dimensions()
         {
             return (rowSize, columnSize);
         }
@@ -58,7 +58,7 @@ namespace Flowcharts
 
         public void LowerColumnFromPosition(int row, int column, int positions)
         {
-            if(positions == 0)
+            if (positions == 0)
             {
                 return;
             }
@@ -69,16 +69,16 @@ namespace Flowcharts
 
             int difference = positions - emptyPositionsAtTheEnd;
 
-            if(difference > 0)
+            if (difference > 0)
             {
                 elementGrid = ResizeArray(elementGrid, rowSize + difference, columnSize);
             }
 
-            for(int i = rowSize - 1; i >= row; i--)
+            for (int i = rowSize - 1; i >= row; i--)
             {
-                if(elementGrid[i, column] != null)
+                if (elementGrid[i, column] != null)
                 {
-                    if(elementGrid[i + positions, column] != null)
+                    if (elementGrid[i + positions, column] != null)
                     {
                         throw new InvalidOperationException("Cannot move. Space is not empty");
                     }
@@ -95,8 +95,8 @@ namespace Flowcharts
             {
                 for (int j = 0; j < columnSize; j++)
                 {
-                    if(elementGrid[i, j] != null && text.Equals(elementGrid[i, j].Text))
-                    { 
+                    if (elementGrid[i, j] != null && text.Equals(elementGrid[i, j].Text))
+                    {
                         return (i, j);
                     }
                 }
@@ -126,11 +126,11 @@ namespace Flowcharts
                 for (int j = 0; j < minCols; j++)
                     newArray[i, j] = original[i, j];
 
-            if(columnSize < columns)
+            if (columnSize < columns)
             {
                 columnSize = columns;
             }
-            if(rowSize < rows)
+            if (rowSize < rows)
             {
                 rowSize = rows;
             }
@@ -153,7 +153,7 @@ namespace Flowcharts
                 if (elementGrid[i, column] != null)
                 {
                     elementGrid[i, column].Row = i;
-                }                
+                }
             }
         }
 
@@ -161,9 +161,9 @@ namespace Flowcharts
         {
             for (int column = columnSize - 1; column >= 0; column--)
             {
-                for(int row = 0; row < rowSize; row++)
+                for (int row = 0; row < rowSize; row++)
                 {
-                    if(elementGrid[row, column] != null)
+                    if (elementGrid[row, column] != null)
                     {
                         MoveColumnInPlace(elementGrid[row, column], row, column);
                     }
@@ -189,7 +189,7 @@ namespace Flowcharts
 
         private int GetAverageRowOfChildren(Element element)
         {
-            if(element.childElements.Count != 0)
+            if (element.childElements.Count != 0)
             {
                 return (int)Math.Round(element.childElements.Average(x => x.Row));
             }
@@ -198,10 +198,10 @@ namespace Flowcharts
         }
 
         private void LevelLastColumn(int lastColumn)
-        {            
-            for(int i = 0; i< rowSize; i++)
+        {
+            for (int i = 0; i < rowSize; i++)
             {
-                if(elementGrid[i, lastColumn] != null)
+                if (elementGrid[i, lastColumn] != null)
                 {
                     int average = GetAverageRowOfParents(elementGrid[i, lastColumn]);
                     int difference = average - i - 1;
@@ -210,7 +210,7 @@ namespace Flowcharts
                         LowerColumnFromPosition(i, lastColumn, difference);
                     }
                 }
-            } 
+            }
         }
 
         private int GetAverageRowOfParents(Element element)

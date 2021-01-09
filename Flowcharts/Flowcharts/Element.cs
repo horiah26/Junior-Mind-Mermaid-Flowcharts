@@ -1,7 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Xml;
-using System.Collections.Generic;
 
 namespace Flowcharts
 {
@@ -14,8 +14,12 @@ namespace Flowcharts
         private readonly int unitWIdth = 300;
         private readonly int unitHeight = 150;
 
+        private double rectangleWidth;
+
+        readonly string orientation;
+
         readonly XmlWriter xmlWriter;
-        public int X { get; set; }
+        public double X { get; set; }
         public double Y { get; set; }
         public string Text { get; private set; }
 
@@ -25,12 +29,13 @@ namespace Flowcharts
         public int Column = 0;
         public int Row = 0;
 
-        public Element(XmlWriter xmlWriter, string Text)
+        public Element(XmlWriter xmlWriter, string Text, string orientation)
         {
             CheckLength(Text);
 
             this.xmlWriter = xmlWriter;
             this.Text = Text;
+            this.orientation = orientation;
 
             X = Column;
         }
@@ -89,23 +94,40 @@ namespace Flowcharts
             int linesOfText = 0;
 
             string[] splitLines = SplitWords(Text, ref linesOfText);
-
-            DrawBox(xmlWriter, X, Y, Text, linesOfText);
-            WriteText(xmlWriter, X, Y, splitLines);
+                        
+            if(orientation == "LR")
+            {
+                DrawBox(xmlWriter, X, Y, Text, linesOfText);
+                WriteText(xmlWriter, X, Y, splitLines);
+            }
+            else if( orientation == "TD")
+            {
+                Console.WriteLine(orientation);
+                DrawBox(xmlWriter, Y, X, Text, linesOfText);
+                WriteText(xmlWriter, Y, X, splitLines);
+            }
         }
 
-        private void DrawBox(XmlWriter xmlWriter, int x, double y, string text, int linesOfText)
+        private void DrawBox(XmlWriter xmlWriter, double x, double y, string text, int linesOfText)
         {
             xmlWriter.WriteStartElement("rect");
             var rectangleHeight = 40 + (linesOfText - 1) * 17;
             int rectangleWidth = default;            
             ResizeBox(text, ref rectangleWidth);
 
-            double rectangleXPos = distanceFromEdge + x * unitWIdth + 2;
+            double rectangleXPos = distanceFromEdge + x * unitWIdth + (unitWIdth-rectangleWidth)/2;
             double rectangleYPos = distanceFromEdge + y * unitHeight - 17;
 
-            In = (rectangleXPos - 5 , rectangleYPos + 20);
-            Out = (rectangleXPos + rectangleWidth, rectangleYPos + 20);
+            if (orientation == "LR")
+            {
+                In = (rectangleXPos - 5, rectangleYPos + rectangleHeight / 2);
+                Out = (rectangleXPos + rectangleWidth, rectangleYPos + 20);
+            }
+            else if (orientation == "TD")
+            {
+                In = (rectangleXPos + rectangleWidth / 2, rectangleYPos - 4);
+                Out = (rectangleXPos + rectangleWidth / 2, rectangleYPos + 40);
+            }
 
             xmlWriter.WriteAttributeString("x", rectangleXPos.ToString());
             xmlWriter.WriteAttributeString("y", rectangleYPos.ToString());
@@ -120,12 +142,13 @@ namespace Flowcharts
             xmlWriter.WriteEndElement();
         }
 
-        void WriteText(XmlWriter xmlWriter, int x, double y, string[] lines)
+        void WriteText(XmlWriter xmlWriter, double x, double y, string[] lines)
         {
             (int x, int y) fitInBox = (10, 7);
             int spaceBetweenLines = 17;
 
-            int xPosition = distanceFromEdge + (x * unitWIdth + fitInBox.x);
+            Console.WriteLine(rectangleWidth);
+            double xPosition = distanceFromEdge + (x * unitWIdth + fitInBox.x) + (unitWIdth - rectangleWidth) / 2;
             double yPosition = distanceFromEdge + (y * unitHeight + fitInBox.y);
 
             xmlWriter.WriteStartElement("text");
@@ -183,6 +206,8 @@ namespace Flowcharts
             {
                 rectangleWidth = 200;
             }
+
+            this.rectangleWidth = rectangleWidth;
         }
 
         private void CheckLength(string text)

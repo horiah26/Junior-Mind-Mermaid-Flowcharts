@@ -14,6 +14,7 @@ namespace Flowcharts
         readonly XmlWriter xmlWriter;
         public int EmptyRow = 0;
         public Grid grid = new Grid();
+        public string orientation = "TD";
 
         public Flowchart(string FileName = null)
         {
@@ -37,11 +38,11 @@ namespace Flowcharts
 
             if (!dictionary.ContainsKey(text1))
             {
-                dictionary.Add(text1, new Element(xmlWriter, text1));
+                dictionary.Add(text1, new Element(xmlWriter, text1, orientation));
             }
             if (!dictionary.ContainsKey(text2))
             {
-                dictionary.Add(text2, new Element(xmlWriter, text2));
+                dictionary.Add(text2, new Element(xmlWriter, text2, orientation));
             }
 
             dictionary[text1].AddFollowing(dictionary[text2]);
@@ -65,7 +66,7 @@ namespace Flowcharts
         }
 
         public void Draw()
-        {          
+        {
             PlaceInGrid();
             grid.UpdateRows();
 
