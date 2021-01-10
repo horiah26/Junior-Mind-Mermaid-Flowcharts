@@ -71,8 +71,6 @@ namespace Flowcharts
 
             grid.ArrangeAll(dictionary.Values.Max(x => x.Column));
 
-            //FitInPage();
-
             foreach (var element in dictionary.Values)
             {   
                 element.Draw();
@@ -90,23 +88,6 @@ namespace Flowcharts
             {
                 MemoryStream.Position = 0;
             }
-        }
-
-        public void FitInPage()
-        {
-            double smallestRow = dictionary.Values.Min(x => x.Row);
-
-            Console.WriteLine(smallestRow);
-
-            if (smallestRow != 0)
-            {
-                foreach (var element in dictionary.Values)
-                {
-                    element.Row -= smallestRow ;
-                }
-            }
-
-            //grid.LevellastOccupiedColumn();
         }
 
         private void InitializeSVG(ref XmlWriter thisWriter)

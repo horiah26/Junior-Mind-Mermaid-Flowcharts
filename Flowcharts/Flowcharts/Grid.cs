@@ -237,24 +237,6 @@ namespace Flowcharts
                     }
                 }
             }
-
-            //for (int i = 0; i < rowSize; i++)
-            //{
-            //    if (elementGrid[i, lastOccupiedColumn] != null)
-            //    {
-            //        double average = GetAverageRowOfParents(elementGrid[i, lastOccupiedColumn]);
-            //        int difference = (int)average - i;
-            //        if (difference != 0)
-            //        {
-            //            foreach(var element in GetColumn(lastOccupiedColumn))
-            //            {
-            //                //if(element != null)
-            //                //element.Row += difference;
-            //            }
-            //        }
-            //    }
-            //}
-
         }
 
         private double GetAverageRowOfParents(Element element)
@@ -294,7 +276,6 @@ namespace Flowcharts
             ActualizeElements();
             ArrangeRows();
             FillEmptySpots();
-            //AlignColumns();
         }
     }
 }
