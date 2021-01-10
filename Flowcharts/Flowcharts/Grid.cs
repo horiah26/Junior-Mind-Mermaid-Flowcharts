@@ -8,6 +8,7 @@ namespace Flowcharts
     {
         private int rowSize = 10;
         private int columnSize = 10;
+        private int lastOccupiedColumn = 0;
 
         public Element[,] elementGrid;
 
@@ -33,6 +34,7 @@ namespace Flowcharts
             }
 
             elementGrid[row, column] = element;
+
         }
 
         public IEnumerator<Element> GetEnumerator()
@@ -56,7 +58,7 @@ namespace Flowcharts
             return elementGrid[row, column];
         }
 
-        public void LowerColumnFromPosition(int row, int column, int positions)
+        public void LowerColumnInGrid(double row, int column, int positions)
         {
             if (positions == 0)
             {
@@ -89,7 +91,7 @@ namespace Flowcharts
             }
         }
 
-        public (int row, int column) FindElementCoordinates(string text)
+        public (int row, int column) FindElementCoordinates(string text) 
         {
             for (int i = 0; i < rowSize; i++)
             {
@@ -138,82 +140,124 @@ namespace Flowcharts
             return newArray;
         }
 
-        public void UpdateRows()
+        public void ActualizeElements()
         {
             for (int i = 0; i < columnSize; i++)
             {
-                UpdateRowsInColumn(i);
-            }
-        }
-
-        public void UpdateRowsInColumn(int column)
-        {
-            for (int i = 0; i < rowSize; i++)
-            {
-                if (elementGrid[i, column] != null)
+                for (int j = 0; j < rowSize; j++)
                 {
-                    elementGrid[i, column].Row = i;
+                    if (elementGrid[i, j] != null)
+                    {
+                        elementGrid[i, j].Row = i;
+                        elementGrid[i, j].Column = j;
+                    }
                 }
             }
         }
 
-        public void ArrangeRows(int lastColumn)
+        public void ArrangeRows()
         {
-            for (int column = columnSize - 1; column >= 0; column--)
+            for (int column = lastOccupiedColumn; column >= 0; column--)
             {
                 for (int row = 0; row < rowSize; row++)
                 {
                     if (elementGrid[row, column] != null)
                     {
-                        MoveColumnInPlace(elementGrid[row, column], row, column);
+                        MoveColumnInPlace(row, column);
                     }
                 }
 
-                UpdateRows();
+                ActualizeElements();
             }
 
-            LevelLastColumn(lastColumn);
-            UpdateRows();
+            LevellastOccupiedColumn();
+            ActualizeElements();
         }
 
-        private void MoveColumnInPlace(Element element, int row, int column)
-        {
-            int average = GetAverageRowOfChildren(element);
-            int difference = average - row;
+        private void MoveColumnInPlace(int row, int column)
+        {            
+            double average = GetAverageRowOfChildren(elementGrid[row, column]);
+            int difference = (int)average - row;
             if (difference > 0)
             {
-                LowerColumnFromPosition(row, column, difference);
+                LowerColumnInGrid(row, column, difference);
             }
-
         }
 
-        private int GetAverageRowOfChildren(Element element)
+        private double GetAverageRowOfChildren(Element element)
         {
             if (element.childElements.Count != 0)
             {
-                return (int)Math.Round(element.childElements.Average(x => x.Row));
+                return (int)Math.Floor(element.childElements.Average(x => x.Row));
             }
 
             return element.Row;
         }
 
-        private void LevelLastColumn(int lastColumn)
+        public void AlignColumns()
         {
+            IEnumerable<Element> elementsInColumn = new List<Element> { };
+            IEnumerable<Element> elementsInNextColumn = GetColumn(lastOccupiedColumn).Where(x => x != null);
+
+            for (int column = lastOccupiedColumn - 1; column >= 0; column--)
+            {
+                elementsInColumn = GetColumn(column).Where(x => x != null);
+
+                var averageRowThis = elementsInColumn.Average(x => x.Row);
+                var averageRowNext = elementsInNextColumn.Average(x => x.Row);
+
+                var difference = averageRowThis - averageRowNext;           
+                var roundedDIfference = Math.Round(difference * 2, MidpointRounding.AwayFromZero) / 2;
+
+                foreach(var element in elementsInColumn)
+                {
+                    element.Row -= roundedDIfference;
+                }
+
+                elementsInNextColumn = elementsInColumn;
+            }
+            LevellastOccupiedColumn();
+        }
+
+        public void LevellastOccupiedColumn()
+        {
+            var lastColumn = GetColumn(lastOccupiedColumn).Where(x => x != null);
+
+            var averageParents = lastColumn.Average(x => GetAverageRowOfParents(x));
+
             for (int i = 0; i < rowSize; i++)
             {
-                if (elementGrid[i, lastColumn] != null)
+                if (elementGrid[i, lastOccupiedColumn] != null)
                 {
-                    int average = GetAverageRowOfParents(elementGrid[i, lastColumn]);
-                    int difference = average - i - 1;
+                    var average = GetAverageRowOfParents(elementGrid[i, lastOccupiedColumn]);
+                    int difference = (int)average - i - 1;
                     if (difference > 0)
                     {
-                        LowerColumnFromPosition(i, lastColumn, difference);
+                        LowerColumnInGrid(i, lastOccupiedColumn, difference);
                     }
                 }
             }
+
+            //for (int i = 0; i < rowSize; i++)
+            //{
+            //    if (elementGrid[i, lastOccupiedColumn] != null)
+            //    {
+            //        double average = GetAverageRowOfParents(elementGrid[i, lastOccupiedColumn]);
+            //        int difference = (int)average - i;
+            //        if (difference != 0)
+            //        {
+            //            foreach(var element in GetColumn(lastOccupiedColumn))
+            //            {
+            //                //if(element != null)
+            //                //element.Row += difference;
+            //            }
+            //        }
+            //    }
+            //}
+
         }
 
-        private int GetAverageRowOfParents(Element element)
+        private double GetAverageRowOfParents(Element element)
         {
             if (element.parentElements.Count != 0)
             {
@@ -221,6 +265,36 @@ namespace Flowcharts
             }
 
             return element.Row;
+        }
+           
+        public void FillEmptySpots()
+        {
+            for (int column = lastOccupiedColumn - 2; column >= 0; column--)
+            {
+                for (int row = 0; row < rowSize; row++)
+                {                
+                    if (elementGrid[row, column] != null && elementGrid[row, column + 1] == null && elementGrid[row, column].MinColumnOfChildren() - 1> column)
+                    {
+                        elementGrid[row, column].MinColumnOfChildren();
+                        elementGrid[row, column + 1] = elementGrid[row, column];
+
+                        elementGrid[row, column] = null;
+                        ActualizeElements();
+                    }
+                }
+            }
+
+            ActualizeElements(); 
+        } 
+
+        public void ArrangeAll(int lastOccupiedColumn)
+        {
+            this.lastOccupiedColumn = lastOccupiedColumn;
+
+            ActualizeElements();
+            ArrangeRows();
+            FillEmptySpots();
+            //AlignColumns();
         }
     }
 }

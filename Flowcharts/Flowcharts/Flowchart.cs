@@ -14,7 +14,7 @@ namespace Flowcharts
         readonly XmlWriter xmlWriter;
         public int EmptyRow = 0;
         public Grid grid = new Grid();
-        public string orientation = "TD";
+        public string orientation = "LR";
 
         public Flowchart(string FileName = null)
         {
@@ -45,13 +45,13 @@ namespace Flowcharts
                 dictionary.Add(text2, new Element(xmlWriter, text2, orientation));
             }
 
-            dictionary[text1].AddFollowing(dictionary[text2]);
-            dictionary[text2].AddPrevious(dictionary[text1]);
+            dictionary[text1].AddChild(dictionary[text2]);
+            dictionary[text2].AddParent(dictionary[text1]);
 
             arrows.Add(new Arrow(xmlWriter, dictionary[text1], dictionary[text2]));
         }
 
-        public void PlaceInGrid()
+        public void DictionaryToGrid()
         {
             var columns = dictionary.Values.GroupBy(x => x.Column);
 
@@ -60,27 +60,24 @@ namespace Flowcharts
                 int i = 0;
                 foreach (var element in column)
                 {
-                    grid.Add(element, i++, column.Key); ;
+                    grid.Add(element, i++, column.Key);
                 }
             }
         }
 
         public void Draw()
         {
-            PlaceInGrid();
-            grid.UpdateRows();
+            DictionaryToGrid();
 
-            grid.ArrangeRows(dictionary.Values.Max(x => x.Column));
+            grid.ArrangeAll(dictionary.Values.Max(x => x.Column));
 
-            foreach (var v in dictionary)
-            {
-                v.Value.UpdateRow();
+            //FitInPage();
+
+            foreach (var element in dictionary.Values)
+            {   
+                element.Draw();
             }
 
-            foreach (var element in dictionary)
-            {
-                element.Value.Draw();
-            }
             foreach (var arrow in arrows)
             {
                 arrow.Draw();
@@ -93,6 +90,23 @@ namespace Flowcharts
             {
                 MemoryStream.Position = 0;
             }
+        }
+
+        public void FitInPage()
+        {
+            double smallestRow = dictionary.Values.Min(x => x.Row);
+
+            Console.WriteLine(smallestRow);
+
+            if (smallestRow != 0)
+            {
+                foreach (var element in dictionary.Values)
+                {
+                    element.Row -= smallestRow ;
+                }
+            }
+
+            //grid.LevellastOccupiedColumn();
         }
 
         private void InitializeSVG(ref XmlWriter thisWriter)

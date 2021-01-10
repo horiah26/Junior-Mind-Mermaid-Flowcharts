@@ -13,13 +13,17 @@ namespace Flowcharts
         static void Main()
         {
             Flowchart flowchart = new Flowchart("test");
-            flowchart.AddPair("A", "B");
-            flowchart.AddPair("C", "B");
-            flowchart.AddPair("B", "D");
-            flowchart.AddPair("B", "E");
-            flowchart.AddPair("B", "F");
-            flowchart.Draw();
+                                
 
+            flowchart.AddPair("B", "F");
+            flowchart.AddPair("B", "E");
+            flowchart.AddPair("F", "n");
+            flowchart.AddPair("E", "H");
+            flowchart.AddPair("E", "h");
+            flowchart.AddPair("E", "hh");
+            flowchart.AddPair("Q", "hh");
+
+            flowchart.Draw();   
         }
     }
 }

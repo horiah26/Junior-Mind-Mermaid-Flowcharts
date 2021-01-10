@@ -19,15 +19,13 @@ namespace Flowcharts
         readonly string orientation;
 
         readonly XmlWriter xmlWriter;
-        public double X { get; set; }
-        public double Y { get; set; }
         public string Text { get; private set; }
 
         public List<Element> parentElements = new List<Element> { };
         public List<Element> childElements = new List<Element> { };
 
         public int Column = 0;
-        public int Row = 0;
+        public double Row = 0;
 
         public Element(XmlWriter xmlWriter, string Text, string orientation)
         {
@@ -36,51 +34,21 @@ namespace Flowcharts
             this.xmlWriter = xmlWriter;
             this.Text = Text;
             this.orientation = orientation;
-
-            X = Column;
         }
 
-        public void AddPrevious(Element previous)
+        public void AddParent(Element previous)
         {
             parentElements.Add(previous);
             UpdateColumn();
-            UpdateRow();
-            X = Column;
         }
-        public void AddFollowing(Element next)
+        public void AddChild(Element next)
         {
             childElements.Add(next);
-            UpdateRow();
-        }
-
-        public void ShowPN()
-        {
-            if (parentElements.Count != 0)
-            {
-                Console.WriteLine("Previous");
-                foreach (var v in parentElements)
-                {
-                    Console.WriteLine(v.Text);
-                }
-            }
-            if (childElements.Count != 0)
-            {
-                Console.WriteLine("Following");
-                foreach (var v in childElements)
-                {
-                    Console.WriteLine(v.Text);
-                }
-            }
         }
 
         public void SetRow(int Row)
         {
             this.Row = Row;
-        }
-
-        public void UpdateRow()
-        {
-            Y = Row;
         }
 
         public void UpdateColumn()
@@ -97,14 +65,13 @@ namespace Flowcharts
                         
             if(orientation == "LR")
             {
-                DrawBox(xmlWriter, X, Y, Text, linesOfText);
-                WriteText(xmlWriter, X, Y, splitLines);
+                DrawBox(xmlWriter, Column, Row, Text, linesOfText);
+                WriteText(xmlWriter, Column, Row, splitLines);
             }
             else if( orientation == "TD")
             {
-                Console.WriteLine(orientation);
-                DrawBox(xmlWriter, Y, X, Text, linesOfText);
-                WriteText(xmlWriter, Y, X, splitLines);
+                DrawBox(xmlWriter, Row, Column, Text, linesOfText);
+                WriteText(xmlWriter, Row, Column, splitLines);
             }
         }
 
@@ -147,7 +114,6 @@ namespace Flowcharts
             (int x, int y) fitInBox = (10, 7);
             int spaceBetweenLines = 17;
 
-            Console.WriteLine(rectangleWidth);
             double xPosition = distanceFromEdge + (x * unitWIdth + fitInBox.x) + (unitWIdth - rectangleWidth) / 2;
             double yPosition = distanceFromEdge + (y * unitHeight + fitInBox.y);
 
@@ -180,6 +146,17 @@ namespace Flowcharts
 
             textLines = split.Length;
             return split;
+        }
+
+        public int MinColumnOfChildren()
+        {
+            int a = 0;
+            if (childElements.Count != 0)
+            {
+                a = childElements.Min(x => x.Column);
+            }
+
+            return a;
         }
 
         private void ResizeBox(string text, ref int rectangleWidth)
