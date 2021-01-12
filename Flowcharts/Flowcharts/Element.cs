@@ -23,6 +23,7 @@ namespace Flowcharts
 
         public List<Element> parentElements = new List<Element> { };
         public List<Element> childElements = new List<Element> { };
+        public List<Element> backElements = new List<Element> { };
 
         public int Column = 0;
         public double Row = 0;
@@ -88,12 +89,12 @@ namespace Flowcharts
             if (orientation == "LR")
             {
                 In = (rectangleXPos - 5, rectangleYPos + rectangleHeight / 2);
-                Out = (rectangleXPos + rectangleWidth, rectangleYPos + 20);
+                Out = (rectangleXPos + rectangleWidth , rectangleYPos + 20);
             }
             else if (orientation == "TD")
             {
                 In = (rectangleXPos + rectangleWidth / 2, rectangleYPos - 4);
-                Out = (rectangleXPos + rectangleWidth / 2, rectangleYPos + 40);
+                Out = (rectangleXPos + rectangleWidth / 2, rectangleYPos + rectangleHeight);
             }
 
             xmlWriter.WriteAttributeString("x", rectangleXPos.ToString());

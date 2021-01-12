@@ -11,19 +11,20 @@ namespace Flowcharts
     class Program
     {
         static void Main()
-        {
+        {         
             Flowchart flowchart = new Flowchart("test");
-                                
+            flowchart.Orientation("TD");
 
-            flowchart.AddPair("B", "F");
-            flowchart.AddPair("B", "E");
-            flowchart.AddPair("F", "n");
-            flowchart.AddPair("E", "H");
-            flowchart.AddPair("E", "h");
-            flowchart.AddPair("E", "hh");
-            flowchart.AddPair("Q", "hh");
+            flowchart.AddPair("Christmas", "Go shopping");
+            flowchart.AddPair("Go shopping", "Let me think");
 
-            flowchart.Draw();   
+            flowchart.AddPair("Let me think", "Laptop");
+            flowchart.AddPair("Let me think", "iPhone");
+            flowchart.AddPair("Let me think", "Car");
+
+            flowchart.AddBackPair("Laptop", "Christmas");
+
+            flowchart.Draw();
         }
     }
 }

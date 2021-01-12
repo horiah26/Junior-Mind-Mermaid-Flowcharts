@@ -23,6 +23,11 @@ namespace Flowcharts
             InitializeSVG(ref xmlWriter);
         }
 
+        public void Orientation(string orientation)
+        {
+            this.orientation = orientation;
+        }
+
         public Flowchart(MemoryStream MemoryStream)
         {
             this.MemoryStream = MemoryStream;
@@ -31,11 +36,10 @@ namespace Flowcharts
             InitializeSVG(ref xmlWriter);
         }
 
-        private readonly List<Arrow> arrows = new List<Arrow> { };
+        public readonly List<Arrow> arrows = new List<Arrow> { };
 
         public void AddPair(string text1, string text2)
         {
-
             if (!dictionary.ContainsKey(text1))
             {
                 dictionary.Add(text1, new Element(xmlWriter, text1, orientation));
@@ -48,7 +52,13 @@ namespace Flowcharts
             dictionary[text1].AddChild(dictionary[text2]);
             dictionary[text2].AddParent(dictionary[text1]);
 
-            arrows.Add(new Arrow(xmlWriter, dictionary[text1], dictionary[text2]));
+            arrows.Add(new Arrow(xmlWriter, dictionary[text1], dictionary[text2]));                
+        }
+
+        public void AddBackPair(string text1, string text2)
+        {
+            arrows.Add(new BackArrow(xmlWriter, dictionary[text1], dictionary[text2]));
+            dictionary[text1].backElements.Add(dictionary[text2]);
         }
 
         public void DictionaryToGrid()
@@ -69,16 +79,16 @@ namespace Flowcharts
         {
             DictionaryToGrid();
 
-            grid.ArrangeAll(dictionary.Values.Max(x => x.Column));
+            grid.ArrangeAll(arrows, dictionary.Values.Max(x => x.Column));
 
             foreach (var element in dictionary.Values)
-            {   
+            {
                 element.Draw();
             }
 
             foreach (var arrow in arrows)
-            {
-                arrow.Draw();
+            {               
+                arrow.Draw();               
             }
 
             xmlWriter.WriteEndDocument();

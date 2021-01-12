@@ -21,7 +21,7 @@ namespace Flowcharts.Tests
             XmlWriter xmlWriter;
             MemoryStream MemoryStream = new MemoryStream();
             xmlWriter = XmlWriter.Create(MemoryStream);
-            var element = new Element(xmlWriter, "a");
+            var element = new Element(xmlWriter, "a", "LR");
 
             var grid = new Grid();
 
@@ -37,7 +37,7 @@ namespace Flowcharts.Tests
             MemoryStream MemoryStream = new MemoryStream();
             xmlWriter = XmlWriter.Create(MemoryStream);
 
-            var element = new Element(xmlWriter, "a");
+            var element = new Element(xmlWriter, "a", "LR");
 
             var grid = new Grid();
 
@@ -53,10 +53,10 @@ namespace Flowcharts.Tests
             MemoryStream MemoryStream = new MemoryStream();
             xmlWriter = XmlWriter.Create(MemoryStream);
 
-            var elementA = new Element(xmlWriter, "a");
-            var elementB = new Element(xmlWriter, "b");
-            var elementC = new Element(xmlWriter, "c");
-            var elementD = new Element(xmlWriter, "d");
+            var elementA = new Element(xmlWriter, "a", "LR");
+            var elementB = new Element(xmlWriter, "b", "LR");
+            var elementC = new Element(xmlWriter, "c", "LR");
+            var elementD = new Element(xmlWriter, "d", "LR");
 
             var grid = new Grid();
 
@@ -78,7 +78,7 @@ namespace Flowcharts.Tests
             MemoryStream MemoryStream = new MemoryStream();
             xmlWriter = XmlWriter.Create(MemoryStream);
 
-            var element = new Element(xmlWriter, "a");
+            var element = new Element(xmlWriter, "a", "LR");
 
             var grid = new Grid();
 
@@ -98,7 +98,7 @@ namespace Flowcharts.Tests
             MemoryStream MemoryStream = new MemoryStream();
             xmlWriter = XmlWriter.Create(MemoryStream);
 
-            var element = new Element(xmlWriter, "a");
+            var element = new Element(xmlWriter, "a", "LR");
 
             var grid = new Grid();
 
@@ -117,7 +117,7 @@ namespace Flowcharts.Tests
             MemoryStream MemoryStream = new MemoryStream();
             xmlWriter = XmlWriter.Create(MemoryStream);
 
-            var element = new Element(xmlWriter, "a");
+            var element = new Element(xmlWriter, "a", "LR");
 
             var grid = new Grid();
 
@@ -136,15 +136,15 @@ namespace Flowcharts.Tests
             MemoryStream MemoryStream = new MemoryStream();
             xmlWriter = XmlWriter.Create(MemoryStream);
 
-            var elementA = new Element(xmlWriter, "a");
-            var elementB = new Element(xmlWriter, "b");
+            var elementA = new Element(xmlWriter, "a", "LR");
+            var elementB = new Element(xmlWriter, "b", "LR");
 
             var grid = new Grid();
 
             grid.Add(elementA, 0, 0);
             grid.Add(elementB, 1, 0);
 
-            grid.LowerColumnFromPosition(0, 0, 2);
+            grid.LowerColumnInGrid(0, 0, 2);
 
             Assert.Equal(elementA, grid.ElementAt(2, 0));
             Assert.Equal(elementB, grid.ElementAt(3, 0));
@@ -157,15 +157,15 @@ namespace Flowcharts.Tests
             MemoryStream MemoryStream = new MemoryStream();
             xmlWriter = XmlWriter.Create(MemoryStream);
 
-            var elementA = new Element(xmlWriter, "a");
-            var elementB = new Element(xmlWriter, "b");
+            var elementA = new Element(xmlWriter, "a", "LR");
+            var elementB = new Element(xmlWriter, "b", "LR");
 
             var grid = new Grid();
 
             grid.Add(elementA, 0, 3);
             grid.Add(elementB, 1, 3);
 
-            grid.LowerColumnFromPosition(1, 3, 1);
+            grid.LowerColumnInGrid(1, 3, 1);
 
             Assert.Equal(elementA, grid.ElementAt(0, 3));
             Assert.Equal(elementB, grid.ElementAt(2, 3));
@@ -178,8 +178,8 @@ namespace Flowcharts.Tests
             MemoryStream MemoryStream = new MemoryStream();
             xmlWriter = XmlWriter.Create(MemoryStream);
 
-            var elementA = new Element(xmlWriter, "a");
-            var elementB = new Element(xmlWriter, "b");
+            var elementA = new Element(xmlWriter, "a", "LR");
+            var elementB = new Element(xmlWriter, "b", "LR");
 
             var grid = new Grid();
 

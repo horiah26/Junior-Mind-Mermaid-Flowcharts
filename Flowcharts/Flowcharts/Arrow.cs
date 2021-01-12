@@ -1,10 +1,11 @@
-﻿using System.Xml;
+﻿using System;
+using System.Xml;
 
 namespace Flowcharts
 {
-    class Arrow
+    public class Arrow
     {
-        private readonly XmlWriter xmlWriter;
+        public XmlWriter xmlWriter;
         public Element fromElement;
         public Element toElement;
 
@@ -19,6 +20,7 @@ namespace Flowcharts
         {
             xmlWriter.WriteStartElement("defs");
             xmlWriter.WriteStartElement("marker");
+
             xmlWriter.WriteAttributeString("id", "arrowhead");
             xmlWriter.WriteAttributeString("markerWidth", "10");
             xmlWriter.WriteAttributeString("markerHeight", "7");
@@ -30,16 +32,20 @@ namespace Flowcharts
             xmlWriter.WriteEndElement();
             xmlWriter.WriteEndElement();
             xmlWriter.WriteEndElement();
-
             xmlWriter.WriteStartElement("line");
-            xmlWriter.WriteAttributeString("x1", fromElement.Out.x.ToString());
-            xmlWriter.WriteAttributeString("y1", fromElement.Out.y.ToString());
-            xmlWriter.WriteAttributeString("x2", toElement.In.x.ToString());
-            xmlWriter.WriteAttributeString("y2", toElement.In.y.ToString());
+            SetInAndOut();  
             xmlWriter.WriteAttributeString("stroke", "#000");
             xmlWriter.WriteAttributeString("stroke-width", "3");
             xmlWriter.WriteAttributeString("marker-end", "url(#arrowhead)");
             xmlWriter.WriteEndElement();
+        }
+
+        virtual public void SetInAndOut()
+        {
+            xmlWriter.WriteAttributeString("x1", fromElement.Out.x.ToString());
+            xmlWriter.WriteAttributeString("y1", fromElement.Out.y.ToString());
+            xmlWriter.WriteAttributeString("x2", toElement.In.x.ToString());
+            xmlWriter.WriteAttributeString("y2", toElement.In.y.ToString());
         }
     }
 }

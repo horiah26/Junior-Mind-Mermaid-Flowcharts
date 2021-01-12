@@ -15,42 +15,36 @@ namespace Flowcharts.Tests
             flowchart.AddPair( "A",  "B");
             flowchart.Draw();
 
-            XmlReader reader = XmlReader.Create(stream);
+            XmlDocument xmlDoc = new XmlDocument();
+            xmlDoc.Load(stream);
 
-            reader.ReadStartElement("svg");
-            Assert.Equal("rect", reader.Name);
+            var rectangles = xmlDoc.SelectNodes("/*[name()='svg']/*[name()='rect']");
 
-            Assert.Equal("52",reader.GetAttribute("x"));
-            Assert.Equal("33",reader.GetAttribute("y"));
+            Assert.Equal("185", rectangles[0].Attributes[0].Value);
+            Assert.Equal("33", rectangles[0].Attributes[1].Value);
+            Assert.Equal("30", rectangles[0].Attributes[4].Value);
+            Assert.Equal("40", rectangles[0].Attributes[5].Value);
 
-            reader.Read();
-            Assert.Equal("text",reader.Name);
-            reader.Read();
-            Assert.Equal("A",reader.Value);
+            Assert.Equal("485", rectangles[1].Attributes[0].Value);
+            Assert.Equal("33", rectangles[1].Attributes[1].Value);
+            Assert.Equal("30", rectangles[1].Attributes[4].Value);
+            Assert.Equal("40", rectangles[1].Attributes[5].Value);
 
-            reader.Read();
-            Assert.Equal("text",reader.Name);
+            var texts = xmlDoc.SelectNodes("/*[name()='svg']/*[name()='text']");
 
-            reader.Read();
-            Assert.Equal("rect",reader.Name);
+            Assert.Equal("195", texts[0].Attributes[0].Value);
+            Assert.Equal("57", texts[0].Attributes[1].Value);
+            Assert.Equal("A", texts[0].InnerText);
 
-            Assert.Equal("352", reader.GetAttribute("x"));
-            Assert.Equal("33", reader.GetAttribute("y"));
+            Assert.Equal("495", texts[1].Attributes[0].Value);
+            Assert.Equal("57", texts[1].Attributes[1].Value);
+            Assert.Equal("B", texts[1].InnerText);
 
-            reader.Read();
-            Assert.Equal("text", reader.Name);
-            Assert.Equal("360",reader.GetAttribute("x"));
-            Assert.Equal("57",reader.GetAttribute("y"));
-
-            reader.Read();
-            Assert.Equal("B", reader.Value);
-
-            reader.ReadToFollowing("line");
-            Assert.Equal("82", reader.GetAttribute("x1"));
-            Assert.Equal("53", reader.GetAttribute("y1"));
-
-            Assert.Equal("347", reader.GetAttribute("x2"));
-            Assert.Equal("53", reader.GetAttribute("y2"));
+            var lines = xmlDoc.SelectNodes("/*[name()='svg']/*[name()='line']");
+            Assert.Equal("215", lines[0].Attributes[0].Value);
+            Assert.Equal("53", lines[0].Attributes[1].Value);
+            Assert.Equal("480", lines[0].Attributes[2].Value);
+            Assert.Equal("53", lines[0].Attributes[3].Value);
         }
 
         [Fact]
@@ -60,56 +54,247 @@ namespace Flowcharts.Tests
 
             var flowchart = new Flowchart(stream);
 
-            flowchart.AddPair( "Lorem ipsum dolor sit amet, consectetur",  "B");
+            flowchart.AddPair("Lorem ipsum dolor sit amet, consectetur", "B");
 
             flowchart.Draw();
 
-            XmlReader reader = XmlReader.Create(stream);
+            XmlDocument xmlDoc = new XmlDocument();
+            xmlDoc.Load(stream);
 
-            reader.ReadStartElement("svg");
-            Assert.Equal("rect", reader.Name);
+            var rectangles = xmlDoc.SelectNodes("/*[name()='svg']/*[name()='rect']");
 
-            Assert.Equal("52", reader.GetAttribute("x"));
-            Assert.Equal("33", reader.GetAttribute("y"));
+            Assert.Equal("100", rectangles[0].Attributes[0].Value);
+            Assert.Equal("33", rectangles[0].Attributes[1].Value);
+            Assert.Equal("200", rectangles[0].Attributes[4].Value);
+            Assert.Equal("57", rectangles[0].Attributes[5].Value);
 
-            reader.Read();
-            Assert.Equal("text", reader.Name);
-            reader.Read();
-            Assert.Equal("Lorem ipsum dolor sit", reader.Value);
+            Assert.Equal("485", rectangles[1].Attributes[0].Value);
+            Assert.Equal("33", rectangles[1].Attributes[1].Value);
+            Assert.Equal("30", rectangles[1].Attributes[4].Value);
+            Assert.Equal("40", rectangles[1].Attributes[5].Value);
 
-            reader.Read();
-            Assert.Equal("tspan", reader.Name);
-            Assert.Equal("60", reader.GetAttribute("x"));
-            Assert.Equal("74", reader.GetAttribute("y"));
+            var texts = xmlDoc.SelectNodes("/*[name()='svg']/*[name()='text']");
 
-            reader.Read();
-            Assert.Equal("amet, consectetur", reader.Value);
+            Assert.Equal("110", texts[0].Attributes[0].Value);
+            Assert.Equal("57", texts[0].Attributes[1].Value);
+            Assert.Equal("Lorem ipsum dolor sitamet, consectetur", texts[0].InnerText);
 
-            reader.Read();
-            reader.Read();
+            Assert.Equal("495", texts[1].Attributes[0].Value);
+            Assert.Equal("57", texts[1].Attributes[1].Value);
+            Assert.Equal("B", texts[1].InnerText);
 
-            Assert.Equal("text", reader.Name);
+            var lines = xmlDoc.SelectNodes("/*[name()='svg']/*[name()='line']");
+            Assert.Equal("300", lines[0].Attributes[0].Value);
+            Assert.Equal("53", lines[0].Attributes[1].Value);
+            Assert.Equal("480", lines[0].Attributes[2].Value);
+            Assert.Equal("53", lines[0].Attributes[3].Value);
+        }
 
-            reader.Read();
-            Assert.Equal("rect", reader.Name);
+        [Fact]
+        public void CanAddMultiple()
+        {
+            MemoryStream stream = new MemoryStream();
 
-            Assert.Equal("352", reader.GetAttribute("x"));
-            Assert.Equal("33", reader.GetAttribute("y"));
+            var flowchart = new Flowchart(stream);
+            flowchart.AddPair("A", "B");
+            flowchart.AddPair("A", "C");
+            flowchart.Draw();
 
-            reader.Read();
-            Assert.Equal("text", reader.Name);
-            Assert.Equal("360", reader.GetAttribute("x"));
-            Assert.Equal("57", reader.GetAttribute("y"));
+            XmlDocument xmlDoc = new XmlDocument();
+            xmlDoc.Load(stream);
 
-            reader.Read();
-            Assert.Equal("B", reader.Value);
+            var rectangles = xmlDoc.SelectNodes("/*[name()='svg']/*[name()='rect']");
+            Assert.Equal("185", rectangles[0].Attributes[0].Value);
+            Assert.Equal("33", rectangles[0].Attributes[1].Value);
+            Assert.Equal("30", rectangles[0].Attributes[4].Value);
+            Assert.Equal("40", rectangles[0].Attributes[5].Value);
 
-            reader.ReadToFollowing("line");
-            Assert.Equal("252", reader.GetAttribute("x1"));
-            Assert.Equal("53", reader.GetAttribute("y1"));
+            Assert.Equal("485", rectangles[1].Attributes[0].Value);
+            Assert.Equal("33", rectangles[1].Attributes[1].Value);
+            Assert.Equal("30", rectangles[1].Attributes[4].Value);
+            Assert.Equal("40", rectangles[1].Attributes[5].Value);
 
-            Assert.Equal("347", reader.GetAttribute("x2"));
-            Assert.Equal("53", reader.GetAttribute("y2"));
+            Assert.Equal("485", rectangles[2].Attributes[0].Value);
+            Assert.Equal("183", rectangles[2].Attributes[1].Value);
+            Assert.Equal("30", rectangles[2].Attributes[4].Value);
+            Assert.Equal("40", rectangles[2].Attributes[5].Value);
+
+            var texts = xmlDoc.SelectNodes("/*[name()='svg']/*[name()='text']");
+            Assert.Equal("195", texts[0].Attributes[0].Value);
+            Assert.Equal("57", texts[0].Attributes[1].Value);
+            Assert.Equal("A", texts[0].InnerText);
+
+            Assert.Equal("495", texts[1].Attributes[0].Value);
+            Assert.Equal("57", texts[1].Attributes[1].Value);
+            Assert.Equal("B", texts[1].InnerText);
+
+            Assert.Equal("495", texts[2].Attributes[0].Value);
+            Assert.Equal("207", texts[2].Attributes[1].Value);
+            Assert.Equal("C", texts[2].InnerText);
+
+            var lines = xmlDoc.SelectNodes("/*[name()='svg']/*[name()='line']");
+            Assert.Equal("215", lines[0].Attributes[0].Value);
+            Assert.Equal("53", lines[0].Attributes[1].Value);
+            Assert.Equal("480", lines[0].Attributes[2].Value);
+            Assert.Equal("53", lines[0].Attributes[3].Value);
+
+            Assert.Equal("215", lines[1].Attributes[0].Value);
+            Assert.Equal("53", lines[1].Attributes[1].Value);
+            Assert.Equal("480", lines[1].Attributes[2].Value);
+            Assert.Equal("203", lines[1].Attributes[3].Value);
+        }
+
+        [Fact]
+        public void ParentRepositionsIfHas3Children()
+        {
+            MemoryStream stream = new MemoryStream();
+
+            var flowchart = new Flowchart(stream);
+            flowchart.AddPair("A", "B");
+            flowchart.AddPair("A", "C");
+            flowchart.AddPair("A", "D");
+            flowchart.Draw();
+
+            XmlDocument xmlDoc = new XmlDocument();
+            xmlDoc.Load(stream);
+
+            var rectangles = xmlDoc.SelectNodes("/*[name()='svg']/*[name()='rect']");
+            Assert.Equal("185", rectangles[0].Attributes[0].Value);
+            Assert.Equal("183", rectangles[0].Attributes[1].Value);
+            Assert.Equal("30", rectangles[0].Attributes[4].Value);
+            Assert.Equal("40", rectangles[0].Attributes[5].Value);
+
+            Assert.Equal("485", rectangles[1].Attributes[0].Value);
+            Assert.Equal("33", rectangles[1].Attributes[1].Value);
+            Assert.Equal("30", rectangles[1].Attributes[4].Value);
+            Assert.Equal("40", rectangles[1].Attributes[5].Value);
+
+            Assert.Equal("485", rectangles[2].Attributes[0].Value);
+            Assert.Equal("183", rectangles[2].Attributes[1].Value);
+            Assert.Equal("30", rectangles[2].Attributes[4].Value);
+            Assert.Equal("40", rectangles[2].Attributes[5].Value);
+
+            Assert.Equal("485", rectangles[3].Attributes[0].Value);
+            Assert.Equal("333", rectangles[3].Attributes[1].Value);
+            Assert.Equal("30", rectangles[3].Attributes[4].Value);
+            Assert.Equal("40", rectangles[3].Attributes[5].Value);
+
+            var texts = xmlDoc.SelectNodes("/*[name()='svg']/*[name()='text']");
+            Assert.Equal("195", texts[0].Attributes[0].Value);
+            Assert.Equal("207", texts[0].Attributes[1].Value);
+            Assert.Equal("A", texts[0].InnerText);
+
+            Assert.Equal("495", texts[1].Attributes[0].Value);
+            Assert.Equal("57", texts[1].Attributes[1].Value);
+            Assert.Equal("B", texts[1].InnerText);
+
+            Assert.Equal("495", texts[2].Attributes[0].Value);
+            Assert.Equal("207", texts[2].Attributes[1].Value);
+            Assert.Equal("C", texts[2].InnerText);
+
+            Assert.Equal("495", texts[3].Attributes[0].Value);
+            Assert.Equal("357", texts[3].Attributes[1].Value);
+            Assert.Equal("D", texts[3].InnerText);
+
+            var lines = xmlDoc.SelectNodes("/*[name()='svg']/*[name()='line']");
+            Assert.Equal("215", lines[0].Attributes[0].Value);
+            Assert.Equal("203", lines[0].Attributes[1].Value);
+            Assert.Equal("480", lines[0].Attributes[2].Value);
+            Assert.Equal("53", lines[0].Attributes[3].Value);
+
+            Assert.Equal("215", lines[1].Attributes[0].Value);
+            Assert.Equal("203", lines[1].Attributes[1].Value);
+            Assert.Equal("480", lines[1].Attributes[2].Value);
+            Assert.Equal("203", lines[1].Attributes[3].Value);
+
+            Assert.Equal("215", lines[2].Attributes[0].Value);
+            Assert.Equal("203", lines[2].Attributes[1].Value);
+            Assert.Equal("480", lines[2].Attributes[2].Value);
+            Assert.Equal("353", lines[2].Attributes[3].Value);
+        }
+
+        [Fact]
+        public void LastItemsInColumnAlignToTheirParents()
+        {
+            MemoryStream stream = new MemoryStream();
+
+            var flowchart = new Flowchart(stream);
+            flowchart.AddPair("A", "B");
+            flowchart.AddPair("A", "C");
+            flowchart.AddPair("A", "D");
+            flowchart.AddPair("D", "E");
+            flowchart.Draw();
+
+            XmlDocument xmlDoc = new XmlDocument();
+            xmlDoc.Load(stream);
+
+            var rectangles = xmlDoc.SelectNodes("/*[name()='svg']/*[name()='rect']");
+            Assert.Equal("185", rectangles[0].Attributes[0].Value);
+            Assert.Equal("183", rectangles[0].Attributes[1].Value);
+            Assert.Equal("30", rectangles[0].Attributes[4].Value);
+            Assert.Equal("40", rectangles[0].Attributes[5].Value);
+
+            Assert.Equal("485", rectangles[1].Attributes[0].Value);
+            Assert.Equal("33", rectangles[1].Attributes[1].Value);
+            Assert.Equal("30", rectangles[1].Attributes[4].Value);
+            Assert.Equal("40", rectangles[1].Attributes[5].Value);
+
+            Assert.Equal("485", rectangles[2].Attributes[0].Value);
+            Assert.Equal("183", rectangles[2].Attributes[1].Value);
+            Assert.Equal("30", rectangles[2].Attributes[4].Value);
+            Assert.Equal("40", rectangles[2].Attributes[5].Value);
+
+            Assert.Equal("485", rectangles[3].Attributes[0].Value);
+            Assert.Equal("333", rectangles[3].Attributes[1].Value);
+            Assert.Equal("30", rectangles[3].Attributes[4].Value);
+            Assert.Equal("40", rectangles[3].Attributes[5].Value);
+
+            Assert.Equal("785", rectangles[4].Attributes[0].Value);
+            Assert.Equal("33", rectangles[4].Attributes[1].Value);
+            Assert.Equal("30", rectangles[4].Attributes[4].Value);
+            Assert.Equal("40", rectangles[4].Attributes[5].Value);
+
+            var texts = xmlDoc.SelectNodes("/*[name()='svg']/*[name()='text']");
+            Assert.Equal("195", texts[0].Attributes[0].Value);
+            Assert.Equal("207", texts[0].Attributes[1].Value);
+            Assert.Equal("A", texts[0].InnerText);
+
+            Assert.Equal("495", texts[1].Attributes[0].Value);
+            Assert.Equal("57", texts[1].Attributes[1].Value);
+            Assert.Equal("B", texts[1].InnerText);
+
+            Assert.Equal("495", texts[2].Attributes[0].Value);
+            Assert.Equal("207", texts[2].Attributes[1].Value);
+            Assert.Equal("C", texts[2].InnerText);
+
+            Assert.Equal("495", texts[3].Attributes[0].Value);
+            Assert.Equal("357", texts[3].Attributes[1].Value);
+            Assert.Equal("D", texts[3].InnerText);
+
+            Assert.Equal("795", texts[4].Attributes[0].Value);
+            Assert.Equal("57", texts[4].Attributes[1].Value);
+            Assert.Equal("E", texts[4].InnerText);
+
+            var lines = xmlDoc.SelectNodes("/*[name()='svg']/*[name()='line']");
+            Assert.Equal("215", lines[0].Attributes[0].Value);
+            Assert.Equal("203", lines[0].Attributes[1].Value);
+            Assert.Equal("480", lines[0].Attributes[2].Value);
+            Assert.Equal("53", lines[0].Attributes[3].Value);
+
+            Assert.Equal("215", lines[1].Attributes[0].Value);
+            Assert.Equal("203", lines[1].Attributes[1].Value);
+            Assert.Equal("480", lines[1].Attributes[2].Value);
+            Assert.Equal("203", lines[1].Attributes[3].Value);
+
+            Assert.Equal("215", lines[2].Attributes[0].Value);
+            Assert.Equal("203", lines[2].Attributes[1].Value);
+            Assert.Equal("480", lines[2].Attributes[2].Value);
+            Assert.Equal("353", lines[2].Attributes[3].Value);
+
+            Assert.Equal("515", lines[3].Attributes[0].Value);
+            Assert.Equal("353", lines[3].Attributes[1].Value);
+            Assert.Equal("780", lines[3].Attributes[2].Value);
+            Assert.Equal("53", lines[3].Attributes[3].Value);
         }
     }
 }
