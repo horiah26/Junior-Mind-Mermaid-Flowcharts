@@ -13,16 +13,16 @@ namespace Flowcharts
         static void Main()
         {         
             Flowchart flowchart = new Flowchart("test");
-            flowchart.Orientation("TD");
+            flowchart.Orientation("BT");
 
-            flowchart.AddPair("Christmas", "Go shopping");
-            flowchart.AddPair("Go shopping", "Let me think");
+            flowchart.AddPair("Start", "Is it?");
+            flowchart.AddPair("Is it?", "End");
+            flowchart.AddPair("Is it?", "OK");
 
-            flowchart.AddPair("Let me think", "Laptop");
-            flowchart.AddPair("Let me think", "iPhone");
-            flowchart.AddPair("Let me think", "Car");
 
-            flowchart.AddBackPair("Laptop", "Christmas");
+            flowchart.AddPair("OK", "Rethink");
+
+            flowchart.AddBackPair("Rethink", "Is it?");
 
             flowchart.Draw();
         }

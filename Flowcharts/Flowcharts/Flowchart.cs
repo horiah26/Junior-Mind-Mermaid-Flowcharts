@@ -79,11 +79,13 @@ namespace Flowcharts
         {
             DictionaryToGrid();
 
-            grid.ArrangeAll(arrows, dictionary.Values.Max(x => x.Column));
+            int lastOccupiedColumn = dictionary.Values.Max(x => x.Column);
+
+            grid.ArrangeAll(arrows, lastOccupiedColumn);
 
             foreach (var element in dictionary.Values)
             {
-                element.Draw();
+                element.Draw(lastOccupiedColumn);
             }
 
             foreach (var arrow in arrows)

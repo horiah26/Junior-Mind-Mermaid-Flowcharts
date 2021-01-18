@@ -6,8 +6,8 @@ namespace Flowcharts
 {
     public class Grid
     {
-        private int rowSize = 10;
-        private int columnSize = 10;
+        private int rowSize = 1;
+        private int columnSize = 1;
         private int lastOccupiedColumn = 0;
 
         public Element[,] elementGrid;
@@ -19,11 +19,11 @@ namespace Flowcharts
 
         public void Add(Element element, int row, int column)
         {
-            if (column >= columnSize)
+            if (column > columnSize - 1)
             {
                 elementGrid = ResizeArray(elementGrid, rowSize, column + 1);
             }
-            if (row >= rowSize)
+            if (row > rowSize - 1)
             {
                 elementGrid = ResizeArray(elementGrid, row + 1, columnSize);
             }
@@ -91,27 +91,11 @@ namespace Flowcharts
             }
         }
 
-        public (int row, int column) FindElementCoordinates(string text) 
-        {
-            for (int i = 0; i < rowSize; i++)
-            {
-                for (int j = 0; j < columnSize; j++)
-                {
-                    if (elementGrid[i, j] != null && text.Equals(elementGrid[i, j].Text))
-                    {
-                        return (i, j);
-                    }
-                }
-            }
-
-            throw new InvalidOperationException("Element dos not exist");
-        }
-
         public IEnumerable<Element> GetColumn(int column)
         {
             List<Element> extractedColumn = new List<Element> { };
 
-            for (int i = 0; i < columnSize; i++)
+            for (int i = 0; i < rowSize; i++)
             {
                 extractedColumn.Add(elementGrid[i, column]);
             }
@@ -142,10 +126,10 @@ namespace Flowcharts
 
         public void ActualizeElements()
         {
-            for (int i = 0; i < columnSize; i++)
+            for (int i = 0; i < rowSize; i++)
             {
-                for (int j = 0; j < rowSize; j++)
-                {
+                for (int j = 0; j < columnSize; j++)
+                {                
                     if (elementGrid[i, j] != null)
                     {
                         elementGrid[i, j].Row = i;
@@ -192,31 +176,6 @@ namespace Flowcharts
             }
 
             return element.Row;
-        }
-
-        public void AlignColumns() // inactive
-        {
-            IEnumerable<Element> elementsInColumn = new List<Element> { };
-            IEnumerable<Element> elementsInNextColumn = GetColumn(lastOccupiedColumn).Where(x => x != null);
-
-            for (int column = lastOccupiedColumn - 1; column >= 0; column--)
-            {
-                elementsInColumn = GetColumn(column).Where(x => x != null);
-
-                var averageRowThis = elementsInColumn.Average(x => x.Row);
-                var averageRowNext = elementsInNextColumn.Average(x => x.Row);
-
-                var difference = averageRowThis - averageRowNext;           
-                var roundedDIfference = Math.Round(difference * 2, MidpointRounding.AwayFromZero) / 2;
-
-                foreach(var element in elementsInColumn)
-                {
-                    element.Row -= roundedDIfference;
-                }
-
-                elementsInNextColumn = elementsInColumn;
-            }
-            LevellastOccupiedColumn();
         }
 
         public void LevellastOccupiedColumn()
@@ -269,7 +228,7 @@ namespace Flowcharts
             ActualizeElements(); 
         }
 
-        public void PrepareForRecycle()
+        public void SelectParentsFromPreviousColumn()
         {
             for (int column = lastOccupiedColumn; column >= 0; column--)
             {
@@ -340,15 +299,27 @@ namespace Flowcharts
             backArrowCoordinates = tempCoordinates;
         }
 
+        public void SendArraySizeToElements()
+        {
+            foreach(var element in this)
+            {
+                element.columnSize = columnSize;
+                element.rowSize = rowSize;
+            }
+        }
+
         public void ArrangeAll(List<Arrow> arrows, int lastOccupiedColumn)
         {
             this.lastOccupiedColumn = lastOccupiedColumn;
 
-            PrepareForRecycle();
-            ActualizeElements();
+            //SelectParentsFromPreviousColumn();
+            //ActualizeElements();
             ArrangeRows();
             FillEmptySpots();
             AdjustForBackArrows(arrows);
+            SendArraySizeToElements();
+            ActualizeElements();
+            Console.WriteLine();
         }
     }
 }
