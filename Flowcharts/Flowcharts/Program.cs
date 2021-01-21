@@ -15,14 +15,9 @@ namespace Flowcharts
             Flowchart flowchart = new Flowchart("test");
             flowchart.Orientation("BT");
 
-            flowchart.AddPair("Start", "Is it?");
-            flowchart.AddPair("Is it?", "End");
-            flowchart.AddPair("Is it?", "OK");
-
-
-            flowchart.AddPair("OK", "Rethink");
-
-            flowchart.AddBackPair("Rethink", "Is it?");
+            flowchart.AddPair("A", "B");
+            flowchart.AddPair("B", "C");
+            flowchart.AddPair("B", "D");
 
             flowchart.Draw();
         }

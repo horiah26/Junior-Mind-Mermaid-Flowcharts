@@ -61,19 +61,20 @@ namespace Flowcharts
             Column = maxPreviousColumn + 1;
         }
 
-        public void Draw(int lastOccupiedColumn)
+        public void Draw()
         {
             int linesOfText = 0;
 
+            Type orientationType = Type.GetType("Flowcharts.Orientation" + orientationString);
             string[] splitLines = SplitWords(Text, ref linesOfText);
 
-            var orient = new SelectOrientation(orientationString, Column, Row, In, Out, columnSize, rowSize, lastOccupiedColumn);
-
-            DrawBox(xmlWriter, Text, linesOfText, orient);
-            WriteText(xmlWriter, orient.GetColumnRow(), splitLines);          
+            IOrientation orientation = (IOrientation)Activator.CreateInstance(orientationType);
+            orientation.Initialize(Column, Row, In, Out, columnSize, rowSize);
+            DrawBox(xmlWriter, Text, linesOfText, orientation);
+            WriteText(xmlWriter, orientation.GetColumnRow(), splitLines);          
         }
 
-        private void DrawBox(XmlWriter xmlWriter, string text, int linesOfText, SelectOrientation orientation)
+        private void DrawBox(XmlWriter xmlWriter, string text, int linesOfText, IOrientation orientation)
         {
             var position = orientation.GetColumnRow();
 

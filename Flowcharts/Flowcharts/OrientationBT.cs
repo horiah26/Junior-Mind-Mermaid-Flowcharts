@@ -13,7 +13,8 @@ namespace Flowcharts
         (double x, double y) In;
         (double x, double y) Out;
 
-        public OrientationBT(int Column, int Row, (double x, double y) In, (double x, double y) Out, int columnSize, int rowSize) 
+        public OrientationBT() { }
+        public void Initialize(int Column, int Row, (double x, double y) In, (double x, double y) Out, int columnSize, int rowSize)
         {
             this.Column = Column;
             this.Row = Row;

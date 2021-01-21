@@ -85,7 +85,7 @@ namespace Flowcharts
 
             foreach (var element in dictionary.Values)
             {
-                element.Draw(lastOccupiedColumn);
+                element.Draw();
             }
 
             foreach (var arrow in arrows)

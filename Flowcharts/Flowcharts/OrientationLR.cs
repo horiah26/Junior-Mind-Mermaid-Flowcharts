@@ -8,13 +8,14 @@ namespace Flowcharts
     {
         int Column;
         int Row;
-
         int rowSize;
 
         (double x, double y) In;
         (double x, double y) Out;
 
-        public OrientationLR(int Column, int Row, (double x, double y) In, (double x, double y) Out, int columnSize, int rowSize) 
+        public OrientationLR(){}
+
+        public void Initialize(int Column, int Row, (double x, double y) In, (double x, double y) Out, int columnSize, int rowSize) 
         {
             this.Column = Column;
             this.Row = Row;
