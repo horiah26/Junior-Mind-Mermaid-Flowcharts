@@ -8,7 +8,7 @@ namespace Flowcharts
     {
         private int rowSize = 1;
         private int columnSize = 1;
-        private int lastOccupiedColumn = 0;
+        private readonly int lastOccupiedColumn = 0;
 
         public Element[,] elementGrid;
 
@@ -308,18 +308,15 @@ namespace Flowcharts
             }
         }
 
-        public void ArrangeAll(List<Arrow> arrows, int lastOccupiedColumn)
+        public void ArrangeAll(List<Arrow> arrows)
         {
-            this.lastOccupiedColumn = lastOccupiedColumn;
-
-            //SelectParentsFromPreviousColumn();
-            //ActualizeElements();
+            SelectParentsFromPreviousColumn();
+            ActualizeElements();
             ArrangeRows();
             FillEmptySpots();
             AdjustForBackArrows(arrows);
             SendArraySizeToElements();
             ActualizeElements();
-            Console.WriteLine();
         }
     }
 }

@@ -10,14 +10,15 @@ namespace Flowcharts
         public (double x, double y) In;
         public (double x, double y) Out;
 
-        public int rowSize = 10;
-        public int columnSize = 10;
+        public int rowSize = 1;
+        public int columnSize = 1;
 
         private readonly int distanceFromEdge = 50;
         private readonly int unitWIdth = 300;
         private readonly int unitHeight = 150;
 
-        private double rectangleWidth;
+        private int rectangleWidth;
+        public IOrientation orientation;
 
         readonly string orientationString;
 
@@ -29,7 +30,7 @@ namespace Flowcharts
         public List<Element> backElements = new List<Element> { };
 
         public int Column = 0;
-        public int  Row = 0;
+        public int Row = 0;
 
         public Element(XmlWriter xmlWriter, string Text, string orientationString)
         {
@@ -64,67 +65,43 @@ namespace Flowcharts
         public void Draw()
         {
             int linesOfText = 0;
+            string[] splitLines = SplitWords(Text, ref linesOfText);
 
             Type orientationType = Type.GetType("Flowcharts.Orientation" + orientationString);
-            string[] splitLines = SplitWords(Text, ref linesOfText);
 
             IOrientation orientation = (IOrientation)Activator.CreateInstance(orientationType);
             orientation.Initialize(Column, Row, In, Out, columnSize, rowSize);
-            DrawBox(xmlWriter, Text, linesOfText, orientation);
-            WriteText(xmlWriter, orientation.GetColumnRow(), splitLines);          
+            this.orientation = orientation;
+
+            DrawBox(orientation, linesOfText);
+            WriteText(orientation, splitLines);          
+
         }
 
-        private void DrawBox(XmlWriter xmlWriter, string text, int linesOfText, IOrientation orientation)
-        {
+        public void WriteText(IOrientation orientation, string[] splitLines)
+        {      
+            (int x, int y) fitInBox = (10, 7);
             var position = orientation.GetColumnRow();
 
-            xmlWriter.WriteStartElement("rect");
-            var rectangleHeight = 40 + (linesOfText - 1) * 17;
-            int rectangleWidth = default;            
-            ResizeBox(text, ref rectangleWidth);
+            double xPosition = distanceFromEdge + (position.Column * unitWIdth + fitInBox.x) + (unitWIdth - rectangleWidth) / 2;
+            double yPosition = distanceFromEdge + (position.Row * unitHeight + fitInBox.y);
 
-            double rectangleXPos = distanceFromEdge + position.Column * unitWIdth + (unitWIdth-rectangleWidth)/2;
-            double rectangleYPos = distanceFromEdge + position.Row * unitHeight - 17;
-
-            (In, Out) = orientation.GetInOut(rectangleXPos, rectangleYPos, rectangleWidth, rectangleHeight);
-
-            xmlWriter.WriteAttributeString("x", rectangleXPos.ToString());
-            xmlWriter.WriteAttributeString("y", rectangleYPos.ToString());
-
-            xmlWriter.WriteAttributeString("rx", 7.ToString());
-            xmlWriter.WriteAttributeString("ry", 7.ToString());
-
-            xmlWriter.WriteAttributeString("width", rectangleWidth.ToString());
-            xmlWriter.WriteAttributeString("height", rectangleHeight.ToString());
-
-            xmlWriter.WriteAttributeString("style", "fill:rgb(255,255,255);stroke-width:2;stroke:rgb(0,0,0)");
-            xmlWriter.WriteEndElement();
+            WriteText textWriter = new WriteText(xmlWriter, xPosition, yPosition, splitLines);
+            textWriter.Write();
         }
 
-        void WriteText(XmlWriter xmlWriter, (double x, double y) position, string[] lines)
+        public void DrawBox(IOrientation orientation, int linesOfText)
         {
-            (int x, int y) fitInBox = (10, 7);
-            int spaceBetweenLines = 17;
+            int rectangleHeight = 40 + (linesOfText - 1) * 17;
+            int rectangleWidth = ResizeBox(Text);
 
-            double xPosition = distanceFromEdge + (position.x * unitWIdth + fitInBox.x) + (unitWIdth - rectangleWidth) / 2;
-            double yPosition = distanceFromEdge + (position.y * unitHeight + fitInBox.y);
+            var position = orientation.GetColumnRow();
 
-            xmlWriter.WriteStartElement("text");
-            xmlWriter.WriteAttributeString("x", xPosition.ToString());
-            xmlWriter.WriteAttributeString("y", yPosition.ToString());
-            xmlWriter.WriteAttributeString("fill", "black");
-            xmlWriter.WriteString(lines[0]);
+            double rectangleXPos = distanceFromEdge + position.Column * unitWIdth + (unitWIdth - rectangleWidth) / 2;
+            double rectangleYPos = distanceFromEdge + position.Row * unitHeight - 17;
 
-            for (int i = 1; i < lines.Count(); i++)
-            {
-                xmlWriter.WriteStartElement("tspan");
-                xmlWriter.WriteAttributeString("x", xPosition.ToString());
-                xmlWriter.WriteAttributeString("y", (yPosition + i * spaceBetweenLines).ToString());
-                xmlWriter.WriteString(lines[i]);
-                xmlWriter.WriteEndElement();
-            }
-
-            xmlWriter.WriteEndElement();
+            var drawBox = new DrawBox(xmlWriter, rectangleXPos, rectangleYPos, rectangleWidth, rectangleHeight, orientation);
+            (In, Out) = drawBox.Draw();
         }
 
         string[] SplitWords(string text, ref int textLines)
@@ -151,7 +128,7 @@ namespace Flowcharts
             return a;
         }
 
-        private void ResizeBox(string text, ref int rectangleWidth)
+        private int ResizeBox(string text)
         {
             int length = text.Length;
 
@@ -176,7 +153,7 @@ namespace Flowcharts
                 rectangleWidth = 200;
             }
 
-            this.rectangleWidth = rectangleWidth;
+            return rectangleWidth;
         }
 
         private void CheckLength(string text)

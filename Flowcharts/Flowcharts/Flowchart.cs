@@ -38,7 +38,7 @@ namespace Flowcharts
 
         public readonly List<Arrow> arrows = new List<Arrow> { };
 
-        public void AddPair(string text1, string text2)
+        public void AddPair(string text1, string text2, string text = null)
         {
             if (!dictionary.ContainsKey(text1))
             {
@@ -52,7 +52,7 @@ namespace Flowcharts
             dictionary[text1].AddChild(dictionary[text2]);
             dictionary[text2].AddParent(dictionary[text1]);
 
-            arrows.Add(new Arrow(xmlWriter, dictionary[text1], dictionary[text2]));                
+            arrows.Add(new Arrow(xmlWriter, dictionary[text1], dictionary[text2], text));                
         }
 
         public void AddBackPair(string text1, string text2)
@@ -79,9 +79,9 @@ namespace Flowcharts
         {
             DictionaryToGrid();
 
-            int lastOccupiedColumn = dictionary.Values.Max(x => x.Column);
+            int lastOccupiedColumn = (dictionary.Values.Max(x => x.Column));
 
-            grid.ArrangeAll(arrows, lastOccupiedColumn);
+            grid.ArrangeAll(arrows);
 
             foreach (var element in dictionary.Values)
             {
