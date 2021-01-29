@@ -15,9 +15,9 @@ namespace Flowcharts
             Flowchart flowchart = new Flowchart("test");
             flowchart.Orientation("LR");
 
-            flowchart.AddPair("A", "B");
-            flowchart.AddPair("B", "C", "E");
-            flowchart.AddPair("B", "D", "Text on arrow");
+            flowchart.AddPair(("A", "Circle"), ("B", "Rectangle"), "A to B");
+            flowchart.AddPair(("A", "Circle"), ("CDEFGHSI", "Circle"), "Text");
+            flowchart.AddPair(("A", "Circle"), ("ASDASDA", "Circle"), "Another text");
 
             flowchart.Draw();
         }

@@ -21,7 +21,7 @@ namespace Flowcharts.Tests
             XmlWriter xmlWriter;
             MemoryStream MemoryStream = new MemoryStream();
             xmlWriter = XmlWriter.Create(MemoryStream);
-            var element = new Element(xmlWriter, "a", "LR");
+            var element = new Element(xmlWriter, "A", "LR");
 
             var grid = new Grid();
 
@@ -37,7 +37,7 @@ namespace Flowcharts.Tests
             MemoryStream MemoryStream = new MemoryStream();
             xmlWriter = XmlWriter.Create(MemoryStream);
 
-            var element = new Element(xmlWriter, "a", "LR");
+            var element = new Element(xmlWriter, "A", "LR");
 
             var grid = new Grid();
 
@@ -53,10 +53,10 @@ namespace Flowcharts.Tests
             MemoryStream MemoryStream = new MemoryStream();
             xmlWriter = XmlWriter.Create(MemoryStream);
 
-            var elementA = new Element(xmlWriter, "a", "LR");
-            var elementB = new Element(xmlWriter, "b", "LR");
-            var elementC = new Element(xmlWriter, "c", "LR");
-            var elementD = new Element(xmlWriter, "d", "LR");
+            var elementA = new Element(xmlWriter, "A", "LR");
+            var elementB = new Element(xmlWriter, "B", "LR");
+            var elementC = new Element(xmlWriter, "C", "LR");
+            var elementD = new Element(xmlWriter, "D", "LR");
 
             var grid = new Grid();
 
@@ -78,7 +78,7 @@ namespace Flowcharts.Tests
             MemoryStream MemoryStream = new MemoryStream();
             xmlWriter = XmlWriter.Create(MemoryStream);
 
-            var element = new Element(xmlWriter, "a", "LR");
+            var element = new Element(xmlWriter, "A", "LR");
 
             var grid = new Grid();
 
@@ -98,7 +98,7 @@ namespace Flowcharts.Tests
             MemoryStream MemoryStream = new MemoryStream();
             xmlWriter = XmlWriter.Create(MemoryStream);
 
-            var element = new Element(xmlWriter, "a", "LR");
+            var element = new Element(xmlWriter, "A", "LR");
 
             var grid = new Grid();
 
@@ -117,7 +117,7 @@ namespace Flowcharts.Tests
             MemoryStream MemoryStream = new MemoryStream();
             xmlWriter = XmlWriter.Create(MemoryStream);
 
-            var element = new Element(xmlWriter, "a", "LR");
+            var element = new Element(xmlWriter, "A", "LR");
 
             var grid = new Grid();
 
@@ -136,8 +136,8 @@ namespace Flowcharts.Tests
             MemoryStream MemoryStream = new MemoryStream();
             xmlWriter = XmlWriter.Create(MemoryStream);
 
-            var elementA = new Element(xmlWriter, "a", "LR");
-            var elementB = new Element(xmlWriter, "b", "LR");
+            var elementA = new Element(xmlWriter, "A", "LR");
+            var elementB = new Element(xmlWriter, "B", "LR");
 
             var grid = new Grid();
 
@@ -157,8 +157,8 @@ namespace Flowcharts.Tests
             MemoryStream MemoryStream = new MemoryStream();
             xmlWriter = XmlWriter.Create(MemoryStream);
 
-            var elementA = new Element(xmlWriter, "a", "LR");
-            var elementB = new Element(xmlWriter, "b", "LR");
+            var elementA = new Element(xmlWriter, "A", "LR");
+            var elementB = new Element(xmlWriter, "B", "LR");
 
             var grid = new Grid();
 
@@ -178,8 +178,8 @@ namespace Flowcharts.Tests
             MemoryStream MemoryStream = new MemoryStream();
             xmlWriter = XmlWriter.Create(MemoryStream);
 
-            var elementA = new Element(xmlWriter, "a", "LR");
-            var elementB = new Element(xmlWriter, "b", "LR");
+            var elementA = new Element(xmlWriter, "A", "LR");
+            var elementB = new Element(xmlWriter, "B", "LR");
 
             var grid = new Grid();
 

@@ -55,30 +55,30 @@ namespace Flowcharts
                 return;
             }
 
-            int linesOfText = 0;
-            var lines = SplitWords(text, ref linesOfText);
+            int numberOfLines = 0;
+            var lines = SplitWords(text, ref numberOfLines);
 
-            DrawBox(linesOfText, lines);
-            WriteText(linesOfText, lines);
+            DrawBox(numberOfLines, lines);
+            WriteText(numberOfLines, lines);
 
         }
 
-        public void WriteText(int linesOfText, string[] lines)
+        public void WriteText(int numberOfLines, string[] lines)
         {
             double xPosition = (fromElement.Out.x + toElement.In.x - lines[0].Length) / 2;
-            double yPosition = (fromElement.Out.y + toElement.In.y - linesOfText + 10) / 2;
+            double yPosition = (fromElement.Out.y + toElement.In.y - numberOfLines + 10) / 2;
 
             WriteText textWriter = new WriteText(xmlWriter, xPosition, yPosition, lines);
             textWriter.Write();
         }
 
-        public void DrawBox(int linesOfText, string[] lines)
+        public void DrawBox(int numberOfLines, string[] lines)
         {
-            int rectangleHeight = 40 + (linesOfText - 1) * 17;
+            int rectangleHeight = 40 + (numberOfLines - 1) * 17;
             int rectangleWidth = ResizeBox(text);
 
             double xPosition = (fromElement.Out.x + toElement.In.x - lines[0].Length * 5) / 2 - 5;
-            double yPosition = (fromElement.Out.y + toElement.In.y - linesOfText) / 2 - 20;
+            double yPosition = (fromElement.Out.y + toElement.In.y - numberOfLines) / 2 - 20;
 
             DrawBox boxDrawer = new DrawBox(xmlWriter, xPosition, yPosition, rectangleWidth, rectangleHeight, fromElement.orientation, "gray");
             boxDrawer.Draw();

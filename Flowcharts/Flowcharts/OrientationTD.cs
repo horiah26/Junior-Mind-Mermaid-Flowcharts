@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Flowcharts
 {
-    class OrientationTB : IOrientation
+    class OrientationTD : IOrientation
     {
         int Column;
         int Row;
@@ -12,7 +12,7 @@ namespace Flowcharts
         (double x, double y) In;
         (double x, double y) Out;
 
-        public OrientationTB(){}
+        public OrientationTD(){}
 
         public void Initialize(int Column, int Row, (double x, double y) In, (double x, double y) Out, int columnSize, int rowSize)
         {

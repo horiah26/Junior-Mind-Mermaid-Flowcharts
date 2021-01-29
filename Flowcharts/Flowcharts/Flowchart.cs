@@ -2,7 +2,6 @@
 using System.IO;
 using System.Xml;
 using System.Linq;
-using System;
 
 namespace Flowcharts
 {
@@ -38,21 +37,24 @@ namespace Flowcharts
 
         public readonly List<Arrow> arrows = new List<Arrow> { };
 
-        public void AddPair(string text1, string text2, string text = null)
+        public void AddPair((string text, string shape) element1, (string text, string shape) element2, string text = null)
         {
-            if (!dictionary.ContainsKey(text1))
+            if (!dictionary.ContainsKey(element1.text))
             {
-                dictionary.Add(text1, new Element(xmlWriter, text1, orientation));
+                dictionary.Add(element1.text, new Element(xmlWriter, element1.text, orientation));
             }
-            if (!dictionary.ContainsKey(text2))
+            if (!dictionary.ContainsKey(element2.text))
             {
-                dictionary.Add(text2, new Element(xmlWriter, text2, orientation));
+                dictionary.Add(element2.text, new Element(xmlWriter, element2.text, orientation));
             }
 
-            dictionary[text1].AddChild(dictionary[text2]);
-            dictionary[text2].AddParent(dictionary[text1]);
+            dictionary[element1.text].AddChild(dictionary[element2.text]);
+            dictionary[element2.text].AddParent(dictionary[element1.text]);
 
-            arrows.Add(new Arrow(xmlWriter, dictionary[text1], dictionary[text2], text));                
+            dictionary[element1.text].shapeString = element1.shape;
+            dictionary[element2.text].shapeString = element2.shape;
+
+            arrows.Add(new Arrow(xmlWriter, dictionary[element1.text], dictionary[element2.text], text));                
         }
 
         public void AddBackPair(string text1, string text2)

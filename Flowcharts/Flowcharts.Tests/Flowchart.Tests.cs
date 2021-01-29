@@ -12,7 +12,7 @@ namespace Flowcharts.Tests
             MemoryStream stream = new MemoryStream();
 
             var flowchart = new Flowchart(stream);
-            flowchart.AddPair("A", "B");
+            flowchart.AddPair(("A", "Rectangle"), ("B", "Rectangle"));
             flowchart.Draw();
 
             XmlDocument xmlDoc = new XmlDocument();
@@ -54,7 +54,7 @@ namespace Flowcharts.Tests
 
             var flowchart = new Flowchart(stream);
 
-            flowchart.AddPair("Lorem ipsum dolor sit amet, consectetur", "B");
+            flowchart.AddPair(("Lorem ipsum dolor sit amet, consectetur", "Rectangle"), ("B", "Rectangle"));
 
             flowchart.Draw();
 
@@ -96,8 +96,8 @@ namespace Flowcharts.Tests
             MemoryStream stream = new MemoryStream();
 
             var flowchart = new Flowchart(stream);
-            flowchart.AddPair("A", "B");
-            flowchart.AddPair("A", "C");
+            flowchart.AddPair(("A", "Rectangle"), ("B", "Rectangle"));
+            flowchart.AddPair(("A", "Rectangle"), ("C", "Rectangle"));
             flowchart.Draw();
 
             XmlDocument xmlDoc = new XmlDocument();
@@ -150,9 +150,9 @@ namespace Flowcharts.Tests
             MemoryStream stream = new MemoryStream();
 
             var flowchart = new Flowchart(stream);
-            flowchart.AddPair("A", "B");
-            flowchart.AddPair("A", "C");
-            flowchart.AddPair("A", "D");
+            flowchart.AddPair(("A", "Rectangle"), ("B", "Rectangle"));
+            flowchart.AddPair(("A", "Rectangle"), ("C", "Rectangle"));
+            flowchart.AddPair(("A", "Rectangle"), ("D", "Rectangle"));
             flowchart.Draw();
 
             XmlDocument xmlDoc = new XmlDocument();
@@ -219,10 +219,10 @@ namespace Flowcharts.Tests
             MemoryStream stream = new MemoryStream();
 
             var flowchart = new Flowchart(stream);
-            flowchart.AddPair("A", "B");
-            flowchart.AddPair("A", "C");
-            flowchart.AddPair("A", "D");
-            flowchart.AddPair("D", "E");
+            flowchart.AddPair(("A", "Rectangle"), ("B", "Rectangle"));
+            flowchart.AddPair(("A", "Rectangle"), ("C", "Rectangle"));
+            flowchart.AddPair(("A", "Rectangle"), ("D", "Rectangle"));
+            flowchart.AddPair(("D", "Rectangle"), ("E", "Rectangle"));
             flowchart.Draw();
 
             XmlDocument xmlDoc = new XmlDocument();
@@ -305,9 +305,9 @@ namespace Flowcharts.Tests
             var flowchart = new Flowchart(stream);
             flowchart.Orientation("LR");
 
-            flowchart.AddPair("A", "B");
-            flowchart.AddPair("B", "C");
-            flowchart.AddPair("B", "D");
+            flowchart.AddPair(("A", "Rectangle"), ("B", "Rectangle"));
+            flowchart.AddPair(("B", "Rectangle"), ("C", "Rectangle"));
+            flowchart.AddPair(("B", "Rectangle"), ("D", "Rectangle"));
             flowchart.Draw();
 
             XmlDocument xmlDoc = new XmlDocument();
@@ -376,9 +376,9 @@ namespace Flowcharts.Tests
             var flowchart = new Flowchart(stream);
             flowchart.Orientation("RL");
 
-            flowchart.AddPair("A", "B");
-            flowchart.AddPair("B", "C");
-            flowchart.AddPair("B", "D");
+            flowchart.AddPair(("A", "Rectangle"), ("B", "Rectangle"));
+            flowchart.AddPair(("B", "Rectangle"), ("C", "Rectangle"));
+            flowchart.AddPair(("B", "Rectangle"), ("D", "Rectangle"));
             flowchart.Draw();
 
             XmlDocument xmlDoc = new XmlDocument();
@@ -447,9 +447,9 @@ namespace Flowcharts.Tests
             var flowchart = new Flowchart(stream);
             flowchart.Orientation("TB");
 
-            flowchart.AddPair("A", "B");
-            flowchart.AddPair("B", "C");
-            flowchart.AddPair("B", "D");
+            flowchart.AddPair(("A", "Rectangle"), ("B", "Rectangle"));
+            flowchart.AddPair(("B", "Rectangle"), ("C", "Rectangle"));
+            flowchart.AddPair(("B", "Rectangle"), ("D", "Rectangle"));
             flowchart.Draw();
 
             XmlDocument xmlDoc = new XmlDocument();
@@ -518,9 +518,9 @@ namespace Flowcharts.Tests
             var flowchart = new Flowchart(stream);
             flowchart.Orientation("BT");
 
-            flowchart.AddPair("A", "B");
-            flowchart.AddPair("B", "C");
-            flowchart.AddPair("B", "D");
+            flowchart.AddPair(("A", "Rectangle"), ("B", "Rectangle"));
+            flowchart.AddPair(("B", "Rectangle"), ("C", "Rectangle"));
+            flowchart.AddPair(("B", "Rectangle"), ("D", "Rectangle"));
             flowchart.Draw();
 
             XmlDocument xmlDoc = new XmlDocument();
