@@ -26,13 +26,5 @@ namespace Flowcharts
         {
             return (Row, Column);
         }
-
-        public ((double x, double y) In, (double x, double y) Out) GetInOut(double rectangleXPos, double rectangleYPos, int rectangleWidth, int rectangleHeight)
-        {
-            In = (rectangleXPos + rectangleWidth / 2, rectangleYPos - 4);
-            Out = (rectangleXPos + rectangleWidth / 2, rectangleYPos + rectangleHeight);
-
-            return (In, Out);
-        }
     }
 }

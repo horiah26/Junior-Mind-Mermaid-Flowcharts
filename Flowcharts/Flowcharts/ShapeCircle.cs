@@ -43,8 +43,6 @@ namespace Flowcharts
 
             xmlWriter.WriteStartElement("circle");
 
-            orientation.GetInOut(xPos, yPos, radius, radius);
-
             (In, Out) = GetInOut();
 
             xmlWriter.WriteAttributeString("cx", xPos.ToString());

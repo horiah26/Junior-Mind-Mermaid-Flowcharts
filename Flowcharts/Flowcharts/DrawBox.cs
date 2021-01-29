@@ -26,14 +26,9 @@ namespace Flowcharts
             this.color = color;
         }
 
-        public ((double x, double y) In, (double x, double y) Out) Draw()
-        {
-            (double x, double y) In;
-            (double x, double y) Out;        
-
+        public void Draw()
+        {     
             xmlWriter.WriteStartElement("rect");     
-
-            (In, Out) = orientation.GetInOut(rectangleXPos, rectangleYPos, rectangleWidth, rectangleHeight);
 
             xmlWriter.WriteAttributeString("x", rectangleXPos.ToString());
             xmlWriter.WriteAttributeString("y", rectangleYPos.ToString());
@@ -54,8 +49,6 @@ namespace Flowcharts
             }
 
             xmlWriter.WriteEndElement();
-
-            return (In, Out);
         }
     }
 }

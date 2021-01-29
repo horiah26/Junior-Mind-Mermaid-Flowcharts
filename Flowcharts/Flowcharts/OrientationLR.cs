@@ -28,13 +28,5 @@ namespace Flowcharts
         {
             return (Column, Row);
         }
-
-        ((double x, double y) In, (double x, double y) Out) IOrientation.GetInOut(double rectangleXPos, double rectangleYPos, int rectangleWidth, int rectangleHeight)
-        {
-            In = (rectangleXPos - 5, rectangleYPos + rectangleHeight / 2);
-            Out = (rectangleXPos + rectangleWidth, rectangleYPos + 20);
-
-            return (In, Out);
-        }
     }
 }
