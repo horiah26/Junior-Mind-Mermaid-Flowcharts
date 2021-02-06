@@ -56,7 +56,10 @@ namespace Flowcharts
             }
 
             int numberOfLines = 0;
-            var lines = SplitWords(text, ref numberOfLines);
+
+            var textSplitter = new TextSplitter(text);
+            string[] lines;
+            (lines, numberOfLines) = textSplitter.SplitWords();
 
             DrawBox(numberOfLines, lines);
             WriteText(numberOfLines, lines);
@@ -82,20 +85,7 @@ namespace Flowcharts
 
             DrawBox boxDrawer = new DrawBox(xmlWriter, xPosition, yPosition, rectangleWidth, rectangleHeight, fromElement.orientation, "gray");
             boxDrawer.Draw();
-        }
-
-        string[] SplitWords(string text, ref int textLines)
-        {
-            var charCount = 0;
-            var maxLineLength = 23;
-
-            var split = text.Split(' ', StringSplitOptions.RemoveEmptyEntries)
-                            .GroupBy(w => (charCount += w.Length + 1) / maxLineLength)
-                            .Select(g => string.Join(" ", g)).ToArray();
-
-            textLines = split.Length;
-            return split;
-        }
+        } 
 
         virtual public void SetInAndOut()
         {
@@ -104,6 +94,7 @@ namespace Flowcharts
             xmlWriter.WriteAttributeString("x2", toElement.In.x.ToString());
             xmlWriter.WriteAttributeString("y2", toElement.In.y.ToString());
         }
+
         private int ResizeBox(string text)
         {
             int length = text.Length;

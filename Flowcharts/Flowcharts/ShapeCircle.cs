@@ -30,7 +30,6 @@ namespace Flowcharts
             radius = GetRadius(Text);
             xPos = distanceFromEdge + position.Column * unitWIdth + (unitWIdth) / 2 + Text.Length * 3;
             yPos = distanceFromEdge + position.Row * unitHeight;
-
             (In, Out) = Draw();
 
             return (In, Out, radius);

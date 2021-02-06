@@ -26,17 +26,20 @@ namespace Flowcharts
 
         public ((double x, double y) In, (double x, double y) Out) Draw()
         {
-            (string[] splitText, int numberofLines) = SplitWords(text);
-            numberOfLines = numberofLines;
+
+            string[] lines;
+
+            var textSplitter = new TextSplitter(text);
+            (lines, numberOfLines) = textSplitter.SplitWords();
 
             ((double x, double y) In, (double x, double y) Out) = DrawBox();
 
-            WriteText(orientation, splitText);
+            PrepareAndWriteText(lines);
 
             return (In, Out);
         }
 
-        public void WriteText(IOrientation orientation, string[] splitLines)
+        public void PrepareAndWriteText(string[] splitLines)
         {
             (int x, int y) fitInBox = (10, 7);
             var (column, row) = orientation.GetColumnRow();
@@ -57,18 +60,6 @@ namespace Flowcharts
 
             this.boxWidth = boxWidth;
             return (In, Out);
-        }
-
-        (string[] splitText, int numberOfLines) SplitWords(string text)
-        {
-            var charCount = 0;
-            var maxLineLength = 23;
-
-            var split = text.Split(' ', StringSplitOptions.RemoveEmptyEntries)
-                            .GroupBy(w => (charCount += w.Length + 1) / maxLineLength)
-                            .Select(g => string.Join(" ", g)).ToArray();
-
-            return (split, split.Length);
-        }        
+        }           
     }
 }
