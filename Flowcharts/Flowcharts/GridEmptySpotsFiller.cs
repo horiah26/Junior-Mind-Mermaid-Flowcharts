@@ -10,6 +10,7 @@ namespace Flowcharts
         int rowSize;
         Element[,] elementGrid;
         int lastOccupiedColumn;
+
         public GridEmptySpotsFiller(Grid grid)
         {
             this.grid = grid;

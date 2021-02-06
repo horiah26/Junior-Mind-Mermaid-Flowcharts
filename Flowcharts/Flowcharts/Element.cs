@@ -59,7 +59,7 @@ namespace Flowcharts
             Type orientationType = Type.GetType("Flowcharts.Orientation" + orientationName);
             IOrientation orientation = (IOrientation)Activator.CreateInstance(orientationType);
 
-            orientation.Initialize(Column, Row, In, Out, columnSize, rowSize);
+            orientation.Initialize(Column, Row, columnSize, rowSize);
 
             this.orientation = orientation;
 

@@ -6,15 +6,27 @@ namespace Flowcharts
 {
     class GridSpacer
     {
-        private int distanceFromEdge = 50;
-        private int unitLength = 400;
-        private int unitHeight = 250;
+        IOrientation orientation;
 
-        public GridSpacer() { }
-
-        public (int, int, int) GetSpacing()
+        public GridSpacer(IOrientation orientation)
         {
-            return (distanceFromEdge, unitLength, unitHeight);
+            this.orientation = orientation;
+        }
+
+        public (int distanceFromEdge, int unitLength, int unitHeight) GetSpacing()
+        {
+            if (typeof(OrientationRightLeft) == orientation.GetType() || typeof(OrientationLeftRight) == orientation.GetType())
+            {
+                return (50, 400, 125);
+            }
+            else if (typeof(OrientationTopDown) == orientation.GetType() || typeof(OrientationDownTop) == orientation.GetType())
+            {
+                return (50, 200, 250);
+            }
+            else
+            {
+                throw new ArgumentException("Orientation must be one of the following: RightLeft | LeftRight | TopDown | DownTop");
+            }
         }
     }
 }

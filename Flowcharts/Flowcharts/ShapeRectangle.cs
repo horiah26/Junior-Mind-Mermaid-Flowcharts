@@ -30,7 +30,7 @@ namespace Flowcharts
             this.xmlWriter = xmlWriter;
             this.orientation = orientation;
             rectangleHeight = 40 + (numberOfLines - 1) * 17;
-            (distanceFromEdge, unitLength, unitHeight) = new GridSpacer().GetSpacing();
+            (distanceFromEdge, unitLength, unitHeight) = new GridSpacer(orientation).GetSpacing();
 
             var textSplitter = new TextSplitter(text);
 
@@ -88,7 +88,7 @@ namespace Flowcharts
 
         public ((double x, double y) In, (double x, double y) Out) GetInOut()
         {
-            if (typeof(OrientationLeftRIght) == orientation.GetType())
+            if (typeof(OrientationLeftRight) == orientation.GetType())
             {
                 In = (rectangleXPos - 5, rectangleYPos + rectangleHeight / 2);
                 Out = (rectangleXPos + rectangleWidth, rectangleYPos + 20);

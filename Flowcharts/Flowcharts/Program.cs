@@ -12,7 +12,7 @@ namespace Flowcharts
     {
         static void Main()
         {         
-            Flowchart flowchart = new Flowchart("TD", "test");
+            Flowchart flowchart = new Flowchart("TopDown", "test");
 
             flowchart.AddPair(("A", "Rectangle"), ("Bqwqfq qf fwe f3 fgsgbg ", "Rectangle"), "J");
             flowchart.AddPair(("A", "Rectangle"), (" dsgsd vdf sg sg sfg tedb sasfsag sdgf D", "Rectangle"), "A to B");

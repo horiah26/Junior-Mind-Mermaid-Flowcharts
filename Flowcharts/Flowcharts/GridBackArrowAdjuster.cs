@@ -7,10 +7,12 @@ namespace Flowcharts
     class GridBackArrowAdjuster
     {
         Grid grid;
+
         public GridBackArrowAdjuster(Grid grid)
         {
             this.grid = grid;
         }
+
         public void AdjustForBackArrows(List<Arrow> arrows)
         {
             List<(double row, int forwardColum, int backColumn)> backArrowCoordinates = new List<(double row, int forwardColum, int backColumn)> { };

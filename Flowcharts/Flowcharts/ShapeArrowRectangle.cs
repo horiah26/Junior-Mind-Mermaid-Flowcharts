@@ -36,7 +36,5 @@ namespace Flowcharts
         {
             xmlWriter.WriteAttributeString("style", "fill:rgb(230,230,230);stroke-width:2;stroke:rgb(230,230,230)");
         }
-
-
     }
 }

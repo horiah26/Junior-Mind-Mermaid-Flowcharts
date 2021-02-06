@@ -9,6 +9,7 @@ namespace Flowcharts
         int rowSize;
         int columnSize;
         Element[,] elementGrid;
+
         public GridElementActualizer(Grid grid)
         {
             rowSize = grid.rowSize;

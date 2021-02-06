@@ -10,6 +10,7 @@ namespace Flowcharts
         Grid grid;
         int rowSize;
         Element[,] elementGrid;
+
         public GridLastColumnLeveler(Grid grid)
         {
             this.grid = grid;

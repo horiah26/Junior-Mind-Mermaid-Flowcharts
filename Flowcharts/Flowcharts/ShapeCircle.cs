@@ -25,7 +25,7 @@ namespace Flowcharts
 
         public ((double x, double y) In, (double x, double y) Out, int boxWidth) Draw(XmlWriter xmlWriter, IOrientation orientation, string Text, int numberOfLines)
         {
-            (distanceFromEdge, unitLength, unitHeight) = new GridSpacer().GetSpacing();
+            (distanceFromEdge, unitLength, unitHeight) = new GridSpacer(orientation).GetSpacing();
             this.xmlWriter = xmlWriter;
             this.orientation = orientation;   
             var position = orientation.GetColumnRow();
@@ -90,7 +90,7 @@ namespace Flowcharts
 
         public ((double x, double y) In, (double x, double y) Out) GetInOut()
         {
-            if (typeof(OrientationLeftRIght) == orientation.GetType())
+            if (typeof(OrientationLeftRight) == orientation.GetType())
             {
                 In = (xPos - radius - 3, yPos);
                 Out = (xPos + radius, yPos);

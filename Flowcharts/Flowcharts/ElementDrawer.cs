@@ -22,7 +22,7 @@ namespace Flowcharts
             this.text = text;
             this.xmlWriter = xmlWriter;
             this.shapeString = shapeString;
-            (this.distanceFromEdge, unitLength, unitHeight) = new GridSpacer().GetSpacing();
+            (this.distanceFromEdge, unitLength, unitHeight) = new GridSpacer(orientation).GetSpacing();
         }
 
         public ((double x, double y) In, (double x, double y) Out) Draw()
