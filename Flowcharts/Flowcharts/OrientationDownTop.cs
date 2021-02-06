@@ -4,29 +4,28 @@ using System.Text;
 
 namespace Flowcharts
 {
-    class OrientationLR : IOrientation
+    class OrientationDownTop : IOrientation
     {
         int Column;
         int Row;
-        int rowSize;
+        int columnSize;
 
         (double x, double y) In;
         (double x, double y) Out;
 
-        public OrientationLR(){}
-
-        public void Initialize(int Column, int Row, (double x, double y) In, (double x, double y) Out, int columnSize, int rowSize) 
+        public OrientationDownTop() { }
+        public void Initialize(int Column, int Row, (double x, double y) In, (double x, double y) Out, int columnSize, int rowSize)
         {
             this.Column = Column;
             this.Row = Row;
             this.In = In;
             this.Out = Out;
-            this.rowSize = rowSize;            
+            this.columnSize = columnSize;
         }
 
         public (int Column, int Row) GetColumnRow()
         {
-            return (Column, Row);
+            return (Row, columnSize - Column - 1);
         }
     }
 }

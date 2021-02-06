@@ -9,19 +9,17 @@ namespace Flowcharts
         Element[,] elementGrid;
         int rowSize;
 
-        public GridColumnExtractor(Element[,] elementGrid, int rowSize)
+        public GridColumnExtractor(Grid grid)
         {
-            this.elementGrid = elementGrid;
-            this.rowSize = rowSize;
+            elementGrid = grid.elementGrid;
+            rowSize = grid.rowSize;
         }
 
         public IEnumerable<Element> Extract(int column)
         {
             List<Element> extractedColumn = new List<Element> { };
 
-
-            while()
-            for (int i = 0; i < rowSize; i++)
+            for(int i = 0; i< rowSize; i++)
             {
                 extractedColumn.Add(elementGrid[i, column]);
             }

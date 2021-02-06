@@ -8,10 +8,16 @@ namespace Flowcharts
     class GridColumnLowerer
     {
         Element[,] elementGrid;
+        Grid grid;
+        int rowSize;
+        int columnSize;
 
-        public GridColumnLowerer(Element[,] elementGrid)
+        public GridColumnLowerer(Grid grid)
         {
-            this.elementGrid = elementGrid;
+            elementGrid = grid.elementGrid;
+            this.grid = grid;
+            rowSize = grid.rowSize;
+            columnSize = grid.columnSize;
         }
 
         public void LowerColumnInGrid(double row, int column, int positions)
@@ -21,7 +27,7 @@ namespace Flowcharts
                 return;
             }
 
-            IEnumerable<Element> extractedColumn = GetColumn(column);
+            IEnumerable<Element> extractedColumn = new GridColumnExtractor(grid).Extract(column);
 
             int emptyPositionsAtTheEnd = extractedColumn.Reverse().TakeWhile(x => x == null).Count();
 
@@ -29,7 +35,7 @@ namespace Flowcharts
 
             if (difference > 0)
             {
-                elementGrid = ResizeArray(elementGrid, rowSize + difference, columnSize);
+                elementGrid = new GridArrayResizer(grid).Resize(elementGrid, rowSize + difference, columnSize);
             }
 
             for (int i = rowSize - 1; i >= row; i--)

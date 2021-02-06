@@ -88,22 +88,22 @@ namespace Flowcharts
 
         public ((double x, double y) In, (double x, double y) Out) GetInOut()
         {
-            if (typeof(OrientationLR) == orientation.GetType())
+            if (typeof(OrientationLeftRIght) == orientation.GetType())
             {
                 In = (rectangleXPos - 5, rectangleYPos + rectangleHeight / 2);
                 Out = (rectangleXPos + rectangleWidth, rectangleYPos + 20);
             }
-            else if (typeof(OrientationRL) == orientation.GetType())
+            else if (typeof(OrientationRightLeft) == orientation.GetType())
             {
                 In = (rectangleXPos + rectangleWidth, rectangleYPos + 20);
                 Out = (rectangleXPos - 5, rectangleYPos + rectangleHeight / 2);
             }
-            else if (typeof(OrientationTD) == orientation.GetType())
+            else if (typeof(OrientationTopDown) == orientation.GetType())
             {
                 In = (rectangleXPos + rectangleWidth / 2, rectangleYPos - 4);
                 Out = (rectangleXPos + rectangleWidth / 2, rectangleYPos + rectangleHeight);
             }
-            else if (typeof(OrientationDT) == orientation.GetType())
+            else if (typeof(OrientationDownTop) == orientation.GetType())
             {
                 In = (rectangleXPos + rectangleWidth / 2, rectangleYPos + rectangleHeight);
                 Out = (rectangleXPos + rectangleWidth / 2, rectangleYPos - 4);

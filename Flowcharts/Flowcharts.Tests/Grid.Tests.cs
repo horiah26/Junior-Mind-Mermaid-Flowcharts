@@ -82,12 +82,12 @@ namespace Flowcharts.Tests
 
             var grid = new Grid();
 
-            Assert.Equal((1,1), grid.Dimensions());
+            Assert.Equal((1,1), grid.GetDimensions());
 
             grid.Add(element, 12, 11);
 
             Assert.Equal(element, grid.ElementAt(12, 11));
-            Assert.Equal((13, 12), grid.Dimensions());
+            Assert.Equal((13, 12), grid.GetDimensions());
         }
 
 
@@ -102,12 +102,12 @@ namespace Flowcharts.Tests
 
             var grid = new Grid();
 
-            Assert.Equal((1, 1), grid.Dimensions());
+            Assert.Equal((1, 1), grid.GetDimensions());
 
             grid.Add(element, 1, 17);
 
             Assert.Equal(element, grid.ElementAt(1, 17));
-            Assert.Equal((2, 18), grid.Dimensions());
+            Assert.Equal((2, 18), grid.GetDimensions());
         }
 
         [Fact]
@@ -121,12 +121,12 @@ namespace Flowcharts.Tests
 
             var grid = new Grid();
 
-            Assert.Equal((1, 1), grid.Dimensions());
+            Assert.Equal((1, 1), grid.GetDimensions());
 
             grid.Add(element, 13, 5);
 
             Assert.Equal(element, grid.ElementAt(13, 5));
-            Assert.Equal((14, 6), grid.Dimensions());
+            Assert.Equal((14, 6), grid.GetDimensions());
         }
 
         [Fact]
