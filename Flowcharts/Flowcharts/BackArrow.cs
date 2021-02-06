@@ -14,12 +14,15 @@ namespace Flowcharts
             this.toElement = toElement;
         }
 
-        override public void SetInAndOut()
+        override public string[] GetArrowEnds()       
         {
-            xmlWriter.WriteAttributeString("x1", fromElement.In.x.ToString());
-            xmlWriter.WriteAttributeString("y1", fromElement.In.y.ToString());
-            xmlWriter.WriteAttributeString("x2", toElement.Out.x.ToString());
-            xmlWriter.WriteAttributeString("y2", toElement.Out.y.ToString());
+            string[] coordinates = new string[4];
+            coordinates[0] = fromElement.In.x.ToString();
+            coordinates[1] = fromElement.In.y.ToString();
+            coordinates[2] = toElement.Out.x.ToString();
+            coordinates[3] = toElement.Out.y.ToString();
+
+            return coordinates;
         }
     }
 }

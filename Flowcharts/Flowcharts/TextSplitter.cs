@@ -17,7 +17,7 @@ namespace Flowcharts
         public (string[] lines, int numberOfLines) SplitWords()
         {
             var charCount = 0;
-            var maxLineLength = 23;
+            var maxLineLength = 20;
 
             var lines = text.Split(' ', StringSplitOptions.RemoveEmptyEntries)
                             .GroupBy(w => (charCount += w.Length + 1) / maxLineLength)

@@ -34,7 +34,6 @@ namespace Flowcharts
             }
 
             elementGrid[row, column] = element;
-
         }
 
         public IEnumerator<Element> GetEnumerator()

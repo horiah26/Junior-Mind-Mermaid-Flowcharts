@@ -8,9 +8,9 @@ namespace Flowcharts
     class ShapeRectangle : IShape
     {
         int rectangleWidth = 0;
-        private int distanceFromEdge = 50;
-        private int unitWIdth = 300;
-        private int unitHeight = 150;
+        private int distanceFromEdge ;
+        private int unitLength;
+        private int unitHeight;
         private XmlWriter xmlWriter;
         IOrientation orientation;
 
@@ -25,47 +25,35 @@ namespace Flowcharts
         {
         }
 
-        public ((double x, double y) In, (double x, double y) Out, int boxWidth) Draw(XmlWriter xmlWriter, IOrientation orientation, string Text, int numberOfLines)
+        public ((double x, double y) In, (double x, double y) Out, int boxWidth) Draw(XmlWriter xmlWriter, IOrientation orientation, string text, int numberOfLines)
         {
             this.xmlWriter = xmlWriter;
             this.orientation = orientation;
             rectangleHeight = 40 + (numberOfLines - 1) * 17;
-            rectangleWidth = ResizeBox(Text);
-            var position = orientation.GetColumnRow();
-            rectangleXPos = distanceFromEdge + position.Column * unitWIdth + (unitWIdth - rectangleWidth) / 2;
-            rectangleYPos = distanceFromEdge + position.Row * unitHeight - 17;
+            (distanceFromEdge, unitLength, unitHeight) = new GridSpacer().GetSpacing();
 
+            var textSplitter = new TextSplitter(text);
+
+            string[] lines;
+            (lines, numberOfLines) = textSplitter.SplitWords();
+
+            var rectangleLengthCalculator = new RectangleLengthCalculator(lines);
+            
+            rectangleWidth = rectangleLengthCalculator.Calculate() * 9;
+
+            var position = orientation.GetColumnRow();
+            (rectangleXPos, rectangleYPos) = GetPosition(position);
             (In, Out) = Draw();
 
             return (In, Out, rectangleWidth);
         }
 
-        private int ResizeBox(string text)
+        public virtual (double rectangleXPos, double rectangleYPos) GetPosition((int Column, int Row)position)
         {
-            int length = text.Length;
+            rectangleXPos = distanceFromEdge + position.Column * unitLength + (unitLength - rectangleWidth) / 2;
+            rectangleYPos = distanceFromEdge + position.Row * unitHeight - 17;
 
-            if (length == 1)
-            {
-                rectangleWidth = 30;
-            }
-            else if (length > 1 && length <= 3)
-            {
-                rectangleWidth = 45;
-            }
-            else if (length > 3 && length <= 10)
-            {
-                rectangleWidth = 90;
-            }
-            else if (length > 10 && length <= 20)
-            {
-                rectangleWidth = 150;
-            }
-            else
-            {
-                rectangleWidth = 200;
-            }
-
-            return rectangleWidth;
+            return (rectangleXPos, rectangleYPos);
         }
 
         public ((double x, double y) In, (double x, double y) Out) Draw()
@@ -86,11 +74,16 @@ namespace Flowcharts
             xmlWriter.WriteAttributeString("width", rectangleWidth.ToString());
             xmlWriter.WriteAttributeString("height", rectangleHeight.ToString());
 
-            xmlWriter.WriteAttributeString("style", "fill:rgb(255,255,255);stroke-width:2;stroke:rgb(0,0,0)");
+            Color();
 
             xmlWriter.WriteEndElement();
 
             return (In, Out);
+        }
+
+        virtual public void Color()
+        {
+            xmlWriter.WriteAttributeString("style", "fill:rgb(255,255,255);stroke-width:2;stroke:rgb(0,0,0)");
         }
 
         public ((double x, double y) In, (double x, double y) Out) GetInOut()

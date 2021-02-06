@@ -3,14 +3,14 @@ using System.Xml;
 
 namespace Flowcharts
 {
-    public class WriteText
+    public class TextWriter
     {
         readonly XmlWriter xmlWriter;
         readonly double xPosition;
         readonly double yPosition;
         readonly string[] lines;
 
-        public WriteText(XmlWriter xmlWriter, double xPosition, double yPosition, string[] lines) 
+        public TextWriter(XmlWriter xmlWriter, double xPosition, double yPosition, string[] lines) 
         {
             this.xmlWriter = xmlWriter;
             this.xPosition = xPosition;

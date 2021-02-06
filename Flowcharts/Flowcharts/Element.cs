@@ -15,7 +15,7 @@ namespace Flowcharts
 
         public IOrientation orientation;
 
-        readonly string orientationString;
+        readonly string orientationName;
         public string shapeString = "Rectangle";
 
         readonly XmlWriter xmlWriter;
@@ -28,13 +28,13 @@ namespace Flowcharts
         public int Column = 0;
         public int Row = 0;
 
-        public Element(XmlWriter xmlWriter, string Text, string orientationString)
+        public Element(XmlWriter xmlWriter, string Text, string orientationName)
         {
             CheckLength(Text);
 
             this.xmlWriter = xmlWriter;
             this.Text = Text;
-            this.orientationString = orientationString;
+            this.orientationName = orientationName;
         }
 
         public void AddParent(Element previous)
@@ -56,7 +56,7 @@ namespace Flowcharts
 
         public void Draw()
         {
-            Type orientationType = Type.GetType("Flowcharts.Orientation" + orientationString);
+            Type orientationType = Type.GetType("Flowcharts.Orientation" + orientationName);
             IOrientation orientation = (IOrientation)Activator.CreateInstance(orientationType);
 
             orientation.Initialize(Column, Row, In, Out, columnSize, rowSize);

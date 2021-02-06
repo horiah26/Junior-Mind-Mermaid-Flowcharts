@@ -8,9 +8,9 @@ namespace Flowcharts
     {
         readonly XmlWriter xmlWriter;
         readonly IOrientation orientation;
-        private readonly int distanceFromEdge = 50;
-        private readonly int unitWIdth = 300;
-        private readonly int unitHeight = 150;
+        private int distanceFromEdge;
+        private int unitLength;
+        private int unitHeight;
         int boxWidth = 0;
         int numberOfLines = 1;
         readonly string text;
@@ -22,6 +22,7 @@ namespace Flowcharts
             this.text = text;
             this.xmlWriter = xmlWriter;
             this.shapeString = shapeString;
+            (this.distanceFromEdge, unitLength, unitHeight) = new GridSpacer().GetSpacing();
         }
 
         public ((double x, double y) In, (double x, double y) Out) Draw()
@@ -44,10 +45,10 @@ namespace Flowcharts
             (int x, int y) fitInBox = (10, 7);
             var (column, row) = orientation.GetColumnRow();
 
-            double xPosition = distanceFromEdge + (column * unitWIdth + fitInBox.x) + (unitWIdth - boxWidth) / 2;
+            double xPosition = distanceFromEdge + (column * unitLength + fitInBox.x) + (unitLength - boxWidth) / 2;
             double yPosition = distanceFromEdge + (row * unitHeight + fitInBox.y);
 
-            WriteText textWriter = new WriteText(xmlWriter, xPosition, yPosition, splitLines);
+            TextWriter textWriter = new TextWriter(xmlWriter, xPosition, yPosition, splitLines);
             textWriter.Write();
         }
 

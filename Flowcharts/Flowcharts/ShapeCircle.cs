@@ -7,9 +7,10 @@ namespace Flowcharts
 {
     class ShapeCircle : IShape
     {
-        private int distanceFromEdge = 50;
-        private int unitWIdth = 300;
-        private int unitHeight = 150;
+        private int distanceFromEdge;
+        private int unitLength;
+        private int unitHeight;
+        
         private XmlWriter xmlWriter;
         IOrientation orientation;
 
@@ -24,11 +25,12 @@ namespace Flowcharts
 
         public ((double x, double y) In, (double x, double y) Out, int boxWidth) Draw(XmlWriter xmlWriter, IOrientation orientation, string Text, int numberOfLines)
         {
+            (distanceFromEdge, unitLength, unitHeight) = new GridSpacer().GetSpacing();
             this.xmlWriter = xmlWriter;
             this.orientation = orientation;   
             var position = orientation.GetColumnRow();
             radius = GetRadius(Text);
-            xPos = distanceFromEdge + position.Column * unitWIdth + (unitWIdth) / 2 + Text.Length * 3;
+            xPos = distanceFromEdge + position.Column * unitLength + (unitLength) / 2 + Text.Length * 3;
             yPos = distanceFromEdge + position.Row * unitHeight;
             (In, Out) = Draw();
 
@@ -83,8 +85,7 @@ namespace Flowcharts
                 radius = 60;
             }
 
-            return radius;
-            
+            return radius;            
         }
 
         public ((double x, double y) In, (double x, double y) Out) GetInOut()
