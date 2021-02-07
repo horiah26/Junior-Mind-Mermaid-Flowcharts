@@ -14,13 +14,12 @@ namespace Flowcharts
         {         
             Flowchart flowchart = new Flowchart("TopDown", "test");
 
-            flowchart.AddPair(("A", "Rectangle"), ("Bqwqfq qf fwe f3 fgsgbg ", "Rectangle"), "J");
-            flowchart.AddPair(("A", "Rectangle"), (" dsgsd vdf sg sg sfg tedb sasfsag sdgf D", "Rectangle"), "A to B");
-            flowchart.AddPair(("E gjd jfgj djfdj dfhjdg", "Rectangle"), (" jfjfhj fd hkgfkh fj gfd jhfF", "Rectangle"), "A to B gaghsdg astastwe");
-            flowchart.AddPair(("Gjfdj fgjyj fgjd fjgfjdfjgfjfg", "Rectangle"), ("Hgj fjfj fyjdyfjyj dhj", "Rectangle"), "A to B gaghsdg astastwe weyweryer ");
-            flowchart.AddPair(("Ikfkufdn gfjhyfjd jhfjyj dfnyn dn", "Rectangle"), ("Jgfjd mhfdyfd gffny", "Rectangle"), "A to B gaghsdg astas twe weywe ryer  agaseg  kf");
-            flowchart.AddPair(("Kfhfg fgjfg", "Rectangle"), ("jfdjdf fgjd jyf djgkighifL", "Rectangle"), "A to B gaghsdg as tastwe wey eryer  agaseg t rju 4 wegfsgf kf");
-
+            flowchart.AddPair(("A", "Circle"), ("B", "Circle"), "J");
+            flowchart.AddPair(("A", "Circle"), (" dsgsd vdf sfsag sdgf D", "Circle"), "A to B");
+            flowchart.AddPair(("E gjd jfgj djfdj dfhjdg", "Circle"), (" jfjfhj fd hkgfkh fj gfd jhfF", "Circle"), "A to B gaghsdg astastwe");
+            flowchart.AddPair(("C", "Circle"), ("Hgj fjfj fdas dfsb adf d dgsbdtbds sdfb ds fas fd dsb syjdyfjyj dhj", "Circle"), "A to B gaghsdg astastwe weyweryer ");
+            flowchart.AddPair(("Ikfkufdn gfjhyfjd jhfjyj dfnyn dn", "Circle"), ("Jgfjd dgasbaf fabfrg hewt dfsggrget dfsggeth gdfsr dergsab dfsgrb mhfdyfd gffny", "Circle"), "A to B gaghsdg astas twe weywe ryer  agaseg  kf");
+            flowchart.AddPair(("Kfhfg fgjfg", "Circle"), ("jfdjdf fgjd jyf djgkighifL", "Circle"), "A to B gaghsdg as tastwe wey eryer  agaseg t rju 4 wegfsgf kf");
 
             flowchart.Draw();
         }

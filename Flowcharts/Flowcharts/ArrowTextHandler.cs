@@ -1,4 +1,5 @@
 ﻿using System.Xml;
+using System.Linq;
 
 namespace Flowcharts
 {
@@ -19,7 +20,7 @@ namespace Flowcharts
 
         public void DrawAndWrite() 
         {
-            (string[] lines,int numberOfLines) = new TextSplitter(text).SplitWords();
+            (string[] lines,int numberOfLines) = new TextSplitter(text).Split();
 
             Draw(numberOfLines, lines);
             WriteText(lines);
@@ -27,7 +28,8 @@ namespace Flowcharts
 
         public void WriteText(string[] lines)
         {
-            double xPosition = (fromElement.Out.x + toElement.In.x - (lines[0].Length - 0) * 10) / 2;
+            int maxLineLength = lines.Max(x => x.Length);
+            double xPosition = (fromElement.Out.x + toElement.In.x - maxLineLength * 7) / 2;
             double yPosition = (fromElement.Out.y + toElement.In.y - lines.Length * 5) / 2;
 
             TextWriter textWriter = new TextWriter(xmlWriter, xPosition, yPosition, lines);

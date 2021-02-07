@@ -37,7 +37,7 @@ namespace Flowcharts
             new GridColumnLowerer(this).LowerColumnInGrid(row, column, positions);
         }
 
-        public void ActualizeElements()
+        public void UpdateElementsPosition()
         {
             new GridElementActualizer(this).Actualize();
         }
@@ -72,11 +72,11 @@ namespace Flowcharts
         {
             lastOccupiedColumn = new GridLastOccupiedColumnFinder(this).GetLastColumn();
 
-            ActualizeElements();
+            UpdateElementsPosition();
             ArrangeRows();
             FillEmptySpots();
             AdjustForBackArrows(arrows);
-            ActualizeElements();
+            UpdateElementsPosition();
         }
     }
 }

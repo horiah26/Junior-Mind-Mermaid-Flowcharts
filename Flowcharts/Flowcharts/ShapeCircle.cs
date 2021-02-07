@@ -30,8 +30,18 @@ namespace Flowcharts
             this.orientation = orientation;   
             var position = orientation.GetColumnRow();
             radius = GetRadius(Text);
-            xPos = distanceFromEdge + position.Column * unitLength + (unitLength) / 2 + Text.Length * 3;
-            yPos = distanceFromEdge + position.Row * unitHeight;
+
+            if (Text.Length == 1)
+            {
+                xPos = distanceFromEdge + position.Column * unitLength + unitLength / 2 + 5;
+                yPos = distanceFromEdge + position.Row * unitHeight + numberOfLines * 5 - 3;
+            }
+            else
+            {
+                xPos = distanceFromEdge + position.Column * unitLength + unitLength / 2 + radius / 4 + 5;
+                yPos = distanceFromEdge + position.Row * unitHeight + numberOfLines * 5;
+            }
+   
             (In, Out) = Draw();
 
             return (In, Out, radius);
@@ -62,30 +72,7 @@ namespace Flowcharts
 
         public int GetRadius(string Text)
         {
-            int length = Text.Length;
-
-            if (length == 1)
-            {
-                radius = 20;
-            }
-            else if (length > 1 && length <= 3)
-            {
-                radius = 30;
-            }
-            else if (length > 3 && length <= 10)
-            {
-                radius = 45;
-            }
-            else if (length > 10 && length <= 20)
-            {
-                radius = 50;
-            }
-            else
-            {
-                radius = 60;
-            }
-
-            return radius;            
+            return new CircleRadiusCalculator(Text).Calculate();
         }
 
         public ((double x, double y) In, (double x, double y) Out) GetInOut()

@@ -31,7 +31,7 @@ namespace Flowcharts
             string[] lines;
 
             var textSplitter = new TextSplitter(text);
-            (lines, numberOfLines) = textSplitter.SplitWords();
+            (lines, numberOfLines) = textSplitter.Split();
 
             ((double x, double y) In, (double x, double y) Out) = DrawBox();
 

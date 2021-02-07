@@ -21,9 +21,7 @@ namespace Flowcharts
         private double rectangleYPos;
         private int rectangleHeight;
 
-        public ShapeRectangle()
-        {
-        }
+        public ShapeRectangle() {}
 
         public ((double x, double y) In, (double x, double y) Out, int boxWidth) Draw(XmlWriter xmlWriter, IOrientation orientation, string text, int numberOfLines)
         {
@@ -35,7 +33,7 @@ namespace Flowcharts
             var textSplitter = new TextSplitter(text);
 
             string[] lines;
-            (lines, numberOfLines) = textSplitter.SplitWords();
+            (lines, numberOfLines) = textSplitter.Split();
 
             var rectangleLengthCalculator = new RectangleLengthCalculator(lines);
             
