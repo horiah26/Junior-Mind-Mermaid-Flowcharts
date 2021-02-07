@@ -35,9 +35,7 @@ namespace Flowcharts
             string[] lines;
             (lines, numberOfLines) = textSplitter.Split();
 
-            var rectangleLengthCalculator = new RectangleLengthCalculator(lines);
-            
-            rectangleWidth = rectangleLengthCalculator.Calculate() * 9;
+            rectangleWidth = new RectangleLengthCalculator(lines).Calculate() * 9;
 
             var position = orientation.GetColumnRow();
             (rectangleXPos, rectangleYPos) = GetPosition(position);
@@ -46,7 +44,7 @@ namespace Flowcharts
             return (In, Out, rectangleWidth);
         }
 
-        public virtual (double rectangleXPos, double rectangleYPos) GetPosition((int Column, int Row)position)
+        public virtual (double rectangleXPos, double rectangleYPos) GetPosition((int Column, int Row) position)
         {
             rectangleXPos = distanceFromEdge + position.Column * unitLength + (unitLength - rectangleWidth) / 2;
             rectangleYPos = distanceFromEdge + position.Row * unitHeight - 17;

@@ -29,7 +29,7 @@ namespace Flowcharts
             this.xmlWriter = xmlWriter;
             this.orientation = orientation;   
             var position = orientation.GetColumnRow();
-            radius = GetRadius(Text);
+            radius = new CircleRadiusCalculator(Text).Calculate(); ;
 
             if (Text.Length == 1)
             {
@@ -68,11 +68,6 @@ namespace Flowcharts
             xmlWriter.WriteEndElement();
 
             return (In, Out);
-        }
-
-        public int GetRadius(string Text)
-        {
-            return new CircleRadiusCalculator(Text).Calculate();
         }
 
         public ((double x, double y) In, (double x, double y) Out) GetInOut()
