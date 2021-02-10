@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Xml;
 
 namespace Flowcharts
@@ -36,9 +34,12 @@ namespace Flowcharts
 
             rhombusSize = Calculate(lines);
 
-            var position = orientation.GetColumnRow(); 
-            rhombusXPos = distanceFromEdge + position.Column * unitLength + (unitLength - rhombusSize/2) / 2;
-            rhombusYPos = distanceFromEdge + position.Row * unitHeight - 23 * numberOfLines;
+            var maxline = lines.Max(x => x.Length);
+
+            var (Column, Row) = orientation.GetColumnRow(); 
+
+            rhombusXPos = distanceFromEdge + Column * unitLength + (unitLength - rhombusSize/3) / 2 + maxline * 4/3 - (numberOfLines - 1) * 7;
+            rhombusYPos = distanceFromEdge + Row * unitHeight - rhombusSize/2 +  numberOfLines * 5; 
             (In, Out) = Draw();
 
             return (In, Out, rectangleLength);
@@ -53,8 +54,6 @@ namespace Flowcharts
 
             (In, Out) = GetInOut();
             
-            var position = orientation.GetColumnRow();
-
             string coordinates = CoordinatesCalculator(rhombusXPos, rhombusYPos, rhombusSize);
 
             xmlWriter.WriteAttributeString("points", coordinates);
@@ -69,25 +68,33 @@ namespace Flowcharts
         {
             var maxline = lines.Max(x => x.Length);
 
-            if (maxline < 5)
+            if (maxline < 2)
             {
-                return 50;
+                return 40;
             }
-            else if (maxline >= 5 && maxline < 10)
+            else if (maxline >= 2 && maxline < 5)
+            {
+                return 68;
+            }
+            else if (maxline >= 5 && maxline < 7)
+            {
+                return 85;
+            }
+            else if (maxline >= 7 && maxline < 10)
             {
                 return 100;
             }
             else if (maxline >= 10 && maxline < 13)
             {
-                return 150;
+                return 120;
             }
             else if (maxline >= 13 && maxline < 17)
             {
-                return 180;
+                return 150;
             }
             else
             {
-                return 250;
+                return 190;
             }            
         }
 
@@ -106,12 +113,12 @@ namespace Flowcharts
             if (typeof(OrientationLeftRight) == orientation.GetType())
             {
                 In = (rhombusXPos - 5, rhombusYPos + rhombusSize / 2);
-                Out = (rhombusXPos + rhombusSize, rhombusYPos + 20);
+                Out = (rhombusXPos + rhombusSize, rhombusYPos + rhombusSize / 2);
             }
             else if (typeof(OrientationRightLeft) == orientation.GetType())
             {
-                In = (rhombusXPos + rhombusSize, rhombusYPos + 20);
-                Out = (rhombusXPos - 5, rhombusYPos + rhombusSize / 2);
+                In = (rhombusXPos + rhombusSize + 3, rhombusYPos + rhombusSize / 2);
+                Out = (rhombusXPos, rhombusYPos + rhombusSize / 2);
             }
             else if (typeof(OrientationTopDown) == orientation.GetType())
             {
@@ -120,8 +127,8 @@ namespace Flowcharts
             }
             else if (typeof(OrientationDownTop) == orientation.GetType())
             {
-                In = (rhombusXPos + rectangleLength / 2, rhombusYPos + rhombusSize);
-                Out = (rhombusXPos + rectangleLength / 2, rhombusYPos - 4);
+                In = (rhombusXPos + rhombusSize / 2, rhombusYPos + rhombusSize + 3);
+                Out = (rhombusXPos + rhombusSize / 2, rhombusYPos);
             }
             else
             {

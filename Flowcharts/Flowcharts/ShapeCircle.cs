@@ -28,19 +28,21 @@ namespace Flowcharts
             (distanceFromEdge, unitLength, unitHeight) = new GridSpacer(orientation).GetSpacing();
             this.xmlWriter = xmlWriter;
             this.orientation = orientation;   
-            var position = orientation.GetColumnRow();
+
+            var (Column, Row) = orientation.GetColumnRow();
+
             radius = new CircleRadiusCalculator(text).Calculate(); ;
-            (string[] lines, int numberOfLines) = new TextSplitter(text).Split();
+            (_, int numberOfLines) = new TextSplitter(text).Split();
 
             if (text.Length == 1)
             {
-                xPos = distanceFromEdge + position.Column * unitLength + unitLength / 2 + 5;
-                yPos = distanceFromEdge + position.Row * unitHeight + numberOfLines * 5 - 3;
+                xPos = distanceFromEdge + Column * unitLength + unitLength / 2 + 5;
+                yPos = distanceFromEdge + Row * unitHeight + numberOfLines * 5 - 3;
             }
             else
             {
-                xPos = distanceFromEdge + position.Column * unitLength + unitLength / 2 + radius / 4 + 5;
-                yPos = distanceFromEdge + position.Row * unitHeight + numberOfLines * 5;
+                xPos = distanceFromEdge + Column * unitLength + unitLength / 2 + radius / 4 + 5;
+                yPos = distanceFromEdge + Row * unitHeight + numberOfLines * 5;
             }
    
             (In, Out) = Draw();

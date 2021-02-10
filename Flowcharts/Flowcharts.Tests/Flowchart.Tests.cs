@@ -11,7 +11,7 @@ namespace Flowcharts.Tests
         {
             MemoryStream stream = new MemoryStream();
 
-            var flowchart = new Flowchart(stream);
+            var flowchart = new Flowchart("LeftRight", stream);
             flowchart.AddPair(("A", "Rectangle"), ("B", "Rectangle"));
             flowchart.Draw();
 
@@ -52,7 +52,7 @@ namespace Flowcharts.Tests
         {
             MemoryStream stream = new MemoryStream();
 
-            var flowchart = new Flowchart(stream);
+            var flowchart = new Flowchart("LeftRight", stream);
 
             flowchart.AddPair(("Lorem ipsum dolor sit amet, consectetur", "Rectangle"), ("B", "Rectangle"));
 
@@ -95,7 +95,8 @@ namespace Flowcharts.Tests
         {
             MemoryStream stream = new MemoryStream();
 
-            var flowchart = new Flowchart(stream);
+            var flowchart = new Flowchart("LeftRight", stream);
+
             flowchart.AddPair(("A", "Rectangle"), ("B", "Rectangle"));
             flowchart.AddPair(("A", "Rectangle"), ("C", "Rectangle"));
             flowchart.Draw();
@@ -149,7 +150,7 @@ namespace Flowcharts.Tests
         {
             MemoryStream stream = new MemoryStream();
 
-            var flowchart = new Flowchart(stream);
+            var flowchart = new Flowchart("LeftRight", stream);
             flowchart.AddPair(("A", "Rectangle"), ("B", "Rectangle"));
             flowchart.AddPair(("A", "Rectangle"), ("C", "Rectangle"));
             flowchart.AddPair(("A", "Rectangle"), ("D", "Rectangle"));
@@ -218,7 +219,7 @@ namespace Flowcharts.Tests
         {
             MemoryStream stream = new MemoryStream();
 
-            var flowchart = new Flowchart(stream);
+            var flowchart = new Flowchart("LeftRight", stream);
             flowchart.AddPair(("A", "Rectangle"), ("B", "Rectangle"));
             flowchart.AddPair(("A", "Rectangle"), ("C", "Rectangle"));
             flowchart.AddPair(("A", "Rectangle"), ("D", "Rectangle"));
@@ -302,8 +303,7 @@ namespace Flowcharts.Tests
         {
             MemoryStream stream = new MemoryStream();
 
-            var flowchart = new Flowchart(stream);
-            flowchart.Orientation("LR");
+            var flowchart = new Flowchart("LeftRight", stream);
 
             flowchart.AddPair(("A", "Rectangle"), ("B", "Rectangle"));
             flowchart.AddPair(("B", "Rectangle"), ("C", "Rectangle"));
@@ -373,8 +373,7 @@ namespace Flowcharts.Tests
         {
             MemoryStream stream = new MemoryStream();
 
-            var flowchart = new Flowchart(stream);
-            flowchart.Orientation("RL");
+            var flowchart = new Flowchart("LeftRight", stream);
 
             flowchart.AddPair(("A", "Rectangle"), ("B", "Rectangle"));
             flowchart.AddPair(("B", "Rectangle"), ("C", "Rectangle"));
@@ -444,8 +443,7 @@ namespace Flowcharts.Tests
         {
             MemoryStream stream = new MemoryStream();
 
-            var flowchart = new Flowchart(stream);
-            flowchart.Orientation("TB");
+            var flowchart = new Flowchart("TopDown", stream);
 
             flowchart.AddPair(("A", "Rectangle"), ("B", "Rectangle"));
             flowchart.AddPair(("B", "Rectangle"), ("C", "Rectangle"));
@@ -515,8 +513,7 @@ namespace Flowcharts.Tests
         {
             MemoryStream stream = new MemoryStream();
 
-            var flowchart = new Flowchart(stream);
-            flowchart.Orientation("BT");
+            var flowchart = new Flowchart("DownTop", stream);
 
             flowchart.AddPair(("A", "Rectangle"), ("B", "Rectangle"));
             flowchart.AddPair(("B", "Rectangle"), ("C", "Rectangle"));
