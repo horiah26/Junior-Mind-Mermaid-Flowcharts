@@ -23,15 +23,16 @@ namespace Flowcharts
 
         public ShapeCircle() { }
 
-        public ((double x, double y) In, (double x, double y) Out, int boxWidth) Draw(XmlWriter xmlWriter, IOrientation orientation, string Text, int numberOfLines)
+        public ((double x, double y) In, (double x, double y) Out, int boxWidth) Draw(XmlWriter xmlWriter, IOrientation orientation, string text)
         {
             (distanceFromEdge, unitLength, unitHeight) = new GridSpacer(orientation).GetSpacing();
             this.xmlWriter = xmlWriter;
             this.orientation = orientation;   
             var position = orientation.GetColumnRow();
-            radius = new CircleRadiusCalculator(Text).Calculate(); ;
+            radius = new CircleRadiusCalculator(text).Calculate(); ;
+            (string[] lines, int numberOfLines) = new TextSplitter(text).Split();
 
-            if (Text.Length == 1)
+            if (text.Length == 1)
             {
                 xPos = distanceFromEdge + position.Column * unitLength + unitLength / 2 + 5;
                 yPos = distanceFromEdge + position.Row * unitHeight + numberOfLines * 5 - 3;

@@ -57,7 +57,7 @@ namespace Flowcharts
             Type shapeType = Type.GetType("Flowcharts.Shape" + shapeString);
             IShape shape = (IShape)Activator.CreateInstance(shapeType);
 
-            ((double x, double y) In, (double x, double y) Out, int boxWidth) = shape.Draw(xmlWriter, orientation, text, numberOfLines);
+            ((double x, double y) In, (double x, double y) Out, int boxWidth) = shape.Draw(xmlWriter, orientation, text);
 
             this.boxWidth = boxWidth;
             return (In, Out);

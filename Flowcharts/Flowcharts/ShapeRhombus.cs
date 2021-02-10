@@ -8,7 +8,7 @@ namespace Flowcharts
 {
     class ShapeRhombus : IShape
     {
-        int rectangleWidth = 0;
+        int rectangleLength = 0;
         private int distanceFromEdge;
         private int unitLength;
         private int unitHeight;
@@ -26,16 +26,13 @@ namespace Flowcharts
         {
         }
 
-        public ((double x, double y) In, (double x, double y) Out, int boxWidth) Draw(XmlWriter xmlWriter, IOrientation orientation, string Text, int numberOfLines)
+        public ((double x, double y) In, (double x, double y) Out, int boxWidth) Draw(XmlWriter xmlWriter, IOrientation orientation, string Text)
         {
             this.xmlWriter = xmlWriter;
             this.orientation = orientation;
             (distanceFromEdge, unitLength, unitHeight) = new GridSpacer(orientation).GetSpacing();
 
-            var textSplitter = new TextSplitter(Text);
-
-            string[] lines;
-            (lines, numberOfLines) = textSplitter.Split();
+            (string[] lines, int numberOfLines) = new TextSplitter(Text).Split();
 
             rhombusSize = Calculate(lines);
 
@@ -44,7 +41,7 @@ namespace Flowcharts
             rhombusYPos = distanceFromEdge + position.Row * unitHeight - 23 * numberOfLines;
             (In, Out) = Draw();
 
-            return (In, Out, rectangleWidth);
+            return (In, Out, rectangleLength);
         }
 
         public ((double x, double y) In, (double x, double y) Out) Draw()
@@ -123,8 +120,8 @@ namespace Flowcharts
             }
             else if (typeof(OrientationDownTop) == orientation.GetType())
             {
-                In = (rhombusXPos + rectangleWidth / 2, rhombusYPos + rhombusSize);
-                Out = (rhombusXPos + rectangleWidth / 2, rhombusYPos - 4);
+                In = (rhombusXPos + rectangleLength / 2, rhombusYPos + rhombusSize);
+                Out = (rhombusXPos + rectangleLength / 2, rhombusYPos - 4);
             }
             else
             {

@@ -38,7 +38,7 @@ namespace Flowcharts
 
         public void Draw(int numberOfLines, string[] lines)
         {
-            new ShapeArrowRectangle(xmlWriter, fromElement, toElement, numberOfLines, lines).Draw(xmlWriter, fromElement.orientation, text, numberOfLines);
+            new ShapeArrowRectangle(xmlWriter, fromElement, toElement, numberOfLines, lines).Draw(xmlWriter, fromElement.orientation, text);
         }
     }
 }

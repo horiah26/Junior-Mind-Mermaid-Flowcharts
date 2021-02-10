@@ -25,7 +25,7 @@ namespace Flowcharts
             }
             else if (maxline >= 5 && maxline < 10)
             {
-                return 35 + numberOfLines * 2;
+                return 40 + numberOfLines * 2;
             }
             else if (maxline >= 10 && maxline < 13)
             {

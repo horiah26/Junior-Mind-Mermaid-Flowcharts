@@ -7,7 +7,7 @@ namespace Flowcharts
 {
     class ShapeRectangle : IShape
     {
-        int rectangleWidth = 0;
+        int rectangleLength = 0;
         private int distanceFromEdge ;
         private int unitLength;
         private int unitHeight;
@@ -23,30 +23,28 @@ namespace Flowcharts
 
         public ShapeRectangle() {}
 
-        public ((double x, double y) In, (double x, double y) Out, int boxWidth) Draw(XmlWriter xmlWriter, IOrientation orientation, string text, int numberOfLines)
+        public ((double x, double y) In, (double x, double y) Out, int boxWidth) Draw(XmlWriter xmlWriter, IOrientation orientation, string text)
         {
             this.xmlWriter = xmlWriter;
             this.orientation = orientation;
+
+            (string[] lines, int numberOfLines) = new TextSplitter(text).Split();
+
             rectangleHeight = 40 + (numberOfLines - 1) * 17;
+
+            rectangleLength = new RectangleLengthCalculator(lines).Calculate() * 9;
             (distanceFromEdge, unitLength, unitHeight) = new GridSpacer(orientation).GetSpacing();
-
-            var textSplitter = new TextSplitter(text);
-
-            string[] lines;
-            (lines, numberOfLines) = textSplitter.Split();
-
-            rectangleWidth = new RectangleLengthCalculator(lines).Calculate() * 9;
 
             var position = orientation.GetColumnRow();
             (rectangleXPos, rectangleYPos) = GetPosition(position);
             (In, Out) = Draw();
 
-            return (In, Out, rectangleWidth);
+            return (In, Out, rectangleLength);
         }
 
         public virtual (double rectangleXPos, double rectangleYPos) GetPosition((int Column, int Row) position)
         {
-            rectangleXPos = distanceFromEdge + position.Column * unitLength + (unitLength - rectangleWidth) / 2;
+            rectangleXPos = distanceFromEdge + position.Column * unitLength + (unitLength - rectangleLength) / 2;
             rectangleYPos = distanceFromEdge + position.Row * unitHeight - 17;
 
             return (rectangleXPos, rectangleYPos);
@@ -67,7 +65,7 @@ namespace Flowcharts
             xmlWriter.WriteAttributeString("rx", 7.ToString());
             xmlWriter.WriteAttributeString("ry", 7.ToString());
 
-            xmlWriter.WriteAttributeString("width", rectangleWidth.ToString());
+            xmlWriter.WriteAttributeString("width", rectangleLength.ToString());
             xmlWriter.WriteAttributeString("height", rectangleHeight.ToString());
 
             Color();
@@ -87,22 +85,22 @@ namespace Flowcharts
             if (typeof(OrientationLeftRight) == orientation.GetType())
             {
                 In = (rectangleXPos - 5, rectangleYPos + rectangleHeight / 2);
-                Out = (rectangleXPos + rectangleWidth, rectangleYPos + 20);
+                Out = (rectangleXPos + rectangleLength, rectangleYPos + 20);
             }
             else if (typeof(OrientationRightLeft) == orientation.GetType())
             {
-                In = (rectangleXPos + rectangleWidth, rectangleYPos + 20);
+                In = (rectangleXPos + rectangleLength, rectangleYPos + 20);
                 Out = (rectangleXPos - 5, rectangleYPos + rectangleHeight / 2);
             }
             else if (typeof(OrientationTopDown) == orientation.GetType())
             {
-                In = (rectangleXPos + rectangleWidth / 2, rectangleYPos - 4);
-                Out = (rectangleXPos + rectangleWidth / 2, rectangleYPos + rectangleHeight);
+                In = (rectangleXPos + rectangleLength / 2, rectangleYPos - 4);
+                Out = (rectangleXPos + rectangleLength / 2, rectangleYPos + rectangleHeight);
             }
             else if (typeof(OrientationDownTop) == orientation.GetType())
             {
-                In = (rectangleXPos + rectangleWidth / 2, rectangleYPos + rectangleHeight);
-                Out = (rectangleXPos + rectangleWidth / 2, rectangleYPos - 4);
+                In = (rectangleXPos + rectangleLength / 2, rectangleYPos + rectangleHeight);
+                Out = (rectangleXPos + rectangleLength / 2, rectangleYPos - 4);
             }
             else
             {
