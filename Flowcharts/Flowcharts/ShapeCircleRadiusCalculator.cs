@@ -5,10 +5,10 @@ using System.Text;
 
 namespace Flowcharts
 {
-    class CircleRadiusCalculator
+    class ShapeCircleRadiusCalculator
     {
         string text;
-        public CircleRadiusCalculator(string text) 
+        public ShapeCircleRadiusCalculator(string text) 
         {
             this.text = text;
         }
