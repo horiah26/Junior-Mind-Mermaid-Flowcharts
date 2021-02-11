@@ -13,9 +13,9 @@ namespace Flowcharts
         static void Main()
         {
             string fileName = "test";
-            //string path = @"D:\Code\OOP2\Flowcharts\Flowcharts\bin\Debug\";
+            string path = @"D:\Code\OOP2\Flowcharts\Flowcharts\bin\Debug\";
 
-            var flowchart = new Flowchart("LeftRight", fileName);
+            var flowchart = new Flowchart("LeftRight", fileName, path);
 
             flowchart.AddPair(("Rhombus", "Rhombus"), ("Rhombus 2", "Rhombus"), "Rhombus to rhombus");
             flowchart.AddPair(("Circle", "Circle"), ("Rhombus 2", "Rhombus"), "Circle to rhombus");
