@@ -7,7 +7,7 @@ namespace Flowcharts
 {
     public class TextSplitter
     {
-        string text;
+        readonly string text;
        
         public TextSplitter(string text)
         {

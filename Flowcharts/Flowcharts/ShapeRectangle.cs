@@ -52,12 +52,9 @@ namespace Flowcharts
 
         public ((double x, double y) In, (double x, double y) Out) Draw()
         {
-            (double x, double y) In;
-            (double x, double y) Out;
-
             xmlWriter.WriteStartElement("rect");
 
-            (In, Out) = GetInOut();
+            (In, Out) = new ShapeRectangleInOutCalculator(orientation, rectangleXPos, rectangleYPos, rectangleHeight, rectangleLength).GetInOut();
 
             xmlWriter.WriteAttributeString("x", rectangleXPos.ToString());
             xmlWriter.WriteAttributeString("y", rectangleYPos.ToString());
@@ -78,36 +75,6 @@ namespace Flowcharts
         virtual public void Color()
         {
             xmlWriter.WriteAttributeString("style", "fill:rgb(255,255,255);stroke-width:2;stroke:rgb(0,0,0)");
-        }
-
-        public ((double x, double y) In, (double x, double y) Out) GetInOut()
-        {
-            if (typeof(OrientationLeftRight) == orientation.GetType())
-            {
-                In = (rectangleXPos - 5, rectangleYPos + rectangleHeight / 2);
-                Out = (rectangleXPos + rectangleLength, rectangleYPos + 20);
-            }
-            else if (typeof(OrientationRightLeft) == orientation.GetType())
-            {
-                In = (rectangleXPos + rectangleLength, rectangleYPos + 20);
-                Out = (rectangleXPos - 5, rectangleYPos + rectangleHeight / 2);
-            }
-            else if (typeof(OrientationTopDown) == orientation.GetType())
-            {
-                In = (rectangleXPos + rectangleLength / 2, rectangleYPos - 4);
-                Out = (rectangleXPos + rectangleLength / 2, rectangleYPos + rectangleHeight);
-            }
-            else if (typeof(OrientationDownTop) == orientation.GetType())
-            {
-                In = (rectangleXPos + rectangleLength / 2, rectangleYPos + rectangleHeight);
-                Out = (rectangleXPos + rectangleLength / 2, rectangleYPos - 4);
-            }
-            else
-            {
-                throw new FormatException("Orientation has not been writeen correctly");
-            }
-
-            return (In, Out);
         }
     }
 }

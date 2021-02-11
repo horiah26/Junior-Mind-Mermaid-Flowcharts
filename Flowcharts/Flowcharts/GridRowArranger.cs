@@ -7,7 +7,7 @@ namespace Flowcharts
 {
     class GridRowArranger
     {
-        Grid grid;
+        readonly Grid grid;
 
         public GridRowArranger(Grid grid)
         {

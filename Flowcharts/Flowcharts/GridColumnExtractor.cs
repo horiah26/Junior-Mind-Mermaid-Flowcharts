@@ -6,7 +6,7 @@ namespace Flowcharts
 {
     public class GridColumnExtractor
     {
-        Grid grid;
+        readonly Grid grid;
 
         public GridColumnExtractor(Grid grid)
         {

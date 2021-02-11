@@ -5,10 +5,10 @@ namespace Flowcharts
 {
     class ArrowTextHandler
     {
-        XmlWriter xmlWriter;
-        Element fromElement;
-        Element toElement;
-        string text;
+        readonly XmlWriter xmlWriter;
+        readonly Element fromElement;
+        readonly Element toElement;
+        readonly string text;
 
         public ArrowTextHandler(XmlWriter xmlWriter, Element fromElement, Element toElement, string text)
         {

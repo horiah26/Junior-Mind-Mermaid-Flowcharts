@@ -6,7 +6,7 @@ namespace Flowcharts
 {
     class GridEmptySpotsFiller
     {
-        Grid grid;
+        readonly Grid grid;
 
         public GridEmptySpotsFiller(Grid grid)
         {

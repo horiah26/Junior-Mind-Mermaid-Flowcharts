@@ -6,7 +6,7 @@ namespace Flowcharts
 {
     class GridParentFromPreviousColumnSelector
     {
-        Grid grid;
+        readonly Grid grid;
 
         public GridParentFromPreviousColumnSelector(Grid grid)
         {

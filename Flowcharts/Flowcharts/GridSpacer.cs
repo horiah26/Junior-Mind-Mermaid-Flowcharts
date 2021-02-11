@@ -6,7 +6,7 @@ namespace Flowcharts
 {
     class GridSpacer
     {
-        IOrientation orientation;
+        readonly IOrientation orientation;
 
         public GridSpacer(IOrientation orientation)
         {

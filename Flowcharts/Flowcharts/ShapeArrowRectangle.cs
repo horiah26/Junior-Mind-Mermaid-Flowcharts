@@ -8,11 +8,11 @@ namespace Flowcharts
 {
     class ShapeArrowRectangle : ShapeRectangle
     {
-        private XmlWriter xmlWriter;
-        Element fromElement;
-        Element toElement;
-        int numberOfLines;
-        string[] lines;
+        private readonly XmlWriter xmlWriter;
+        readonly Element fromElement;
+        readonly Element toElement;
+        readonly int numberOfLines;
+        readonly string[] lines;
 
         public ShapeArrowRectangle(XmlWriter xmlWriter, Element fromElement, Element toElement, int numberOfLines, string[] lines) 
         {
