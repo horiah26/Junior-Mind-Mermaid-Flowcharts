@@ -6,15 +6,17 @@ namespace Flowcharts
 {
     public class Grid
     {
-        public int rowSize = 1;
-        public int columnSize = 1;
+        public int rowSize;
+        public int columnSize;
         public int lastOccupiedColumn;
 
         public Element[,] elementGrid;
 
-        public Grid()
+        public Grid(int rowSize = 1, int columnSize = 1)
         {
             elementGrid = new Element[rowSize, columnSize];
+            this.rowSize = rowSize;
+            this.columnSize = columnSize;
         }
 
         public void Add(Element element, int row, int column)
@@ -57,6 +59,11 @@ namespace Flowcharts
             new GridBackArrowAdjuster(this).AdjustForBackArrows(arrows);
         }
 
+        public void ArrangeLastColumn()
+        {
+            new GridLastColumnArranger(this).Level();
+        }
+
         public IEnumerator<Element> GetEnumerator()
         {
             foreach (Element element in elementGrid)
@@ -74,8 +81,10 @@ namespace Flowcharts
 
             UpdateElementsPosition();
             ArrangeRows();
+            UpdateElementsPosition();
             FillEmptySpots();
             AdjustForBackArrows(arrows);
+            ArrangeLastColumn();
             UpdateElementsPosition();
         }
     }

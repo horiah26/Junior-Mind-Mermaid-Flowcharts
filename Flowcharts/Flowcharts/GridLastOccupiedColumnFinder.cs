@@ -7,18 +7,18 @@ namespace Flowcharts
 {
     class GridLastOccupiedColumnFinder
     {
-        Element[,] elementGrid;
+        Grid grid;
 
         public GridLastOccupiedColumnFinder(Grid grid)
         {
-            elementGrid = grid.elementGrid;
+            this.grid = grid;
         }
 
         public int GetLastColumn()
         {
             List<Element> list = new List<Element> { };
 
-            foreach(Element element in elementGrid)
+            foreach(Element element in grid.elementGrid)
             {
                 if(element != null)
                 {

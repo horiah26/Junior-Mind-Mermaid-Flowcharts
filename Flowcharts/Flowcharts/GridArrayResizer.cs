@@ -6,14 +6,10 @@ namespace Flowcharts
 {
     class GridArrayResizer
     {
-        int columnSize;
-        int rowSize;
         Grid grid;
 
         public GridArrayResizer(Grid grid)
         {
-            columnSize = grid.columnSize;
-            rowSize = grid.rowSize;
             this.grid = grid;
         }
 
@@ -30,11 +26,11 @@ namespace Flowcharts
                 }
             }
 
-            if (columnSize < columns)
+            if (grid.columnSize < columns)
             {
                 grid.columnSize = columns;
             }
-            if (rowSize < rows)
+            if (grid.rowSize < rows)
             {
                 grid.rowSize = rows;
             }

@@ -6,30 +6,26 @@ namespace Flowcharts
 {
     public class GridElementActualizer
     {
-        int rowSize;
-        int columnSize;
-        Element[,] elementGrid;
+        Grid grid;
 
         public GridElementActualizer(Grid grid)
         {
-            rowSize = grid.rowSize;
-            columnSize = grid.columnSize;
-            elementGrid = grid.elementGrid;
+            this.grid = grid;
         }
 
         public void Actualize()
         {
-            for (int i = 0; i < rowSize; i++)
+            for (int i = 0; i < grid.rowSize; i++)
             {
-                for (int j = 0; j < columnSize; j++)
+                for (int j = 0; j < grid.columnSize; j++)
                 {
-                    if (elementGrid[i, j] != null)
+                    if (grid.elementGrid[i, j] != null)
                     {
-                        elementGrid[i, j].Row = i;
-                        elementGrid[i, j].Column = j;
+                        grid.elementGrid[i, j].Row = i;
+                        grid.elementGrid[i, j].Column = j;
 
-                        elementGrid[i, j].columnSize = columnSize;
-                        elementGrid[i, j].rowSize = rowSize;
+                        grid.elementGrid[i, j].columnSize = grid.columnSize;
+                        grid.elementGrid[i, j].rowSize = grid.rowSize;
                     }
                 }
             }

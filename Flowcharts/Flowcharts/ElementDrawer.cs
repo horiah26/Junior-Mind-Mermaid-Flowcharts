@@ -12,7 +12,6 @@ namespace Flowcharts
         private int unitLength;
         private int unitHeight;
         int boxWidth = 0;
-        int numberOfLines = 1;
         readonly string text;
         readonly string shapeString;
 
@@ -31,7 +30,7 @@ namespace Flowcharts
             string[] lines;
 
             var textSplitter = new TextSplitter(text);
-            (lines, numberOfLines) = textSplitter.Split();
+            (lines, _) = textSplitter.Split();
 
             ((double x, double y) In, (double x, double y) Out) = DrawBox();
 

@@ -8,27 +8,21 @@ namespace Flowcharts
     class GridRowArranger
     {
         Grid grid;
-        int rowSize;
-        int lastOccupiedColumn;
-        Element[,] elementGrid;
 
         public GridRowArranger(Grid grid)
         {
             this.grid = grid;
-            rowSize = grid.rowSize;
-            lastOccupiedColumn = grid.lastOccupiedColumn;
-            elementGrid = grid.elementGrid;
         }
 
         public void ArrangeRows()
         {
             var elementActualizer = new GridElementActualizer(grid);
 
-            for (int column = lastOccupiedColumn; column >= 0; column--)
+            for (int column = grid.lastOccupiedColumn; column >= 0; column--)
             {
-                for (int row = 0; row < rowSize; row++)
+                for (int row = 0; row < grid.rowSize; row++)
                 {
-                    if (elementGrid[row, column] != null)
+                    if (grid.elementGrid[row, column] != null)
                     {
                         MoveColumnInPlace(row, column);
                     }
@@ -37,13 +31,12 @@ namespace Flowcharts
                 elementActualizer.Actualize();
             }
 
-            new GridLastColumnLeveler(grid).Level();
             elementActualizer.Actualize();
         }
 
         private void MoveColumnInPlace(int row, int column)
         {
-            double average = GetAverageRowOfChildren(elementGrid[row, column]);
+            double average = GetAverageRowOfChildren(grid.elementGrid[row, column]);
             int difference = (int)average - row;
             if (difference > 0)
             {

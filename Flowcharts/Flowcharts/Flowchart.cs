@@ -20,12 +20,12 @@ namespace Flowcharts
         FlowchartElementManager elementManager;
         FlowchartArrowManager arrowManager;
 
-        public Flowchart(string orientationName, string FileName = null)
+        public Flowchart(string orientationName, string FileName = null, string path = null)
         {
             this.orientationName = orientationName;
             this.FileName = FileName;
 
-            xmlWriter = XmlWriter.Create(FileName + ".svg");
+            xmlWriter = XmlWriter.Create(path + FileName + ".svg");
 
             InitializeFlowchart();
         }
@@ -59,9 +59,6 @@ namespace Flowcharts
             elementManager[text1].backElements.Add(elementManager[text2]);
         }
 
-        public void Draw()
-        {
-            new FlowchartDrawer(xmlWriter, memoryStream, grid, arrowManager, elementManager).Draw();
-        }
+        public void Draw() => new FlowchartDrawer(xmlWriter, memoryStream, grid, arrowManager, elementManager).Draw();
     }
 }

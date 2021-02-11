@@ -6,24 +6,20 @@ namespace Flowcharts
 {
     class GridParentFromPreviousColumnSelector
     {
-        int lastOccupiedColumn;
-        int rowSize;
-        Element[,] elementGrid;
+        Grid grid;
 
         public GridParentFromPreviousColumnSelector(Grid grid)
         {
-            lastOccupiedColumn = grid.lastOccupiedColumn;
-            rowSize = grid.rowSize;
-            elementGrid = grid.elementGrid;
+            this.grid = grid;
         }
 
         public void Select()
         {
-            for (int column = lastOccupiedColumn; column >= 0; column--)
+            for (int column = grid.lastOccupiedColumn; column >= 0; column--)
             {
-                for (int row = 0; row < rowSize; row++)
+                for (int row = 0; row < grid.rowSize; row++)
                 {
-                    var element = elementGrid[row, column];
+                    var element = grid.elementGrid[row, column];
                     if (element != null)
                     {
                         List<Element> newParents = new List<Element> { };

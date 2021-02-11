@@ -6,22 +6,20 @@ namespace Flowcharts
 {
     public class GridColumnExtractor
     {
-        Element[,] elementGrid;
-        int rowSize;
+        Grid grid;
 
         public GridColumnExtractor(Grid grid)
         {
-            elementGrid = grid.elementGrid;
-            rowSize = grid.rowSize;
+            this.grid = grid;
         }
 
         public IEnumerable<Element> Extract(int column)
         {
             List<Element> extractedColumn = new List<Element> { };
 
-            for(int i = 0; i< rowSize; i++)
+            for(int i = 0; i < grid.rowSize - 1; i++)
             {
-                extractedColumn.Add(elementGrid[i, column]);
+                extractedColumn.Add(grid.elementGrid[i, column]);
             }
 
             return extractedColumn;

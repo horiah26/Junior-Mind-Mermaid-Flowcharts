@@ -7,28 +7,23 @@ namespace Flowcharts
     class GridElementAdder
     {
         Grid grid;
-        int rowSize;
-        int columnSize;
-        Element[,] elementGrid;
 
         public GridElementAdder(Grid grid)
         {
             this.grid = grid;
-            rowSize = grid.rowSize;
-            columnSize = grid.columnSize;
-            elementGrid = grid.elementGrid;
-
         }
 
         public void Add(Element element, int row, int column)
         {
-            if (column > grid.columnSize - 1)
-            {
-                grid.elementGrid = new GridArrayResizer(grid).Resize(elementGrid, rowSize, column + 1);
-            }
+            var gridResizer = new GridArrayResizer(grid);
+
             if (row > grid.rowSize - 1)
             {
-                grid.elementGrid = new GridArrayResizer(grid).Resize(elementGrid, row + 1, columnSize);
+                grid.elementGrid = gridResizer.Resize(grid.elementGrid, row + 1, grid.columnSize);
+            }
+            if (column > grid.columnSize - 1)
+            {
+                grid.elementGrid = gridResizer.Resize(grid.elementGrid, grid.rowSize, column + 1);
             }
 
             if (grid.elementGrid[row, column] != null)

@@ -20,12 +20,12 @@ namespace Flowcharts.Tests
 
             var rectangles = xmlDoc.SelectNodes("/*[name()='svg']/*[name()='rect']");
 
-            Assert.Equal("185", rectangles[0].Attributes[0].Value);
-            Assert.Equal("33", rectangles[0].Attributes[1].Value);
-            Assert.Equal("30", rectangles[0].Attributes[4].Value);
+            Assert.Equal("261", rectangles[0].Attributes[0].Value);
+            Assert.Equal("58", rectangles[0].Attributes[1].Value);
+            Assert.Equal("27", rectangles[0].Attributes[4].Value);
             Assert.Equal("40", rectangles[0].Attributes[5].Value);
 
-            Assert.Equal("485", rectangles[1].Attributes[0].Value);
+            Assert.Equal("661", rectangles[1].Attributes[0].Value);
             Assert.Equal("33", rectangles[1].Attributes[1].Value);
             Assert.Equal("30", rectangles[1].Attributes[4].Value);
             Assert.Equal("40", rectangles[1].Attributes[5].Value);

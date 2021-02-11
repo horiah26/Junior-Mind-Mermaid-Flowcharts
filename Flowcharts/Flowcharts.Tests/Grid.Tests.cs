@@ -80,9 +80,9 @@ namespace Flowcharts.Tests
 
             var element = new Element(xmlWriter, "A", "LR");
 
-            var grid = new Grid();
+            var grid = new Grid(10, 10);
 
-            Assert.Equal((1,1), grid.GetDimensions());
+            Assert.Equal((10,10), grid.GetDimensions());
 
             grid.Add(element, 12, 11);
 
@@ -119,14 +119,14 @@ namespace Flowcharts.Tests
 
             var element = new Element(xmlWriter, "A", "LR");
 
-            var grid = new Grid();
+            var grid = new Grid(10, 10);
 
-            Assert.Equal((1, 1), grid.GetDimensions());
+            Assert.Equal((10, 10), grid.GetDimensions());
 
             grid.Add(element, 13, 5);
 
             Assert.Equal(element, grid.ElementAt(13, 5));
-            Assert.Equal((14, 6), grid.GetDimensions());
+            Assert.Equal((14, 10), grid.GetDimensions());
         }
 
         [Fact]
@@ -139,7 +139,7 @@ namespace Flowcharts.Tests
             var elementA = new Element(xmlWriter, "A", "LR");
             var elementB = new Element(xmlWriter, "B", "LR");
 
-            var grid = new Grid();
+            var grid = new Grid(10, 10);
 
             grid.Add(elementA, 0, 0);
             grid.Add(elementB, 1, 0);
@@ -160,7 +160,7 @@ namespace Flowcharts.Tests
             var elementA = new Element(xmlWriter, "A", "LR");
             var elementB = new Element(xmlWriter, "B", "LR");
 
-            var grid = new Grid();
+            var grid = new Grid(10, 10);
 
             grid.Add(elementA, 0, 3);
             grid.Add(elementB, 1, 3);
@@ -181,7 +181,7 @@ namespace Flowcharts.Tests
             var elementA = new Element(xmlWriter, "A", "LR");
             var elementB = new Element(xmlWriter, "B", "LR");
 
-            var grid = new Grid();
+            var grid = new Grid(10, 10);
 
             grid.Add(elementA, 1, 1);
 
