@@ -10,10 +10,10 @@ namespace Flowcharts
     class FlowchartDrawer
     {
         Grid grid;
-        readonly XmlWriter xmlWriter;
-        readonly FlowchartArrowManager arrowManager;
-        readonly FlowchartElementManager elementManager;
-        readonly MemoryStream memoryStream;
+        XmlWriter xmlWriter;
+        FlowchartArrowManager arrowManager;
+        FlowchartElementManager elementManager;
+        MemoryStream memoryStream;
 
         public FlowchartDrawer(XmlWriter xmlWriter, MemoryStream memoryStream, Grid grid, FlowchartArrowManager arrowManager, FlowchartElementManager elementManager)
         {

@@ -5,10 +5,10 @@ namespace Flowcharts
 {
     class ArrowTextHandler
     {
-        readonly XmlWriter xmlWriter;
-        readonly Element fromElement;
-        readonly Element toElement;
-        readonly string text;
+        XmlWriter xmlWriter;
+        Element fromElement;
+        Element toElement;
+        string text;
 
         public ArrowTextHandler(XmlWriter xmlWriter, Element fromElement, Element toElement, string text)
         {
@@ -38,7 +38,7 @@ namespace Flowcharts
 
         public void Draw(int numberOfLines, string[] lines)
         {
-            new ShapeArrowRectangle(xmlWriter, fromElement, toElement, numberOfLines, lines).Draw(xmlWriter, fromElement.orientation, text);
+            new ShapeArrowRectangle(xmlWriter, fromElement.orientation, fromElement, toElement, numberOfLines, lines).Draw(xmlWriter, fromElement.orientation, text);
         }
     }
 }

@@ -6,7 +6,7 @@ namespace Flowcharts
 {
     class ShapeRhombus : IShape
     {
-        readonly int rectangleLength = 0;
+        int rectangleLength = 0;
         private int distanceFromEdge;
         private int unitLength;
         private int unitHeight;

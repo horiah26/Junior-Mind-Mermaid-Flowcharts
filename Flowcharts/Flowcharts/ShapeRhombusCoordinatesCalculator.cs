@@ -6,9 +6,9 @@ namespace Flowcharts
 {
     class ShapeRhombusCoordinatesCalculator
     {
-        readonly double rhombusXPos;
-        readonly double rhombusYPos;
-        readonly double rhombusSize;
+        double rhombusXPos;
+        double rhombusYPos;
+        double rhombusSize;
 
         public ShapeRhombusCoordinatesCalculator(double rhombusXPos, double rhombusYPos, double rhombusSize)
         {

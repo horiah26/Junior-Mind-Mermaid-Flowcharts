@@ -8,9 +8,9 @@ namespace Flowcharts
     {
         readonly XmlWriter xmlWriter;
         readonly IOrientation orientation;
-        private readonly int distanceFromEdge;
-        private readonly int unitLength;
-        private readonly int unitHeight;
+        private int distanceFromEdge;
+        private int unitLength;
+        private int unitHeight;
         int boxWidth = 0;
         readonly string text;
         readonly string shapeString;

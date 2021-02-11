@@ -9,8 +9,8 @@ namespace Flowcharts
     public class FlowchartElementManager : IEnumerable<Element>
     {
         public Dictionary<string, Element> dictionary = new Dictionary<string, Element> { };
-        readonly XmlWriter xmlWriter;
-        readonly string orientationName;
+        XmlWriter xmlWriter;
+        string orientationName;
 
         public FlowchartElementManager(XmlWriter xmlWriter, string orientationName) 
         {

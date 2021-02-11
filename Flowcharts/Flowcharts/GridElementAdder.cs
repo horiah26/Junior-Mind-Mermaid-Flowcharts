@@ -6,7 +6,7 @@ namespace Flowcharts
 {
     class GridElementAdder
     {
-        readonly Grid grid;
+        Grid grid;
 
         public GridElementAdder(Grid grid)
         {

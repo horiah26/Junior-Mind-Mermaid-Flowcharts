@@ -12,7 +12,7 @@ namespace Flowcharts
         public XmlWriter xmlWriter;
         public Element fromElement;
         public Element toElement;
-        readonly string[] coordinates;
+        string[] coordinates;
 
         public ArrowDrawer(XmlWriter xmlWriter, Element fromElement, Element toElement, string[] coordinates)
         {

@@ -8,11 +8,12 @@ namespace Flowcharts
     {
         (double x, double y) In;
         (double x, double y) Out;
-        readonly IOrientation orientation;
-        readonly double xPos;
-        readonly double yPos;
-        readonly int rectangleHeight;
-        readonly int rectangleLength;
+
+        IOrientation orientation;
+        double xPos;
+        double yPos;
+        int rectangleHeight;
+        int rectangleLength;
 
         public ShapeRectangleInOutCalculator(IOrientation orientation, double xPos, double yPos, int rectangleHeight, int rectangleLength)
         {

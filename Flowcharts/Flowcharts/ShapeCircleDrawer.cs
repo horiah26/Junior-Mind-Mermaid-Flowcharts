@@ -7,11 +7,12 @@ namespace Flowcharts
 {
     class ShapeCircleDrawer
     {
-        readonly XmlWriter xmlWriter;
-        readonly IOrientation orientation;
-        readonly int xPos;
-        readonly int yPos;
-        readonly int radius;
+        XmlWriter xmlWriter;
+        IOrientation orientation;
+
+        int xPos;
+        int yPos;
+        int radius;
 
         public ShapeCircleDrawer(XmlWriter xmlWriter, IOrientation orientation, int xPos, int yPos, int radius)
         {

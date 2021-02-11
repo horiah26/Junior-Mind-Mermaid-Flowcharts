@@ -8,10 +8,11 @@ namespace Flowcharts
     {
         (double x, double y) In;
         (double x, double y) Out;
-        readonly IOrientation orientation;
-        readonly int xPos;
-        readonly int yPos;
-        readonly int radius;
+
+        IOrientation orientation;
+        int xPos;
+        int yPos;
+        int radius;
 
         public ShapeCirlceInOutCalculator(IOrientation orientation, int xPos, int yPos, int radius)
         {

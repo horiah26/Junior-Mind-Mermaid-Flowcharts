@@ -8,9 +8,6 @@ namespace Flowcharts
     class ShapeRectangle : IShape
     {
         int rectangleLength = 0;
-        private int distanceFromEdge ;
-        private int unitLength;
-        private int unitHeight;
         private XmlWriter xmlWriter;
         IOrientation orientation;
 
@@ -32,49 +29,22 @@ namespace Flowcharts
 
             rectangleHeight = 40 + (numberOfLines - 1) * 17;
 
-            rectangleLength = new RectangleLengthCalculator(lines).Calculate() * 9;
-            (distanceFromEdge, unitLength, unitHeight) = new GridSpacer(orientation).GetSpacing();
-
             var position = orientation.GetColumnRow();
-            (rectangleXPos, rectangleYPos) = GetPosition(position);
-            (In, Out) = Draw();
 
+            (rectangleXPos, rectangleYPos) = CalculatePosition(lines, position);
+
+            (In, Out) = new ShapeRectangleDrawer(xmlWriter, orientation, rectangleXPos, rectangleYPos, rectangleHeight, rectangleLength, Color()).Draw();
             return (In, Out, rectangleLength);
         }
 
-        public virtual (double rectangleXPos, double rectangleYPos) GetPosition((int Column, int Row) position)
+        public virtual (double, double) CalculatePosition(string[] lines, (int Column, int Row) position)
         {
-            rectangleXPos = distanceFromEdge + position.Column * unitLength + (unitLength - rectangleLength) / 2;
-            rectangleYPos = distanceFromEdge + position.Row * unitHeight - 17;
+            return new ShapeRectanglePositionCalculator(orientation, position, lines).Calculate();
+        } 
 
-            return (rectangleXPos, rectangleYPos);
-        }
-
-        public ((double x, double y) In, (double x, double y) Out) Draw()
+        virtual public string Color()
         {
-            xmlWriter.WriteStartElement("rect");
-
-            (In, Out) = new ShapeRectangleInOutCalculator(orientation, rectangleXPos, rectangleYPos, rectangleHeight, rectangleLength).GetInOut();
-
-            xmlWriter.WriteAttributeString("x", rectangleXPos.ToString());
-            xmlWriter.WriteAttributeString("y", rectangleYPos.ToString());
-
-            xmlWriter.WriteAttributeString("rx", 7.ToString());
-            xmlWriter.WriteAttributeString("ry", 7.ToString());
-
-            xmlWriter.WriteAttributeString("width", rectangleLength.ToString());
-            xmlWriter.WriteAttributeString("height", rectangleHeight.ToString());
-
-            Color();
-
-            xmlWriter.WriteEndElement();
-
-            return (In, Out);
-        }
-
-        virtual public void Color()
-        {
-            xmlWriter.WriteAttributeString("style", "fill:rgb(255,255,255);stroke-width:2;stroke:rgb(0,0,0)");
+            return "fill:rgb(255,255,255);stroke-width:2;stroke:rgb(0,0,0)";                       
         }
     }
 }

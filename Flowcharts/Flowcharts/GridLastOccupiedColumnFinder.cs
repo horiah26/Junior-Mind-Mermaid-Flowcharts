@@ -7,7 +7,7 @@ namespace Flowcharts
 {
     class GridLastOccupiedColumnFinder
     {
-        readonly Grid grid;
+        Grid grid;
 
         public GridLastOccupiedColumnFinder(Grid grid)
         {

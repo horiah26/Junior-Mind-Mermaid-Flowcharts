@@ -7,7 +7,7 @@ namespace Flowcharts
 {
     class CircleRadiusCalculator
     {
-        readonly string text;
+        string text;
         public CircleRadiusCalculator(string text) 
         {
             this.text = text;

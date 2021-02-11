@@ -6,7 +6,7 @@ namespace Flowcharts
 {
     class GridArrayResizer
     {
-        readonly Grid grid;
+        Grid grid;
 
         public GridArrayResizer(Grid grid)
         {

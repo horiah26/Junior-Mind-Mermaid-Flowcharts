@@ -6,7 +6,7 @@ namespace Flowcharts
 {
     class GridBackArrowAdjuster
     {
-        readonly Grid grid;
+        Grid grid;
 
         public GridBackArrowAdjuster(Grid grid)
         {

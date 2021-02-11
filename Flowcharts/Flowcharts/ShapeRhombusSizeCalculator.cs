@@ -7,7 +7,7 @@ namespace Flowcharts
 {
     class ShapeRhombusSizeCalculator
     {
-        readonly string[] lines;
+        string[] lines;
 
         public ShapeRhombusSizeCalculator(string[] lines)
         {
