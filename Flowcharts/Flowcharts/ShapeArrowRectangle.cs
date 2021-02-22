@@ -27,7 +27,7 @@ namespace Flowcharts
 
         public (double rectangleXPos, double rectangleYPos) GetPosition((int Column, int Row) position)
         {
-            var maxLengthOfLine = new RectangleLengthCalculator(lines).Calculate();
+            var maxLengthOfLine = new TextSizeCalculator(lines).Calculate();
 
             double xPosition = (fromElement.Out.x + toElement.In.x - (maxLengthOfLine) * 9.2) / 2;
             double yPosition = (fromElement.Out.y + toElement.In.y - (numberOfLines + 3) * 12)  / 2 ;

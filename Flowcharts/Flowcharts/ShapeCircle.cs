@@ -31,8 +31,9 @@ namespace Flowcharts
 
             var (Column, Row) = orientation.GetColumnRow();
 
-            radius = new ShapeCircleRadiusCalculator(text).Calculate(); ;
-            (_, int numberOfLines) = new TextSplitter(text).Split();
+            (string[] lines, int numberOfLines) = new TextSplitter(text).Split();
+
+            radius = Convert.ToInt32( new ShapeCircleRadiusCalculator(text).Calculate());
 
             if (text.Length == 1)
             {

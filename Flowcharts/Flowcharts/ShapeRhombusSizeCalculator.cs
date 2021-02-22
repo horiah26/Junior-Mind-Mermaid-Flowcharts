@@ -15,36 +15,23 @@ namespace Flowcharts
         }
         public double Calculate()
         {
-            var maxline = lines.Max(x => x.Length);
+            var sizeOfText = new TextSizeCalculator(lines).Calculate();
+            var maxLineLength = lines.Max(x => x.Length);
 
-            if (maxline < 2)
+            if (maxLineLength == 1)
             {
                 return 40;
             }
-            else if (maxline >= 2 && maxline < 5)
+            else if (maxLineLength > 1 && maxLineLength <= 3)
             {
-                return 68;
+                return sizeOfText * 11 + 5;
             }
-            else if (maxline >= 5 && maxline < 7)
+            else if (maxLineLength > 3 && maxLineLength <= 6)
             {
-                return 85;
+                return sizeOfText * 8.5 + 5;
             }
-            else if (maxline >= 7 && maxline < 10)
-            {
-                return 100;
-            }
-            else if (maxline >= 10 && maxline < 13)
-            {
-                return 120;
-            }
-            else if (maxline >= 13 && maxline < 17)
-            {
-                return 150;
-            }
-            else
-            {
-                return 190;
-            }
+
+            return sizeOfText * 7.5;
         }
     }
 }

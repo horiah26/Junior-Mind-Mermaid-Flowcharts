@@ -20,11 +20,10 @@ namespace Flowcharts
 
         public virtual (double rectangleXPos, double rectangleYPos) Calculate()
         {
-            int rectangleLength = new RectangleLengthCalculator(lines).Calculate() * 9;
-
             (int distanceFromEdge, int unitLength, int unitHeight) = new GridSpacer(orientation).GetSpacing();
+            var length = new ShapeRectangleLengthCalculator(lines).Calculate();
 
-            double rectangleXPos = distanceFromEdge + position.Column * unitLength + (unitLength - rectangleLength) / 2;
+            double rectangleXPos = distanceFromEdge + position.Column * unitLength + (unitLength - length)/2 + 3;
             double rectangleYPos = distanceFromEdge + position.Row * unitHeight - 17;
 
             return (rectangleXPos, rectangleYPos);

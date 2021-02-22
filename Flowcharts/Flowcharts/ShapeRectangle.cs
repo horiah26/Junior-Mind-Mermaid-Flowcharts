@@ -28,9 +28,9 @@ namespace Flowcharts
             (string[] lines, int numberOfLines) = new TextSplitter(text).Split();
 
             rectangleHeight = 40 + (numberOfLines - 1) * 17;
+            rectangleLength = new ShapeRectangleLengthCalculator(lines).Calculate();
 
             var position = orientation.GetColumnRow();
-
             (rectangleXPos, rectangleYPos) = CalculatePosition(lines, position);
 
             (In, Out) = new ShapeRectangleDrawer(xmlWriter, orientation, rectangleXPos, rectangleYPos, rectangleHeight, rectangleLength, Color()).Draw();
