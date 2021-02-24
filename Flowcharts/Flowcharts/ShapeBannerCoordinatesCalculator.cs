@@ -8,32 +8,24 @@ namespace Flowcharts
     {
         private double xPos;
         private double yPos;
-        private double bannerHeight;
-        private double bannerLength;
+        private double height;
+        private double length;
 
-        public ShapeBannerCoordinatesCalculator(double xPos, double yPos, double bannerHeight, double bannerLength)
+        public ShapeBannerCoordinatesCalculator(double xPos, double yPos, double height, double length)
         {
             this.xPos = xPos;
             this.yPos = yPos;
-            this.bannerHeight = bannerHeight;
-            this.bannerLength = bannerLength;
+            this.height = height;
+            this.length = length;
         }
 
         internal string Calculate()
         {
-            //string arrowUp = (xPos - bannerLength/5).ToString() + "," + yPos.ToString();
-            //string arrowMiddle = xPos.ToString() + "," + (yPos + bannerHeight / 2).ToString();
-            //string arrowDown = (xPos - bannerLength / 5).ToString() + "," + (yPos + bannerHeight).ToString();
-            //string down = (xPos + bannerLength).ToString() + "," + (yPos + bannerHeight).ToString();
-            //string up = (xPos + bannerLength).ToString() + "," + (yPos).ToString();
-
             string arrowUp = (xPos).ToString() + "," + yPos.ToString();
-            string arrowMiddle = (xPos + bannerLength/5).ToString() + "," + (yPos + bannerHeight / 2).ToString();
-            string arrowDown = (xPos ).ToString() + "," + (yPos + bannerHeight).ToString();
-            string down = (xPos + bannerLength).ToString() + "," + (yPos + bannerHeight).ToString();
-            string up = (xPos + bannerLength).ToString() + "," + (yPos).ToString();
-
-            //return arrowUp + " " + arrowDown + " " + down + " " + up;
+            string arrowMiddle = (xPos + length/5).ToString() + "," + (yPos + height / 2).ToString();
+            string arrowDown = (xPos ).ToString() + "," + (yPos + height).ToString();
+            string down = (xPos + length).ToString() + "," + (yPos + height).ToString();
+            string up = (xPos + length).ToString() + "," + (yPos).ToString();
 
             return arrowUp + " " + arrowMiddle + " " + arrowDown + " " + down + " " + up;
         }

@@ -1,38 +1,42 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Text;
 
 namespace Flowcharts
 {
-    internal class ShapeBannerInOutCalculator
+    class ShapeHexagonInOutCalculator
     {
         private IOrientation orientation;
         private double xPos;
         private double yPos;
         private double height;
         private double length;
+        string[] lines;
 
-        public ShapeBannerInOutCalculator(IOrientation orientation, double xPos, double yPos, double height, double length)
+        public ShapeHexagonInOutCalculator(IOrientation orientation, double xPos, double yPos, double height, double length, string[] lines)
         {
             this.orientation = orientation;
             this.xPos = xPos;
             this.yPos = yPos;
             this.height = height;
             this.length = length;
+            this.lines = lines;
         }
 
         public EntryExitPoints GetInOut()
         {
             (double x, double y) In;
             (double x, double y) Out;
-
+            double numberOfLines = lines.Length;
             if (typeof(OrientationLeftRight) == orientation.GetType())
             {
-                In = (xPos - 12 + length/5, yPos + height / 2);
-                Out = (xPos + length, yPos + 20);
+                In = (xPos - numberOfLines * 10 - 3, yPos + height / 2);
+                Out = (xPos + length + numberOfLines * 10, yPos + height / 2);
             }
             else if (typeof(OrientationRightLeft) == orientation.GetType())
             {
                 In = (xPos + length + 5, yPos + height / 2);
-                Out = (xPos + length/5, yPos + height / 2);
+                Out = (xPos + length / 5, yPos + height / 2);
             }
             else if (typeof(OrientationTopDown) == orientation.GetType())
             {

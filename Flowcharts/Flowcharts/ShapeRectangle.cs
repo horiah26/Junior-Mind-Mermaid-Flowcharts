@@ -17,7 +17,7 @@ namespace Flowcharts
         public int rectangleLength = 0;
         public ShapeRectangle() {}
 
-        public (EntryExitPoints, int dimension) Draw(XmlWriter xmlWriter, IOrientation orientation, string text)
+        public (EntryExitPoints, int textAlignment) Draw(XmlWriter xmlWriter, IOrientation orientation, string text)
         {
             this.orientation = orientation;
             this.xmlWriter = xmlWriter;

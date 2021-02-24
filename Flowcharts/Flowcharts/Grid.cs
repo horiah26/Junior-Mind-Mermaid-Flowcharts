@@ -24,7 +24,7 @@ namespace Flowcharts
             new GridElementAdder(this).Add(element, row, column);
         }
 
-        public (int, int) GetDimensions()
+        public (int, int) GettextAlignments()
         {
             return (rowSize, columnSize);
         }

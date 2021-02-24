@@ -17,12 +17,12 @@ namespace Flowcharts
         public double xPos;
         public double yPos;
 
-        public double bannerHeight;
-        public double bannerLength;
+        public double height;
+        public double length;
 
         public ShapeBanner() { }
-
-        public (EntryExitPoints, int dimension) Draw(XmlWriter xmlWriter, IOrientation orientation, string Text)
+        
+        public (EntryExitPoints, int textAlignment) Draw(XmlWriter xmlWriter, IOrientation orientation, string Text)
         {
             this.xmlWriter = xmlWriter;
             this.orientation = orientation;
@@ -31,10 +31,9 @@ namespace Flowcharts
 
             (string[] lines, _) = new TextSplitter(Text).Split();
 
-            (bannerHeight, bannerLength) = GetSize(lines);
+            (height, length) = GetSize(lines);
 
             (xPos, yPos) = CalculatePosition(lines, orientation);
-
 
             EntryExitPoints InOut = DrawBanner();
 
@@ -43,10 +42,10 @@ namespace Flowcharts
 
         private EntryExitPoints DrawBanner()
         {
-            return new ShapeBannerDrawer(xmlWriter, orientation, xPos, yPos, bannerHeight, bannerLength).Draw();
+            return new ShapeBannerDrawer(xmlWriter, orientation, xPos, yPos, height, length).Draw();
         }
 
-        private (double bannerHeight, double bannerLength) GetSize(string[] lines)
+        private (double height, double length) GetSize(string[] lines)
         {
             return new ShapeBannerSizeCalculator(lines).Calculate();
         }

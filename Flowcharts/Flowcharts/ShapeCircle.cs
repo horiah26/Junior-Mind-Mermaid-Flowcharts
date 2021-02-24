@@ -21,7 +21,7 @@ namespace Flowcharts
 
         public ShapeCircle() { }
 
-        public (EntryExitPoints, int dimension) Draw(XmlWriter xmlWriter, IOrientation orientation, string text)
+        public (EntryExitPoints, int textAlignment) Draw(XmlWriter xmlWriter, IOrientation orientation, string text)
         {
             (distanceFromEdge, unitLength, unitHeight) = new GridSpacer(orientation).GetSpacing();
             this.xmlWriter = xmlWriter;
