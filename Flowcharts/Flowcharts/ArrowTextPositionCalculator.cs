@@ -6,8 +6,8 @@ namespace Flowcharts
 {
     class ArrowTextPositionCalculator
     {
-        IOrientation orientation;
-        string[] lines;
+        readonly IOrientation orientation;
+        readonly string[] lines;
 
         (int Column, int Row) position;
 
@@ -18,14 +18,14 @@ namespace Flowcharts
             this.lines = lines;
         }
 
-        public virtual (double rectangleXPos, double rectangleYPos) Calculate()
+        public virtual (double xPos, double yPos) Calculate()
         {
             (int distanceFromEdge, int unitLength, int unitHeight) = new GridSpacer(orientation).GetSpacing();
             var rectangleLength =  new TextSizeCalculator(lines).Calculate();
-            double rectangleXPos = distanceFromEdge + position.Column * unitLength + (unitLength - rectangleLength) / 2;
-            double rectangleYPos = distanceFromEdge + position.Row * unitHeight - 17;
+            double xPos = distanceFromEdge + position.Column * unitLength + (unitLength - rectangleLength) / 2;
+            double yPos = distanceFromEdge + position.Row * unitHeight - 17;
 
-            return (rectangleXPos, rectangleYPos);
+            return (xPos, yPos);
         }
 
     }

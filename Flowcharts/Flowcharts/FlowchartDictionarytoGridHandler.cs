@@ -7,8 +7,8 @@ namespace Flowcharts
 {
     public class FlowchartDictionarytoGridHandler
     {
-        Grid grid = new Grid();
-        FlowchartElementManager elementManager;
+        readonly Grid grid = new Grid();
+        readonly FlowchartElementManager elementManager;
 
         public FlowchartDictionarytoGridHandler(FlowchartElementManager elementManager)
         {

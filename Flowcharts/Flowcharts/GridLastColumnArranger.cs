@@ -7,7 +7,7 @@ namespace Flowcharts
 {
     class GridLastColumnArranger
     {
-        Grid grid;
+        readonly Grid grid;
 
         public GridLastColumnArranger(Grid grid)
         {

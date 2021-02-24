@@ -7,12 +7,13 @@ namespace Flowcharts
 {
     class ShapeRhombusSizeCalculator
     {
-        string[] lines;
+        readonly string[] lines;
 
         public ShapeRhombusSizeCalculator(string[] lines)
         {
             this.lines = lines;
         }
+
         public double Calculate()
         {
             var sizeOfText = new TextSizeCalculator(lines).Calculate();

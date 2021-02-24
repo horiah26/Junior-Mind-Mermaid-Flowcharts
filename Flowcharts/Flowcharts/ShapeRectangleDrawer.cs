@@ -7,19 +7,16 @@ namespace Flowcharts
 {
     class ShapeRectangleDrawer
     {
-        XmlWriter xmlWriter;
+        readonly XmlWriter xmlWriter;
 
         (double x, double y) In;
         (double x, double y) Out;
-
-        IOrientation orientation;
-        double xPos;
-        double yPos;
-
-        int rectangleHeight;
-        int rectangleLength;
-
-        string color;
+        readonly IOrientation orientation;
+        readonly double xPos;
+        readonly double yPos;
+        readonly int rectangleHeight;
+        readonly int rectangleLength;
+        readonly string color;
 
 
         public ShapeRectangleDrawer(XmlWriter xmlWriter, IOrientation orientation, double xPos, double yPos, int rectangleHeight, int rectangleLength, string color)
@@ -32,7 +29,7 @@ namespace Flowcharts
             this.rectangleLength = rectangleLength;
             this.color = color;
         }
-        public ((double x, double y) In, (double x, double y) Out) Draw()
+        public EntryExitPoints Draw()
         {
             xmlWriter.WriteStartElement("rect");
 
@@ -41,8 +38,7 @@ namespace Flowcharts
             xmlWriter.WriteAttributeString("x", xPos.ToString());
             xmlWriter.WriteAttributeString("y", yPos.ToString());
 
-            xmlWriter.WriteAttributeString("rx", 7.ToString());
-            xmlWriter.WriteAttributeString("ry", 7.ToString());
+            RoundCorners();
 
             xmlWriter.WriteAttributeString("width", rectangleLength.ToString());
             xmlWriter.WriteAttributeString("height", rectangleHeight.ToString());
@@ -51,7 +47,11 @@ namespace Flowcharts
 
             xmlWriter.WriteEndElement();
 
-            return (In, Out);
+            return new EntryExitPoints(In, Out);
+        }
+
+        public virtual void RoundCorners()
+        {
         }
     }
 }

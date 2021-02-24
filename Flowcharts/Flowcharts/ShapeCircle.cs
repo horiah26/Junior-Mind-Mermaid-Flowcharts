@@ -13,9 +13,7 @@ namespace Flowcharts
         
         private XmlWriter xmlWriter;
         IOrientation orientation;
-
-        (double x, double y) In;
-        (double x, double y) Out;
+        EntryExitPoints InOut;
 
         int xPos;
         int yPos;
@@ -23,7 +21,7 @@ namespace Flowcharts
 
         public ShapeCircle() { }
 
-        public ((double x, double y) In, (double x, double y) Out, int boxWidth) Draw(XmlWriter xmlWriter, IOrientation orientation, string text)
+        public (EntryExitPoints, int dimension) Draw(XmlWriter xmlWriter, IOrientation orientation, string text)
         {
             (distanceFromEdge, unitLength, unitHeight) = new GridSpacer(orientation).GetSpacing();
             this.xmlWriter = xmlWriter;
@@ -31,7 +29,7 @@ namespace Flowcharts
 
             var (Column, Row) = orientation.GetColumnRow();
 
-            (string[] lines, int numberOfLines) = new TextSplitter(text).Split();
+            (_, int numberOfLines) = new TextSplitter(text).Split();
 
             radius = Convert.ToInt32( new ShapeCircleRadiusCalculator(text).Calculate());
 
@@ -46,12 +44,12 @@ namespace Flowcharts
                 yPos = distanceFromEdge + Row * unitHeight + numberOfLines * 5;
             }
    
-            (In, Out) = Draw();
+            InOut = Draw();
 
-            return (In, Out, radius);
+            return (InOut, radius);
         }
 
-        public ((double x, double y) In, (double x, double y) Out) Draw()
+        public EntryExitPoints Draw()
         {
             return new ShapeCircleDrawer(xmlWriter, orientation, xPos, yPos, radius).Draw();
         }

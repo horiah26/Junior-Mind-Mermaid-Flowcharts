@@ -8,11 +8,10 @@ namespace Flowcharts
     {
         (double x, double y) In;
         (double x, double y) Out;
-
-        IOrientation orientation;
-        int xPos;
-        int yPos;
-        int radius;
+        readonly IOrientation orientation;
+        readonly int xPos;
+        readonly int yPos;
+        readonly int radius;
 
         public ShapeCirlceInOutCalculator(IOrientation orientation, int xPos, int yPos, int radius)
         {
@@ -22,7 +21,7 @@ namespace Flowcharts
             this.radius = radius;
         }
 
-        public ((double x, double y) In, (double x, double y) Out) GetInOut()
+        public EntryExitPoints GetInOut()
         {
             if (typeof(OrientationLeftRight) == orientation.GetType())
             {
@@ -49,7 +48,7 @@ namespace Flowcharts
                 throw new FormatException("Orientation has not been writeen correctly");
             }
 
-            return (In, Out);
+            return new EntryExitPoints(In, Out);
         }
     }
 }

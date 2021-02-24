@@ -17,16 +17,15 @@ namespace Flowcharts
 
             var flowchart = new Flowchart("LeftRight", fileName, path);
 
-            flowchart.AddPair(("D", "Rectangle"), ("Rhombus das fasf asfa sfafsd fsdfa dsafgwry wehdfffaf", "Rectangle"));
-            flowchart.AddPair(("AE", "Rectangle"), ("Rhombus 3", "Rectangle"));
-            flowchart.AddPair(("ABCDEF", "Rectangle"), ("Rhombh dfh dhdsfhth dgs hgdus 4", "Rectangle"));
-            flowchart.AddPair(("ABCDEFG", "Rectangle"), ("Rhombuss 4", "Rectangle"));
+            flowchart.AddPair(("A", "Banner"), ("Banner das fasf asfa sfafsd fsdfa dsafgwry wehdfffaf", "Banner"));
+            flowchart.AddPair(("AB", "Banner"), ("Banner 3", "Banner"));
+            flowchart.AddPair(("ABC", "Banner"), ("Rhombh dfh dhdsfhth dgs hgdus 4", "Banner"));
+            flowchart.AddPair(("ABCD", "Banner"), ("Banners 4", "Banner"));
 
-
-            flowchart.AddPair(("abcd", "Rectangle"), ("Rhombus das fasf assfa sfafsdg sdhrh fddh szsdd fsdfa dsafgwry wehdfffaf", "Rectangle"));
-            flowchart.AddPair(("abcde", "Rectangle"), ("gasfg afgs dhf hdshcvmghklguf  3", "Rectangle"));
-            flowchart.AddPair(("abcdef", "Rectangle"), ("Rhombjhd jhdss gfhnygtikyilgjgdf dxgfh dtju fjsus d4", "Rectangle"));
-            flowchart.AddPair(("abcdefg", "Rectangle"), ("Rhombus hsdah sah 5etrs hdrs gs  df4", "Rectangle"));
+            flowchart.AddPair(("abcd", "Banner"), ("Banner das fasf assfa sfafsdg sdhrh fddh szsdd fsdfa dsafgwry wehdfffaf", "Banner"));
+            flowchart.AddPair(("abcde", "Banner"), ("gasfg afgs dhf hdshcvmghklguf  3", "Banner"));
+            flowchart.AddPair(("abcdef", "Banner"), ("Rhombjhd jhdss gfhnygtikyilgjgdf dxgfh dtju fjsus d4", "Banner"));
+            flowchart.AddPair(("abcdefg", "Banner"), ("Banner hsdah sah 5etrs hdrs gs  df4", "Banner"));
 
             flowchart.Draw();
         }

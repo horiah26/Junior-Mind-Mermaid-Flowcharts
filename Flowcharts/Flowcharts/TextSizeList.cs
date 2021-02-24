@@ -6,7 +6,7 @@ namespace Flowcharts
 {
     public class TextSizeList
     {
-        List<TextSizePair> list = new List<TextSizePair> { };
+        readonly List<TextSizePair> list = new List<TextSizePair> { };
         public TextSizeList()
         {
             Create();

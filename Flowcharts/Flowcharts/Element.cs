@@ -64,7 +64,10 @@ namespace Flowcharts
             this.orientation = orientation;
 
             var elementDrawer =  new ElementDrawer(xmlWriter, orientation, Text, shapeString);
-            (In,Out) = elementDrawer.Draw();
+
+            var InOut = elementDrawer.Draw();
+            In = InOut.In;
+            Out = InOut.Out;
         }
 
         public int MinColumnOfChildren()

@@ -7,7 +7,7 @@ namespace Flowcharts
 {
     class TextSizeCalculator
     {
-        string[] lines;
+        readonly string[] lines;
 
         public TextSizeCalculator(string[] lines)
         {

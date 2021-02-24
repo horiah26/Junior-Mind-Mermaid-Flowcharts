@@ -8,10 +8,10 @@ namespace Flowcharts
     {
         readonly XmlWriter xmlWriter;
         readonly IOrientation orientation;
-        private int distanceFromEdge;
-        private int unitLength;
-        private int unitHeight;
-        int boxWidth = 0;
+        private readonly int distanceFromEdge;
+        private readonly int unitLength;
+        private readonly int unitHeight;
+        int dimension = 0;
         readonly string text;
         readonly string shapeString;
 
@@ -21,10 +21,10 @@ namespace Flowcharts
             this.text = text;
             this.xmlWriter = xmlWriter;
             this.shapeString = shapeString;
-            (this.distanceFromEdge, unitLength, unitHeight) = new GridSpacer(orientation).GetSpacing();
+            (distanceFromEdge, unitLength, unitHeight) = new GridSpacer(orientation).GetSpacing();
         }
 
-        public ((double x, double y) In, (double x, double y) Out) Draw()
+        public EntryExitPoints Draw()
         {
 
             string[] lines;
@@ -32,11 +32,11 @@ namespace Flowcharts
             var textSplitter = new TextSplitter(text);
             (lines, _) = textSplitter.Split();
 
-            ((double x, double y) In, (double x, double y) Out) = DrawBox();
+            EntryExitPoints InOut = DrawBox();
 
             PrepareAndWriteText(lines);
 
-            return (In, Out);
+            return InOut;
         }
 
         public void PrepareAndWriteText(string[] splitLines)
@@ -44,22 +44,22 @@ namespace Flowcharts
             (int x, int y) fitInBox = (10, 7);
             var (column, row) = orientation.GetColumnRow();
 
-            double xPosition = distanceFromEdge + (column * unitLength + fitInBox.x) + (unitLength - boxWidth) / 2;
+            double xPosition = distanceFromEdge + (column * unitLength + fitInBox.x) + (unitLength - dimension) / 2;
             double yPosition = distanceFromEdge + (row * unitHeight + fitInBox.y);
 
             TextWriter textWriter = new TextWriter(xmlWriter, xPosition, yPosition, splitLines);
             textWriter.Write();
         }
 
-        public ((double x, double y) In, (double x, double y) Out) DrawBox()
+        public EntryExitPoints DrawBox()
         {
             Type shapeType = Type.GetType("Flowcharts.Shape" + shapeString);
             IShape shape = (IShape)Activator.CreateInstance(shapeType);
 
-            ((double x, double y) In, (double x, double y) Out, int boxWidth) = shape.Draw(xmlWriter, orientation, text);
+            (EntryExitPoints InOut, int dimension) = shape.Draw(xmlWriter, orientation, text);
 
-            this.boxWidth = boxWidth;
-            return (In, Out);
+            this.dimension = dimension;
+            return InOut;
         }           
     }
 }

@@ -6,7 +6,7 @@ namespace Flowcharts
 {
     public class GridElementActualizer
     {
-        Grid grid;
+        readonly Grid grid;
 
         public GridElementActualizer(Grid grid)
         {

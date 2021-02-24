@@ -8,11 +8,10 @@ namespace Flowcharts
     {
         (double x, double y) In;
         (double x, double y) Out;
-
-        IOrientation orientation;
-        double xPos;
-        double yPos;
-        double rhombusSize;
+        readonly IOrientation orientation;
+        readonly double xPos;
+        readonly double yPos;
+        readonly double rhombusSize;
 
         public ShapeRhombusInOutCalculator(IOrientation orientation, double xPos, double yPos, double rhombusSize)
         {

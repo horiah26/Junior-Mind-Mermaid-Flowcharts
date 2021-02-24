@@ -7,23 +7,20 @@ namespace Flowcharts
 {
     class ShapeRectangle : IShape
     {
-        int rectangleLength = 0;
-        private XmlWriter xmlWriter;
-        IOrientation orientation;
+        public IOrientation orientation;
+        public XmlWriter xmlWriter;
 
-        (double x, double y) In;
-        (double x, double y) Out;
+        public double xPos;
+        public double yPos;
+        public int rectangleHeight;
 
-        private double rectangleXPos;
-        private double rectangleYPos;
-        private int rectangleHeight;
-
+        public int rectangleLength = 0;
         public ShapeRectangle() {}
 
-        public ((double x, double y) In, (double x, double y) Out, int boxWidth) Draw(XmlWriter xmlWriter, IOrientation orientation, string text)
+        public (EntryExitPoints, int dimension) Draw(XmlWriter xmlWriter, IOrientation orientation, string text)
         {
-            this.xmlWriter = xmlWriter;
             this.orientation = orientation;
+            this.xmlWriter = xmlWriter;
 
             (string[] lines, int numberOfLines) = new TextSplitter(text).Split();
 
@@ -31,16 +28,22 @@ namespace Flowcharts
             rectangleLength = new ShapeRectangleLengthCalculator(lines).Calculate();
 
             var position = orientation.GetColumnRow();
-            (rectangleXPos, rectangleYPos) = CalculatePosition(lines, position);
+            (xPos, yPos) = CalculatePosition(lines, position);
 
-            (In, Out) = new ShapeRectangleDrawer(xmlWriter, orientation, rectangleXPos, rectangleYPos, rectangleHeight, rectangleLength, Color()).Draw();
-            return (In, Out, rectangleLength);
+            EntryExitPoints InOut = DrawRectangle();
+            return (InOut, rectangleLength);
         }
 
-        public virtual (double, double) CalculatePosition(string[] lines, (int Column, int Row) position)
+        public virtual (double xPos, double yPos) CalculatePosition(string[] lines, (int Column, int Row) position)
         {
             return new ShapeRectanglePositionCalculator(orientation, position, lines).Calculate();
         } 
+
+        public virtual EntryExitPoints DrawRectangle()
+        {
+            return new ShapeRectangleDrawer(xmlWriter, orientation, xPos, yPos, rectangleHeight, rectangleLength, Color()).Draw();
+
+        }
 
         virtual public string Color()
         {

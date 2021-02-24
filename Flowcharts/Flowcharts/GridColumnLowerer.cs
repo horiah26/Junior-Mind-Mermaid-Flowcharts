@@ -7,7 +7,7 @@ namespace Flowcharts
 {
     class GridColumnLowerer
     {
-        Grid grid;
+        readonly Grid grid;
 
         public GridColumnLowerer(Grid grid)
         {

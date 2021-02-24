@@ -7,12 +7,11 @@ namespace Flowcharts
 {
     class ShapeCircleDrawer
     {
-        XmlWriter xmlWriter;
-        IOrientation orientation;
-
-        int xPos;
-        int yPos;
-        int radius;
+        readonly XmlWriter xmlWriter;
+        readonly IOrientation orientation;
+        readonly int xPos;
+        readonly int yPos;
+        readonly int radius;
 
         public ShapeCircleDrawer(XmlWriter xmlWriter, IOrientation orientation, int xPos, int yPos, int radius)
         {
@@ -23,7 +22,7 @@ namespace Flowcharts
             this.radius = radius;
         }
 
-        public ((double x, double y) In, (double x, double y) Out) Draw()
+        public EntryExitPoints Draw()
         {
             xmlWriter.WriteStartElement("circle");
 

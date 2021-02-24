@@ -6,23 +6,23 @@ namespace Flowcharts
 {
     class ShapeRhombusCoordinatesCalculator
     {
-        double rhombusXPos;
-        double rhombusYPos;
-        double rhombusSize;
+        readonly double xPos;
+        readonly double yPos;
+        readonly double rhombusSize;
 
-        public ShapeRhombusCoordinatesCalculator(double rhombusXPos, double rhombusYPos, double rhombusSize)
+        public ShapeRhombusCoordinatesCalculator(double xPos, double yPos, double rhombusSize)
         {
-            this.rhombusXPos = rhombusXPos;
-            this.rhombusYPos = rhombusYPos;
+            this.xPos = xPos;
+            this.yPos = yPos;
             this.rhombusSize = rhombusSize;
         }
 
         public string Calculate()
         {
-            string left = rhombusXPos.ToString() + "," + (rhombusYPos + rhombusSize / 2).ToString();
-            string down = (rhombusXPos + rhombusSize / 2).ToString() + "," + (rhombusYPos + rhombusSize).ToString();
-            string up = (rhombusXPos + rhombusSize / 2).ToString() + "," + rhombusYPos.ToString();
-            string right = (rhombusXPos + rhombusSize).ToString() + "," + (rhombusYPos + rhombusSize / 2).ToString();
+            string left = xPos.ToString() + "," + (yPos + rhombusSize / 2).ToString();
+            string down = (xPos + rhombusSize / 2).ToString() + "," + (yPos + rhombusSize).ToString();
+            string up = (xPos + rhombusSize / 2).ToString() + "," + yPos.ToString();
+            string right = (xPos + rhombusSize).ToString() + "," + (yPos + rhombusSize / 2).ToString();
 
             return up + " " + left + " " + down + " " + right;
         }

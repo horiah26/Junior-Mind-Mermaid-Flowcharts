@@ -8,16 +8,13 @@ namespace Flowcharts
 {
     class ShapeArrowRectangle : ShapeRectangle
     {
-        private XmlWriter xmlWriter;
-        Element fromElement;
-        Element toElement;
-        int numberOfLines;
-        string[] lines;
-        IOrientation orientation;
+        readonly Element fromElement;
+        readonly Element toElement;
+        readonly int numberOfLines;
+        readonly string[] lines;
 
-        public ShapeArrowRectangle(XmlWriter xmlWriter, IOrientation orientation, Element fromElement, Element toElement, int numberOfLines, string[] lines) 
+        public ShapeArrowRectangle(IOrientation orientation, Element fromElement, Element toElement, int numberOfLines, string[] lines) 
         {
-            this.xmlWriter = xmlWriter;
             this.fromElement = fromElement;
             this.toElement = toElement;
             this.numberOfLines = numberOfLines;
@@ -25,7 +22,7 @@ namespace Flowcharts
             this.lines = lines;
         }
 
-        public (double rectangleXPos, double rectangleYPos) GetPosition((int Column, int Row) position)
+        public (double xPos, double yPos) GetPosition()
         {
             var maxLengthOfLine = new TextSizeCalculator(lines).Calculate();
 
@@ -35,7 +32,7 @@ namespace Flowcharts
             return (xPosition, yPosition);
         }
 
-        public override (double, double) CalculatePosition(string[] lines, (int Column, int Row) position)
+        public override (double xPos, double yPos) CalculatePosition(string[] lines, (int Column, int Row) position)
         {
             return new ArrowTextPositionCalculator(orientation, position, lines).Calculate();
         }
