@@ -5,55 +5,26 @@ using System.Xml;
 
 namespace Flowcharts
 {
-    class ShapeBanner : IShape
+    class ShapeBanner : ShapePolygon
     {
-        public IOrientation orientation;
-        public XmlWriter xmlWriter;
-
-        public int distanceFromEdge;
-        public int unitLength;
-        public int unitHeight;
-
-        public double xPos;
-        public double yPos;
-
-        public double height;
-        public double length;
-
-        public ShapeBanner() { }
-        
-        public (EntryExitPoints, int textAlignment) Draw(XmlWriter xmlWriter, IOrientation orientation, string Text)
+        public ShapeBanner(XmlWriter xmlWriter, IOrientation orientation, string text): base(xmlWriter, orientation, text)
         {
-            this.xmlWriter = xmlWriter;
-            this.orientation = orientation;
 
-            (distanceFromEdge, unitLength, unitHeight) = new GridSpacer(orientation).GetSpacing();
-
-            (string[] lines, _) = new TextSplitter(Text).Split();
-
-            (height, length) = GetSize(lines);
-
-            (xPos, yPos) = CalculatePosition(lines, orientation);
-
-            EntryExitPoints InOut = DrawBanner();
-
-            return (InOut, 0);
         }
 
-        private EntryExitPoints DrawBanner()
-        {
-            return new ShapeBannerDrawer(xmlWriter, orientation, xPos, yPos, height, length).Draw();
-        }
-
-        private (double height, double length) GetSize(string[] lines)
+        public override (double height, double length) GetSize()
         {
             return new ShapeBannerSizeCalculator(lines).Calculate();
         }
 
-        private (double xPos, double yPos) CalculatePosition(string[] lines, IOrientation orientation)
+        public override string CalculateCornerPoints()
         {
-            var position = orientation.GetColumnRow();
-            return new ShapeRectanglePositionCalculator(orientation, position, lines).Calculate();
+            return new ShapeBannerPointsCalculator(xPos, yPos, height, length).Calculate();
+        }
+
+        public override EntryExitPoints GetInOut()
+        {
+            return new ShapeBannerInOutCalculator(orientation, xPos, yPos, height, length).GetInOut();
         }
     }
 }

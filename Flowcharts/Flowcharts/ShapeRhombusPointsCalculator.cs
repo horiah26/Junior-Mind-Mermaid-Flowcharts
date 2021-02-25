@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Flowcharts
+﻿namespace Flowcharts
 {
-    class ShapeRhombusCoordinatesCalculator
+    class ShapeRhombusPointsCalculator
     {
         readonly double xPos;
         readonly double yPos;
         readonly double rhombusSize;
 
-        public ShapeRhombusCoordinatesCalculator(double xPos, double yPos, double rhombusSize)
+        public ShapeRhombusPointsCalculator(double xPos, double yPos, double rhombusSize)
         {
             this.xPos = xPos;
             this.yPos = yPos;

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Xml;
 
 namespace Flowcharts
@@ -22,18 +21,20 @@ namespace Flowcharts
 
         EntryExitPoints InOut;
 
-        public ShapeRhombus()
+        string text;
+
+        public ShapeRhombus(XmlWriter xmlWriter, IOrientation orientation, string text)
         {
+            this.orientation = orientation;
+            this.xmlWriter = xmlWriter;
+            this.text = text;
         }
 
-        public (EntryExitPoints, int textAlignment) Draw(XmlWriter xmlWriter, IOrientation orientation, string Text)
+        public (EntryExitPoints, int textAlignment) Draw()
         {
-            this.xmlWriter = xmlWriter;
-            this.orientation = orientation;
-
             (distanceFromEdge, unitLength, unitHeight) = new GridSpacer(orientation).GetSpacing();
             
-            (string[] lines, int numberOfLines) = new TextSplitter(Text).Split();
+            (string[] lines, int numberOfLines) = new TextSplitter(text).Split();
             this.lines = lines;
 
             rhombusSize = GetSize();

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Xml;
+﻿using System.Xml;
 
 namespace Flowcharts
 {
@@ -29,18 +26,18 @@ namespace Flowcharts
             xmlWriter.WriteStartElement("polygon");
 
             (In, Out) = new ShapeRhombusInOutCalculator(orientation, xPos, yPos, size).GetInOut();
-                        string coordinates = GetCoordinates();
+                        string points = Getpoints();
 
-            xmlWriter.WriteAttributeString("points", coordinates);
+            xmlWriter.WriteAttributeString("points", points);
             xmlWriter.WriteAttributeString("style", "fill:white;stroke:black;stroke-width:3");
             xmlWriter.WriteEndElement();
 
             return new EntryExitPoints(In, Out);
         }
 
-        public virtual string GetCoordinates()
+        public virtual string Getpoints()
         {
-            return new ShapeRhombusCoordinatesCalculator(xPos, yPos, size).Calculate();
+            return new ShapeRhombusPointsCalculator(xPos, yPos, size).Calculate();
         }
     }
 }

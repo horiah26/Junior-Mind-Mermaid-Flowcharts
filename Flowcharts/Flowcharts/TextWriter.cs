@@ -50,7 +50,7 @@ namespace Flowcharts
 
             foreach (var line in lines)
             {
-                double gap = line.Length * 3;
+                double gap = new TextSizeCalculator(new string[] { line }).Calculate();
                 list.Add((line, gap));
             }
 

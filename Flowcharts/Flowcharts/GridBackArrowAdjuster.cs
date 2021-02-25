@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace Flowcharts
 {
@@ -15,15 +13,15 @@ namespace Flowcharts
 
         public void AdjustForBackArrows(List<Arrow> arrows)
         {
-            List<(double row, int forwardColum, int backColumn)> backArrowCoordinates = new List<(double row, int forwardColum, int backColumn)> { };
+            List<(double row, int forwardColum, int backColumn)> backArrowpoints = new List<(double row, int forwardColum, int backColumn)> { };
 
-            UpdateListOfBackArrows(ref backArrowCoordinates, arrows);
+            UpdateListOfBackArrows(ref backArrowpoints, arrows);
 
             foreach (var element in grid)
             {
-                UpdateListOfBackArrows(ref backArrowCoordinates, arrows);
+                UpdateListOfBackArrows(ref backArrowpoints, arrows);
 
-                foreach (var (row, forwardColum, backColumn) in backArrowCoordinates)
+                foreach (var (row, forwardColum, backColumn) in backArrowpoints)
                 {
                     if (element.Row == row && backColumn < element.Column && element.Column < forwardColum)
                     {
@@ -34,9 +32,9 @@ namespace Flowcharts
             }
         }
 
-        private void UpdateListOfBackArrows(ref List<(double row, int forwardColum, int backColumn)> backArrowCoordinates, List<Arrow> arrows)
+        private void UpdateListOfBackArrows(ref List<(double row, int forwardColum, int backColumn)> backArrowpoints, List<Arrow> arrows)
         {
-            List<(double row, int forwardColum, int backColumn)> tempCoordinates = new List<(double row, int forwardColum, int backColumn)> { };
+            List<(double row, int forwardColum, int backColumn)> temppoints = new List<(double row, int forwardColum, int backColumn)> { };
 
             foreach (var backArrow in arrows)
             {
@@ -44,11 +42,11 @@ namespace Flowcharts
 
                     if (typeof(BackArrow) == backArrow.GetType() && backArrow.fromElement.Row == backArrow.toElement.Row)
                     {
-                        tempCoordinates.Add((backArrow.fromElement.Row, backArrow.fromElement.Column, backArrow.toElement.Column));
+                        temppoints.Add((backArrow.fromElement.Row, backArrow.fromElement.Column, backArrow.toElement.Column));
                     }
             }
 
-            backArrowCoordinates = tempCoordinates;
+            backArrowpoints = temppoints;
         }
     }
 }

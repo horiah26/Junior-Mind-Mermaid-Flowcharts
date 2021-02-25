@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Linq;
 
 namespace Flowcharts
 {
@@ -25,19 +22,19 @@ namespace Flowcharts
 
             if (maxLineLength == 1)
             {
-                length = 40;
+                length = 35;
             }
             else if (maxLineLength > 1 && maxLineLength <= 3)
             {
-                length = sizeOfText * 12 + 5;
+                length = sizeOfText * 9 + 10;
             }
-            else if (maxLineLength > 3 && maxLineLength <= 6)
+            else if (maxLineLength > 3 && maxLineLength <= 7)
             {
-                length = sizeOfText * 12;
+                length = sizeOfText * 8;
             }
             else
             {
-                length = sizeOfText * 9;
+                length = sizeOfText * 7.2;
             }
 
             if(numberOfLines == 1)

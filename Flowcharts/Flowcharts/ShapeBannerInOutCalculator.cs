@@ -4,11 +4,11 @@ namespace Flowcharts
 {
     internal class ShapeBannerInOutCalculator
     {
-        private IOrientation orientation;
-        private double xPos;
-        private double yPos;
-        private double height;
-        private double length;
+        private readonly IOrientation orientation;
+        private readonly double xPos;
+        private readonly double yPos;
+        private readonly double height;
+        private readonly double length;
 
         public ShapeBannerInOutCalculator(IOrientation orientation, double xPos, double yPos, double height, double length)
         {
@@ -26,23 +26,23 @@ namespace Flowcharts
 
             if (typeof(OrientationLeftRight) == orientation.GetType())
             {
-                In = (xPos - 12 + length/5, yPos + height / 2);
-                Out = (xPos + length, yPos + 20);
+                In = (xPos - 20, yPos + height / 2);
+                Out = (xPos + length - length/5, yPos + height / 2);
             }
             else if (typeof(OrientationRightLeft) == orientation.GetType())
             {
-                In = (xPos + length + 5, yPos + height / 2);
-                Out = (xPos + length/5, yPos + height / 2);
+                In = (xPos + length - length / 5 + 3, yPos + height / 2);
+                Out = (xPos - 10, yPos + height / 2);
             }
             else if (typeof(OrientationTopDown) == orientation.GetType())
             {
-                In = (xPos + length / 2, yPos - 4);
-                Out = (xPos + length / 2, yPos + height);
+                In = (xPos + length / 2 - 15 - length / 10, yPos - 4);
+                Out = (xPos + length / 2 - 15 - length / 10, yPos + height);
             }
             else if (typeof(OrientationDownTop) == orientation.GetType())
             {
-                In = (xPos + length / 2, yPos + height + 4);
-                Out = (xPos + length / 2, yPos);
+                In = (xPos + length / 2 - 15 - length / 10, yPos + height + 4);
+                Out = (xPos + length / 2 - 15 - length / 10, yPos);
             }
             else
             {

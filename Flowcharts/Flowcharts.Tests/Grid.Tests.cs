@@ -172,7 +172,7 @@ namespace Flowcharts.Tests
         }
 
         [Fact]
-        public void ThrowsExceptionIfAddingElementAtCoordinatesOfExistingElement()
+        public void ThrowsExceptionIfAddingElementAtpointsOfExistingElement()
         {
             XmlWriter xmlWriter;
             MemoryStream MemoryStream = new MemoryStream();

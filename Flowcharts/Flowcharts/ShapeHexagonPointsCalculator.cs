@@ -1,18 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Flowcharts
+﻿namespace Flowcharts
 {
-    class ShapeHexagonCoordinatesCalculator
+    class ShapeHexagonPointsCalculator
     {
-        private double xPos;
-        private double yPos;
-        private double height;
-        private double length;
-        string[] lines;
+        private readonly double xPos;
+        private readonly double yPos;
+        private readonly double height;
+        private readonly double length;
+        readonly string[] lines;
 
-        public ShapeHexagonCoordinatesCalculator(double xPos, double yPos, double height, double length, string[] lines)
+        public ShapeHexagonPointsCalculator(double xPos, double yPos, double height, double length, string[] lines)
         {
             this.xPos = xPos;
             this.yPos = yPos;

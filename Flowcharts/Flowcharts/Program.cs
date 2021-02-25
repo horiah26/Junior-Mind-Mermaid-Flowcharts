@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Xml;
-using System.Xml.Linq;
-using System.Xml.XPath;
-
-namespace Flowcharts
+﻿namespace Flowcharts
 {
     class Program
     {
@@ -17,15 +9,17 @@ namespace Flowcharts
 
             var flowchart = new Flowchart("DownTop", fileName, path);
 
-            flowchart.AddPair(("A", "Hexagon"), ("Hexagon das fasf asfa sfafsd fsdfa dsafgwry wehdfffaf", "Hexagon"));
-            flowchart.AddPair(("AB", "Hexagon"), ("Hexagon 3", "Hexagon"));
-            flowchart.AddPair(("ABC", "Hexagon"), ("Rhombh dfh dhdsfhth dgs hgdus 4", "Hexagon"));
-            flowchart.AddPair(("ABCD", "Hexagon"), ("Rectangles 4", "Hexagon"));
-
-            flowchart.AddPair(("abcd", "Hexagon"), ("Hexagon das fasf assfa sfafsdg sdhrh fddh szsdd fsdfa dsafgwry wehdfffaf", "Hexagon"));
-            flowchart.AddPair(("abcde", "Hexagon"), ("gasfg afgs dhf hdshcvmghklguf  3", "Hexagon"));
-            flowchart.AddPair(("abcdef", "Hexagon"), ("Rhombjhd jhdss gfhnygtikyilgjgdf dxgfh dtju fjsus d4", "Hexagon"));
-            flowchart.AddPair(("abcdefg", "Hexagon"), ("Circle hsdah sah 5etrs hdrs gs  df4", "Hexagon"));
+            flowchart.AddPair(("A", "Banner"), ("Banner das fasf asfa sfafsd fsdfa dsafgwry wehdfffaf", "Banner"));
+            flowchart.AddPair(("AB", "Banner"), ("Banner 3", "Banner"));
+            flowchart.AddPair(("ABC", "Banner"), ("Rhombh dfh dhdsfhth dgs hgdus 4", "Banner"));
+            flowchart.AddPair(("ABCD", "Banner"), ("Banners 4", "Banner"));
+            flowchart.AddPair(("ABCDEF", "Banner"), ("Rhombjhd jhdss gfhnygtikyilgjgdf dxgfh dtju fjsus d4", "Banner"));
+            flowchart.AddPair(("ABCDEFG", "Banner"), ("Circldsge hsdah sah 5etrs hdrs gs  df4", "Banner"));
+            flowchart.AddPair(("abcdefg", "Banner"), ("Circle hsdah sahasg 5etrs hdrs gs  df4", "Banner"));
+            flowchart.AddPair(("ABCDda da sdas avc sdfafa sdfcawda sfdas afEFGHI", "Banner"), ("Circle hsdagaah sah 5etrs hdrs gs  df4", "Banner"));
+            flowchart.AddPair(("ABCDEfasf a afasf saf sagvfsdgvree bs bsvb s aFGHIJ", "Banner"), ("Circle hsdaaah sah 5etrs hdrs gs  df4", "Banner"));
+            flowchart.AddPair(("ABCDsdg a dsgrsgad vsdfg wegasv dsavaEFGHIJK", "Banner"), ("Circle hsdah sah agag5etrs hdrs gs  df4", "Banner"));
+            flowchart.AddPair(("ABCDEFGHIJKL", "Banner"), ("Circle hasfsdah sah 5etrs hdrs gs  df4", "Banner"));
 
             flowchart.Draw();
         }

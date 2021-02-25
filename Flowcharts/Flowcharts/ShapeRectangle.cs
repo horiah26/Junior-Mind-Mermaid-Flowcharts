@@ -1,37 +1,40 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Xml;
+﻿using System.Xml;
 
 namespace Flowcharts
 {
     class ShapeRectangle : IShape
     {
-        public IOrientation orientation;
-        public XmlWriter xmlWriter;
+        IOrientation orientation;
+        XmlWriter xmlWriter;
 
-        public double xPos;
-        public double yPos;
-        public int rectangleHeight;
+        double xPos;
+        double yPos;
+        int rectangleHeight;
+        int rectangleLength;
 
-        public int rectangleLength = 0;
-        public ShapeRectangle() {}
+        string text;
 
-        public (EntryExitPoints, int textAlignment) Draw(XmlWriter xmlWriter, IOrientation orientation, string text)
+        public ShapeRectangle(XmlWriter xmlWriter, IOrientation orientation, string text) 
         {
             this.orientation = orientation;
             this.xmlWriter = xmlWriter;
+            this.text = text;
+        }
 
-            (string[] lines, int numberOfLines) = new TextSplitter(text).Split();
-
-            rectangleHeight = 40 + (numberOfLines - 1) * 17;
-            rectangleLength = new ShapeRectangleLengthCalculator(lines).Calculate();
+        public (EntryExitPoints, int textAlignment) Draw()
+        {
+            (string[] lines, _) = new TextSplitter(text).Split();
 
             var position = orientation.GetColumnRow();
             (xPos, yPos) = CalculatePosition(lines, position);
-
+            (rectangleHeight, rectangleLength) = GetSize(text);
             EntryExitPoints InOut = DrawRectangle();
             return (InOut, rectangleLength);
+        }
+
+        public(int rectangleHeight, int rectangleLength) GetSize(string text)
+        {
+            return new ShapeRectangleSizeCalculator(text).Calculate();
         }
 
         public virtual (double xPos, double yPos) CalculatePosition(string[] lines, (int Column, int Row) position)
@@ -41,13 +44,7 @@ namespace Flowcharts
 
         public virtual EntryExitPoints DrawRectangle()
         {
-            return new ShapeRectangleDrawer(xmlWriter, orientation, xPos, yPos, rectangleHeight, rectangleLength, Color()).Draw();
-
-        }
-
-        virtual public string Color()
-        {
-            return "fill:rgb(255,255,255);stroke-width:2;stroke:rgb(0,0,0)";                       
+            return new ShapeRectangleDrawer(xmlWriter, orientation, xPos, yPos, rectangleHeight, rectangleLength, "fill:rgb(255,255,255);stroke-width:2;stroke:rgb(0,0,0)").Draw();
         }
     }
 }

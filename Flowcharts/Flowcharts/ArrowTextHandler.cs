@@ -20,9 +20,9 @@ namespace Flowcharts
 
         public void DrawAndWrite() 
         {
-            (string[] lines,int numberOfLines) = new TextSplitter(text).Split();
+            (string[] lines, _) = new TextSplitter(text).Split();
 
-            Draw(numberOfLines, lines);
+            Draw();
             WriteText(lines);
         }
 
@@ -36,9 +36,9 @@ namespace Flowcharts
             textWriter.Write();
         }
 
-        public void Draw(int numberOfLines, string[] lines)
+        public void Draw()
         {
-            new ShapeArrowRectangle(fromElement.orientation, fromElement, toElement, numberOfLines, lines).Draw(xmlWriter, fromElement.orientation, text);
+            new ShapeArrowRectangle(fromElement.orientation, xmlWriter, fromElement, toElement, text).Draw();
         }
     }
 }

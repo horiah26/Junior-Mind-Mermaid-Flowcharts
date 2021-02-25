@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace Flowcharts
 {
@@ -34,7 +32,7 @@ namespace Flowcharts
             list.Add(new TextSizePair(1.4, 'e'));
             list.Add(new TextSizePair(1.9, 'E'));
 
-            list.Add(new TextSizePair(0.9, 'f'));
+            list.Add(new TextSizePair(1.2, 'f'));
             list.Add(new TextSizePair(1.8, 'F'));
 
             list.Add(new TextSizePair(1.5, 'g'));

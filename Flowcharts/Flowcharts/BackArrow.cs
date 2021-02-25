@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Xml;
+﻿using System.Xml;
 
 namespace Flowcharts
 {
@@ -16,13 +13,13 @@ namespace Flowcharts
 
         override public string[] GetArrowEnds()       
         {
-            string[] coordinates = new string[4];
-            coordinates[0] = fromElement.In.x.ToString();
-            coordinates[1] = fromElement.In.y.ToString();
-            coordinates[2] = toElement.Out.x.ToString();
-            coordinates[3] = toElement.Out.y.ToString();
+            string[] points = new string[4];
+            points[0] = fromElement.In.x.ToString();
+            points[1] = fromElement.In.y.ToString();
+            points[2] = toElement.Out.x.ToString();
+            points[3] = toElement.Out.y.ToString();
 
-            return coordinates;
+            return points;
         }
     }
 }

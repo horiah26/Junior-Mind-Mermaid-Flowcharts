@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using System.Xml;
 
 namespace Flowcharts
@@ -54,9 +53,9 @@ namespace Flowcharts
         public EntryExitPoints DrawBox()
         {
             Type shapeType = Type.GetType("Flowcharts.Shape" + shapeString);
-            IShape shape = (IShape)Activator.CreateInstance(shapeType);
+            IShape shape = (IShape)Activator.CreateInstance(shapeType, new object[] { xmlWriter, orientation, text });
 
-            (EntryExitPoints InOut, int textAlignment) = shape.Draw(xmlWriter, orientation, text);
+            (EntryExitPoints InOut, int textAlignment) = shape.Draw();
 
             this.textAlignment = textAlignment;
             return InOut;

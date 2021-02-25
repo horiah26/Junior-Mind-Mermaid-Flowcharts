@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Flowcharts
+﻿namespace Flowcharts
 {
     public class TextSizePair
     {
@@ -14,10 +10,5 @@ namespace Flowcharts
             this.value = value;
             this.letter = letter;
         }
-
-        //public bool ContainsLetter(char newLetter)
-        //{
-        //    return letter == newLetter;
-        //}
     }
 }
