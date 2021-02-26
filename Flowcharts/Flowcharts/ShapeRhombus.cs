@@ -5,7 +5,7 @@ namespace Flowcharts
 {
     class ShapeRhombus : IShape
     {
-        public int rectangleLength = 0;
+        public int length = 0;
         public int distanceFromEdge;
         public int unitLength;
         public int unitHeight;
@@ -20,8 +20,7 @@ namespace Flowcharts
         public string[] lines;
 
         EntryExitPoints InOut;
-
-        string text;
+        readonly string text;
 
         public ShapeRhombus(XmlWriter xmlWriter, IOrientation orientation, string text)
         {
@@ -30,7 +29,7 @@ namespace Flowcharts
             this.text = text;
         }
 
-        public (EntryExitPoints, int textAlignment) Draw()
+        public (EntryExitPoints, double textAlignment) Draw()
         {
             (distanceFromEdge, unitLength, unitHeight) = new GridSpacer(orientation).GetSpacing();
             
@@ -48,7 +47,7 @@ namespace Flowcharts
 
             InOut = DrawFigure();
 
-            return (InOut, rectangleLength);
+            return (InOut, length);
         }
 
         public virtual EntryExitPoints DrawFigure()

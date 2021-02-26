@@ -5,8 +5,8 @@ namespace Flowcharts
 {
     class ShapeCircle : IShape
     {        
-        private XmlWriter xmlWriter;
-        IOrientation orientation;
+        private readonly XmlWriter xmlWriter;
+        readonly IOrientation orientation;
         EntryExitPoints InOut;
 
         int xPos;
@@ -21,7 +21,7 @@ namespace Flowcharts
             this.text = text;
         }
 
-        public (EntryExitPoints, int textAlignment) Draw()
+        public (EntryExitPoints, double textAlignment) Draw()
         {
             radius = Convert.ToInt32(new ShapeCircleRadiusCalculator(text).Calculate());
 

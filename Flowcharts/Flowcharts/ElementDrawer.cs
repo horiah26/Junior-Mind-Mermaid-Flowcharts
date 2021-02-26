@@ -10,7 +10,7 @@ namespace Flowcharts
         private readonly int distanceFromEdge;
         private readonly int unitLength;
         private readonly int unitHeight;
-        int textAlignment = 0;
+        double textAlignment;
         readonly string text;
         readonly string shapeString;
 
@@ -20,12 +20,12 @@ namespace Flowcharts
             this.text = text;
             this.xmlWriter = xmlWriter;
             this.shapeString = shapeString;
+
             (distanceFromEdge, unitLength, unitHeight) = new GridSpacer(orientation).GetSpacing();
         }
 
         public EntryExitPoints Draw()
         {
-
             string[] lines;
 
             var textSplitter = new TextSplitter(text);
@@ -55,7 +55,7 @@ namespace Flowcharts
             Type shapeType = Type.GetType("Flowcharts.Shape" + shapeString);
             IShape shape = (IShape)Activator.CreateInstance(shapeType, new object[] { xmlWriter, orientation, text });
 
-            (EntryExitPoints InOut, int textAlignment) = shape.Draw();
+            (EntryExitPoints InOut, double textAlignment) = shape.Draw();
 
             this.textAlignment = textAlignment;
             return InOut;

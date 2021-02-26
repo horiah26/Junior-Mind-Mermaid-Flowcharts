@@ -6,24 +6,24 @@ namespace Flowcharts
 {
     class ShapeRectangleSizeCalculator
     {
-        string text;
+        readonly string text;
 
         public ShapeRectangleSizeCalculator(string text)
         {
             this.text = text;
         }
 
-        public int rectangleHeight;
-        public int rectangleLength;
+        public double height;
+        public double length;
 
-        public (int rectangleHeight, int rectangleLength) Calculate()
+        public (double height, double length) Calculate()
         {
             (string[] lines, int numberOfLines) = new TextSplitter(text).Split();
 
-            rectangleHeight = 40 + (numberOfLines - 1) * 17;
-            rectangleLength = new ShapeRectangleLengthCalculator(lines).Calculate();
+            height = 40 + (numberOfLines - 1) * 17;
+            length = new ShapelengthCalculator(lines).Calculate();
 
-            return (rectangleHeight, rectangleLength);
+            return (height, length);
         }
     }
 }

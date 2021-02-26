@@ -15,8 +15,7 @@ namespace Flowcharts
         public double length;
 
         public string[] lines;
-
-        string text;
+        readonly public string text;
 
         public ShapePolygon(XmlWriter xmlWriter, IOrientation orientation, string text)
         {
@@ -25,7 +24,7 @@ namespace Flowcharts
             this.text = text;
         }
 
-        public (EntryExitPoints, int textAlignment) Draw()
+        public (EntryExitPoints, double textAlignment) Draw()
         {
             (lines, _) = new TextSplitter(text).Split();
 
@@ -35,7 +34,7 @@ namespace Flowcharts
 
             DrawPolygon();
 
-            return (GetInOut(), Convert.ToInt32(length));
+            return (GetInOut(), length);
         }
 
         public void DrawPolygon()
@@ -52,17 +51,17 @@ namespace Flowcharts
 
         public virtual (double height, double length) GetSize()
         {
-            return new ShapeHexagonSizeCalculator(lines).Calculate();
+            return new ShapeRectangleSizeCalculator(text).Calculate();
         }
 
         public virtual string CalculateCornerPoints()
         {
-            return new ShapeHexagonPointsCalculator(xPos, yPos, height, length, lines).Calculate();
+            return new ShapeRectanglePointsCalculator(xPos, yPos, height, length).Calculate();
         }
 
         public virtual EntryExitPoints GetInOut()
         {
-            return new ShapeHexagonInOutCalculator(orientation, xPos, yPos, height, length, lines).GetInOut();
+            return new ShapeRectangleInOutCalculator(orientation, xPos, yPos, height, length).GetInOut();
         }
     }
 }

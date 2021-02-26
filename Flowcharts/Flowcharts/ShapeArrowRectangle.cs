@@ -4,20 +4,18 @@ namespace Flowcharts
 {
     class ShapeArrowRectangle : IShape
     {
-        IOrientation orientation;
-        XmlWriter xmlWriter;
+        readonly IOrientation orientation;
+        readonly XmlWriter xmlWriter;
 
         double xPos;
         double yPos;
-        int rectangleHeight;
-        int rectangleLength;
-
-        string text;
+        double height;
+        double length;
+        readonly string text;
         string[] lines;
         int numberOfLines;
-
-        Element fromElement;
-        Element toElement;
+        readonly Element fromElement;
+        readonly Element toElement;
 
 
         public ShapeArrowRectangle(IOrientation orientation, XmlWriter xmlWriter, Element fromElement, Element toElement, string text)
@@ -29,16 +27,16 @@ namespace Flowcharts
             this.text = text;
         }
 
-        public (EntryExitPoints, int textAlignment) Draw()
+        public (EntryExitPoints, double textAlignment) Draw()
         {
             (lines, numberOfLines) = new TextSplitter(text).Split();
 
-            (rectangleHeight, rectangleLength) = GetSize(text);
+            (height, length) = GetSize(text);
 
             (xPos, yPos) = GetPosition();
 
             EntryExitPoints InOut = DrawRectangle();
-            return (InOut, rectangleLength);
+            return (InOut, length);
         }
 
         public (double xPos, double yPos) GetPosition()
@@ -51,14 +49,14 @@ namespace Flowcharts
             return (xPosition, yPosition);
         }
 
-        public (int rectangleHeight, int rectangleLength) GetSize(string text)
+        public (double height, double length) GetSize(string text)
         {
             return new ShapeRectangleSizeCalculator(text).Calculate();
         }
 
         public virtual EntryExitPoints DrawRectangle()
         {
-            return new ShapeRectangleDrawer(xmlWriter, orientation, xPos, yPos, rectangleHeight, rectangleLength, "fill:rgb(255,255,255);stroke-width:2;stroke:rgb(0,0,0)").Draw();
+            return new ShapeRectangleDrawer(xmlWriter, orientation, xPos, yPos, height, length, "fill:rgb(255,255,255);stroke-width:2;stroke:rgb(0,0,0)").Draw();
         }
     }
 }

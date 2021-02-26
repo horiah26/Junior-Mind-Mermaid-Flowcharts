@@ -7,10 +7,9 @@
         private int unitHeight;
         int xPos;
         int yPos;
-
-        IOrientation orientation;
-        string text;
-        int radius;
+        readonly IOrientation orientation;
+        readonly string text;
+        readonly int radius;
 
         public ShapeCirclePositionCalculator(IOrientation orientation, string text, int radius)
         {
