@@ -2,39 +2,38 @@
 
 namespace Flowcharts
 {
-    class ShapeHexagonInOutCalculator
+    class ShapeParallelogramInOutCalculator
     {
-        private readonly IOrientation orientation;
-        private readonly double xPos;
-        private readonly double yPos;
-        private readonly double height;
-        private readonly double length;
-        readonly string[] lines;
+        (double x, double y) In;
+        (double x, double y) Out;
+        readonly IOrientation orientation;
+        readonly double xPos;
+        readonly double yPos;
+        readonly double length;
+        readonly double height;
+        private readonly double gap;
 
-        public ShapeHexagonInOutCalculator(IOrientation orientation, double xPos, double yPos, double height, double length, string[] lines)
+        public ShapeParallelogramInOutCalculator(IOrientation orientation, double xPos, double yPos, double height, double length, string[] lines, double gap)
         {
             this.orientation = orientation;
             this.xPos = xPos;
             this.yPos = yPos;
-            this.height = height;
             this.length = length;
-            this.lines = lines;
-        }
-
+            this.height = height;
+            this.gap = gap;
+        } 
         public EntryExitPoints CalculateInOut()
         {
-            (double x, double y) In;
-            (double x, double y) Out;
-            double numberOfLines = lines.Length;
+
             if (typeof(OrientationLeftRight) == orientation.GetType())
             {
-                In = (xPos - numberOfLines * 10 - 3, yPos + height / 2);
-                Out = (xPos + length + numberOfLines * 10, yPos + height / 2);
+                In = (xPos - 5 - gap/2, yPos + height / 2);
+                Out = (xPos + length + gap / 2, yPos + height / 2);
             }
             else if (typeof(OrientationRightLeft) == orientation.GetType())
             {
-                In = (xPos + length + 5, yPos + height / 2);
-                Out = (xPos + length / 5, yPos + height / 2);
+                In = (xPos + length + gap / 2 + 4, yPos + height / 2);
+                Out = (xPos - 5 - gap / 2 + 4, yPos + height / 2);
             }
             else if (typeof(OrientationTopDown) == orientation.GetType())
             {

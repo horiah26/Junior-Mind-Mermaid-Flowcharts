@@ -34,7 +34,7 @@ namespace Flowcharts
 
             DrawPolygon();
 
-            return (GetInOut(), length);
+            return (CalculateInOut(), length);
         }
 
         public void DrawPolygon()
@@ -59,9 +59,9 @@ namespace Flowcharts
             return new ShapeRectanglePointsCalculator(xPos, yPos, height, length).Calculate();
         }
 
-        public virtual EntryExitPoints GetInOut()
+        public virtual EntryExitPoints CalculateInOut()
         {
-            return new ShapeRectangleInOutCalculator(orientation, xPos, yPos, height, length).GetInOut();
+            return new ShapeRectangleInOutCalculator(orientation, xPos, yPos, height, length).CalculateInOut();
         }
     }
 }

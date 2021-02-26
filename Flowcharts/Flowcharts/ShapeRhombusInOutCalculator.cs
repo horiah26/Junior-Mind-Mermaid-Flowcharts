@@ -19,7 +19,7 @@ namespace Flowcharts
             this.rhombusSize = rhombusSize;
         }
 
-        public ((double x, double y) In, (double x, double y) Out) GetInOut()
+        public ((double x, double y) In, (double x, double y) Out) CalculateInOut()
         {
             if (typeof(OrientationLeftRight) == orientation.GetType())
             {

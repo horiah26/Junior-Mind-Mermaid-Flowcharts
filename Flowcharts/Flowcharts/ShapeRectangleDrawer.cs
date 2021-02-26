@@ -28,12 +28,10 @@ namespace Flowcharts
         {
             xmlWriter.WriteStartElement("rect");
 
-            var InOut = new ShapeRectangleInOutCalculator(orientation, xPos, yPos, height, length).GetInOut();
+            var InOut = new ShapeRectangleInOutCalculator(orientation, xPos, yPos, height, length).CalculateInOut();
 
             xmlWriter.WriteAttributeString("x", xPos.ToString());
             xmlWriter.WriteAttributeString("y", yPos.ToString());
-
-            RoundCorners();
 
             xmlWriter.WriteAttributeString("width", length.ToString());
             xmlWriter.WriteAttributeString("height", height.ToString());
@@ -43,10 +41,6 @@ namespace Flowcharts
             xmlWriter.WriteEndElement();
 
             return InOut;
-        }
-
-        public virtual void RoundCorners()
-        {
         }
     }
 }

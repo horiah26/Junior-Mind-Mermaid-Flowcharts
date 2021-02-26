@@ -25,7 +25,7 @@ namespace Flowcharts
         {
             xmlWriter.WriteStartElement("polygon");
 
-            (In, Out) = new ShapeRhombusInOutCalculator(orientation, xPos, yPos, size).GetInOut();
+            (In, Out) = new ShapeRhombusInOutCalculator(orientation, xPos, yPos, size).CalculateInOut();
                         string points = Getpoints();
 
             xmlWriter.WriteAttributeString("points", points);

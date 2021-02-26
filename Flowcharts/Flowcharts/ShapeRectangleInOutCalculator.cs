@@ -21,16 +21,16 @@ namespace Flowcharts
             this.length = length;
         }
 
-        public EntryExitPoints GetInOut()
+        public EntryExitPoints CalculateInOut()
         {
             if (typeof(OrientationLeftRight) == orientation.GetType())
             {
                 In = (xPos - 5, yPos + height / 2);
-                Out = (xPos + length, yPos + 20);
+                Out = (xPos + length, yPos + height / 2);
             }
             else if (typeof(OrientationRightLeft) == orientation.GetType())
             {
-                In = (xPos + length, yPos + 20);
+                In = (xPos + length, yPos + height / 2);
                 Out = (xPos - 5, yPos + height / 2);
             }
             else if (typeof(OrientationTopDown) == orientation.GetType())

@@ -19,7 +19,7 @@ namespace Flowcharts
             this.radius = radius;
         }
 
-        public EntryExitPoints GetInOut()
+        public EntryExitPoints CalculateInOut()
         {
             if (typeof(OrientationLeftRight) == orientation.GetType())
             {

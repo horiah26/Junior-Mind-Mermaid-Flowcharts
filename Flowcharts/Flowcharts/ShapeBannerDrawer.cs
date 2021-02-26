@@ -24,7 +24,7 @@ namespace Flowcharts
         public EntryExitPoints Draw()
         {
             xmlWriter.WriteStartElement("polygon");
-            EntryExitPoints InOut = new ShapeBannerInOutCalculator(orientation, xPos, yPos, height, length).GetInOut();
+            EntryExitPoints InOut = new ShapeBannerInOutCalculator(orientation, xPos, yPos, height, length).CalculateInOut();
             string points = Getpoints();
 
             xmlWriter.WriteAttributeString("points", points);

@@ -22,9 +22,9 @@ namespace Flowcharts
             return new ShapeBannerPointsCalculator(xPos, yPos, height, length).Calculate();
         }
 
-        public override EntryExitPoints GetInOut()
+        public override EntryExitPoints CalculateInOut()
         {
-            return new ShapeBannerInOutCalculator(orientation, xPos, yPos, height, length).GetInOut();
+            return new ShapeBannerInOutCalculator(orientation, xPos, yPos, height, length).CalculateInOut();
         }
     }
 }

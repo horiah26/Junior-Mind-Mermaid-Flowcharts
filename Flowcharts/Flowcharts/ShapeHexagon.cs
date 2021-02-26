@@ -19,9 +19,9 @@ namespace Flowcharts
             return new ShapeHexagonPointsCalculator(xPos, yPos, height, length, lines).Calculate();
         }
 
-        public override EntryExitPoints GetInOut()
+        public override EntryExitPoints CalculateInOut()
         {
-            return new ShapeHexagonInOutCalculator(orientation, xPos, yPos, height, length, lines).GetInOut();
+            return new ShapeHexagonInOutCalculator(orientation, xPos, yPos, height, length, lines).CalculateInOut();
         }
     }
 }

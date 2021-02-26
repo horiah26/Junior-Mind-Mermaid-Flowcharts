@@ -34,7 +34,7 @@ namespace Flowcharts
 
             xmlWriter.WriteEndElement();
 
-            return new ShapeCirlceInOutCalculator(orientation, xPos, yPos, radius).GetInOut(); ;
+            return new ShapeCirlceInOutCalculator(orientation, xPos, yPos, radius).CalculateInOut(); ;
         }
     }
 }
