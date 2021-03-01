@@ -17,6 +17,8 @@ namespace Flowcharts
         public string[] lines;
         readonly public string text;
 
+        protected string coordinates;
+
         public ShapePolygon(XmlWriter xmlWriter, IOrientation orientation, string text)
         {
             this.orientation = orientation;
@@ -32,15 +34,16 @@ namespace Flowcharts
 
             (xPos, yPos) = CalculatePosition();
 
+            coordinates = CalculateCornerPoints();
+
             DrawPolygon();
 
             return (CalculateInOut(), length);
         }
 
-        public void DrawPolygon()
+        public virtual void DrawPolygon()
         {
-            string coorinates = CalculateCornerPoints();
-            new ShapePolygonDrawer(xmlWriter).Draw(coorinates);
+            new ShapePolygonDrawer(xmlWriter).Draw(coordinates);
         }
 
         public (double xPos, double yPos) CalculatePosition()
