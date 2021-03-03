@@ -43,8 +43,8 @@ namespace Flowcharts
         {
             var maxLengthOfLine = new TextSizeCalculator(lines).Calculate();
 
-            double xPosition = (fromElement.Out.x + toElement.In.x - (maxLengthOfLine) * 9.2) / 2;
-            double yPosition = (fromElement.Out.y + toElement.In.y - (numberOfLines + 3) * 12) / 2;
+            double xPosition = (fromElement.Out.x + toElement.In.x - (maxLengthOfLine) * 7) / 2;
+            double yPosition = (fromElement.Out.y + toElement.In.y - 55) / 2;
 
             return (xPosition, yPosition);
         }
@@ -56,7 +56,7 @@ namespace Flowcharts
 
         public virtual EntryExitPoints DrawRectangle()
         {
-            return new ShapeRectangleDrawer(xmlWriter, orientation, xPos, yPos, height, length, "fill:rgb(255,255,255);stroke-width:2;stroke:rgb(0,0,0)").Draw();
+            return new ShapeRectangleDrawer(xmlWriter, orientation, xPos, yPos, height, length, "fill:rgb(220,220,220);stroke-width:4;stroke:rgb(255,255,255)").Draw();
         }
     }
 }

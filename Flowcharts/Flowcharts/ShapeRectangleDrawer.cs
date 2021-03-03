@@ -24,6 +24,7 @@ namespace Flowcharts
             this.length = length;
             this.color = color;
         }
+
         public EntryExitPoints Draw()
         {
             xmlWriter.WriteStartElement("rect");
