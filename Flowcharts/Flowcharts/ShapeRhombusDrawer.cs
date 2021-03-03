@@ -24,8 +24,7 @@ namespace Flowcharts
         public EntryExitPoints Draw()
         {
             xmlWriter.WriteStartElement("polygon");
-
-            
+                        
             string points = Getpoints();
 
             xmlWriter.WriteAttributeString("points", points);

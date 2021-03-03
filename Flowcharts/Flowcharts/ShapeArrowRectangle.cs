@@ -44,7 +44,7 @@ namespace Flowcharts
             var maxLengthOfLine = new TextSizeCalculator(lines).Calculate();
 
             double xPosition = (fromElement.Out.x + toElement.In.x - (maxLengthOfLine) * 7) / 2;
-            double yPosition = (fromElement.Out.y + toElement.In.y - 55) / 2;
+            double yPosition = (fromElement.Out.y + toElement.In.y - 55 - numberOfLines * 4) / 2;
 
             return (xPosition, yPosition);
         }

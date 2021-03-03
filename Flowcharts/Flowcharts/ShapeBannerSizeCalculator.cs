@@ -28,13 +28,9 @@ namespace Flowcharts
             {
                 length = sizeOfText * 9 + 10;
             }
-            else if (maxLineLength > 3 && maxLineLength <= 7)
-            {
-                length = sizeOfText * 8;
-            }
             else
             {
-                length = sizeOfText * 7.2;
+                length = sizeOfText * 8;
             }
 
             if(numberOfLines == 1)

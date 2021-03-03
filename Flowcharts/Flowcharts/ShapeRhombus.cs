@@ -10,7 +10,6 @@ namespace Flowcharts
         public int unitLength;
         public int unitHeight;
 
-
         public double xPos;
         public double yPos;
         public double rhombusSize;
@@ -21,6 +20,9 @@ namespace Flowcharts
 
         EntryExitPoints InOut;
         readonly string text;
+
+        (double x, double y) In;
+        (double x, double y) Out; 
 
         public ShapeRhombus(XmlWriter xmlWriter, IOrientation orientation, string text)
         {
@@ -45,9 +47,10 @@ namespace Flowcharts
             xPos = distanceFromEdge + Column * unitLength + (unitLength - rhombusSize/3) / 2 + maxline * 4/3 - (numberOfLines - 1) * 7;
             yPos = distanceFromEdge + Row * unitHeight - rhombusSize/2 +  numberOfLines * 5;
 
-            InOut = DrawFigure();
+            (In, Out) = GetInOut();
+            DrawFigure();
 
-            return (InOut, length);
+            return (new EntryExitPoints(In, Out), length);
         }
 
         public virtual EntryExitPoints DrawFigure()
@@ -58,6 +61,11 @@ namespace Flowcharts
         public virtual double GetSize()
         {
            return new ShapeRhombusSizeCalculator(lines).Calculate();
+        }
+
+        public ((double x, double y) In, (double x, double y) Out) GetInOut()
+        {
+            return new ShapeRhombusInOutCalculator(orientation, xPos, yPos, rhombusSize).CalculateInOut();
         }
     }
 }
