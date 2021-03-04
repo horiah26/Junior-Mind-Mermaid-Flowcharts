@@ -18,7 +18,6 @@ namespace Flowcharts
         public IOrientation orientation;
         public string[] lines;
 
-        EntryExitPoints InOut;
         readonly string text;
 
         (double x, double y) In;
@@ -50,7 +49,7 @@ namespace Flowcharts
             (In, Out) = GetInOut();
             DrawFigure();
 
-            return (new EntryExitPoints(In, Out), length);
+            return (new EntryExitPoints(In, Out), rhombusSize);
         }
 
         public virtual EntryExitPoints DrawFigure()

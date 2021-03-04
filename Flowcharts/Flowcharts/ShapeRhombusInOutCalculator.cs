@@ -23,23 +23,23 @@ namespace Flowcharts
         {
             if (typeof(OrientationLeftRight) == orientation.GetType())
             {
-                In = (xPos - 5, yPos + rhombusSize / 2);
-                Out = (xPos + rhombusSize, yPos + rhombusSize / 2);
+                In = (xPos - rhombusSize / 2 - 5, yPos + rhombusSize / 2);
+                Out = (xPos + rhombusSize / 2, yPos + rhombusSize / 2);
             }
             else if (typeof(OrientationRightLeft) == orientation.GetType())
             {
-                In = (xPos + rhombusSize + 3, yPos + rhombusSize / 2);
-                Out = (xPos, yPos + rhombusSize / 2);
+                In = (xPos + rhombusSize / 2 + 3, yPos + rhombusSize / 2);
+                Out = (xPos - rhombusSize / 2, yPos + rhombusSize / 2);
             }
             else if (typeof(OrientationTopDown) == orientation.GetType())
             {
-                In = (xPos + rhombusSize / 2, yPos - 4);
-                Out = (xPos + rhombusSize / 2, yPos + rhombusSize);
+                In = (xPos, yPos - 4);
+                Out = (xPos, yPos + rhombusSize);
             }
             else if (typeof(OrientationDownTop) == orientation.GetType())
             {
-                In = (xPos + rhombusSize / 2, yPos + rhombusSize + 3);
-                Out = (xPos + rhombusSize / 2, yPos);
+                In = (xPos, yPos + rhombusSize + 3);
+                Out = (xPos, yPos);
             }
             else
             {

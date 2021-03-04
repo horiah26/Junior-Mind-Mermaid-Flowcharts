@@ -15,10 +15,10 @@
 
         public string Calculate()
         {
-            string left = xPos.ToString() + "," + (yPos + rhombusSize / 2).ToString();
-            string down = (xPos + rhombusSize / 2).ToString() + "," + (yPos + rhombusSize).ToString();
-            string up = (xPos + rhombusSize / 2).ToString() + "," + yPos.ToString();
-            string right = (xPos + rhombusSize).ToString() + "," + (yPos + rhombusSize / 2).ToString();
+            string left = (xPos - rhombusSize / 2).ToString() + "," + (yPos + rhombusSize / 2).ToString();
+            string down = (xPos).ToString() + "," + (yPos + rhombusSize).ToString();
+            string up = (xPos).ToString() + "," + yPos.ToString();
+            string right = (xPos + rhombusSize / 2).ToString() + "," + (yPos + rhombusSize / 2).ToString();
 
             return up + " " + left + " " + down + " " + right;
         }
