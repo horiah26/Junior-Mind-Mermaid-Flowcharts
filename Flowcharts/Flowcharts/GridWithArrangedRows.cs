@@ -3,18 +3,17 @@ using System.Linq;
 
 namespace Flowcharts
 {
-    class GridRowArranger
+    class GridWithArrangedRows
     {
-        readonly Grid grid;
+        Grid grid;
 
-        public GridRowArranger(Grid grid)
+        public GridWithArrangedRows(Grid grid)
         {
             this.grid = grid;
         }
 
         public void ArrangeRows()
         {
-            var elementActualizer = new GridElementActualizer(grid);
 
             for (int column = grid.lastOccupiedColumn; column >= 0; column--)
             {
@@ -26,10 +25,10 @@ namespace Flowcharts
                     }
                 }
 
-                elementActualizer.Actualize();
+                grid = new UpdatedGrid(grid).Get();
             }
 
-            elementActualizer.Actualize();
+            grid = new UpdatedGrid(grid).Get();
         }
 
         private void MoveColumnInPlace(int row, int column)
@@ -50,6 +49,12 @@ namespace Flowcharts
             }
 
             return element.Row;
+        }
+
+        public Grid Get()
+        {
+            ArrangeRows();
+            return grid;
         }
     }
 }

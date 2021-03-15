@@ -1,15 +1,15 @@
 ﻿namespace Flowcharts
 {
-    public class GridElementActualizer
+    public class UpdatedGrid
     {
         readonly Grid grid;
 
-        public GridElementActualizer(Grid grid)
+        public UpdatedGrid(Grid grid)
         {
             this.grid = grid;
         }
 
-        public void Actualize()
+        public void UpdateGrid()
         {
             for (int i = 0; i < grid.rowSize; i++)
             {
@@ -25,6 +25,12 @@
                     }
                 }
             }
+        }
+
+        public Grid Get()
+        {
+            UpdateGrid();
+            return grid;
         }
     }
 }

@@ -3,16 +3,16 @@ using System.Linq;
 
 namespace Flowcharts
 {
-    class GridLastOccupiedColumnFinder
+    class LastOccupiedColumnOfGrid
     {
         readonly Grid grid;
 
-        public GridLastOccupiedColumnFinder(Grid grid)
+        public LastOccupiedColumnOfGrid(Grid grid)
         {
             this.grid = grid;
         }
 
-        public int GetLastColumn()
+        public int GetColumn()
         {
             List<Element> list = new List<Element> { };
 

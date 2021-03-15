@@ -1,17 +1,16 @@
 ﻿namespace Flowcharts
 {
-    class GridEmptySpotsFiller
+    class GridWithFilledSpots
     {
-        readonly Grid grid;
+        Grid grid;
 
-        public GridEmptySpotsFiller(Grid grid)
+        public GridWithFilledSpots(Grid grid)
         {
             this.grid = grid;
         }
 
         public void FillEmptySpots()
         {
-            var elementsActualizer = new GridElementActualizer(grid);
             for (int column = grid.lastOccupiedColumn - 2; column >= 0; column--)
             {
                 for (int row = 0; row < grid.rowSize; row++)
@@ -22,12 +21,18 @@
                         grid.elementGrid[row, column + 1] = grid.elementGrid[row, column];
 
                         grid.elementGrid[row, column] = null;
-                        elementsActualizer.Actualize();
+                        grid = new UpdatedGrid(grid).Get();
                     }
                 }
             }
 
-            elementsActualizer.Actualize();
+            grid = new UpdatedGrid(grid).Get();
+        }
+
+        public Grid Get()
+        {
+            FillEmptySpots();
+            return grid;
         }
     }
 }

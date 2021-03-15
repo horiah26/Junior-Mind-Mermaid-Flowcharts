@@ -3,11 +3,11 @@ using System.Linq;
 
 namespace Flowcharts
 {
-    class GridLastColumnArranger
+    class GridWithArrangedLastColumn
     {
-        readonly Grid grid;
+        Grid grid;
 
-        public GridLastColumnArranger(Grid grid)
+        public GridWithArrangedLastColumn(Grid grid)
         {
             this.grid = grid;
         }
@@ -27,7 +27,7 @@ namespace Flowcharts
                 new GridColumnLowerer(grid).LowerColumnInGrid(0, lastOccupiedColumn, difference);
             }
 
-            new GridElementActualizer(grid).Actualize();
+            grid = new UpdatedGrid(grid).Get();
         }
 
         private double GetAverageRowOfParents(Element element)
@@ -38,6 +38,12 @@ namespace Flowcharts
             }
 
             return element.Row;
+        }
+
+        public Grid Get()
+        {
+            Level();
+            return grid;
         }
     }
 }

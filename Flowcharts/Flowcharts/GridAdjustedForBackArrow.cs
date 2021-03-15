@@ -2,16 +2,18 @@
 
 namespace Flowcharts
 {
-    class GridBackArrowAdjuster
+    class GridAdjustedForBackArrow
     {
-        readonly Grid grid;
+        Grid grid;
+        List<Arrow> arrows;
 
-        public GridBackArrowAdjuster(Grid grid)
+        public GridAdjustedForBackArrow(Grid grid, List<Arrow> arrows)
         {
             this.grid = grid;
+            this.arrows = arrows;
         }
 
-        public void AdjustForBackArrows(List<Arrow> arrows)
+        public void AdjustForBackArrows()
         {
             List<(double row, int forwardColum, int backColumn)> backArrowpoints = new List<(double row, int forwardColum, int backColumn)> { };
 
@@ -26,7 +28,7 @@ namespace Flowcharts
                     if (element.Row == row && backColumn < element.Column && element.Column < forwardColum)
                     {
                         new GridColumnLowerer(grid).LowerColumnInGrid(row, element.Column, 1);
-                        new GridElementActualizer(grid).Actualize();
+                        grid = new UpdatedGrid(grid).Get();
                     }
                 }
             }
@@ -47,6 +49,12 @@ namespace Flowcharts
             }
 
             backArrowpoints = temppoints;
+        }
+
+        public Grid Get()
+        {
+            AdjustForBackArrows();
+            return grid;
         }
     }
 }
