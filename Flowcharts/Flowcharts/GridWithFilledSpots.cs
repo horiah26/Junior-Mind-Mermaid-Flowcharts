@@ -15,12 +15,12 @@
             {
                 for (int row = 0; row < grid.rowSize; row++)
                 {
-                    if (grid.elementGrid[row, column] != null && grid.elementGrid[row, column + 1] == null && grid.elementGrid[row, column].MinColumnOfChildren() - 1 > column)
+                    if (grid.elementArray[row, column] != null && grid.elementArray[row, column + 1] == null && grid.elementArray[row, column].MinColumnOfChildren() - 1 > column)
                     {
-                        grid.elementGrid[row, column].MinColumnOfChildren();
-                        grid.elementGrid[row, column + 1] = grid.elementGrid[row, column];
+                        grid.elementArray[row, column].MinColumnOfChildren();
+                        grid.elementArray[row, column + 1] = grid.elementArray[row, column];
 
-                        grid.elementGrid[row, column] = null;
+                        grid.elementArray[row, column] = null;
                         grid = new UpdatedGrid(grid).Get();
                     }
                 }

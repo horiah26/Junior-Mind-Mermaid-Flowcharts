@@ -6,6 +6,7 @@ namespace Flowcharts
     class GridWithArrangedLastColumn
     {
         Grid grid;
+        Grid updatedGrid;
 
         public GridWithArrangedLastColumn(Grid grid)
         {
@@ -15,7 +16,7 @@ namespace Flowcharts
         public void Level()
         {
             int lastOccupiedColumn = grid.lastOccupiedColumn;
-            var lastColumn = new GridColumnExtractor(grid).Extract(lastOccupiedColumn).Where(x => x != null);
+            var lastColumn = new ExtractedColumn(grid, lastOccupiedColumn).GetColumn().Where(x => x != null);
 
             var averageParents = (int)lastColumn.Average(x => GetAverageRowOfParents(x));
             var averageThis = (int)lastColumn.Average(x => x.Row);
@@ -24,10 +25,13 @@ namespace Flowcharts
 
             if (difference > 0)
             {
-                new GridColumnLowerer(grid).LowerColumnInGrid(0, lastOccupiedColumn, difference);
+                var gridWithLoweredColumn = new GridWithLoweredColumn(grid, 0, lastOccupiedColumn, difference).GetNewGrid();
+                updatedGrid = new UpdatedGrid(gridWithLoweredColumn).Get();
             }
-
-            grid = new UpdatedGrid(grid).Get();
+            else
+            {
+                updatedGrid = new UpdatedGrid(grid).Get();
+            }
         }
 
         private double GetAverageRowOfParents(Element element)
@@ -43,7 +47,7 @@ namespace Flowcharts
         public Grid Get()
         {
             Level();
-            return grid;
+            return updatedGrid;
         }
     }
 }

@@ -9,18 +9,18 @@ namespace Flowcharts
 
         public ShapeParallelogramAlt(XmlWriter xmlWriter, IOrientation orientation, string text) : base(xmlWriter, orientation, text)
         {
-            (string[] lines, _) = new TextSplitter(text).Split();
+            lines = new SplitText(text).GetLines();
             inclination = Math.Sqrt(lines.Length) * 15;
         }
 
         public override string CalculateCornerPoints()
         {
-            return new ShapeParallelogramAltPointsCalculator(xPos, yPos, height, length, lines, inclination).Calculate();
+            return new ShapeParallelogramAltPoints(xPos, yPos, height, length, lines, inclination).GetPoints();
         }
 
-        public override EntryExitPoints CalculateInOut()
+        public override IOPoints GetIO()
         {
-            return new ShapeParallelogramInOutCalculator(orientation, xPos, yPos, height, length, lines, inclination).CalculateInOut();
+            return new ShapeParallelogramIO(orientation, xPos, yPos, height, length, lines, inclination).GetIO();
         }
     }
 }

@@ -30,12 +30,12 @@ namespace Flowcharts
             this.text = text;
         }
 
-        public (EntryExitPoints, double textAlignment) Draw()
+        public (IOPoints, double textAlignment) Draw()
         {
-            (distanceFromEdge, unitLength, unitHeight) = new GridSpacer(orientation).GetSpacing();
-            
-            (string[] lines, int numberOfLines) = new TextSplitter(text).Split();
-            this.lines = lines;
+            (distanceFromEdge, unitLength, unitHeight) = new GridSpacing(orientation).GetSpacing();
+
+            lines = new SplitText(text).GetLines();
+            var numberOfLines = lines.Length;
 
             rhombusSize = GetSize();
 
@@ -49,22 +49,22 @@ namespace Flowcharts
             (In, Out) = GetInOut();
             DrawFigure();
 
-            return (new EntryExitPoints(In, Out), rhombusSize);
+            return (new IOPoints(In, Out), rhombusSize);
         }
 
-        public virtual EntryExitPoints DrawFigure()
+        public virtual IOPoints DrawFigure()
         {
-           return new ShapeRhombusDrawer(xmlWriter, orientation, xPos, yPos, rhombusSize).Draw();
+           return new ShapeRhombusDrawn(xmlWriter, orientation, xPos, yPos, rhombusSize).Draw();
         }
 
         public virtual double GetSize()
         {
-           return new ShapeRhombusSizeCalculator(lines).Calculate();
+           return new ShapeRhombusSize(lines).GetSize();
         }
 
         public ((double x, double y) In, (double x, double y) Out) GetInOut()
         {
-            return new ShapeRhombusInOutCalculator(orientation, xPos, yPos, rhombusSize).CalculateInOut();
+            return new ShapeRhombusIO(orientation, xPos, yPos, rhombusSize).GetIO();
         }
     }
 }

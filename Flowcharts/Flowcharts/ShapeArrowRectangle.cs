@@ -27,15 +27,16 @@ namespace Flowcharts
             this.text = text;
         }
 
-        public (EntryExitPoints, double textAlignment) Draw()
+        public (IOPoints, double textAlignment) Draw()
         {
-            (lines, numberOfLines) = new TextSplitter(text).Split();
+            lines = new SplitText(text).GetLines();
+            numberOfLines = lines.Length;
 
             (height, length) = GetSize(text);
 
             (xPos, yPos) = GetPosition();
 
-            EntryExitPoints InOut = DrawRectangle();
+            IOPoints InOut = DrawRectangle();
             return (InOut, length);
         }
 
@@ -51,12 +52,12 @@ namespace Flowcharts
 
         public (double height, double length) GetSize(string text)
         {
-            return new ShapeRectangleSizeCalculator(text).Calculate();
+            return new ShapeRectangleSize(text).GetSize();
         }
 
-        public virtual EntryExitPoints DrawRectangle()
+        public virtual IOPoints DrawRectangle()
         {
-            return new ShapeRectangleDrawer(xmlWriter, orientation, xPos, yPos, height, length, "fill:rgb(220,220,220);stroke-width:4;stroke:rgb(255,255,255)").Draw();
+            return new ShapeRectangleDrawn(xmlWriter, orientation, xPos, yPos, height, length, "fill:rgb(220,220,220);stroke-width:4;stroke:rgb(255,255,255)").Draw();
         }
     }
 }

@@ -15,28 +15,28 @@ namespace Flowcharts
 
         public void AdjustForBackArrows()
         {
-            List<(double row, int forwardColum, int backColumn)> backArrowpoints = new List<(double row, int forwardColum, int backColumn)> { };
+            List<(double row, int forwardColum, int backColumn)> backArrowPoints = new List<(double row, int forwardColum, int backColumn)> { };
 
-            UpdateListOfBackArrows(ref backArrowpoints, arrows);
+            UpdateListOfBackArrows(ref backArrowPoints, arrows);
 
             foreach (var element in grid)
             {
-                UpdateListOfBackArrows(ref backArrowpoints, arrows);
+                UpdateListOfBackArrows(ref backArrowPoints, arrows);
 
-                foreach (var (row, forwardColum, backColumn) in backArrowpoints)
+                foreach (var (row, forwardColum, backColumn) in backArrowPoints)
                 {
                     if (element.Row == row && backColumn < element.Column && element.Column < forwardColum)
                     {
-                        new GridColumnLowerer(grid).LowerColumnInGrid(row, element.Column, 1);
-                        grid = new UpdatedGrid(grid).Get();
+                        var gridWithLoweredColumn = new GridWithLoweredColumn(grid, row, element.Column, 1).GetNewGrid();
+                        grid = new UpdatedGrid(gridWithLoweredColumn).Get();
                     }
                 }
             }
         }
 
-        private void UpdateListOfBackArrows(ref List<(double row, int forwardColum, int backColumn)> backArrowpoints, List<Arrow> arrows)
+        private void UpdateListOfBackArrows(ref List<(double row, int forwardColum, int backColumn)> backArrowPoints, List<Arrow> arrows)
         {
-            List<(double row, int forwardColum, int backColumn)> temppoints = new List<(double row, int forwardColum, int backColumn)> { };
+            List<(double row, int forwardColum, int backColumn)> tempPoints = new List<(double row, int forwardColum, int backColumn)> { };
 
             foreach (var backArrow in arrows)
             {
@@ -44,11 +44,11 @@ namespace Flowcharts
 
                     if (typeof(BackArrow) == backArrow.GetType() && backArrow.fromElement.Row == backArrow.toElement.Row)
                     {
-                        temppoints.Add((backArrow.fromElement.Row, backArrow.fromElement.Column, backArrow.toElement.Column));
+                        tempPoints.Add((backArrow.fromElement.Row, backArrow.fromElement.Column, backArrow.toElement.Column));
                     }
             }
 
-            backArrowpoints = temppoints;
+            backArrowPoints = tempPoints;
         }
 
         public Grid Get()

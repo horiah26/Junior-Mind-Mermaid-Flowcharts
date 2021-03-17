@@ -16,7 +16,7 @@ namespace Flowcharts
         {
             List<Element> list = new List<Element> { };
 
-            foreach(Element element in grid.elementGrid)
+            foreach(Element element in grid.elementArray)
             {
                 if(element != null)
                 {

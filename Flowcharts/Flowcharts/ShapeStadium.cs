@@ -14,12 +14,12 @@ namespace Flowcharts
 
         public override void DrawPolygon()
         {
-            new ShapeStadiumDrawer(xmlWriter).Draw(xPos, yPos, height, length);
+            new ShapeStadiumDrawn(xmlWriter).Draw(xPos, yPos, height, length);
         }
 
-        public override EntryExitPoints CalculateInOut()
+        public override IOPoints GetIO()
         {
-            return new ShapeStadiumInOutCalculator(orientation, xPos, yPos, height, length, lines).CalculateInOut();
+            return new ShapeStadiumIO(orientation, xPos, yPos, height, length, lines).GetIO();
         }
     }
 }

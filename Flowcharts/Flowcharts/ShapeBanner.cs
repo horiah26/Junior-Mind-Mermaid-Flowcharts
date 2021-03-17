@@ -14,17 +14,17 @@ namespace Flowcharts
 
         public override (double height, double length) GetSize()
         {
-            return new ShapeBannerSizeCalculator(lines).Calculate();
+            return new ShapeBannerSize(lines).GetSize();
         }
 
         public override string CalculateCornerPoints()
         {
-            return new ShapeBannerPointsCalculator(xPos, yPos, height, length).Calculate();
+            return new ShapeBannerPoints(xPos, yPos, height, length).GetPoints();
         }
 
-        public override EntryExitPoints CalculateInOut()
+        public override IOPoints GetIO()
         {
-            return new ShapeBannerInOutCalculator(orientation, xPos, yPos, height, length).CalculateInOut();
+            return new ShapeBannerIO(orientation, xPos, yPos, height, length).GetIO();
         }
     }
 }

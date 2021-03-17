@@ -11,17 +11,17 @@ namespace Flowcharts
 
         public override (double height, double length) GetSize()
         {
-            return new ShapeHexagonSizeCalculator(lines).Calculate();
+            return new ShapeHexagonSize(lines).Calculate();
         }
 
         public override string CalculateCornerPoints()
         {
-            return new ShapeHexagonPointsCalculator(xPos, yPos, height, length, lines).Calculate();
+            return new ShapeHexagonPoints(xPos, yPos, height, length, lines).GetPoints();
         }
 
-        public override EntryExitPoints CalculateInOut()
+        public override IOPoints GetIO()
         {
-            return new ShapeHexagonInOutCalculator(orientation, xPos, yPos, height, length, lines).CalculateInOut();
+            return new ShapeHexagonIO(orientation, xPos, yPos, height, length, lines).GetIO();
         }
     }
 }

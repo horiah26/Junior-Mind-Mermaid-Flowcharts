@@ -7,7 +7,7 @@ namespace Flowcharts
     {        
         private readonly XmlWriter xmlWriter;
         readonly IOrientation orientation;
-        EntryExitPoints InOut;
+        IOPoints InOut;
 
         int xPos;
         int yPos;
@@ -21,9 +21,9 @@ namespace Flowcharts
             this.text = text;
         }
 
-        public (EntryExitPoints, double textAlignment) Draw()
+        public (IOPoints, double textAlignment) Draw()
         {
-            radius = Convert.ToInt32(new ShapeCircleRadiusCalculator(text).Calculate());
+            radius = Convert.ToInt32(new ShapeCircleRadius(text).GetRadius());
 
             (xPos, yPos) = GetPosition();
    
@@ -32,14 +32,14 @@ namespace Flowcharts
             return (InOut, radius);
         }
 
-        public EntryExitPoints DrawCircle()
+        public IOPoints DrawCircle()
         {
-            return new ShapeCircleDrawer(xmlWriter, orientation, xPos, yPos, radius).Draw();
+            return new ShapeCircleDrawn(xmlWriter, orientation, xPos, yPos, radius).Draw();
         }
 
         public (int xPos, int yPos) GetPosition()
         {
-            return new ShapeCirclePositionCalculator(orientation, text, radius).Calculate();
+            return new ShapeCirclePosition(orientation, text, radius).GetPosition();
         }
     }
 }

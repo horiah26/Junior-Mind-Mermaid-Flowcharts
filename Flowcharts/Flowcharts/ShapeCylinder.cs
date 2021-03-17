@@ -22,7 +22,7 @@ namespace Flowcharts
         public IOrientation orientation;
         public string[] lines;
 
-        EntryExitPoints InOut;
+        IOPoints InOut;
         readonly string text;
 
         public ShapeCylinder(XmlWriter xmlWriter, IOrientation orientation, string text)
@@ -32,12 +32,12 @@ namespace Flowcharts
             this.text = text;
         }
 
-        public (EntryExitPoints, double textAlignment) Draw()
+        public (IOPoints, double textAlignment) Draw()
         {
-            (distanceFromEdge, unitLength, unitHeight) = new GridSpacer(orientation).GetSpacing();
+            (distanceFromEdge, unitLength, unitHeight) = new GridSpacing(orientation).GetSpacing();
 
-            (string[] lines, int numberOfLines) = new TextSplitter(text).Split();
-            this.lines = lines;
+            lines = new SplitText(text).GetLines();
+            var numberOfLines = lines.Length;
 
             (height, length) = GetSize();
 
@@ -49,25 +49,25 @@ namespace Flowcharts
 
             DrawFigure();
 
-            InOut = new ShapeCylinderInOutCalculator(orientation, xPos, yPos, height, length, numberOfLines).CalculateInOut();
+            InOut = new ShapeCylinderIO(orientation, xPos, yPos, height, length, numberOfLines).GetIO();
 
             return (InOut, length);
         }
 
         public void DrawFigure()
         {
-            new ShapeCylinderDrawer(xmlWriter, xPos, yPos, height, length).Draw();
+            new ShapeCylinderDrawn(xmlWriter, xPos, yPos, height, length).Draw();
         }
 
         public (double height, double length) GetSize()
         {
-            return new ShapeRectangleSizeCalculator(text).Calculate();
+            return new ShapeRectangleSize(text).GetSize();
         }
 
         public (double xPos, double yPos) CalculatePosition()
         {
             var position = orientation.GetColumnRow();
-            return new ShapePolygonPositionCalculator(orientation, position, lines).Calculate();
+            return new ShapePolygonPosition(orientation, position, lines).GetPosition();
         }
     }
 }

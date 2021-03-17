@@ -63,9 +63,8 @@ namespace Flowcharts
 
             this.orientation = orientation;
 
-            var elementDrawer =  new ElementDrawer(xmlWriter, orientation, Text, shapeString);
+            var InOut = new DrawnElement(xmlWriter, orientation, Text, shapeString).Draw();
 
-            var InOut = elementDrawer.Draw();
             In = InOut.In;
             Out = InOut.Out;
         }

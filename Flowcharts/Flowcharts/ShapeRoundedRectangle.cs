@@ -13,7 +13,7 @@ namespace Flowcharts
 
         public override void DrawPolygon()
         {
-            new ShapeRoundedRectangleDrawer(xmlWriter, xPos, yPos, height, length).Draw(coordinates);
+            new ShapeRoundedRectangleDrawn(xmlWriter, xPos, yPos, height, length).Draw(coordinates);
         }
     }
 }

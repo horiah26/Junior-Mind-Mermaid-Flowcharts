@@ -26,20 +26,21 @@ namespace Flowcharts
 
         public void Draw()
         {
-            new ArrowDrawer(xmlWriter, fromElement, toElement, GetArrowEnds()).Draw();
+            new DrawnArrow(xmlWriter, fromElement, toElement, GetArrowEnds()).Draw();
         }
 
         public void Write()
         {
             if (text != null)
             {
-                new ArrowTextHandler(xmlWriter, fromElement, toElement, text).DrawAndWrite();
+                new TextOnArrow(xmlWriter, fromElement, toElement, text).DrawAndWrite();
             }
         }
 
         public virtual string[] GetArrowEnds()
         {
             string[] points = new string[4];
+
             points[0] = fromElement.Out.x.ToString();
             points[1] = fromElement.Out.y.ToString();
             points[2] = toElement.In.x.ToString();

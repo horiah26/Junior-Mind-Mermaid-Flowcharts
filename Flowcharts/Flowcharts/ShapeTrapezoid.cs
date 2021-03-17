@@ -9,18 +9,18 @@ namespace Flowcharts
 
         public ShapeTrapezoid(XmlWriter xmlWriter, IOrientation orientation, string text) : base(xmlWriter, orientation, text)
         {
-            (string[] lines, _) = new TextSplitter(text).Split();
+            lines = new SplitText(text).GetLines();
             inclination = Math.Sqrt(lines.Length) * 20;
         }
 
         public override string CalculateCornerPoints()
         {
-            return new ShapeTrapezoidPointsCalculator(xPos, yPos, height, length, lines, inclination).Calculate();
+            return new ShapeTrapezoidPoints(xPos, yPos, height, length, lines, inclination).GetPoints();
         }
 
-        public override EntryExitPoints CalculateInOut()
+        public override IOPoints GetIO()
         {
-            return new ShapeParallelogramInOutCalculator(orientation, xPos, yPos, height, length, lines, inclination).CalculateInOut();
+            return new ShapeParallelogramIO(orientation, xPos, yPos, height, length, lines, inclination).GetIO();
         }
     }
 }

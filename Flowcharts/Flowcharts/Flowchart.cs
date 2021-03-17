@@ -14,8 +14,8 @@ namespace Flowcharts
         public int EmptyRow = 0;
         public string orientationName = "LR";
 
-        FlowchartElementManager elementManager;
-        FlowchartArrowManager arrowManager;
+        ElementRegister elementRegister;
+        ArrowRegister arrowManager;
 
         public Flowchart(string orientationName, string FileName = null, string path = null)
         {
@@ -27,10 +27,10 @@ namespace Flowcharts
             InitializeFlowchart();
         }
 
-        public Flowchart(string orientationName, MemoryStream MemoryStream)
+        public Flowchart(string orientationName, MemoryStream memoryStream)
         {
             this.orientationName = orientationName;
-            this.memoryStream = MemoryStream;
+            this.memoryStream = memoryStream;
 
             xmlWriter = XmlWriter.Create(memoryStream);
             memoryStream.Position = 0;
@@ -39,23 +39,23 @@ namespace Flowcharts
         }
         public void InitializeFlowchart()
         {
-            elementManager = new FlowchartElementManager(xmlWriter, orientationName) { };
-            arrowManager = new FlowchartArrowManager() { };
+            elementRegister = new ElementRegister(xmlWriter, orientationName) { };
+            arrowManager = new ArrowRegister() { };
             grid = new Grid();
         }
 
         public void AddPair((string text, string shape) element1, (string text, string shape) element2, string text = null)
         {
-            elementManager.AddPair(element1, element2, text);
-            arrowManager.Add(new Arrow(xmlWriter, elementManager[element1.text], elementManager[element2.text], text));
+            elementRegister.AddPair(element1, element2, text);
+            arrowManager.Add(new Arrow(xmlWriter, elementRegister[element1.text], elementRegister[element2.text], text));
         }                     
 
         public void AddBackPair(string text1, string text2)
         {
-            arrowManager.Add(new BackArrow(xmlWriter, elementManager[text1], elementManager[text2]));
-            elementManager[text1].backElements.Add(elementManager[text2]);
+            arrowManager.Add(new BackArrow(xmlWriter, elementRegister[text1], elementRegister[text2]));
+            elementRegister[text1].backElements.Add(elementRegister[text2]);
         }
 
-        public void Draw() => new FlowchartDrawer(xmlWriter, memoryStream, grid, arrowManager, elementManager).Draw();
+        public void Draw() => new DrawnFlowchart(xmlWriter, memoryStream, grid, arrowManager, elementRegister).Draw();
     }
 }

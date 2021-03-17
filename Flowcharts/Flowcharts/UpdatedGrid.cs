@@ -15,13 +15,13 @@
             {
                 for (int j = 0; j < grid.columnSize; j++)
                 {
-                    if (grid.elementGrid[i, j] != null)
+                    if (grid.elementArray[i, j] != null)
                     {
-                        grid.elementGrid[i, j].Row = i;
-                        grid.elementGrid[i, j].Column = j;
+                        grid.elementArray[i, j].Row = i;
+                        grid.elementArray[i, j].Column = j;
 
-                        grid.elementGrid[i, j].columnSize = grid.columnSize;
-                        grid.elementGrid[i, j].rowSize = grid.rowSize;
+                        grid.elementArray[i, j].columnSize = grid.columnSize;
+                        grid.elementArray[i, j].rowSize = grid.rowSize;
                     }
                 }
             }

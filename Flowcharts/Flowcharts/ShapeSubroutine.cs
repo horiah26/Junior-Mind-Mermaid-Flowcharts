@@ -14,12 +14,12 @@ namespace Flowcharts
 
         public override string CalculateCornerPoints()
         {
-            return new ShapeSubroutinePointsCalculator(xPos, yPos, height, length).Calculate();
+            return new ShapeSubroutinePoints(xPos, yPos, height, length).GetPoints();
         }
 
-        public override EntryExitPoints CalculateInOut()
+        public override IOPoints GetIO()
         {
-            return new ShapeSubroutineInOutCalculator(orientation, xPos, yPos, height, length).CalculateInOut();
+            return new ShapeSubroutineIO(orientation, xPos, yPos, height, length).GetIO();
         }
     }
 }

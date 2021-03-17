@@ -26,9 +26,9 @@ namespace Flowcharts
             this.text = text;
         }
 
-        public (EntryExitPoints, double textAlignment) Draw()
+        public (IOPoints, double textAlignment) Draw()
         {
-            (lines, _) = new TextSplitter(text).Split();
+            lines = new SplitText(text).GetLines();
 
             (height, length) = GetSize();
 
@@ -38,33 +38,36 @@ namespace Flowcharts
 
             DrawPolygon();
 
-            return (CalculateInOut(), length);
+            return (GetIO(), length);
         }
 
         public virtual void DrawPolygon()
         {
-            new ShapePolygonDrawer(xmlWriter).Draw(coordinates);
+            xmlWriter.WriteStartElement("polygon");
+            xmlWriter.WriteAttributeString("points", coordinates);
+            xmlWriter.WriteAttributeString("style", "fill:white;stroke:black;stroke-width:3");
+            xmlWriter.WriteEndElement();
         }
 
         public (double xPos, double yPos) CalculatePosition()
         {
             var position = orientation.GetColumnRow();
-            return new ShapePolygonPositionCalculator(orientation, position, lines).Calculate();
+            return new ShapePolygonPosition(orientation, position, lines).GetPosition();
         }
 
         public virtual (double height, double length) GetSize()
         {
-            return new ShapeRectangleSizeCalculator(text).Calculate();
+            return new ShapeRectangleSize(text).GetSize();
         }
 
         public virtual string CalculateCornerPoints()
         {
-            return new ShapeRectanglePointsCalculator(xPos, yPos, height, length).Calculate();
+            return new ShapeRectanglePointsCalculator(xPos, yPos, height, length).GetPoints();
         }
 
-        public virtual EntryExitPoints CalculateInOut()
+        public virtual IOPoints GetIO()
         {
-            return new ShapeRectangleInOutCalculator(orientation, xPos, yPos, height, length).CalculateInOut();
+            return new ShapeRectangleIO(orientation, xPos, yPos, height, length).GetIO();
         }
     }
 }

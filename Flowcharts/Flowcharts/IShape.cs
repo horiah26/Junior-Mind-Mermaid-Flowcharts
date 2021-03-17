@@ -4,6 +4,6 @@ namespace Flowcharts
 {
     interface IShape
     {
-        public (EntryExitPoints, double textAlignment) Draw();
+        public (IOPoints, double textAlignment) Draw();
     }
 }

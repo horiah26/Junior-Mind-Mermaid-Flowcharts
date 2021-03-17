@@ -19,7 +19,7 @@ namespace Flowcharts
             {
                 for (int row = 0; row < grid.rowSize; row++)
                 {
-                    if (grid.elementGrid[row, column] != null)
+                    if (grid.elementArray[row, column] != null)
                     {
                         MoveColumnInPlace(row, column);
                     }
@@ -33,11 +33,11 @@ namespace Flowcharts
 
         private void MoveColumnInPlace(int row, int column)
         {
-            double average = GetAverageRowOfChildren(grid.elementGrid[row, column]);
+            double average = GetAverageRowOfChildren(grid.elementArray[row, column]);
             int difference = (int)average - row;
             if (difference > 0)
             {
-                new GridColumnLowerer(grid).LowerColumnInGrid(row, column, difference);
+                new GridWithLoweredColumn(grid, row, column, difference).GetNewGrid();
             }
         }
 
