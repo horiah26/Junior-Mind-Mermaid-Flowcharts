@@ -44,10 +44,10 @@ namespace Flowcharts
             grid = new Grid();
         }
 
-        public void AddPair((string text, string shape) element1, (string text, string shape) element2, string text = null)
+        public void AddPair((string key, string text, string shape) element1, (string key, string text, string shape) element2, string text = null)
         {
             elementRegister.AddPair(element1, element2, text);
-            arrowManager.Add(new Arrow(xmlWriter, elementRegister[element1.text], elementRegister[element2.text], text));
+            arrowManager.Add(new Arrow(xmlWriter, elementRegister[element1.key], elementRegister[element2.key], text));
         }                     
 
         public void AddBackPair(string text1, string text2)

@@ -20,6 +20,7 @@ namespace Flowcharts
 
         readonly XmlWriter xmlWriter;
         public string Text { get; private set; }
+        public string Key { get; private set; }
 
         public List<Element> parentElements = new List<Element> { };
         public List<Element> childElements = new List<Element> { };

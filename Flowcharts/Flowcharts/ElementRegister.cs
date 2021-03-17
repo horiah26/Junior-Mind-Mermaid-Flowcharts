@@ -30,22 +30,22 @@ namespace Flowcharts
             }
         }
 
-        public void AddPair((string text, string shape) element1, (string text, string shape) element2, string text = null)
+        public void AddPair((string key, string text, string shape) element1, (string key, string text, string shape) element2, string text = null)
         {
-            if (!dictionary.ContainsKey(element1.text))
+            if (!dictionary.ContainsKey(element1.key))
             {
-                dictionary.Add(element1.text, new Element(xmlWriter, element1.text, orientationName));
+                dictionary.Add(element1.key, new Element(xmlWriter, element1.text, orientationName));
             }
-            if (!dictionary.ContainsKey(element2.text))
+            if (!dictionary.ContainsKey(element2.key))
             {
-                dictionary.Add(element2.text, new Element(xmlWriter, element2.text, orientationName));
+                dictionary.Add(element2.key, new Element(xmlWriter, element2.text, orientationName));
             }
 
-            dictionary[element1.text].AddChild(dictionary[element2.text]);
-            dictionary[element2.text].AddParent(dictionary[element1.text]);
+            dictionary[element1.key].AddChild(dictionary[element2.key]);
+            dictionary[element2.key].AddParent(dictionary[element1.key]);
 
-            dictionary[element1.text].shapeString = element1.shape;
-            dictionary[element2.text].shapeString = element2.shape;
+            dictionary[element1.key].shapeString = element1.shape;
+            dictionary[element2.key].shapeString = element2.shape;
         }
 
         public IEnumerator GetEnumerator()
