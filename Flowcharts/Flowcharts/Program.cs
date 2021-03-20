@@ -9,7 +9,7 @@
 
             var flowchart = new Flowchart("LeftRight", fileName, path);
             flowchart.AddPair(("Element1", "Lorem Ipsum", "Rhombus"), ("Element2","Lorem ipsum dolor sit amet, consectetur adipiscing ", "TrapezoidAlt"), "DottedLink");
-            flowchart.AddPair(("Element3", "Lorem ipsum dolor sit amet, consectetur adipiscing", "Trapezoid"), ("Element4", "Lorem ipsum dolor adipiscing ", "TrapezoidAlt"),"Arrow", "Duis egestas urna lacus");
+            flowchart.AddPair(("Element3", "Lorem ipsum dolor sit amet, consectetur adipiscing", "Trapezoid"), ("Element4", "Lorem ipsum dolor adipiscing ", "TrapezoidAlt"),"ThickLink", "Duis egestas urna lacus");
             flowchart.AddPair(("Element5", "Nullam sit ", "Circle"), ("Element6", "Vivamus tristique lectus in turpis vehicula pulvinar", "Banner"), "Arrow", "Vestibulum quis sollicitudin mi, et ornare libero. Nunc sed convallis magna. Vestibulum id elit risus.");
             flowchart.AddPair(("Element7", "A", "Stadium"), ("Element8", "Donec viverra est eget felis dignissim, venenatis blandit magna consectetur", "Cylinder"), "Arrow", "fagbdsbs sfa");
             flowchart.AddPair(("Element9", "Sed at erat interdum metus sagittis", "Rhombus"), ("Element10", "Etiam tincidunt ", "Subroutine"), "Arrow", "Nulla sagittis, ligula ut suscipit bibendum");
