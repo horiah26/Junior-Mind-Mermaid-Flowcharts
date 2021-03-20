@@ -5,12 +5,12 @@ namespace Flowcharts
     class GridAdjustedForBackArrow
     {
         Grid grid;
-        List<Arrow> arrows;
+        List<BackArrow> arrows;
 
-        public GridAdjustedForBackArrow(Grid grid, List<Arrow> arrows)
+        public GridAdjustedForBackArrow(Grid grid, List<IArrow> arrows)
         {
             this.grid = grid;
-            this.arrows = arrows;
+            this.arrows = ExtractBackArrows(arrows);
         }
 
         public void AdjustForBackArrows()
@@ -34,21 +34,34 @@ namespace Flowcharts
             }
         }
 
-        private void UpdateListOfBackArrows(ref List<(double row, int forwardColum, int backColumn)> backArrowPoints, List<Arrow> arrows)
+        private void UpdateListOfBackArrows(ref List<(double row, int forwardColum, int backColumn)> backArrowPoints, List<BackArrow> arrows)
         {
             List<(double row, int forwardColum, int backColumn)> tempPoints = new List<(double row, int forwardColum, int backColumn)> { };
 
             foreach (var backArrow in arrows)
             {
-                if (typeof(BackArrow) == backArrow.GetType())
-
-                    if (typeof(BackArrow) == backArrow.GetType() && backArrow.fromElement.Row == backArrow.toElement.Row)
-                    {
-                        tempPoints.Add((backArrow.fromElement.Row, backArrow.fromElement.Column, backArrow.toElement.Column));
-                    }
+                if (typeof(BackArrow) == backArrow.GetType() && backArrow.fromElement.Row == backArrow.toElement.Row)
+                {
+                    tempPoints.Add((backArrow.fromElement.Row, backArrow.fromElement.Column, backArrow.toElement.Column));
+                }
             }
 
             backArrowPoints = tempPoints;
+        }
+
+        private List<BackArrow> ExtractBackArrows(List<IArrow> arrows)
+        {
+            List<BackArrow> backArrows = new List<BackArrow> { };
+
+            foreach (var backArrow in arrows)
+            {
+                if (typeof(BackArrow) == backArrow.GetType())
+                {
+                    backArrows.Add((BackArrow)backArrow);
+                }
+            }
+
+            return backArrows;
         }
 
         public Grid Get()

@@ -5,13 +5,13 @@ using System.Xml;
 
 namespace Flowcharts
 {
-    public class ElementRegister : IEnumerable<Element>
+    public class ElementList : IEnumerable<Element>
     {
         public Dictionary<string, Element> dictionary = new Dictionary<string, Element> { };
         readonly XmlWriter xmlWriter;
         readonly string orientationName;
 
-        public ElementRegister(XmlWriter xmlWriter, string orientationName) 
+        public ElementList(XmlWriter xmlWriter, string orientationName) 
         {
             this.xmlWriter = xmlWriter;
             this.orientationName = orientationName;

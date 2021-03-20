@@ -5,16 +5,16 @@ namespace Flowcharts
 {
     class ArrowRegister : IEnumerable
     {
-        public List<Arrow> arrows = new List<Arrow> { };
+        public List<IArrow> arrows = new List<IArrow> { };
 
         public ArrowRegister() { }
 
-        public void Add(Arrow arrow)
+        public void Add(IArrow arrow)
         {
             arrows.Add(arrow);
         }
 
-        public List<Arrow> GetList()
+        public List<IArrow> GetList()
         {
             return arrows;
         }

@@ -7,9 +7,9 @@ namespace Flowcharts
     class OrganizedGrid
     {
         Grid grid;
-        List<Arrow> arrows;
+        List<IArrow> arrows;
 
-        public OrganizedGrid(Grid grid, List<Arrow> arrows)
+        public OrganizedGrid(Grid grid, List<IArrow> arrows)
         {
             this.grid = grid;
             this.arrows = arrows;

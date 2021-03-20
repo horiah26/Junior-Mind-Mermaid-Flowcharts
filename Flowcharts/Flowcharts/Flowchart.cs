@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Xml;
 
 namespace Flowcharts
@@ -14,8 +15,8 @@ namespace Flowcharts
         public int EmptyRow = 0;
         public string orientationName = "LR";
 
-        ElementRegister elementRegister;
-        ArrowRegister arrowManager;
+        ElementList elementList;
+        ArrowRegister arrowList;
 
         public Flowchart(string orientationName, string FileName = null, string path = null)
         {
@@ -37,25 +38,25 @@ namespace Flowcharts
 
             InitializeFlowchart();
         }
+
         public void InitializeFlowchart()
         {
-            elementRegister = new ElementRegister(xmlWriter, orientationName) { };
-            arrowManager = new ArrowRegister() { };
+            elementList = new ElementList(xmlWriter, orientationName) { };
+            arrowList = new ArrowRegister() { };
             grid = new Grid();
         }
 
-        public void AddPair((string key, string text, string shape) element1, (string key, string text, string shape) element2, string text = null)
+        public void AddPair((string key, string text, string shape) element1, (string key, string text, string shape) element2, string arrowName, string text = null )
         {
-            elementRegister.AddPair(element1, element2, text);
-            arrowManager.Add(new Arrow(xmlWriter, elementRegister[element1.key], elementRegister[element2.key], text));
+            elementList.AddPair(element1, element2);
+
+            var arrowType = Type.GetType("Flowcharts." + arrowName);
+
+            IArrow arrow = (IArrow)Activator.CreateInstance(arrowType, new object[] { xmlWriter, elementList[element1.key], elementList[element2.key], text });
+            
+            arrowList.Add(arrow);
         }                     
 
-        public void AddBackPair(string text1, string text2)
-        {
-            arrowManager.Add(new BackArrow(xmlWriter, elementRegister[text1], elementRegister[text2]));
-            elementRegister[text1].backElements.Add(elementRegister[text2]);
-        }
-
-        public void Draw() => new DrawnFlowchart(xmlWriter, memoryStream, grid, arrowManager, elementRegister).Draw();
+        public void Draw() => new DrawnFlowchart(xmlWriter, memoryStream, grid, arrowList, elementList).Draw();
     }
 }

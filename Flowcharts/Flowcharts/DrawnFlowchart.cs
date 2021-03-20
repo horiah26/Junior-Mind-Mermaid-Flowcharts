@@ -8,39 +8,39 @@ namespace Flowcharts
     {
         Grid grid;
         readonly XmlWriter xmlWriter;
-        readonly ArrowRegister arrowManager;
-        readonly ElementRegister elementManager;
+        readonly ArrowRegister arrowList;
+        readonly ElementList elementList;
         readonly MemoryStream memoryStream;
 
-        public DrawnFlowchart(XmlWriter xmlWriter, MemoryStream memoryStream, Grid grid, ArrowRegister arrowManager, ElementRegister elementManager)
+        public DrawnFlowchart(XmlWriter xmlWriter, MemoryStream memoryStream, Grid grid, ArrowRegister arrowList, ElementList elementList)
         {
             this.grid = grid;
             this.xmlWriter = xmlWriter;
             this.memoryStream = memoryStream;
-            this.arrowManager = arrowManager;
-            this.elementManager = elementManager;
+            this.arrowList = arrowList;
+            this.elementList = elementList;
         }
 
         public void Draw()
         {
             InitializeSVG(xmlWriter);
 
-            grid = new GridFromDictionary(elementManager).GetGrid();
+            grid = new GridFromDictionary(elementList).GetGrid();
 
-            int lastOccupiedColumn = (elementManager.Max(x => x.Column));
-            new OrganizedGrid(grid, arrowManager.GetList()).GetOrganizedGrid();
+            int lastOccupiedColumn = (elementList.Max(x => x.Column));
+            new OrganizedGrid(grid, arrowList.GetList()).GetOrganizedGrid();
 
-            foreach (Element element in elementManager)
+            foreach (Element element in elementList)
             {
                 element.Draw();
             }
 
-            foreach (Arrow arrow in arrowManager)
+            foreach (Arrow arrow in arrowList)
             {
                 arrow.Draw();
             }
 
-            foreach (Arrow arrow in arrowManager)
+            foreach (Arrow arrow in arrowList)
             {
                 arrow.Write();
             }

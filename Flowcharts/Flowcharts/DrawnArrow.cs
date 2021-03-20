@@ -2,8 +2,6 @@
 
 namespace Flowcharts
 {
-
-
     class DrawnArrow
     {
         public XmlWriter xmlWriter;
@@ -47,6 +45,5 @@ namespace Flowcharts
             xmlWriter.WriteAttributeString("marker-end", "url(#arrowhead)");
             xmlWriter.WriteEndElement();
         }
-
     }
 }

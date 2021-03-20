@@ -2,19 +2,12 @@
 
 namespace Flowcharts
 {
-    public class Arrow
+    public class Arrow : IArrow
     {
         public XmlWriter xmlWriter;
         public Element fromElement;
         public Element toElement;
         public string text = null;
-
-        public Arrow(XmlWriter xmlWriter, Element fromElement, Element toElement)
-        {
-            this.xmlWriter = xmlWriter;
-            this.fromElement = fromElement;
-            this.toElement = toElement;
-        }
 
         public Arrow(XmlWriter xmlWriter, Element fromElement, Element toElement, string text)
         {
@@ -24,7 +17,7 @@ namespace Flowcharts
             this.text = text;
         }
 
-        public void Draw()
+        public virtual void Draw()
         {
             new DrawnArrow(xmlWriter, fromElement, toElement, GetArrowEnds()).Draw();
         }
