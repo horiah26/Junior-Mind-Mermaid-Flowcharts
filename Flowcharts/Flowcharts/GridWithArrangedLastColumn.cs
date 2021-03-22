@@ -15,17 +15,17 @@ namespace Flowcharts
 
         public void Level()
         {
-            int lastOccupiedColumn = grid.lastOccupiedColumn;
-            var lastColumn = new ExtractedColumn(grid, lastOccupiedColumn).GetColumn().Where(x => x != null);
+            var lastColumn = new LastColumn(grid);
+            int indexOfLastColumn = lastColumn.Index;
 
-            var averageParents = (int)lastColumn.Average(x => GetAverageRowOfParents(x));
-            var averageThis = (int)lastColumn.Average(x => x.Row);
+            var averageParents = (int)lastColumn.Column.Average(x => GetAverageRowOfParents(x));
+            var averageThis = (int)lastColumn.Column.Average(x => x.Row);
 
             int difference = averageParents - averageThis;
 
             if (difference > 0)
             {
-                var gridWithLoweredColumn = new GridWithLoweredColumn(grid, 0, lastOccupiedColumn, difference).GetNewGrid();
+                var gridWithLoweredColumn = new GridWithLoweredColumn(grid, 0, indexOfLastColumn, difference).GetNewGrid();
                 updatedGrid = new UpdatedGrid(gridWithLoweredColumn).Get();
             }
             else
@@ -49,5 +49,7 @@ namespace Flowcharts
             Level();
             return updatedGrid;
         }
+
+
     }
 }

@@ -28,6 +28,7 @@ namespace Flowcharts
             grid = new GridFromDictionary(elementList).GetGrid();
 
             int lastOccupiedColumn = (elementList.Max(x => x.Column));
+
             new OrganizedGrid(grid, arrowList.GetList()).GetOrganizedGrid();
 
             foreach (Element element in elementList)
