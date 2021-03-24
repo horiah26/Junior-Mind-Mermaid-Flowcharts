@@ -6,7 +6,6 @@ namespace Flowcharts
     {
         public int rowSize;
         public int columnSize;
-        public int lastOccupiedColumn;
 
         public Element[,] elementArray;
 
@@ -15,6 +14,13 @@ namespace Flowcharts
             elementArray = new Element[rowSize, columnSize];
             this.rowSize = rowSize;
             this.columnSize = columnSize;
+        }
+
+        public Grid(Grid grid)
+        {
+            elementArray = grid.elementArray;
+            rowSize = grid.rowSize;
+            columnSize = grid.columnSize;
         }
 
         public void Add(Element element, int row, int column)

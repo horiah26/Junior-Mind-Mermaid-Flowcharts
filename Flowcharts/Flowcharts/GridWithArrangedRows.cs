@@ -5,39 +5,40 @@ namespace Flowcharts
 {
     class GridWithArrangedRows
     {
-        Grid grid;
+        Grid newGrid;
 
         public GridWithArrangedRows(Grid grid)
         {
-            this.grid = grid;
+            newGrid = new Grid(grid);
         }
 
         public void ArrangeRows()
         {
+            int lastColumnIndex = new LastColumn(newGrid).Index;
 
-            for (int column = grid.lastOccupiedColumn; column >= 0; column--)
+            for (int column = lastColumnIndex; column >= 0; column--)
             {
-                for (int row = 0; row < grid.rowSize; row++)
+                for (int row = 0; row < newGrid.rowSize; row++)
                 {
-                    if (grid.elementArray[row, column] != null)
+                    if (newGrid.elementArray[row, column] != null)
                     {
                         MoveColumnInPlace(row, column);
                     }
                 }
 
-                grid = new UpdatedGrid(grid).Get();
+                newGrid = new UpdatedGrid(newGrid).Get();
             }
 
-            grid = new UpdatedGrid(grid).Get();
+            newGrid = new UpdatedGrid(newGrid).Get();
         }
 
         private void MoveColumnInPlace(int row, int column)
         {
-            double average = GetAverageRowOfChildren(grid.elementArray[row, column]);
+            double average = GetAverageRowOfChildren(newGrid.elementArray[row, column]);
             int difference = (int)average - row;
             if (difference > 0)
             {
-                new GridWithLoweredColumn(grid, row, column, difference).GetNewGrid();
+                new GridWithLoweredColumn(newGrid, row, column, difference).GetNewGrid();
             }
         }
 
@@ -54,7 +55,7 @@ namespace Flowcharts
         public Grid Get()
         {
             ArrangeRows();
-            return grid;
+            return new UpdatedGrid(newGrid).Get();
         }
     }
 }

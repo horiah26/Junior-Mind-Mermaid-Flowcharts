@@ -29,11 +29,13 @@ namespace Flowcharts
 
             int lastOccupiedColumn = (elementList.Max(x => x.Column));
 
-            new OrganizedGrid(grid, arrowList.GetList()).GetOrganizedGrid();
+            var organizedGrid = new OrganizedGrid(grid, arrowList.GetList()).GetOrganizedGrid();
 
-            foreach (Element element in elementList)
+            (int rowSize, int columnSize) = new GridSize(organizedGrid).GetSize();
+
+            foreach (Element element in organizedGrid)
             {
-                element.Draw();
+                element.Draw(columnSize, rowSize);
             }
 
             foreach (Arrow arrow in arrowList)

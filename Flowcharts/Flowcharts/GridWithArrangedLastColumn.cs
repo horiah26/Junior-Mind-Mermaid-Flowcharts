@@ -5,17 +5,15 @@ namespace Flowcharts
 {
     class GridWithArrangedLastColumn
     {
-        Grid grid;
-        Grid updatedGrid;
+        Grid newGrid;
 
         public GridWithArrangedLastColumn(Grid grid)
         {
-            this.grid = grid;
+            newGrid = new Grid(grid);
         }
-
         public void Level()
         {
-            var lastColumn = new LastColumn(grid);
+            var lastColumn = new LastColumn(newGrid);
             int indexOfLastColumn = lastColumn.Index;
 
             var averageParents = (int)lastColumn.Column.Average(x => GetAverageRowOfParents(x));
@@ -25,12 +23,12 @@ namespace Flowcharts
 
             if (difference > 0)
             {
-                var gridWithLoweredColumn = new GridWithLoweredColumn(grid, 0, indexOfLastColumn, difference).GetNewGrid();
-                updatedGrid = new UpdatedGrid(gridWithLoweredColumn).Get();
+                var newGridWithLoweredColumn = new GridWithLoweredColumn(newGrid, 0, indexOfLastColumn, difference).GetNewGrid();
+                newGrid = new UpdatedGrid(newGridWithLoweredColumn).Get();
             }
             else
             {
-                updatedGrid = new UpdatedGrid(grid).Get();
+                newGrid = new UpdatedGrid(newGrid).Get();
             }
         }
 
@@ -47,9 +45,7 @@ namespace Flowcharts
         public Grid Get()
         {
             Level();
-            return updatedGrid;
+            return newGrid;
         }
-
-
     }
 }

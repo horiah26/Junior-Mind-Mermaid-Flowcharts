@@ -2,37 +2,37 @@
 {
     class GridWithFilledSpots
     {
-        Grid grid;
+        Grid newGrid;
 
         public GridWithFilledSpots(Grid grid)
         {
-            this.grid = grid;
+            newGrid = new Grid(grid);
         }
 
         public void FillEmptySpots()
         {
-            for (int column = grid.lastOccupiedColumn - 2; column >= 0; column--)
-            {
-                for (int row = 0; row < grid.rowSize; row++)
-                {
-                    if (grid.elementArray[row, column] != null && grid.elementArray[row, column + 1] == null && grid.elementArray[row, column].MinColumnOfChildren() - 1 > column)
-                    {
-                        grid.elementArray[row, column].MinColumnOfChildren();
-                        grid.elementArray[row, column + 1] = grid.elementArray[row, column];
+            int lastColumnIndex = new LastColumn(newGrid).Index;
 
-                        grid.elementArray[row, column] = null;
-                        grid = new UpdatedGrid(grid).Get();
+            for (int column = lastColumnIndex - 2; column >= 0; column--)
+            {
+                for (int row = 0; row < newGrid.rowSize; row++)
+                {
+                    if (newGrid.elementArray[row, column] != null && newGrid.elementArray[row, column + 1] == null && newGrid.elementArray[row, column].MinColumnOfChildren() - 1 > column)
+                    {
+                        newGrid.elementArray[row, column].MinColumnOfChildren();
+                        newGrid.elementArray[row, column + 1] = newGrid.elementArray[row, column];
+
+                        newGrid.elementArray[row, column] = null;
+                        newGrid = new UpdatedGrid(newGrid).Get();
                     }
                 }
             }
-
-            grid = new UpdatedGrid(grid).Get();
         }
 
         public Grid Get()
         {
             FillEmptySpots();
-            return grid;
+            return new UpdatedGrid(newGrid).Get(); ;
         }
     }
 }
