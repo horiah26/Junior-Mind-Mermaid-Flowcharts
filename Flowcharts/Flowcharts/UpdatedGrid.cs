@@ -2,35 +2,36 @@
 {
     public class UpdatedGrid
     {
-        readonly Grid grid;
+        Grid newGrid;
 
         public UpdatedGrid(Grid grid)
         {
-            this.grid = grid;
+            newGrid = new Grid(grid);
         }
 
         public void UpdateGrid()
         {
-            for (int i = 0; i < grid.rowSize; i++)
+            for (int i = 0; i < newGrid.rowSize; i++)
             {
-                for (int j = 0; j < grid.columnSize; j++)
+                for (int j = 0; j < newGrid.columnSize; j++)
                 {
-                    if (grid.elementArray[i, j] != null)
+                    if (newGrid.elementArray[i, j] != null)
                     {
-                        grid.elementArray[i, j].Row = i;
-                        grid.elementArray[i, j].Column = j;
-
-                        grid.elementArray[i, j].columnSize = grid.columnSize;
-                        grid.elementArray[i, j].rowSize = grid.rowSize;
+                        newGrid.elementArray[i, j].Row = i;
+                        newGrid.elementArray[i, j].Column = j;
                     }
                 }
             }
+
+            (int rowSize, int columnSize) = new GridSize(newGrid).GetSize();
+            newGrid.rowSize = rowSize;
+            newGrid.columnSize = columnSize;
         }
 
         public Grid Get()
         {
             UpdateGrid();
-            return grid;
+            return newGrid;
         }
     }
 }

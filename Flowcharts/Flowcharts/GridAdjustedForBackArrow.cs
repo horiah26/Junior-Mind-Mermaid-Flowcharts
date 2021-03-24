@@ -4,22 +4,27 @@ namespace Flowcharts
 {
     class GridAdjustedForBackArrow
     {
-        Grid grid;
+        Grid newGrid;
         List<BackArrow> arrows;
 
         public GridAdjustedForBackArrow(Grid grid, List<IArrow> arrows)
         {
-            this.grid = grid;
             this.arrows = ExtractBackArrows(arrows);
+            newGrid = new Grid(grid);
         }
 
         public void AdjustForBackArrows()
         {
+            if(arrows.Count == 0)
+            {
+                return;
+            }
+
             List<(double row, int forwardColum, int backColumn)> backArrowPoints = new List<(double row, int forwardColum, int backColumn)> { };
 
             UpdateListOfBackArrows(ref backArrowPoints, arrows);
 
-            foreach (var element in grid)
+            foreach (var element in newGrid)
             {
                 UpdateListOfBackArrows(ref backArrowPoints, arrows);
 
@@ -27,8 +32,8 @@ namespace Flowcharts
                 {
                     if (element.Row == row && backColumn < element.Column && element.Column < forwardColum)
                     {
-                        var gridWithLoweredColumn = new GridWithLoweredColumn(grid, row, element.Column, 1).GetNewGrid();
-                        grid = new UpdatedGrid(gridWithLoweredColumn).Get();
+                        var gridWithLoweredColumn = new GridWithLoweredColumn(newGrid, row, element.Column, 1).GetNewGrid();
+                        newGrid = new UpdatedGrid(gridWithLoweredColumn).Get();
                     }
                 }
             }
@@ -67,7 +72,7 @@ namespace Flowcharts
         public Grid Get()
         {
             AdjustForBackArrows();
-            return grid;
+            return new UpdatedGrid(newGrid).Get();
         }
     }
 }

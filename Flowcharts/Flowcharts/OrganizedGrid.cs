@@ -17,15 +17,12 @@ namespace Flowcharts
 
         public Grid GetOrganizedGrid()
         {
-            var updatedGrid = new UpdatedGrid(grid).Get();
-            var arrangedGrid = new GridWithArrangedRows(updatedGrid).Get();
-            updatedGrid = new UpdatedGrid(arrangedGrid).Get();
-            var filledGrid = new GridWithFilledSpots(updatedGrid).Get();
+            var arrangedGrid = new GridWithArrangedRows(grid).Get(); // !makes extra dimension for arranged grid
+            var filledGrid = new GridWithFilledSpots(arrangedGrid).Get();
             var gridAdjustedForBackArrows = new GridAdjustedForBackArrow(filledGrid, arrows).Get();
             var gridWithArrangedLastColumn = new GridWithArrangedLastColumn(gridAdjustedForBackArrows).Get();
-            var finalGrid = new UpdatedGrid(gridWithArrangedLastColumn).Get();
-
-            return finalGrid;
+            new GridWithoutNullEnds(gridWithArrangedLastColumn).IdentifyEmptyRows();
+            return grid;
         }
     }
 }

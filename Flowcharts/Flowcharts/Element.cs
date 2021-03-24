@@ -10,9 +10,6 @@ namespace Flowcharts
         public (double x, double y) In;
         public (double x, double y) Out;
 
-        public int rowSize = 1;
-        public int columnSize = 1;
-
         public IOrientation orientation;
 
         readonly string orientationName;
@@ -55,7 +52,7 @@ namespace Flowcharts
             Column = maxPreviousColumn + 1;
         }
 
-        public void Draw()
+        public void Draw(int columnSize, int rowSize)
         {
             Type orientationType = Type.GetType("Flowcharts.Orientation" + orientationName);
             IOrientation orientation = (IOrientation)Activator.CreateInstance(orientationType);
