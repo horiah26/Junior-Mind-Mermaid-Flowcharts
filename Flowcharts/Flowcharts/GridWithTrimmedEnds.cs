@@ -5,7 +5,7 @@ namespace Flowcharts
 {
     class GridWithTrimmedEnds
     {
-        Grid newGrid;
+        readonly Grid newGrid;
         Element[,] elementArray;
 
         public GridWithTrimmedEnds(Grid grid)

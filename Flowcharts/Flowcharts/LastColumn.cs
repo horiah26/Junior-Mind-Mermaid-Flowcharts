@@ -7,7 +7,7 @@ namespace Flowcharts
 {
     public class LastColumn
     {
-        Grid grid;
+        readonly Grid grid;
         public int Index { get; private set; }
         public IEnumerable<Element> Column { get; private set; }
 

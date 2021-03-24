@@ -5,7 +5,7 @@ namespace Flowcharts
     class GridAdjustedForBackArrow
     {
         Grid newGrid;
-        List<BackArrow> arrows;
+        readonly List<BackArrow> arrows;
 
         public GridAdjustedForBackArrow(Grid grid, List<IArrow> arrows)
         {

@@ -2,7 +2,7 @@
 {
     public class UpdatedGrid
     {
-        Grid newGrid;
+        readonly Grid newGrid;
 
         public UpdatedGrid(Grid grid)
         {

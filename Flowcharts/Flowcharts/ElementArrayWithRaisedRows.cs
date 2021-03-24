@@ -6,10 +6,10 @@ namespace Flowcharts
 {
     class ElementArrayWithRaisedRows
     {
-        Element[,] elementArray;
-        List<int> emptyRows;
-        int rowSize;
-        int columnSize;
+        readonly Element[,] elementArray;
+        readonly List<int> emptyRows;
+        readonly int rowSize;
+        readonly int columnSize;
 
         public ElementArrayWithRaisedRows(Element[,] elementArray, List<int> emptyRows)
         {

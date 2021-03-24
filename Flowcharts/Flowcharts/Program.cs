@@ -8,21 +8,31 @@
             string path = null;
 
             var flowchart = new Flowchart("LeftRight", fileName, path);
+
+            flowchart.AddPair(("A", "A", "Rhombus"), ("B", "B", "Rhombus"), "Arrow");
             flowchart.AddPair(("A", "A", "Rhombus"), ("C", "C", "Rhombus"), "Arrow");
-            flowchart.AddPair(("B", "B", "Rhombus"), ("C", "C", "Rhombus"), "Arrow");
-            flowchart.AddPair(("D", "D", "Rhombus"), ("C", "C", "Rhombus"), "Arrow");
+            //flowchart.AddPair(("A", "A", "Rhombus"), ("D", "D", "Rhombus"), "Arrow");
 
-            flowchart.AddPair(("A", "A", "Rhombus"), ("E", "E", "Rhombus"), "Arrow");
-            flowchart.AddPair(("B", "B", "Rhombus"), ("E", "E", "Rhombus"), "Arrow");
-            flowchart.AddPair(("D", "D", "Rhombus"), ("E", "E", "Rhombus"), "Arrow");
 
-            flowchart.AddPair(("A", "A", "Rhombus"), ("H", "H", "Rhombus"), "Arrow");
-            flowchart.AddPair(("B", "B", "Rhombus"), ("H", "H", "Rhombus"), "Arrow");
-            flowchart.AddPair(("D", "D", "Rhombus"), ("H", "H", "Rhombus"), "Arrow");
+            flowchart.AddPair(("C", "C", "Rhombus"), ("C1", "C1", "Rhombus"), "Arrow");
+            flowchart.AddPair(("C", "C", "Rhombus"), ("C2", "C2", "Rhombus"), "Arrow");
 
-            flowchart.AddPair(("A", "A", "Rhombus"), ("G", "G", "Rhombus"), "Arrow");
-            flowchart.AddPair(("B", "B", "Rhombus"), ("G", "G", "Rhombus"), "Arrow");
-            flowchart.AddPair(("D", "D", "Rhombus"), ("G", "G", "Rhombus"), "Arrow");
+
+            //flowchart.AddPair(("A", "A", "Rhombus"), ("C", "C", "Rhombus"), "Arrow");
+            //flowchart.AddPair(("B", "B", "Rhombus"), ("C", "C", "Rhombus"), "Arrow");
+            //flowchart.AddPair(("D", "D", "Rhombus"), ("C", "C", "Rhombus"), "Arrow");
+
+            //flowchart.AddPair(("A", "A", "Rhombus"), ("E", "E", "Rhombus"), "Arrow");
+            //flowchart.AddPair(("B", "B", "Rhombus"), ("E", "E", "Rhombus"), "Arrow");
+            //flowchart.AddPair(("D", "D", "Rhombus"), ("E", "E", "Rhombus"), "Arrow");
+
+            //flowchart.AddPair(("A", "A", "Rhombus"), ("H", "H", "Rhombus"), "Arrow");
+            //flowchart.AddPair(("B", "B", "Rhombus"), ("H", "H", "Rhombus"), "Arrow");
+            //flowchart.AddPair(("D", "D", "Rhombus"), ("H", "H", "Rhombus"), "Arrow");
+
+            //flowchart.AddPair(("A", "A", "Rhombus"), ("G", "G", "Rhombus"), "Arrow");
+            //flowchart.AddPair(("B", "B", "Rhombus"), ("G", "G", "Rhombus"), "Arrow");
+            //flowchart.AddPair(("D", "D", "Rhombus"), ("G", "G", "Rhombus"), "Arrow");
 
             //flowchart.AddPair(("A", "A", "Rhombus"), ("I", "I", "Rhombus"), "Arrow");
             //flowchart.AddPair(("B", "B", "Rhombus"), ("I", "I", "Rhombus"), "Arrow");

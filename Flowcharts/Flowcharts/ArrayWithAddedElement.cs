@@ -5,11 +5,11 @@ namespace Flowcharts
     class ArrayWithAddedElement
     {
         Element[,] elementArray;
-        Element element;
-        int row;
-        int column;
-        int columnSize;
-        int rowSize;
+        readonly Element element;
+        readonly int row;
+        readonly int column;
+        readonly int columnSize;
+        readonly int rowSize;
 
         public ArrayWithAddedElement(Element[,] elementArray, Element element, int row, int column)
         {

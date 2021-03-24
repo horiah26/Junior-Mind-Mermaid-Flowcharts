@@ -6,10 +6,10 @@ namespace Flowcharts
 {
     class ElementArrayWithoutEmptyRows
     {
-        Element[,] elementArray;
-        int rowSize;
-        int columnSize;
-        int deletedRows;
+        readonly Element[,] elementArray;
+        readonly int rowSize;
+        readonly int columnSize;
+        readonly int deletedRows;
 
         public ElementArrayWithoutEmptyRows(Element[,] elementArray, int deletedRows, int rowSize, int columnSize)
         {

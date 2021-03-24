@@ -11,7 +11,7 @@ namespace Flowcharts
         readonly double yPos;
         readonly double height;
         readonly double length;
-        string[] lines;
+        readonly string[] lines;
 
         public ShapeStadiumIO(IOrientation orientation, double xPos, double yPos, double height, double length, string[] lines)
         {

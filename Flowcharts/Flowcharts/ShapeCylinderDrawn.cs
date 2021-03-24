@@ -4,11 +4,11 @@ namespace Flowcharts
 {
     internal class ShapeCylinderDrawn
     {
-        private XmlWriter xmlWriter;
-        private double xPos;
-        private double yPos;
-        private double height;
-        private double length;
+        private readonly XmlWriter xmlWriter;
+        private readonly double xPos;
+        private readonly double yPos;
+        private readonly double height;
+        private readonly double length;
 
         public ShapeCylinderDrawn(XmlWriter xmlWriter, double xPos, double yPos, double height, double length)
         {

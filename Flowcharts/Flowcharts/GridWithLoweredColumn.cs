@@ -6,10 +6,10 @@ namespace Flowcharts
 {
     class GridWithLoweredColumn
     {
-        Grid grid;
-        double row;
-        int column;
-        int positions;
+        readonly Grid grid;
+        readonly double row;
+        readonly int column;
+        readonly int positions;
 
         public GridWithLoweredColumn(Grid grid, double row, int column, int positions)
         {
@@ -34,10 +34,10 @@ namespace Flowcharts
 
             if (difference > 0)
             {
-                grid.elementArray = new ResizedElementArray(grid.elementArray, grid.Rows + difference, grid.Columns).Get();
+                grid.elementArray = new ResizedElementArray(grid.elementArray, grid.elementArray.GetLength(0) + difference, grid.elementArray.GetLength(1)).Get();
             }
 
-            for (int i = grid.Rows - 1; i >= row; i--)
+            for (int i = grid.elementArray.GetLength(0) - 1; i >= row; i--)
             {
                 if (grid.elementArray[i, column] != null)
                 {

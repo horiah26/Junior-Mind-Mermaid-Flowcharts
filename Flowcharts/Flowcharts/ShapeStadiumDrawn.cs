@@ -5,7 +5,7 @@ namespace Flowcharts
 {
     internal class ShapeStadiumDrawn
     {
-        private XmlWriter xmlWriter;
+        private readonly XmlWriter xmlWriter;
 
         public ShapeStadiumDrawn(XmlWriter xmlWriter)
         {

@@ -6,7 +6,7 @@ namespace Flowcharts
 {
     class GridSize
     {
-        Grid grid;
+        readonly Grid grid;
         int RowSize;
         int ColumnSize;
 

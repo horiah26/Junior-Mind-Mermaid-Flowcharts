@@ -6,7 +6,7 @@ namespace Flowcharts
 {
     class ListOfEmptyRows
     {
-        Element[,] elementArray;
+        readonly Element[,] elementArray;
 
         public ListOfEmptyRows(Element[,] elementArray)
         {

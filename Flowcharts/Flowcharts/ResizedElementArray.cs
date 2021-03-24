@@ -4,10 +4,10 @@ namespace Flowcharts
 {
     class ResizedElementArray
     {
-        Element[,] originalArray;
-        Element[,] newArray;
-        int rows;
-        int columns;
+        readonly Element[,] originalArray;
+        readonly Element[,] newArray;
+        readonly int rows;
+        readonly int columns;
 
         public ResizedElementArray(Element[,] elementArray, int rows, int columns)
         {

@@ -6,8 +6,8 @@ namespace Flowcharts
 {
     class OrganizedGrid
     {
-        Grid grid;
-        List<IArrow> arrows;
+        readonly Grid grid;
+        readonly List<IArrow> arrows;
 
         public OrganizedGrid(Grid grid, List<IArrow> arrows)
         {
