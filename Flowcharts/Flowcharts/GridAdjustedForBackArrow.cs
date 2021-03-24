@@ -32,8 +32,8 @@ namespace Flowcharts
                 {
                     if (element.Row == row && backColumn < element.Column && element.Column < forwardColum)
                     {
-                        var gridWithLoweredColumn = new GridWithLoweredColumn(newGrid, row, element.Column, 1).GetNewGrid();
-                        newGrid = new UpdatedGrid(gridWithLoweredColumn).Get();
+                        newGrid.elementArray = new ElementArrayWithLoweredColumn(newGrid, row, element.Column, 1).GetNewGrid();
+                        newGrid = new UpdatedGrid(newGrid).Get();
                     }
                 }
             }

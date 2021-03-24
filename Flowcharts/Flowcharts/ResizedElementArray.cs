@@ -31,7 +31,7 @@ namespace Flowcharts
             }
         }
 
-        public Element[,] Get()
+        public Element[,] GetArray()
         {
             Resize();
             return newArray;

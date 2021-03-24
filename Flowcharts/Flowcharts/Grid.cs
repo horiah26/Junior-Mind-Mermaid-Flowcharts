@@ -15,20 +15,20 @@ namespace Flowcharts
         {
             get
             {
-                return elementArray.GetLength(0);
+                return elementArray.GetLength(1);
             }
         }
 
         public Element[,] elementArray;
 
-        public Grid(int rowSize = 1, int columnSize = 1)
+        public Grid(int Rows = 1, int Columns = 1)
         {
-            elementArray = new Element[rowSize, columnSize];
+            elementArray = new Element[Rows, Columns];
         }
 
         public Grid(Grid grid)
         {
-            elementArray = grid.elementArray;
+            elementArray = new ResizedElementArray(grid.elementArray, grid.elementArray.GetLength(0), grid.elementArray.GetLength(1)).GetArray();
         }
 
         public void Add(Element element, int row, int column)

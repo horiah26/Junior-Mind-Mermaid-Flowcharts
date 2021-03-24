@@ -35,10 +35,6 @@ namespace Flowcharts
                 }
             }
 
-            foreach (var v in emptyRows)
-            {
-                Console.WriteLine(v);
-            }
             return emptyRows;
         }
 

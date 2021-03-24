@@ -11,32 +11,31 @@ namespace Flowcharts
         {
             newGrid = new Grid(grid);
         }
+
         public void Level()
         {
             var lastColumn = new LastColumn(newGrid);
+             
             int indexOfLastColumn = lastColumn.Index;
 
-            var averageParents = (int)lastColumn.Column.Average(x => GetAverageRowOfParents(x));
-            var averageThis = (int)lastColumn.Column.Average(x => x.Row);
+            var averageParents = (double)lastColumn.Column.Average(x => GetAverageRowOfParents(x));
+            var averageThis = (double)lastColumn.Column.Average(x => x.Row);
 
-            int difference = averageParents - averageThis;
+            var difference = Convert.ToInt32(averageParents - averageThis); 
 
             if (difference > 0)
             {
-                var newGridWithLoweredColumn = new GridWithLoweredColumn(newGrid, 0, indexOfLastColumn, difference).GetNewGrid();
-                newGrid = new UpdatedGrid(newGridWithLoweredColumn).Get();
+                newGrid.elementArray = new ElementArrayWithLoweredColumn(newGrid, 0, indexOfLastColumn, difference).GetNewGrid();
             }
-            else
-            {
-                newGrid = new UpdatedGrid(newGrid).Get();
-            }
+
+            newGrid = new UpdatedGrid(newGrid).Get();
         }
 
         private double GetAverageRowOfParents(Element element)
         {
             if (element.parentElements.Count != 0)
             {
-                return (int)Math.Round(element.parentElements.Average(x => x.Row));
+                return element.parentElements.Average(x => x.Row);
             }
 
             return element.Row;

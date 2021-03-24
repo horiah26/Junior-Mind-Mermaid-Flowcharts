@@ -15,7 +15,7 @@ namespace Flowcharts
 
         public IEnumerable<Element> GetColumn()
         {
-            List<Element> extractedColumn = new List<Element> { };
+            var extractedColumn = new List<Element> { };
 
             for(int i = 0; i < grid.Rows - 1; i++)
             {

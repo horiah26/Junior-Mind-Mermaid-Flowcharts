@@ -28,6 +28,7 @@ namespace Flowcharts
         private int GetIndex()
         {
             int index = 0;
+
             foreach(var element in grid)
             {
                 if(element.Column > index)

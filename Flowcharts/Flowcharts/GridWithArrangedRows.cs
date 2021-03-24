@@ -38,7 +38,7 @@ namespace Flowcharts
             int difference = (int)average - row;
             if (difference > 0)
             {
-                new GridWithLoweredColumn(newGrid, row, column, difference).GetNewGrid();
+                newGrid.elementArray = new ElementArrayWithLoweredColumn(newGrid, row, column, difference).GetNewGrid();
             }
         }
 

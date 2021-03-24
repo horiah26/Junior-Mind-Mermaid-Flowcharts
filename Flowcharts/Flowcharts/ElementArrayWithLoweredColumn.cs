@@ -4,15 +4,17 @@ using System.Linq;
 
 namespace Flowcharts
 {
-    class GridWithLoweredColumn
+    class ElementArrayWithLoweredColumn
     {
         readonly Grid grid;
+        Element[,] elementArray;
         readonly double row;
         readonly int column;
         readonly int positions;
 
-        public GridWithLoweredColumn(Grid grid, double row, int column, int positions)
+        public ElementArrayWithLoweredColumn(Grid grid, double row, int column, int positions)
         {
+            elementArray = grid.elementArray;
             this.grid = grid;
             this.row = row;
             this.column = column;
@@ -26,36 +28,36 @@ namespace Flowcharts
                 return;
             }
 
-            IEnumerable<Element> extractedColumn = new ExtractedColumn(grid, column).GetColumn();
-
+            var extractedColumn = new ExtractedColumn(grid, column).GetColumn();
+            var reversedColumn = extractedColumn.Reverse();
             int emptyPositionsAtTheEnd = extractedColumn.Reverse().TakeWhile(x => x == null).Count();
 
             int difference = positions - emptyPositionsAtTheEnd;
 
             if (difference > 0)
             {
-                grid.elementArray = new ResizedElementArray(grid.elementArray, grid.elementArray.GetLength(0) + difference, grid.elementArray.GetLength(1)).Get();
+                elementArray = new ResizedElementArray(elementArray, elementArray.GetLength(0) + difference, elementArray.GetLength(1)).GetArray();
             }
 
-            for (int i = grid.elementArray.GetLength(0) - 1; i >= row; i--)
+            for (int i = elementArray.GetLength(0) - 1; i >= row; i--)
             {
-                if (grid.elementArray[i, column] != null)
+                if (elementArray[i, column] != null)
                 {
-                    if (grid.elementArray[i + positions, column] != null)
+                    if (elementArray[i + positions, column] != null)
                     {
                         throw new InvalidOperationException("Cannot move. Space is not empty");
                     }
 
-                    grid.elementArray[i + positions, column] = grid.elementArray[i, column];
-                    grid.elementArray[i, column] = null;
+                    elementArray[i + positions, column] = elementArray[i, column];
+                    elementArray[i, column] = null;
                 }
             }
         }
 
-        public Grid GetNewGrid()
+        public Element[,] GetNewGrid()
         {
             LowerColumnInGrid();
-            return grid;
+            return elementArray;
         }
 
     }
