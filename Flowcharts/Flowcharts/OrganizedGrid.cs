@@ -21,8 +21,8 @@ namespace Flowcharts
             var filledGrid = new GridWithFilledSpots(arrangedGrid).Get();
             var gridAdjustedForBackArrows = new GridAdjustedForBackArrow(filledGrid, arrows).Get();
             var gridWithArrangedLastColumn = new GridWithArrangedLastColumn(gridAdjustedForBackArrows).Get();
-            new GridWithoutNullEnds(gridWithArrangedLastColumn).IdentifyEmptyRows();
-            return grid;
+            var trimmedGrid = new GridWithTrimmedEnds(gridWithArrangedLastColumn).GetWithoutNull();
+            return trimmedGrid;
         }
     }
 }
