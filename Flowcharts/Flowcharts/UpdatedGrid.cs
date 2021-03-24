@@ -11,9 +11,9 @@
 
         public void UpdateGrid()
         {
-            for (int i = 0; i < newGrid.rowSize; i++)
+            for (int i = 0; i < newGrid.elementArray.GetLength(0); i++)
             {
-                for (int j = 0; j < newGrid.columnSize; j++)
+                for (int j = 0; j < newGrid.elementArray.GetLength(1); j++)
                 {
                     if (newGrid.elementArray[i, j] != null)
                     {
@@ -22,10 +22,6 @@
                     }
                 }
             }
-
-            (int rowSize, int columnSize) = new GridSize(newGrid).GetSize();
-            newGrid.rowSize = rowSize;
-            newGrid.columnSize = columnSize;
         }
 
         public Grid Get()

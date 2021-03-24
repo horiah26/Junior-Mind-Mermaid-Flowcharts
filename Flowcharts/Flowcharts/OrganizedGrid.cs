@@ -17,7 +17,7 @@ namespace Flowcharts
 
         public Grid GetOrganizedGrid()
         {
-            var arrangedGrid = new GridWithArrangedRows(grid).Get(); // !makes extra dimension for arranged grid
+            var arrangedGrid = new GridWithArrangedRows(grid).Get();
             var filledGrid = new GridWithFilledSpots(arrangedGrid).Get();
             var gridAdjustedForBackArrows = new GridAdjustedForBackArrow(filledGrid, arrows).Get();
             var gridWithArrangedLastColumn = new GridWithArrangedLastColumn(gridAdjustedForBackArrows).Get();

@@ -18,7 +18,7 @@ namespace Flowcharts
 
             for (int column = lastColumnIndex; column >= 0; column--)
             {
-                for (int row = 0; row < newGrid.rowSize; row++)
+                for (int row = 0; row < newGrid.Rows; row++)
                 {
                     if (newGrid.elementArray[row, column] != null)
                     {

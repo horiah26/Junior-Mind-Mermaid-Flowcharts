@@ -34,10 +34,10 @@ namespace Flowcharts
 
             if (difference > 0)
             {
-                grid.elementArray = new ResizedElementArray(grid.elementArray, grid.rowSize + difference, grid.columnSize).Get();
+                grid.elementArray = new ResizedElementArray(grid.elementArray, grid.Rows + difference, grid.Columns).Get();
             }
 
-            for (int i = grid.rowSize - 1; i >= row; i--)
+            for (int i = grid.Rows - 1; i >= row; i--)
             {
                 if (grid.elementArray[i, column] != null)
                 {
