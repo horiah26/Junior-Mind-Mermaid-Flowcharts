@@ -28,7 +28,6 @@ namespace Flowcharts
         {
             string[] lines;
 
-            var textSplitter = new SplitText(text); 
             lines = new SplitText(text).GetLines();
 
             IOPoints InOut = DrawBox();

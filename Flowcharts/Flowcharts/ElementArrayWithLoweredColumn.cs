@@ -29,7 +29,6 @@ namespace Flowcharts
             }
 
             var extractedColumn = new ExtractedColumn(grid, column).GetColumn();
-            var reversedColumn = extractedColumn.Reverse();
             int emptyPositionsAtTheEnd = extractedColumn.Reverse().TakeWhile(x => x == null).Count();
 
             int difference = positions - emptyPositionsAtTheEnd;

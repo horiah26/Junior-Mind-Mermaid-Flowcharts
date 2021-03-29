@@ -19,7 +19,6 @@
                 {
                     if (newGrid.elementArray[row, column] != null && newGrid.elementArray[row, column + 1] == null && newGrid.elementArray[row, column].MinColumnOfChildren() - 1 > column)
                     {
-                        newGrid.elementArray[row, column].MinColumnOfChildren();
                         newGrid.elementArray[row, column + 1] = newGrid.elementArray[row, column];
 
                         newGrid.elementArray[row, column] = null;

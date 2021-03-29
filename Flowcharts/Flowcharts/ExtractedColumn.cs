@@ -6,6 +6,7 @@ namespace Flowcharts
     {
         readonly Grid grid;
         readonly int column;
+        List<Element> extractedColumn;
 
         public ExtractedColumn(Grid grid, int column)
         {
@@ -15,7 +16,7 @@ namespace Flowcharts
 
         public IEnumerable<Element> GetColumn()
         {
-            var extractedColumn = new List<Element> { };
+            extractedColumn = new List<Element> { };
 
             for(int i = 0; i < grid.Rows - 1; i++)
             {
