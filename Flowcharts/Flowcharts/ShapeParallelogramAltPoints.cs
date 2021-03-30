@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Flowcharts
+﻿namespace Flowcharts
 {
     internal class ShapeParallelogramAltPoints
     {

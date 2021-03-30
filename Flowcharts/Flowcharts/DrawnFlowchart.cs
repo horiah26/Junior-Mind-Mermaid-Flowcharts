@@ -48,6 +48,11 @@ namespace Flowcharts
                 arrow.Write();
             }
 
+            //foreach (Element element in organizedGrid)
+            //{
+            //    element.Draw(columnSize, rowSize);
+            //}
+
             xmlWriter.WriteEndDocument();
             xmlWriter.Close();
 

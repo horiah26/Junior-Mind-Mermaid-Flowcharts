@@ -1,7 +1,4 @@
-﻿using System;
-using System.Linq;
-
-namespace Flowcharts
+﻿namespace Flowcharts
 {
     internal class CompactGrid
     {
@@ -9,14 +6,14 @@ namespace Flowcharts
 
         public CompactGrid(Grid grid)
         {
-            newGrid = grid;
+            newGrid = new Grid(grid);
         }
 
         public void MakeColumnsCompact()
         {
             int lastColumnIndex = new LastColumn(newGrid).Index;
 
-            for (int i = 0; i < lastColumnIndex; i++)
+            for (int i = 0; i <= lastColumnIndex; i++)
             {
                 CompactColumn(i);
             }

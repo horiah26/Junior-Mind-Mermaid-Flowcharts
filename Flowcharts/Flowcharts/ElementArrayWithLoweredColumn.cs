@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace Flowcharts
@@ -53,7 +52,7 @@ namespace Flowcharts
             }
         }
 
-        public Element[,] GetNewGrid()
+        public Element[,] GetNewArray()
         {
             LowerColumnInGrid();
             return elementArray;

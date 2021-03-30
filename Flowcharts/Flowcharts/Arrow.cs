@@ -41,5 +41,10 @@ namespace Flowcharts
 
             return points;
         }
+
+        public (Element fromElement, Element toElement) GetElementPair()
+        {
+            return (fromElement, toElement);
+        }
     }
 }

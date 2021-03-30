@@ -104,6 +104,7 @@ namespace Flowcharts
             list.Add(new TextSizePair(1.6, '9'));
 
             list.Add(new TextSizePair(1, ' '));
+            list.Add(new TextSizePair(2, '?'));
         }
     }
 }

@@ -2,18 +2,25 @@
 
 namespace Flowcharts
 {
-    internal class ThickLink : Link
+    class DrawnBackArrow
     {
-        public ThickLink(XmlWriter xmlWriter, Element fromElement, Element toElement, string text) : base(xmlWriter, fromElement, toElement, text)
+        public XmlWriter xmlWriter;
+        public Element fromElement;
+        public Element toElement;
+        readonly string[] points;
+
+        public DrawnBackArrow(XmlWriter xmlWriter, Element fromElement, Element toElement, string[] points)
         {
+            this.xmlWriter = xmlWriter;
+            this.fromElement = fromElement;
+            this.toElement = toElement;
+            this.points = points;
         }
 
-        public override void Draw()
+        public void Draw()
         {
-            var points = GetArrowEnds();
             xmlWriter.WriteStartElement("defs");
             xmlWriter.WriteStartElement("marker");
-
             xmlWriter.WriteAttributeString("id", "arrowhead");
             xmlWriter.WriteAttributeString("markerWidth", "10");
             xmlWriter.WriteAttributeString("markerHeight", "7");
@@ -25,15 +32,25 @@ namespace Flowcharts
             xmlWriter.WriteEndElement();
             xmlWriter.WriteEndElement();
             xmlWriter.WriteEndElement();
-            xmlWriter.WriteStartElement("line");
 
+            xmlWriter.WriteStartElement("line");
             xmlWriter.WriteAttributeString("x1", points[0]);
             xmlWriter.WriteAttributeString("y1", points[1]);
             xmlWriter.WriteAttributeString("x2", points[2]);
             xmlWriter.WriteAttributeString("y2", points[3]);
 
             xmlWriter.WriteAttributeString("stroke", "#000");
-            xmlWriter.WriteAttributeString("stroke-width", "5");
+            xmlWriter.WriteAttributeString("stroke-width", "3");
+            xmlWriter.WriteEndElement();
+
+            xmlWriter.WriteStartElement("line");
+            xmlWriter.WriteAttributeString("x1", points[2]);
+            xmlWriter.WriteAttributeString("y1", points[3]);
+            xmlWriter.WriteAttributeString("x2", points[4]);
+            xmlWriter.WriteAttributeString("y2", points[5]);
+
+            xmlWriter.WriteAttributeString("stroke", "#000");
+            xmlWriter.WriteAttributeString("stroke-width", "3");
             xmlWriter.WriteAttributeString("marker-end", "url(#arrowhead)");
             xmlWriter.WriteEndElement();
         }

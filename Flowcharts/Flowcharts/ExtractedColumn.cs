@@ -18,7 +18,7 @@ namespace Flowcharts
         {
             extractedColumn = new List<Element> { };
 
-            for(int i = 0; i < grid.Rows - 1; i++)
+            for(int i = 0; i < grid.Rows; i++)
             {
                 extractedColumn.Add(grid.elementArray[i, column]);
             }

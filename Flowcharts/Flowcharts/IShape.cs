@@ -1,6 +1,4 @@
-﻿using System.Xml;
-
-namespace Flowcharts
+﻿namespace Flowcharts
 {
     interface IShape
     {

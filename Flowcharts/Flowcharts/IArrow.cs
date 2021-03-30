@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Flowcharts
+﻿namespace Flowcharts
 {
     public interface IArrow
     {
         public void Draw();
+        public (Element fromElement, Element toElement) GetElementPair();
     }
 }

@@ -30,7 +30,7 @@ namespace Flowcharts
             }
         }
 
-        public void AddPair((string key, string text, string shape) element1, (string key, string text, string shape) element2, string text = null)
+        public void AddPair(string arrowName, (string key, string text, string shape) element1, (string key, string text, string shape) element2, string text = null)
         {
             if (!dictionary.ContainsKey(element1.key))
             {
@@ -41,8 +41,11 @@ namespace Flowcharts
                 dictionary.Add(element2.key, new Element(xmlWriter, element2.text, orientationName));
             }
 
-            dictionary[element1.key].AddChild(dictionary[element2.key]);
-            dictionary[element2.key].AddParent(dictionary[element1.key]);
+            if(arrowName != "BackArrow")
+            {
+                dictionary[element1.key].AddChild(dictionary[element2.key]);
+                dictionary[element2.key].AddParent(dictionary[element1.key]);
+            }
 
             dictionary[element1.key].shapeString = element1.shape;
             dictionary[element2.key].shapeString = element2.shape;

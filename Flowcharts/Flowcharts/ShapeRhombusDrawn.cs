@@ -5,9 +5,9 @@ namespace Flowcharts
     class ShapeRhombusDrawn
     {
         protected readonly XmlWriter xmlWriter;
+        protected readonly IOrientation orientation;
         protected (double x, double y) In;
         protected (double x, double y) Out;
-        protected readonly IOrientation orientation;
         protected readonly double xPos;
         protected readonly double yPos;
         protected readonly double size;

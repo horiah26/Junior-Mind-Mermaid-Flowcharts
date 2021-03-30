@@ -35,11 +35,11 @@ namespace Flowcharts
 
                 if (!found)
                 {
-                    totalSize += 1;
+                    totalSize += 3;
                 }
             }
 
-            return Convert.ToInt32(totalSize);
+            return Convert.ToInt32(Math.Ceiling(totalSize));
         }
     }
 }

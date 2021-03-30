@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 
 namespace Flowcharts
 {
@@ -34,22 +33,14 @@ namespace Flowcharts
 
         private void MoveColumnInPlace(int row, int column)
         {
-            double average = GetAverageRowOfChildren(newGrid.elementArray[row, column]);
-            int difference = (int)average - row;
+            double averageRowOfChildren = new AverageRowOfChildren(newGrid, row, column).GetAverage();
+
+            int difference = (int)Math.Ceiling(averageRowOfChildren - row);
+
             if (difference > 0)
             {
-                newGrid.elementArray = new ElementArrayWithLoweredColumn(newGrid, row, column, difference).GetNewGrid();
+                newGrid.elementArray = new ElementArrayWithLoweredColumn(newGrid, row, column, difference).GetNewArray();
             }
-        }
-
-        private double GetAverageRowOfChildren(Element element)
-        {
-            if (element.childElements.Count != 0)
-            {
-                return (int)Math.Floor(element.childElements.Average(x => x.Row));
-            }
-
-            return element.Row;
         }
 
         public Grid Get()

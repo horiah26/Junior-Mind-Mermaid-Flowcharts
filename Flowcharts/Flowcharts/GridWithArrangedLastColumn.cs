@@ -25,7 +25,7 @@ namespace Flowcharts
 
             if (difference > 0)
             {
-                newGrid.elementArray = new ElementArrayWithLoweredColumn(newGrid, 0, indexOfLastColumn, difference).GetNewGrid();
+                newGrid.elementArray = new ElementArrayWithLoweredColumn(newGrid, 0, indexOfLastColumn, difference).GetNewArray();
             }
 
             newGrid = new UpdatedGrid(newGrid).Get();

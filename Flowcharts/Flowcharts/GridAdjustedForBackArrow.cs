@@ -32,7 +32,7 @@ namespace Flowcharts
                 {
                     if (element.Row == row && backColumn < element.Column && element.Column < forwardColum)
                     {
-                        newGrid.elementArray = new ElementArrayWithLoweredColumn(newGrid, row, element.Column, 1).GetNewGrid();
+                        newGrid.elementArray = new ElementArrayWithLoweredColumn(newGrid, row, element.Column, 1).GetNewArray();
                         newGrid = new UpdatedGrid(newGrid).Get();
                     }
                 }

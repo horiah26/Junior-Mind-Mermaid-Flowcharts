@@ -69,13 +69,14 @@ namespace Flowcharts
 
         public int MinColumnOfChildren()
         {
-            int a = 0;
+            int minColumn = 0;
+
             if (childElements.Count != 0)
             {
-                a = childElements.Min(x => x.Column);
+                minColumn = childElements.Min(x => x.Column);
             }
 
-            return a;
+            return minColumn;
         }
 
         private void CheckLength(string text)
