@@ -11,7 +11,7 @@ namespace Flowcharts
             this.toElement = toElement;
         }
 
-        override public string[] GetArrowEnds()       
+        override public string[] GetArrowEnds()
         {
             string[] points = new string[6];
             points[0] = fromElement.In.x.ToString();
@@ -20,13 +20,23 @@ namespace Flowcharts
             double xMiddle = (fromElement.In.x + toElement.Out.x) / 2;
             double yMiddle = (fromElement.In.y + toElement.Out.y) / 2;
 
-            double slope = (toElement.Out.y - fromElement.In.y) / (fromElement.In.x - toElement.Out.x );
-            //slope = -1 / slope;
-            System.Console.WriteLine( slope + " " + fromElement.Text);
-            points[2] = (xMiddle + slope).ToString();
-            points[3] = (yMiddle + slope).ToString();
-            points[4] = toElement.Out.x.ToString();
-            points[5] = toElement.Out.y.ToString();
+            double xDifference = (fromElement.In.x - toElement.Out.x);
+            double yDifference = (toElement.Out.y - fromElement.In.y);
+
+            points[2] = (xMiddle + yDifference / 8.5).ToString();
+            points[3] = (yMiddle + xDifference / 8.5).ToString();
+
+            if (typeof(OrientationLeftRight) == fromElement.orientation.GetType() || typeof(OrientationRightLeft) == fromElement.orientation.GetType())
+            {
+                points[4] = (toElement.Out.x + 5).ToString();
+                points[5] = toElement.Out.y.ToString();
+            }
+            else
+            {
+                points[4] = toElement.Out.x.ToString();
+                points[5] = (toElement.Out.y + 5).ToString();
+            }
+
 
             return points;
         }
