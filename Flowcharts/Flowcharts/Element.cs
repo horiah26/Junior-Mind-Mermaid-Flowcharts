@@ -21,7 +21,6 @@ namespace Flowcharts
 
         public List<Element> parentElements = new List<Element> { };
         public List<Element> childElements = new List<Element> { };
-        public List<Element> backElements = new List<Element> { };
 
         public int Column = 0;
         public int Row = 0;

@@ -13,7 +13,7 @@ namespace Flowcharts
         public Grid grid;
 
         public int EmptyRow = 0;
-        public string orientationName = "LR";
+        public string orientationName;
 
         ElementList elementList;
         ArrowRegister arrowList;
