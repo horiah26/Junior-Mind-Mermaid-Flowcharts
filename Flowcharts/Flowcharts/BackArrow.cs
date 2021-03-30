@@ -23,8 +23,8 @@ namespace Flowcharts
             double xDifference = (fromElement.In.x - toElement.Out.x);
             double yDifference = (toElement.Out.y - fromElement.In.y);
 
-            points[2] = (xMiddle + yDifference / 8.5).ToString();
-            points[3] = (yMiddle + xDifference / 8.5).ToString();
+            points[2] = (xMiddle - yDifference / 8.5).ToString();
+            points[3] = (yMiddle - xDifference / 8.5).ToString();
 
             if (typeof(OrientationLeftRight) == fromElement.orientation.GetType() || typeof(OrientationRightLeft) == fromElement.orientation.GetType())
             {

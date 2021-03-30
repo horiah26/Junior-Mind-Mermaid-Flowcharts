@@ -13,6 +13,7 @@ namespace Flowcharts
         double textAlignment;
         readonly string text;
         readonly string shapeString;
+        IShape shape;
 
         public DrawnElement(XmlWriter xmlWriter, IOrientation orientation, string text, string shapeString) 
         {
@@ -42,8 +43,10 @@ namespace Flowcharts
             (int x, int y) fitInBox = (10, 7);
             var (column, row) = orientation.GetColumnRow();
 
+            (var height, var length) = shape.GetSize();
+
             double xPosition = distanceFromEdge + (column * unitLength + fitInBox.x) + (unitLength - textAlignment) / 2;
-            double yPosition = distanceFromEdge + (row * unitHeight + fitInBox.y);
+            double yPosition = distanceFromEdge + (row * unitHeight + fitInBox.y) - height / 2;
 
             new WrittenText(xmlWriter, xPosition, yPosition, splitLines).Write();
         }
@@ -51,7 +54,7 @@ namespace Flowcharts
         public IOPoints DrawBox()
         {
             Type shapeType = Type.GetType("Flowcharts.Shape" + shapeString);
-            IShape shape = (IShape)Activator.CreateInstance(shapeType, new object[] { xmlWriter, orientation, text });
+            shape = (IShape)Activator.CreateInstance(shapeType, new object[] { xmlWriter, orientation, text });
 
             (IOPoints InOut, double textAlignment) = shape.Draw();
 

@@ -37,7 +37,7 @@ namespace Flowcharts
             lines = new SplitText(text).GetLines();
             var numberOfLines = lines.Length;
 
-            rhombusSize = GetSize();
+            (rhombusSize, _) = GetSize();
 
             var maxline = lines.Max(x => x.Length);
 
@@ -52,19 +52,20 @@ namespace Flowcharts
             return (new IOPoints(In, Out), rhombusSize);
         }
 
-        public virtual IOPoints DrawFigure()
+        public IOPoints DrawFigure()
         {
            return new ShapeRhombusDrawn(xmlWriter, orientation, xPos, yPos, rhombusSize).Draw();
-        }
-
-        public virtual double GetSize()
-        {
-           return new ShapeRhombusSize(lines).GetSize();
         }
 
         public ((double x, double y) In, (double x, double y) Out) GetInOut()
         {
             return new ShapeRhombusIO(orientation, xPos, yPos, rhombusSize).GetIO();
+        }
+
+        public  (double height, double length) GetSize()
+        {
+            var height = new ShapeRhombusSize(lines).GetSize();
+            return (height, height);
         }
     }
 }

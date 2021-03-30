@@ -25,22 +25,22 @@ namespace Flowcharts
         {
             if (typeof(OrientationLeftRight) == orientation.GetType())
             {
-                In = (xPos - 5, yPos + height / 2);
-                Out = (xPos + length, yPos + height / 2);
+                In = (xPos - 5, yPos);
+                Out = (xPos + length / 2, yPos);
             }
             else if (typeof(OrientationRightLeft) == orientation.GetType())
             {
-                In = (xPos + length, yPos + height / 2);
-                Out = (xPos - 5, yPos + height / 2);
+                In = (xPos + length + 5, yPos);
+                Out = (xPos + length / 2, yPos);
             }
             else if (typeof(OrientationTopDown) == orientation.GetType())
             {
-                In = (xPos + length / 2, yPos - 4);
-                Out = (xPos + length / 2, yPos + height);
+                In = (xPos + length / 2, yPos - height / 2 - 4);
+                Out = (xPos + length / 2, yPos);
             }
             else if (typeof(OrientationDownTop) == orientation.GetType())
             {
-                In = (xPos + length / 2, yPos + height + 4);
+                In = (xPos + length / 2, yPos + height / 2+ 4);
                 Out = (xPos + length / 2, yPos);
             }
             else

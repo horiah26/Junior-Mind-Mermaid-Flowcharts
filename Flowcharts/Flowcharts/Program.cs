@@ -7,7 +7,7 @@
             string fileName = "test";
             string path = null;
 
-            var flowchart = new Flowchart("TopDown", fileName, path);
+            var flowchart = new Flowchart("LeftRight", fileName, path);
 
             flowchart.AddPair(("A1", "Ordering services", "Stadium"), ("A2", "Complete purchace requisition form (Use CCPR if payment is made by credit card)", "Rectangle"), "Arrow");
             flowchart.AddPair("A2", ("A3", "Approved ?", "Rectangle"), "Arrow");

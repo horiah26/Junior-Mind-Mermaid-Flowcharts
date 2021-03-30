@@ -41,5 +41,11 @@ namespace Flowcharts
         {
             return new ShapeCirclePosition(orientation, text, radius).GetPosition();
         }
+
+        public (double height, double length) GetSize()
+        {
+            var radius = new ShapeCircleRadius(text).GetRadius();
+            return (radius, radius);
+        }
     }
 }

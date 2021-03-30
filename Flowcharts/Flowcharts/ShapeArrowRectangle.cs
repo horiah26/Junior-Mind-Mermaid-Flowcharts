@@ -32,7 +32,7 @@ namespace Flowcharts
             lines = new SplitText(text).GetLines();
             numberOfLines = lines.Length;
 
-            (height, length) = GetSize(text);
+            (height, length) = GetSize();
 
             (xPos, yPos) = GetPosition();
 
@@ -50,7 +50,7 @@ namespace Flowcharts
             return (xPosition, yPosition);
         }
 
-        public (double height, double length) GetSize(string text)
+        public (double height, double length) GetSize()
         {
             return new ShapeRectangleSize(text).GetSize();
         }
