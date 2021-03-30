@@ -18,7 +18,7 @@ namespace Flowcharts
             var filledGrid = new GridWithFilledSpots(grid).Get();
             var compactGrid = new CompactGrid(filledGrid).Get();
             var arrangedGrid = new GridWithArrangedRows(compactGrid).Get();
-            var gridAdjustedForBackArrows = new GridAdjustedForBackArrow(arrangedGrid, arrows).Get();
+            //var gridAdjustedForBackArrows = new GridAdjustedForBackArrow(arrangedGrid, arrows).Get();
             var equalizedGrid = new EqualizedGrid(arrangedGrid).Get();
             var trimmedGrid = new GridWithTrimmedEnds(equalizedGrid).GetWithoutNull();
             var gridAdjustedForArrows = new GridAdjustedForArrows(trimmedGrid, arrows).Get();

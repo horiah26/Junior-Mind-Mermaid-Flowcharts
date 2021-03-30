@@ -8,8 +8,7 @@ namespace Flowcharts
         readonly string text;
         public ShapeCircleRadius(string text)
         {
-            this.text = text;
-           
+            this.text = text;           
         }
 
         public double GetRadius()

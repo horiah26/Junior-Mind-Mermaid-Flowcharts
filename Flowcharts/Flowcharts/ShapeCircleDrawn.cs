@@ -6,11 +6,11 @@ namespace Flowcharts
     {
         readonly XmlWriter xmlWriter;
         readonly IOrientation orientation;
-        readonly int xPos;
-        readonly int yPos;
-        readonly int radius;
+        readonly double xPos;
+        readonly double yPos;
+        readonly double radius;
 
-        public ShapeCircleDrawn(XmlWriter xmlWriter, IOrientation orientation, int xPos, int yPos, int radius)
+        public ShapeCircleDrawn(XmlWriter xmlWriter, IOrientation orientation, double xPos, double yPos, double radius)
         {
             this.xmlWriter = xmlWriter;
             this.orientation = orientation;

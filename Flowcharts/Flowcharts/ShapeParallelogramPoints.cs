@@ -8,7 +8,7 @@
         private readonly double length;
         readonly double gap;
 
-        public ShapeParallelogramPoints(double xPos, double yPos, double height, double length, string[] lines, double gap)
+        public ShapeParallelogramPoints(double xPos, double yPos, double height, double length, double gap)
         {
             this.xPos = xPos;
             this.yPos = yPos;
@@ -19,11 +19,12 @@
 
         internal string GetPoints()
         {
-            string leftUp = (xPos).ToString() + "," + yPos.ToString();
-            string leftDown = (xPos - gap).ToString() + "," + (yPos + height).ToString();
+            string leftUp = (xPos).ToString() + "," + (yPos + height / 2).ToString();
+            string leftDown = (xPos - gap).ToString() + "," + (yPos - height / 2).ToString();
+ 
+            string rightUp = (xPos + length + gap).ToString() + "," + (yPos + height / 2).ToString();
 
-            string rightUp = (xPos + length + gap).ToString() + "," + yPos.ToString();
-            string rightDown = (xPos + length).ToString() + "," + (yPos + height).ToString();
+            string rightDown = (xPos + length).ToString() + "," + (yPos - height / 2).ToString();
 
             return rightUp + " " + rightDown + " " + leftDown + " " + leftUp;
         }

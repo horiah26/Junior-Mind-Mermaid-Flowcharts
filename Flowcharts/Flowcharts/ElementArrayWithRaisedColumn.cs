@@ -3,7 +3,7 @@
     class ElementArrayWithRaisedColumn
     {
         readonly Grid grid;
-        Element[,] elementArray;
+        readonly Element[,] elementArray;
         readonly double row;
         readonly int column;
         readonly int positions;

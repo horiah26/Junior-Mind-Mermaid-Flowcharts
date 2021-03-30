@@ -30,7 +30,7 @@ namespace Flowcharts
             }
         }
 
-        public void AddPair(string arrowName, (string key, string text, string shape) element1, (string key, string text, string shape) element2, string text = null)
+        public void AddPair(string arrowName, (string key, string text, string shape) element1, (string key, string text, string shape) element2)
         {
             if (!dictionary.ContainsKey(element1.key))
             {

@@ -11,38 +11,36 @@ namespace Flowcharts
         readonly double yPos;
         readonly double height;
         readonly double length;
-        readonly string[] lines;
 
-        public ShapeStadiumIO(IOrientation orientation, double xPos, double yPos, double height, double length, string[] lines)
+        public ShapeStadiumIO(IOrientation orientation, double xPos, double yPos, double height, double length)
         {
             this.orientation = orientation;
             this.xPos = xPos;
             this.yPos = yPos;
             this.height = height;
             this.length = length;
-            this.lines = lines;
         }
 
         public IOPoints GetIO()
         {
             if (typeof(OrientationLeftRight) == orientation.GetType())
             {
-                In = (xPos - 24, yPos + height / 2);
-                Out = (xPos + length + 20, yPos + height / 2);
+                In = (xPos - 24, yPos);
+                Out = (xPos + length / 2, yPos);
             }
             else if (typeof(OrientationRightLeft) == orientation.GetType())
             {
-                In = (xPos + length + 24, yPos + height / 2);
-                Out = (xPos - 20, yPos + height / 2);
+                In = (xPos + length + 24, yPos);
+                Out = (xPos + length / 2, yPos);
             }
             else if (typeof(OrientationTopDown) == orientation.GetType())
             {
-                In = (xPos + length / 2, yPos - 4);
-                Out = (xPos + length / 2, yPos + height);
+                In = (xPos + length / 2, yPos - height / 2 - 4);
+                Out = (xPos + length / 2, yPos);
             }
             else if (typeof(OrientationDownTop) == orientation.GetType())
             {
-                In = (xPos + length / 2, yPos + height + 4);
+                In = (xPos + length / 2, yPos + height / 2 + 4);
                 Out = (xPos + length / 2, yPos);
             }
             else

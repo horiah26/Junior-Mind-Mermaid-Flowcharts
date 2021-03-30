@@ -4,7 +4,7 @@ namespace Flowcharts
 {
     class AverageRowOfChildren
     {
-        Element element;
+        readonly Element element;
 
         public AverageRowOfChildren(Element element)
         {

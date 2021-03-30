@@ -40,13 +40,15 @@ namespace Flowcharts
 
         public void PrepareAndWriteText(string[] splitLines)
         {
-            (int x, int y) fitInBox = (10, 7);
+            int xFitInBox = 10;
+            int yFitInBox = 7;
+
             var (column, row) = orientation.GetColumnRow();
 
-            (var height, var length) = shape.GetSize();
+            (var height, _) = shape.GetSize();
 
-            double xPosition = distanceFromEdge + (column * unitLength + fitInBox.x) + (unitLength - textAlignment) / 2;
-            double yPosition = distanceFromEdge + (row * unitHeight + fitInBox.y) - height / 2;
+            double xPosition = distanceFromEdge + (column * unitLength + xFitInBox) + (unitLength - textAlignment) / 2;
+            double yPosition = distanceFromEdge + (row * unitHeight + yFitInBox) - height / 2;
 
             new WrittenText(xmlWriter, xPosition, yPosition, splitLines).Write();
         }

@@ -61,7 +61,7 @@ namespace Flowcharts
 
         public virtual string CalculateCornerPoints()
         {
-            return new ShapeRectanglePointsCalculator(xPos, yPos, height, length).GetPoints();
+            return new ShapeRectanglePoints(xPos, yPos, height, length).GetPoints();
         }
 
         public virtual IOPoints GetIO()

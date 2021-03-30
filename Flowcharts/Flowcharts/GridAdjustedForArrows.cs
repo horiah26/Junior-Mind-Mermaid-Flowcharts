@@ -4,8 +4,8 @@ namespace Flowcharts
 {
     internal class GridAdjustedForArrows
     {
-        private Grid newGrid;
-        List<IArrow> arrows;
+        private readonly Grid newGrid;
+        readonly List<IArrow> arrows;
 
         public GridAdjustedForArrows(Grid grid, List<IArrow> arrows)
         {
