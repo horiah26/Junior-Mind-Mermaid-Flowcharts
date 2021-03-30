@@ -25,7 +25,7 @@ namespace Flowcharts
             this.text = text;
         }
 
-        public (IOPoints, double textAlignment) Draw()
+        public virtual (IOPoints, double textAlignment) Draw()
         {
             lines = new SplitText(text).GetLines();
 

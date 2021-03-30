@@ -9,6 +9,20 @@ namespace Flowcharts
 
         }
 
+        public override (IOPoints, double textAlignment) Draw()
+        {
+            lines = new SplitText(text).GetLines();
+
+            (height, length) = GetSize();
+
+            (xPos, yPos) = CalculatePosition();
+
+            coordinates = CalculateCornerPoints();
+
+            DrawPolygon();
+
+            return (GetIO(), length - 15);
+        }
         public override (double height, double length) GetSize()
         {
             return new ShapeBannerSize(lines).GetSize();

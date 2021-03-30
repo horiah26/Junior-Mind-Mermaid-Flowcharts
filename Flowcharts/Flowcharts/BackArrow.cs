@@ -14,6 +14,7 @@ namespace Flowcharts
         override public string[] GetArrowEnds()
         {
             string[] points = new string[6];
+
             points[0] = fromElement.In.x.ToString();
             points[1] = fromElement.In.y.ToString();
 
@@ -23,8 +24,38 @@ namespace Flowcharts
             double xDifference = (fromElement.In.x - toElement.Out.x);
             double yDifference = (toElement.Out.y - fromElement.In.y);
 
-            points[2] = (xMiddle - yDifference / 8.5).ToString();
-            points[3] = (yMiddle - xDifference / 8.5).ToString();
+            double yAngleCorrection;
+            double xAngleCorrection;
+
+            if(typeof(OrientationLeftRight) == fromElement.orientation.GetType() || typeof(OrientationDownTop) == fromElement.orientation.GetType())
+            {
+                if(toElement.Row < fromElement.Row)
+                {
+                    yAngleCorrection = xDifference / 10;
+                    xAngleCorrection = yDifference / 10;
+                }
+                else
+                {
+                    yAngleCorrection = - xDifference / 10;
+                    xAngleCorrection = - yDifference / 10;
+                }
+            }
+            else
+            {
+                if (toElement.Row >= fromElement.Row)
+                {
+                    yAngleCorrection = xDifference / 10;
+                    xAngleCorrection = yDifference / 10;
+                }
+                else
+                {
+                    yAngleCorrection = -xDifference / 10;
+                    xAngleCorrection = -yDifference / 10;
+                }
+            }
+
+            points[2] = (xMiddle + xAngleCorrection).ToString();
+            points[3] = (yMiddle + yAngleCorrection).ToString();
 
             if (typeof(OrientationLeftRight) == fromElement.orientation.GetType() || typeof(OrientationRightLeft) == fromElement.orientation.GetType())
             {

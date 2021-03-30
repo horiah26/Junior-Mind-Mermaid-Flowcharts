@@ -12,7 +12,7 @@ namespace Flowcharts
             this.lines = lines;
         }
 
-        public int Calculate()
+        public double Calculate()
         {
             double totalSize = 0;
             var sizeList = new TextSizeList().GetList();

@@ -17,11 +17,11 @@
 
         internal string GetPoints()
         {
-            string arrowUp = (xPos - 30).ToString() + "," + yPos.ToString();
-            string arrowMiddle = (xPos - 10).ToString() + "," + (yPos + height / 2).ToString();
-            string arrowDown = (xPos - 30).ToString() + "," + (yPos + height).ToString();
-            string down = (xPos + length - length / 5).ToString() + "," + (yPos + height).ToString();
-            string up = (xPos + length - length / 5).ToString() + "," + (yPos).ToString();
+            string arrowUp = (xPos - 30).ToString() + "," + (yPos - height / 2).ToString();
+            string arrowMiddle = (xPos - 10).ToString() + "," + (yPos).ToString();
+            string arrowDown = (xPos - 30).ToString() + "," + (yPos + height / 2).ToString();
+            string down = (xPos + length - length / 5).ToString() + "," + (yPos + height / 2).ToString();
+            string up = (xPos + length - length / 5).ToString() + "," + (yPos - height / 2).ToString();
 
             return arrowUp + " " + arrowMiddle + " " + arrowDown + " " + down + " " + up;
         }
