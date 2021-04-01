@@ -18,7 +18,7 @@
             var numberOfLines = lines.Length;
 
             height = 40 + (numberOfLines - 1) * 17;
-            length = new ShapelengthCalculator(lines).GetLength();
+            length = new ShapeLengthCalculator(lines).GetLength();
 
             return (height, length);
         }

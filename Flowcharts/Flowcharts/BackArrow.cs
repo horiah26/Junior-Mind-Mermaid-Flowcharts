@@ -27,47 +27,77 @@ namespace Flowcharts
             double yAngleCorrection;
             double xAngleCorrection;
 
+            double angleCorrectionFactor = 11;
+
             if(typeof(OrientationLeftRight) == fromElement.orientation.GetType() || typeof(OrientationDownTop) == fromElement.orientation.GetType())
             {
                 if(toElement.Row < fromElement.Row)
                 {
-                    yAngleCorrection = xDifference / 10;
-                    xAngleCorrection = yDifference / 10;
+                    yAngleCorrection = xDifference / angleCorrectionFactor;
+                    xAngleCorrection = yDifference / angleCorrectionFactor;
+
+                    points[4] = (toElement.BackArrowIn.x + 10).ToString();
+                    points[5] = (toElement.BackArrowIn.y + 12).ToString();
                 }
                 else
                 {
-                    yAngleCorrection = - xDifference / 10;
-                    xAngleCorrection = - yDifference / 10;
+                    yAngleCorrection = - xDifference / angleCorrectionFactor;
+                    xAngleCorrection = - yDifference / angleCorrectionFactor;
+
+                    points[4] = (toElement.BackArrowIn.x + 10).ToString();
+                    points[5] = (toElement.BackArrowIn.y - 12).ToString();
                 }
             }
             else
             {
                 if (toElement.Row >= fromElement.Row)
                 {
-                    yAngleCorrection = xDifference / 10;
-                    xAngleCorrection = yDifference / 10;
+                    yAngleCorrection = xDifference / angleCorrectionFactor;
+                    xAngleCorrection = yDifference / angleCorrectionFactor;
+
+                    points[4] = (toElement.BackArrowIn.x + 10).ToString();
+                    points[5] = (toElement.BackArrowIn.y + 12).ToString();
                 }
                 else
                 {
-                    yAngleCorrection = -xDifference / 10;
-                    xAngleCorrection = -yDifference / 10;
+                    yAngleCorrection = -xDifference / angleCorrectionFactor;
+                    xAngleCorrection = -yDifference / angleCorrectionFactor;
+
+
+                    points[4] = (toElement.BackArrowIn.x + 10).ToString();
+                    points[5] = (toElement.BackArrowIn.y - 12).ToString();
+                }
+            }
+
+            if(typeof(OrientationLeftRight) == fromElement.orientation.GetType())
+            {
+                if (toElement.Row < fromElement.Row)
+                {
+                    points[4] = (toElement.BackArrowIn.x + 10).ToString();
+                    points[5] = (toElement.BackArrowIn.y + 12).ToString();
+                }
+                else
+                {
+                    points[4] = (toElement.BackArrowIn.x + 10).ToString();
+                    points[5] = (toElement.BackArrowIn.y - 12).ToString();
+                }
+            }
+            else if (typeof(OrientationRightLeft) == fromElement.orientation.GetType())
+            {
+                if (toElement.Row < fromElement.Row)
+                {
+                    points[4] = (toElement.BackArrowIn.x + 10).ToString();
+                    points[5] = (toElement.BackArrowIn.y + 12).ToString();
+                }
+                else
+                {
+                    points[4] = (toElement.BackArrowIn.x + 10).ToString();
+                    points[5] = (toElement.BackArrowIn.y - 12).ToString();
                 }
             }
 
             points[2] = (xMiddle + xAngleCorrection).ToString();
             points[3] = (yMiddle + yAngleCorrection).ToString();
-
-            if (typeof(OrientationLeftRight) == fromElement.orientation.GetType() || typeof(OrientationRightLeft) == fromElement.orientation.GetType())
-            {
-                points[4] = (toElement.Out.x + 5).ToString();
-                points[5] = toElement.Out.y.ToString();
-            }
-            else
-            {
-                points[4] = toElement.Out.x.ToString();
-                points[5] = (toElement.Out.y + 5).ToString();
-            }
-
 
             return points;
         }

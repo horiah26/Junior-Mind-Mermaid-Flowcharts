@@ -10,6 +10,8 @@ namespace Flowcharts
         public (double x, double y) In;
         public (double x, double y) Out;
 
+        public (double x, double y) BackArrowIn;
+
         public IOrientation orientation;
 
         readonly string orientationName;
@@ -64,7 +66,9 @@ namespace Flowcharts
 
             In = InOut.In;
             Out = InOut.Out;
+            BackArrowIn = InOut.BackArrowIn;
         }
+    
 
         public int MinColumnOfChildren()
         {

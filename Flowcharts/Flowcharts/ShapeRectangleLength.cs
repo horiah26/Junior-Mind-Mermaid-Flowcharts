@@ -2,10 +2,10 @@
 
 namespace Flowcharts
 {
-    class ShapelengthCalculator
+    class ShapeLengthCalculator
     {
         public string[] lines;
-        public ShapelengthCalculator(string[] lines)
+        public ShapeLengthCalculator(string[] lines)
         {
             this.lines = lines;
         }
@@ -23,7 +23,10 @@ namespace Flowcharts
             {
                 return sizeOfText * 8 + 5;
             }
-
+            else if (maxLineLength > 3 && maxLineLength <= 6)
+            {
+                return sizeOfText * 7 + 5;
+            }
             return sizeOfText * 6.5;        
         }
     }

@@ -35,7 +35,7 @@ namespace Flowcharts
 
                 if (!found)
                 {
-                    totalSize += 3;
+                    totalSize += 2;
                 }
             }
 

@@ -6,7 +6,6 @@ namespace Flowcharts
     {
         public ShapeBanner(XmlWriter xmlWriter, IOrientation orientation, string text): base(xmlWriter, orientation, text)
         {
-
         }
 
         public override (IOPoints, double textAlignment) Draw()
@@ -21,7 +20,7 @@ namespace Flowcharts
 
             DrawPolygon();
 
-            return (GetIO(), length - 15);
+            return (GetIO(), length * 0.7 + 30);
         }
         public override (double height, double length) GetSize()
         {

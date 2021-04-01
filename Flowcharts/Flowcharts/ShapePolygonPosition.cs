@@ -17,7 +17,7 @@
         public virtual (double xPos, double yPos) GetPosition()
         {
             (int distanceFromEdge, int unitLength, int unitHeight) = new GridSpacing(orientation).GetSpacing();
-            var length = new ShapelengthCalculator(lines).GetLength();
+            var length = new ShapeLengthCalculator(lines).GetLength();
 
             double xPos = distanceFromEdge + position.Column * unitLength + (unitLength - length) / 2;
             double yPos = distanceFromEdge + position.Row * unitHeight - 17;

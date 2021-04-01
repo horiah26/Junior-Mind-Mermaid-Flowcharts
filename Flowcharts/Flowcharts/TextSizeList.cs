@@ -74,7 +74,7 @@ namespace Flowcharts
             list.Add(new TextSizePair(1.3, 's'));
             list.Add(new TextSizePair(1.6, 'S'));
 
-            list.Add(new TextSizePair(0.8, 't'));
+            list.Add(new TextSizePair(1, 't'));
             list.Add(new TextSizePair(1.9, 'T'));
 
             list.Add(new TextSizePair(1.5, 'u'));
