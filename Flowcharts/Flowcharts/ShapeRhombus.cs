@@ -11,23 +11,21 @@ namespace Flowcharts
         {
         }
 
-        //public override (IOPoints, double textAlignment) Draw()
-        //{
-        //    lines = new SplitText(text).GetLines();
+        public override (IOPoints, double textAlignment) Draw()
+        {
+            lines = new SplitText(text).GetLines();
 
-        //    (height, length) = GetSize();
+            (height, length) = GetSize();
 
-        //    (xPos, yPos) = CalculatePosition();
+            (xPos, yPos) = CalculatePosition();
 
-        //    coordinates = CalculateCornerPoints();
+            coordinates = CalculateCornerPoints();
 
-        //    DrawPolygon();
+            DrawPolygon();
 
-        //    double linesAdjustment = (lines.Length - 1) * 10;
-        //    double maxDimension = length > height ? length + linesAdjustment * 1.5 : height + linesAdjustment * 1.5;
 
-        //    return (GetIO(), maxDimension / 3);
-        //}
+            return (GetIO(), length * 0.9);
+        }
 
         public override string CalculateCornerPoints()
         {

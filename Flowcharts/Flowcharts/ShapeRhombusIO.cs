@@ -14,7 +14,7 @@ namespace Flowcharts
 
         readonly double height;
         readonly double length;
-        int numberOfLines;
+        string[] lines;
 
         public ShapeRhombusIO(IOrientation orientation, double xPos, double yPos, double height, double length, string[] lines)
         {
@@ -23,41 +23,40 @@ namespace Flowcharts
             this.yPos = yPos;
             this.height = height;
             this.length = length;
-            this.numberOfLines = lines.Length;
+            this.lines = lines;
         }
 
         public IOPoints GetIO()
         {
-            double linesAdjustment = (numberOfLines - 1) * 10;
-            double maxDimension = length > height ? length + linesAdjustment * 2 : height + linesAdjustment * 2;
+            (var linesAdjustment, var maxDimension, var correctionFactor) = new RhombusSizeAndAdjustment(length, height, lines).Get();
 
             if (typeof(OrientationLeftRight) == orientation.GetType())
             {
-                In = (xPos - linesAdjustment / 2 - 5, yPos);
+                In = (xPos - linesAdjustment / correctionFactor - 5, yPos);
                 Out = (xPos + length / 2, yPos);
 
-                BackArrowEntry = (xPos + maxDimension - linesAdjustment, yPos);
+                BackArrowEntry = (xPos + maxDimension - linesAdjustment / correctionFactor, yPos);
             }
             else if (typeof(OrientationRightLeft) == orientation.GetType())
             {
-                In = (xPos + maxDimension - linesAdjustment + 5, yPos);
+                In = (xPos + maxDimension - linesAdjustment / correctionFactor + 7, yPos);
                 Out = (xPos + length / 2, yPos);
 
-                BackArrowEntry = (xPos - linesAdjustment - 10, yPos);
+                BackArrowEntry = (xPos - linesAdjustment / correctionFactor, yPos);
             }
             else if (typeof(OrientationTopDown) == orientation.GetType())
             {
-                In = (xPos + maxDimension / 2 - linesAdjustment, yPos - maxDimension / 2 - 5);
-                Out = (xPos + maxDimension / 2 - linesAdjustment, yPos);
+                In = (xPos + maxDimension / 2 - linesAdjustment / correctionFactor, yPos - maxDimension / 2 - 5);
+                Out = (xPos + maxDimension / 2 - linesAdjustment / correctionFactor, yPos);
 
-                BackArrowEntry = (xPos + maxDimension / 2 - linesAdjustment, yPos + maxDimension / 2);
+                BackArrowEntry = (xPos + maxDimension / 2 - linesAdjustment / correctionFactor, yPos + maxDimension / 2);
             }
             else if (typeof(OrientationDownTop) == orientation.GetType())
             {
-                In = (xPos, yPos + height + 3);
-                Out = (xPos, yPos);
+                In = (xPos + maxDimension / 2 - linesAdjustment / correctionFactor, yPos + maxDimension / 2 + 5);
+                Out = (xPos + maxDimension / 2 - linesAdjustment / correctionFactor, yPos);
 
-                BackArrowEntry = (xPos + length + linesAdjustment, yPos);
+                BackArrowEntry = (xPos + maxDimension / 2 - linesAdjustment / correctionFactor, yPos - maxDimension / 2 - 20);
             }
             else
             {
