@@ -2,10 +2,10 @@
 {
     class ShapeSubroutinePoints
     {
-        private readonly double xPos;
-        private readonly double yPos;
-        private readonly double height;
-        private readonly double length;
+        private double xPos;
+        private double yPos;
+        private double height;
+        private double length;
 
         public ShapeSubroutinePoints(double xPos, double yPos, double height, double length)
         {
@@ -18,7 +18,7 @@
         internal string GetPoints()
         {
             double widthOfEdge = 7;
-
+            yPos -= height / 2;
             string OuterLeftUp = (xPos - widthOfEdge).ToString() + "," + yPos.ToString();
             string OuterLeftDown = (xPos - widthOfEdge).ToString() + "," + (yPos + height).ToString();
 
