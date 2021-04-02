@@ -30,7 +30,7 @@ namespace Flowcharts
             if (typeof(OrientationLeftRight) == orientation.GetType())
             {
                 In = (xPos - 5 - gap / 2, yPos);
-                Out = (xPos + length + gap / 2, yPos);
+                Out = (xPos + length / 2 + gap / 2, yPos);
 
                 BackArrowEntry = (xPos + length + gap / 2, yPos);
             }

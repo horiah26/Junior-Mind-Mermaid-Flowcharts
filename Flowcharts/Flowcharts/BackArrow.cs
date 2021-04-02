@@ -56,7 +56,12 @@ namespace Flowcharts
                 }
             }
 
-            if(typeof(OrientationLeftRight) == fromElement.orientation.GetType())
+            points[2] = (xMiddle + xAngleCorrection).ToString();
+            points[3] = (yMiddle + yAngleCorrection).ToString();
+
+
+
+            if (typeof(OrientationLeftRight) == fromElement.orientation.GetType())
             {
                 if (toElement.Row < fromElement.Row)
                 {
@@ -107,10 +112,7 @@ namespace Flowcharts
                     points[4] = (toElement.BackArrowEntry.x - 12).ToString();
                     points[5] = (toElement.BackArrowEntry.y + 10).ToString();
                 }
-            }
-            points[2] = (xMiddle + xAngleCorrection).ToString();
-            points[3] = (yMiddle + yAngleCorrection).ToString();
-
+            } 
             return points;
         }
 

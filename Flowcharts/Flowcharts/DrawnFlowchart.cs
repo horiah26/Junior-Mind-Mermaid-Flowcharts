@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Xml;
 
@@ -38,7 +39,27 @@ namespace Flowcharts
                 element.Draw(columnSize, rowSize);
             }
 
+            var forwardArrows = new List<Arrow>() { };
+            var backArrows = new List<Arrow>() { };
+
             foreach (Arrow arrow in arrowList)
+            {
+                if(typeof(BackArrow) == arrow.GetType())
+                {
+                    backArrows.Add(arrow);
+                }
+                else
+                {
+                    forwardArrows.Add(arrow);
+                }
+            }
+
+            foreach(var backArrow in backArrows)
+            {
+                backArrow.Draw();
+            }
+
+            foreach(var arrow in forwardArrows)
             {
                 arrow.Draw();
             }
