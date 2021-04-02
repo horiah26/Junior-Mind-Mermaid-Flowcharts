@@ -2,10 +2,10 @@
 {
     class ShapeSubroutinePoints
     {
-        private double xPos;
+        private readonly double xPos;
         private double yPos;
-        private double height;
-        private double length;
+        private readonly double height;
+        private readonly double length;
 
         public ShapeSubroutinePoints(double xPos, double yPos, double height, double length)
         {
@@ -31,7 +31,7 @@
             string InnerRightUp = (xPos + length).ToString() + "," + yPos.ToString();
             string InnerRightDown = (xPos + length).ToString() + "," + (yPos + height).ToString();
 
-            return InnerRightUp + " " + InnerRightDown + " " + InnerLeftDown + " " + InnerLeftUp + " " + OuterLeftUp + " " + OuterLeftDown + " " + OuterRightDown + " " + OuterRightUp + " " + OuterLeftUp;
+            return InnerRightUp + " " + InnerRightDown + " " + InnerLeftDown + " " + InnerLeftUp + " " + OuterLeftUp + " " + OuterLeftDown + " " + OuterRightDown + " " + OuterRightUp + " " + OuterLeftUp + " " + OuterLeftDown + " " + OuterRightDown + " " + OuterRightUp + " " + OuterLeftUp;
         }
     }
 }

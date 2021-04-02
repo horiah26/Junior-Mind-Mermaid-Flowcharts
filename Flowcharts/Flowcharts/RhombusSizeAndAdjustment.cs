@@ -6,9 +6,9 @@ namespace Flowcharts
 {
     class RhombusSizeAndAdjustment
     {
-        double length;
-        double height;
-        int numberOfLines;
+        readonly double length;
+        readonly double height;
+        readonly int numberOfLines;
 
         public RhombusSizeAndAdjustment(double length, double height, string[] lines)
         {

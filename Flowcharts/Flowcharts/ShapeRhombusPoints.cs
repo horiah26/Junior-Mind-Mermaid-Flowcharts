@@ -6,7 +6,7 @@
         readonly double yPos;
         readonly double height;
         readonly double length;
-        int numberOfLines;
+        readonly int numberOfLines;
 
         public ShapeRhombusPoints(double xPos, double yPos, double height, double length,int numberOfLines)
         {

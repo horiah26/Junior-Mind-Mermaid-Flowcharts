@@ -14,7 +14,7 @@ namespace Flowcharts
 
         readonly double height;
         readonly double length;
-        string[] lines;
+        readonly string[] lines;
 
         public ShapeRhombusIO(IOrientation orientation, double xPos, double yPos, double height, double length, string[] lines)
         {
