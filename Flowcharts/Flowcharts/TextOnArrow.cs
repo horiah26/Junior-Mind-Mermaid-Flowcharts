@@ -30,7 +30,7 @@ namespace Flowcharts
         {
             int maxLineLength = lines.Max(x => x.Length);
             double xPosition = (fromElement.Out.x + toElement.In.x - maxLineLength * 7) / 2;
-            double yPosition = (fromElement.Out.y + toElement.In.y - lines.Length * 5) / 2;
+            double yPosition = (fromElement.Out.y + toElement.In.y + 15 - lines.Length * 12) / 2;
 
             WrittenText textWriter = new WrittenText(xmlWriter, xPosition, yPosition, lines);
             textWriter.Write();
