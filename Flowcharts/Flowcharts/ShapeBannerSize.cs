@@ -33,7 +33,7 @@ namespace Flowcharts
                 length = sizeOfText * 8;
             }
 
-            if(numberOfLines == 1)
+            if (numberOfLines == 1)
             {
                 height = 35;
             }

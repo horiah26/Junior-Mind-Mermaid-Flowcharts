@@ -39,10 +39,10 @@ namespace Flowcharts
             }
             else if (typeof(OrientationRightLeft) == orientation.GetType())
             {
-                In = (xPos + maxDimension - linesAdjustment / correctionFactor + 7, yPos);
+                In = (xPos + maxDimension - linesAdjustment / correctionFactor + 5, yPos);
                 Out = (xPos + length / 2, yPos);
 
-                BackArrowEntry = (xPos - linesAdjustment / correctionFactor, yPos);
+                BackArrowEntry = (xPos - linesAdjustment / correctionFactor - 5, yPos);
             }
             else if (typeof(OrientationTopDown) == orientation.GetType())
             {

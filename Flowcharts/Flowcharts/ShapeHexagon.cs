@@ -10,7 +10,7 @@ namespace Flowcharts
 
         public override (double height, double length) GetSize()
         {
-            return new ShapeHexagonSize(lines).Calculate();
+            return new ShapeRectangleSize(text).GetSize();
         }
 
         public override string CalculateCornerPoints()
