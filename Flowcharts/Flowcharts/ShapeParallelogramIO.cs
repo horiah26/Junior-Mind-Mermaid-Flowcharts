@@ -15,7 +15,7 @@ namespace Flowcharts
         readonly double height;
         private readonly double gap;
 
-        public ShapeParallelogramIO(IOrientation orientation, double xPos, double yPos, double height, double length, string[] lines, double gap)
+        public ShapeParallelogramIO(IOrientation orientation, double xPos, double yPos, double height, double length, double gap)
         {
             this.orientation = orientation;
             this.xPos = xPos;
