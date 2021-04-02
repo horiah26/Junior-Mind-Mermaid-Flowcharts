@@ -30,28 +30,28 @@ namespace Flowcharts
             if (typeof(OrientationLeftRight) == orientation.GetType())
             {
                 In = (xPos - 5, yPos + height / 2);
-                Out = (xPos + length, yPos + height / 2);
+                Out = (xPos + length / 2, yPos + height / 2);
 
                 BackArrowEntry = (xPos + length, yPos + height / 2);
             }
             else if (typeof(OrientationRightLeft) == orientation.GetType())
             {
                 In = (xPos + length + 5, yPos + height / 2);
-                Out = (xPos, yPos + height / 2);
+                Out = (xPos + length / 2, yPos + height / 2);
 
                 BackArrowEntry = (xPos - 20, yPos + height / 2);
             }
             else if (typeof(OrientationTopDown) == orientation.GetType())
             {
                 In = (xPos + length / 2, yPos - 23 - numberOfLines * 4);
-                Out = (xPos + length / 2, yPos + height + 10);
+                Out = (xPos + length / 2, yPos + height / 2);
 
                 BackArrowEntry = (xPos + length / 2, yPos + height + 10);
             }
             else if (typeof(OrientationDownTop) == orientation.GetType())
             {
                 In = (xPos + length / 2, yPos + height + 15);
-                Out = (xPos + length / 2, yPos - 18 - numberOfLines * 4);
+                Out = (xPos + length / 2, yPos);
 
                 BackArrowEntry = (xPos + length / 2, yPos - height + numberOfLines * 15 - 20);
             }
