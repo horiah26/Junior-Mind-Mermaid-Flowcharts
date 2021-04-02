@@ -15,11 +15,11 @@ namespace Flowcharts
         {
             if (typeof(OrientationRightLeft) == orientation.GetType() || typeof(OrientationLeftRight) == orientation.GetType())
             {
-                return (75, 300, 150);
+                return (120, 300, 150);
             }
             else if (typeof(OrientationTopDown) == orientation.GetType() || typeof(OrientationDownTop) == orientation.GetType())
             {
-                return (75, 200, 275);
+                return (120, 200, 275);
             }
             else
             {

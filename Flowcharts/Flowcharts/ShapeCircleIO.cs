@@ -6,7 +6,7 @@ namespace Flowcharts
     {
         (double x, double y) In;
         (double x, double y) Out;
-        (double x, double y) BackArrowIn;
+        (double x, double y) BackArrowEntry;
 
         readonly IOrientation orientation;
         readonly double xPos;
@@ -28,35 +28,35 @@ namespace Flowcharts
                 In = (xPos - radius - 3, yPos);
                 Out = (xPos, yPos);
 
-                BackArrowIn = (xPos + radius, yPos);
+                BackArrowEntry = (xPos + radius, yPos);
             }
             else if (typeof(OrientationRightLeft) == orientation.GetType())
             {
                 In = (xPos + radius + 5, yPos);
                 Out = (xPos, yPos);
 
-                BackArrowIn = (xPos - radius - 20, yPos);
+                BackArrowEntry = (xPos - radius - 20, yPos);
             }
             else if (typeof(OrientationTopDown) == orientation.GetType())
             {
                 In = (xPos, yPos - radius - 4);
                 Out = (xPos, yPos );
 
-                BackArrowIn = (xPos, yPos + radius);
+                BackArrowEntry = (xPos, yPos + radius);
             }
             else if (typeof(OrientationDownTop) == orientation.GetType())
             {
                 Out = (xPos, yPos);
                 In = (xPos, yPos + radius + 4);
 
-                BackArrowIn = (xPos, yPos - radius - 20);
+                BackArrowEntry = (xPos, yPos - radius - 20);
             }
             else
             {
                 throw new FormatException("Orientation has not been writeen correctly");
             }
 
-            return new IOPoints(In, Out, BackArrowIn);
+            return new IOPoints(In, Out, BackArrowEntry);
         }
     }
 }

@@ -11,12 +11,12 @@
 
             flowchart.AddPair(("A1", "Ordering services", "Rhombus"), ("A2", "Complete purchace requisition form (Use CCPR if payment is made by credit card)", "Rhombus"), "Arrow");
             flowchart.AddPair("A2", ("A3", "Approved ?", "Rhombus"), "Arrow");
-            flowchart.AddPair("A3", ("A152", "Modify terms and conditions to Comply with requirements", "Rectangle"), "Arrow", "No");
-            flowchart.AddPair("A3", ("A4", "Is service to be provided by an independednt contractor?", "Rectangle"), "Arrow", "Yes");
-            flowchart.AddPair("A3", ("A5", "Modify terms and conditions to Comply with requirements", "Rectangle"), "Arrow", "No");
-            flowchart.AddPair("A5", ("A2", "Complete purchace requisition form (Use CCPR if payment is made by credit card)", "Rectangle"), "BackArrow");
-            flowchart.AddPair("A4", ("A6", "Are there an independent Contractor's Agreement and W-9 on file?", "Rectangle"), "Arrow", "Yes");
-            flowchart.AddPair("A4", ("A7", "Obtain P.O. from Controller", "Rectangle"), "Arrow", "No");
+            flowchart.AddPair("A3", ("A152", "Modify terms and conditions to Comply with requirements", "Rhombus"), "Arrow", "No");
+            flowchart.AddPair("A3", ("A4", "Is service to be provided by an independednt contractor?", "Rhombus"), "Arrow", "Yes");
+            flowchart.AddPair("A3", ("A5", "Modify terms and conditions to Comply with requirements", "Rhombus"), "Arrow", "No");
+            flowchart.AddPair("A5", ("A2", "Complete purchace requisition form (Use CCPR if payment is made by credit card)", "Rhombus"), "BackArrow");
+            flowchart.AddPair("A4", ("A6", "Are there an independent Contractor's Agreement and W-9 on file?", "Rhombus"), "Arrow", "Yes");
+            flowchart.AddPair("A4", ("A7", "Obtain P.O. from Controller", "Rhombus"), "Arrow", "No");
             flowchart.AddPair("A6", ("A9", "No", "Rhombus"), "Arrow");
             flowchart.AddPair("A6", ("A10", "Yesadore", "Rhombus"), "Arrow");
             flowchart.AddPair("A7", ("A8", "Place Request for services with Vendor or contractor", "Rhombus"), "Arrow");

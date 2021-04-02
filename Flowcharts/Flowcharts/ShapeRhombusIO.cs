@@ -6,47 +6,65 @@ namespace Flowcharts
     {
         (double x, double y) In;
         (double x, double y) Out;
+        (double x, double y) BackArrowEntry;
+
         readonly IOrientation orientation;
         readonly double xPos;
         readonly double yPos;
-        readonly double rhombusSize;
 
-        public ShapeRhombusIO(IOrientation orientation, double xPos, double yPos, double rhombusSize)
+        readonly double height;
+        readonly double length;
+        int numberOfLines;
+
+        public ShapeRhombusIO(IOrientation orientation, double xPos, double yPos, double height, double length, string[] lines)
         {
             this.orientation = orientation;
             this.xPos = xPos;
             this.yPos = yPos;
-            this.rhombusSize = rhombusSize;
+            this.height = height;
+            this.length = length;
+            this.numberOfLines = lines.Length;
         }
 
-        public ((double x, double y) In, (double x, double y) Out) GetIO()
+        public IOPoints GetIO()
         {
+            double linesAdjustment = (numberOfLines - 1) * 10;
+            double maxDimension = length > height ? length + linesAdjustment * 2 : height + linesAdjustment * 2;
+
             if (typeof(OrientationLeftRight) == orientation.GetType())
             {
-                In = (xPos - rhombusSize / 2 - 5, yPos + rhombusSize / 2);
-                Out = (xPos + rhombusSize / 2, yPos + rhombusSize / 2);
+                In = (xPos - linesAdjustment / 2 - 5, yPos);
+                Out = (xPos + length / 2, yPos);
+
+                BackArrowEntry = (xPos + maxDimension - linesAdjustment, yPos);
             }
             else if (typeof(OrientationRightLeft) == orientation.GetType())
             {
-                In = (xPos + rhombusSize / 2 + 3, yPos + rhombusSize / 2);
-                Out = (xPos - rhombusSize / 2, yPos + rhombusSize / 2);
+                In = (xPos + maxDimension - linesAdjustment + 5, yPos);
+                Out = (xPos + length / 2, yPos);
+
+                BackArrowEntry = (xPos - linesAdjustment - 10, yPos);
             }
             else if (typeof(OrientationTopDown) == orientation.GetType())
             {
-                In = (xPos, yPos - 4);
-                Out = (xPos, yPos + rhombusSize);
+                In = (xPos + maxDimension / 2 - linesAdjustment, yPos - maxDimension / 2 - 5);
+                Out = (xPos + maxDimension / 2 - linesAdjustment, yPos);
+
+                BackArrowEntry = (xPos + maxDimension / 2 - linesAdjustment, yPos + maxDimension / 2);
             }
             else if (typeof(OrientationDownTop) == orientation.GetType())
             {
-                In = (xPos, yPos + rhombusSize + 3);
+                In = (xPos, yPos + height + 3);
                 Out = (xPos, yPos);
+
+                BackArrowEntry = (xPos + length + linesAdjustment, yPos);
             }
             else
             {
                 throw new FormatException("Orientation has not been writeen correctly");
             }
 
-            return (In, Out);
+            return new IOPoints(In, Out, BackArrowEntry);
         }
     }
 }

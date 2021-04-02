@@ -10,7 +10,7 @@ namespace Flowcharts
         public (double x, double y) In;
         public (double x, double y) Out;
 
-        public (double x, double y) BackArrowIn;
+        public (double x, double y) BackArrowEntry;
 
         public IOrientation orientation;
 
@@ -66,7 +66,7 @@ namespace Flowcharts
 
             In = InOut.In;
             Out = InOut.Out;
-            BackArrowIn = InOut.BackArrowIn;
+            BackArrowEntry = InOut.BackArrowEntry;
         }
     
 
