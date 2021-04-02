@@ -29,6 +29,7 @@ namespace Flowcharts
             {
                 In = (xPos - 20, yPos);
                 Out = (xPos + length / 2, yPos);
+
                 BackArrowIn = (xPos + length / 1.25 - 2, yPos );
             }
             else if (typeof(OrientationRightLeft) == orientation.GetType())
@@ -40,17 +41,17 @@ namespace Flowcharts
             }
             else if (typeof(OrientationTopDown) == orientation.GetType())
             {
-                In = (xPos + length / 2 - 15, yPos - height / 2 - 5);
-                Out = (xPos + length / 2 - 15, yPos);
+                In = (xPos + length / 2 - length / 10 - 15, yPos - height / 2 - 5);
+                Out = (xPos + length / 2 - length / 10  - 15, yPos);
 
-                BackArrowIn = (xPos + length / 2 - 15, yPos + height / 2);
+                BackArrowIn = (xPos + length / 2 - length / 10 - 15, yPos + height / 2);
             }
             else if (typeof(OrientationDownTop) == orientation.GetType())
             {
-                In = (xPos + length / 2 - 15, yPos + height / 2 + 4);
-                Out = (xPos + length / 2 - 15, yPos);
+                In = (xPos + length / 2 - length / 10 - 15, yPos + height / 2 + 4);
+                Out = (xPos + length / 2 - length / 10 - 15, yPos);
 
-                BackArrowIn = (xPos + length / 2, yPos - length / 2);
+                BackArrowIn = (xPos + length / 2 - length / 10 - 15, yPos - height / 2 - 20);
             }
             else
             {

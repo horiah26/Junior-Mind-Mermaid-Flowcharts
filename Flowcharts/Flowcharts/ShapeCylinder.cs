@@ -43,7 +43,7 @@ namespace Flowcharts
             var (Column, Row) = orientation.GetColumnRow();
 
             (xPos, yPos) = CalculatePosition();
-
+            yPos -= height / 2; ;
             DrawFigure();
 
             InOut = new ShapeCylinderIO(orientation, xPos, yPos, height, length, numberOfLines).GetIO();

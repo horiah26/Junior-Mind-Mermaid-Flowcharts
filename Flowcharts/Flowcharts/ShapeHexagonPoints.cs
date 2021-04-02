@@ -21,13 +21,13 @@
         {
             int numberOfLines = lines.Length;
 
-            string rightUp = (xPos).ToString() + "," + yPos.ToString();
-            string rightMiddle = (xPos - numberOfLines * 10).ToString() + "," + (yPos + height / 2).ToString();
-            string rightDown = (xPos).ToString() + "," + (yPos + height).ToString();
+            string rightUp = (xPos).ToString() + "," + (yPos - height / 2).ToString();
+            string rightMiddle = (xPos - numberOfLines * 10).ToString() + "," + yPos.ToString();
+            string rightDown = (xPos).ToString() + "," + (yPos + height / 2).ToString();
 
-            string leftUp = (xPos + length).ToString() + "," + yPos.ToString();
-            string leftMiddle = (xPos + numberOfLines * 10 + length).ToString() + "," + (yPos + height / 2).ToString();
-            string leftDown = (xPos + length).ToString() + "," + (yPos + height).ToString();
+            string leftUp = (xPos + length).ToString() + "," + (yPos - height / 2).ToString();
+            string leftMiddle = (xPos + numberOfLines * 10 + length).ToString() + "," + yPos.ToString();
+            string leftDown = (xPos + length).ToString() + "," + (yPos + height / 2).ToString();
 
             return rightUp + " " + rightMiddle + " " + rightDown + " " + leftDown + " " + leftMiddle + " " + leftUp;
         }

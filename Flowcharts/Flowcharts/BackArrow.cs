@@ -15,14 +15,14 @@ namespace Flowcharts
         {
             string[] points = new string[6];
 
-            points[0] = fromElement.In.x.ToString();
-            points[1] = fromElement.In.y.ToString();
+            points[0] = fromElement.Out.x.ToString();
+            points[1] = fromElement.Out.y.ToString();
 
-            double xMiddle = (fromElement.In.x + toElement.Out.x) / 2;
-            double yMiddle = (fromElement.In.y + toElement.Out.y) / 2;
+            double xMiddle = (fromElement.In.x + toElement.BackArrowIn.x) / 2;
+            double yMiddle = (fromElement.In.y + toElement.BackArrowIn.y) / 2;
 
-            double xDifference = (fromElement.In.x - toElement.Out.x);
-            double yDifference = (toElement.Out.y - fromElement.In.y);
+            double xDifference = (fromElement.In.x - toElement.BackArrowIn.x);
+            double yDifference = (toElement.BackArrowIn.y - fromElement.In.y);
 
             double yAngleCorrection;
             double xAngleCorrection;
@@ -35,17 +35,11 @@ namespace Flowcharts
                 {
                     yAngleCorrection = xDifference / angleCorrectionFactor;
                     xAngleCorrection = yDifference / angleCorrectionFactor;
-
-                    points[4] = (toElement.BackArrowIn.x + 10).ToString();
-                    points[5] = (toElement.BackArrowIn.y + 12).ToString();
                 }
                 else
                 {
                     yAngleCorrection = - xDifference / angleCorrectionFactor;
                     xAngleCorrection = - yDifference / angleCorrectionFactor;
-
-                    points[4] = (toElement.BackArrowIn.x + 10).ToString();
-                    points[5] = (toElement.BackArrowIn.y - 12).ToString();
                 }
             }
             else
@@ -54,18 +48,11 @@ namespace Flowcharts
                 {
                     yAngleCorrection = xDifference / angleCorrectionFactor;
                     xAngleCorrection = yDifference / angleCorrectionFactor;
-
-                    points[4] = (toElement.BackArrowIn.x + 10).ToString();
-                    points[5] = (toElement.BackArrowIn.y + 12).ToString();
                 }
                 else
                 {
                     yAngleCorrection = -xDifference / angleCorrectionFactor;
                     xAngleCorrection = -yDifference / angleCorrectionFactor;
-
-
-                    points[4] = (toElement.BackArrowIn.x + 10).ToString();
-                    points[5] = (toElement.BackArrowIn.y - 12).ToString();
                 }
             }
 
@@ -95,7 +82,32 @@ namespace Flowcharts
                     points[5] = (toElement.BackArrowIn.y - 12).ToString();
                 }
             }
-
+            else if (typeof(OrientationTopDown) == fromElement.orientation.GetType())
+            {
+                if (toElement.Row < fromElement.Row)
+                {
+                    points[4] = (toElement.BackArrowIn.x + 12).ToString();
+                    points[5] = (toElement.BackArrowIn.y + 10).ToString();
+                }
+                else
+                {
+                    points[4] = (toElement.BackArrowIn.x - 12).ToString();
+                    points[5] = (toElement.BackArrowIn.y + 10).ToString();
+                }
+            }
+            else
+            {
+                if (toElement.Row < fromElement.Row)
+                {
+                    points[4] = (toElement.BackArrowIn.x + 12).ToString();
+                    points[5] = (toElement.BackArrowIn.y + 10).ToString();
+                }
+                else
+                {
+                    points[4] = (toElement.BackArrowIn.x - 12).ToString();
+                    points[5] = (toElement.BackArrowIn.y + 10).ToString();
+                }
+            }
             points[2] = (xMiddle + xAngleCorrection).ToString();
             points[3] = (yMiddle + yAngleCorrection).ToString();
 

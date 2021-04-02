@@ -19,11 +19,11 @@
 
         internal string GetPoints()
         {
-            string leftUp = (xPos - gap).ToString() + "," + yPos.ToString();
-            string leftDown = (xPos).ToString() + "," + (yPos + height).ToString();
+            string leftUp = (xPos - gap).ToString() + "," + (yPos - height / 2).ToString();
+            string leftDown = (xPos).ToString() + "," + (yPos + height / 2).ToString();
 
-            string rightUp = (xPos + length).ToString() + "," + yPos.ToString();
-            string rightDown = (xPos + length + gap).ToString() + "," + (yPos + height).ToString();
+            string rightUp = (xPos + length).ToString() + "," + (yPos - height / 2).ToString();
+            string rightDown = (xPos + length + gap).ToString() + "," + (yPos + height / 2).ToString();
 
             return rightUp + " " + rightDown + " " + leftDown + " " + leftUp;
         }

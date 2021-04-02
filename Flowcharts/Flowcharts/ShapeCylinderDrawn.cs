@@ -21,13 +21,13 @@ namespace Flowcharts
 
         public void Draw()
         {
-            DrawEllipse();
-            DrawEdges();
-            DrawCurve();
-            CoverBackCurve();
+            DrawRectangle();
+            DrawUpperEllipse();
+            DrawLowerEllipse();
+            CoverLowerEllipse();
         }
 
-        public void DrawEllipse()
+        public void DrawUpperEllipse()
         {
             xmlWriter.WriteStartElement("ellipse");
             xmlWriter.WriteAttributeString("cx", (xPos + length / 2).ToString());
@@ -35,35 +35,23 @@ namespace Flowcharts
             xmlWriter.WriteAttributeString("rx", (length / 2).ToString());
             xmlWriter.WriteAttributeString("ry", 10.ToString());
             xmlWriter.WriteAttributeString("stroke", "black");
-            xmlWriter.WriteAttributeString("fill", "transparent");
+            xmlWriter.WriteAttributeString("fill", "white");
             xmlWriter.WriteAttributeString("stroke-width", "3");
 
             xmlWriter.WriteEndElement();
-
         }
 
-        public void DrawEdges()
+        public void DrawRectangle()
         {
-            xmlWriter.WriteStartElement("line");
-            xmlWriter.WriteAttributeString("x1", xPos.ToString());
-            xmlWriter.WriteAttributeString("x2", xPos.ToString());
-            xmlWriter.WriteAttributeString("y1", (yPos + height).ToString());
-            xmlWriter.WriteAttributeString("y2", (yPos - height / 4).ToString());
-            xmlWriter.WriteAttributeString("stroke", "black");
-            xmlWriter.WriteAttributeString("stroke-width", "3");
-            xmlWriter.WriteEndElement();
+            var coordinates = new ShapeRectanglePoints(xPos, yPos + height / 2.5 - 1, height * 1.25 - 2, length).GetPoints();
 
-            xmlWriter.WriteStartElement("line");
-            xmlWriter.WriteAttributeString("x1", (xPos + length).ToString());
-            xmlWriter.WriteAttributeString("x2", (xPos + length).ToString());
-            xmlWriter.WriteAttributeString("y1", (yPos + height).ToString());
-            xmlWriter.WriteAttributeString("y2", (yPos - height / 4).ToString());
-            xmlWriter.WriteAttributeString("stroke", "black");
-            xmlWriter.WriteAttributeString("stroke-width", "3");
+            xmlWriter.WriteStartElement("polygon");
+            xmlWriter.WriteAttributeString("points", coordinates);
+            xmlWriter.WriteAttributeString("style", "fill:white;stroke:black;stroke-width:3");
             xmlWriter.WriteEndElement();
         }
 
-        public void DrawCurve()
+        public void DrawLowerEllipse()
         {
             xmlWriter.WriteStartElement("ellipse");
             xmlWriter.WriteAttributeString("cx", (xPos + length / 2).ToString());
@@ -71,13 +59,13 @@ namespace Flowcharts
             xmlWriter.WriteAttributeString("rx", (length / 2).ToString());
             xmlWriter.WriteAttributeString("ry", 10.ToString());
             xmlWriter.WriteAttributeString("stroke", "black");
-            xmlWriter.WriteAttributeString("fill", "transparent");
+            xmlWriter.WriteAttributeString("fill", "white");
             xmlWriter.WriteAttributeString("stroke-width", "3");
 
             xmlWriter.WriteEndElement();
         }
 
-        public void CoverBackCurve()
+        public void CoverLowerEllipse()
         {
             xmlWriter.WriteStartElement("rect");
             xmlWriter.WriteAttributeString("x", (xPos + 1.5).ToString());

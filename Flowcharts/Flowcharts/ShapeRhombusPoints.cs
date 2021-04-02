@@ -15,10 +15,10 @@
 
         public string GetPoints()
         {
-            string left = (xPos - rhombusSize / 2).ToString() + "," + (yPos + rhombusSize / 2).ToString();
-            string down = (xPos).ToString() + "," + (yPos + rhombusSize).ToString();
-            string up = (xPos).ToString() + "," + yPos.ToString();
-            string right = (xPos + rhombusSize / 2).ToString() + "," + (yPos + rhombusSize / 2).ToString();
+            string left = (xPos - rhombusSize / 2).ToString() + "," + (yPos).ToString();
+            string down = (xPos).ToString() + "," + (yPos + rhombusSize / 2).ToString();
+            string up = (xPos).ToString() + "," + (yPos - rhombusSize / 2).ToString();
+            string right = (xPos + rhombusSize / 2).ToString() + "," + (yPos).ToString();
 
             return up + " " + left + " " + down + " " + right;
         }
