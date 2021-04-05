@@ -5,13 +5,13 @@ using System.Xml;
 
 namespace Flowcharts
 {
-    public class ElementList : IEnumerable<Element>
+    public class ElementRegister : IEnumerable<Element>
     {
         public Dictionary<string, Element> dictionary = new Dictionary<string, Element> { };
         readonly XmlWriter xmlWriter;
         readonly string orientationName;
 
-        public ElementList(XmlWriter xmlWriter, string orientationName) 
+        public ElementRegister(XmlWriter xmlWriter, string orientationName) 
         {
             this.xmlWriter = xmlWriter;
             this.orientationName = orientationName;
@@ -30,25 +30,22 @@ namespace Flowcharts
             }
         }
 
-        public void AddPair(string arrowName, (string key, string text, string shape) element1, (string key, string text, string shape) element2)
+        public void AddPair(string arrowName, Element element1, Element element2)
         {
-            if (!dictionary.ContainsKey(element1.key))
+            if (!dictionary.ContainsKey(element1.Key))
             {
-                dictionary.Add(element1.key, new Element(xmlWriter, element1.text, orientationName));
+                dictionary.Add(element1.Key, element1);
             }
-            if (!dictionary.ContainsKey(element2.key))
+            if (!dictionary.ContainsKey(element2.Key))
             {
-                dictionary.Add(element2.key, new Element(xmlWriter, element2.text, orientationName));
+                dictionary.Add(element2.Key, element2);
             }
 
             if(arrowName != "BackArrow")
             {
-                dictionary[element1.key].AddChild(dictionary[element2.key]);
-                dictionary[element2.key].AddParent(dictionary[element1.key]);
+                dictionary[element1.Key].AddChild(dictionary[element2.Key]);
+                dictionary[element2.Key].AddParent(dictionary[element1.Key]);
             }
-
-            dictionary[element1.key].shapeString = element1.shape;
-            dictionary[element2.key].shapeString = element2.shape;
         }
 
         public IEnumerator GetEnumerator()

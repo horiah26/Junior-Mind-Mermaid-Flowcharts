@@ -5,15 +5,15 @@ using System.Xml;
 
 namespace Flowcharts
 {
-    class DrawnFlowchart
+    public class DrawnFlowchart
     {
         Grid grid;
         readonly XmlWriter xmlWriter;
         readonly ArrowRegister arrowList;
-        readonly ElementList elementList;
+        readonly ElementRegister elementList;
         readonly MemoryStream memoryStream;
 
-        public DrawnFlowchart(XmlWriter xmlWriter, MemoryStream memoryStream, Grid grid, ArrowRegister arrowList, ElementList elementList)
+        public DrawnFlowchart(XmlWriter xmlWriter, MemoryStream memoryStream, Grid grid, ArrowRegister arrowList, ElementRegister elementList)
         {
             this.grid = grid;
             this.xmlWriter = xmlWriter;

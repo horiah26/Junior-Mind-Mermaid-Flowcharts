@@ -1,6 +1,6 @@
 ﻿namespace Flowcharts
 {
-    class IOPoints
+    public class IOPoints
     {
         public (double x, double y) In;
         public (double x, double y) Out;

@@ -1,6 +1,6 @@
 ﻿namespace Flowcharts
 {
-    interface IShape
+    public interface IShape
     {
         public (IOPoints, double textAlignment) Draw();
 

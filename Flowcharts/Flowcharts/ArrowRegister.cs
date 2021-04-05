@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Flowcharts
 {
-    class ArrowRegister : IEnumerable
+    public class ArrowRegister : IEnumerable
     {
         public List<IArrow> arrows = new List<IArrow> { };
 

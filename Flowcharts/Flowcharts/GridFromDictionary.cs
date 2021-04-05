@@ -5,9 +5,9 @@ namespace Flowcharts
     public class GridFromDictionary
     {
         readonly Grid grid = new Grid();
-        readonly ElementList elementList;
+        readonly ElementRegister elementList;
 
-        public GridFromDictionary(ElementList elementList)
+        public GridFromDictionary(ElementRegister elementList)
         {
             this.elementList = elementList;
         }

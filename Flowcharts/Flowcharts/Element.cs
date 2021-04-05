@@ -9,13 +9,12 @@ namespace Flowcharts
     {
         public (double x, double y) In;
         public (double x, double y) Out;
-
         public (double x, double y) BackArrowEntry;
 
         public IOrientation orientation;
 
         readonly string orientationName;
-        public string shapeString = "Rectangle";
+        public string shapeName = "Rectangle";
 
         readonly XmlWriter xmlWriter;
         public string Text { get; private set; }
@@ -27,13 +26,15 @@ namespace Flowcharts
         public int Column = 0;
         public int Row = 0;
 
-        public Element(XmlWriter xmlWriter, string Text, string orientationName)
+        public Element(XmlWriter xmlWriter, string Key, string Text, string shapeName, string orientationName)
         {
             CheckLength(Text);
 
             this.xmlWriter = xmlWriter;
             this.Text = Text;
             this.orientationName = orientationName;
+            this.Key = Key;
+            this.shapeName = shapeName;
         }
 
         public void AddParent(Element previous)
@@ -62,7 +63,7 @@ namespace Flowcharts
 
             this.orientation = orientation;
 
-            var InOut = new DrawnElement(xmlWriter, orientation, Text, shapeString).Draw();
+            var InOut = new DrawnElement(xmlWriter, orientation, Text, shapeName).Draw();
 
             In = InOut.In;
             Out = InOut.Out;

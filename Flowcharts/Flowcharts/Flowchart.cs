@@ -8,15 +8,14 @@ namespace Flowcharts
     {
         public string FileName { get; private set; }
 
-        public MemoryStream memoryStream;
-        readonly XmlWriter xmlWriter;
-        public Grid grid;
+        public MemoryStream MemoryStream { get; private set; }
+        private XmlWriter xmlWriter { get; set; }
+        private Grid Grid { get; set; }
 
-        public int EmptyRow = 0;
-        public string orientationName;
+        public string orientationName { get; private set; }
 
-        ElementList elementList;
-        ArrowRegister arrowList;
+        private ElementRegister elementRegister;
+        private ArrowRegister arrowRegister;
 
         public Flowchart(string orientationName, string FileName = null, string path = null)
         {
@@ -31,7 +30,7 @@ namespace Flowcharts
         public Flowchart(string orientationName, MemoryStream memoryStream)
         {
             this.orientationName = orientationName;
-            this.memoryStream = memoryStream;
+            MemoryStream = memoryStream;
 
             xmlWriter = XmlWriter.Create(memoryStream);
             memoryStream.Position = 0;
@@ -39,59 +38,62 @@ namespace Flowcharts
             InitializeFlowchart();
         }
 
-        public void InitializeFlowchart()
+        private void InitializeFlowchart()
         {
-            elementList = new ElementList(xmlWriter, orientationName) { };
-            arrowList = new ArrowRegister() { };
-            grid = new Grid();
+            elementRegister = Factory.CreateElementRegister(xmlWriter, orientationName);
+            arrowRegister = Factory.CreateArrowRegister();
+            Grid = Factory.CreateGrid();
         }
 
-        public void AddPair((string key, string text, string shape) element1, (string key, string text, string shape) element2, string arrowName, string text = null )
+        public void AddPair((string key, string text, string shape) dataElement1, (string key, string text, string shape) dataElement2, string arrowName, string text = null )
         {
-            var arrowType = Type.GetType("Flowcharts." + arrowName);
+            var element1 = Factory.CreateElement(xmlWriter, dataElement1.key, dataElement1.text, dataElement1.shape, orientationName);
+            var element2 = Factory.CreateElement(xmlWriter, dataElement2.key, dataElement2.text, dataElement2.shape, orientationName);
 
-            elementList.AddPair(arrowName, element1, element2);
+            elementRegister.AddPair(arrowName, element1, element2);
 
-            IArrow arrow = (IArrow)Activator.CreateInstance(arrowType, new object[] { xmlWriter, elementList[element1.key], elementList[element2.key], text });
-            
-            arrowList.Add(arrow);
+            var arrow = Factory.CreateIArrow(xmlWriter, arrowName, element1, element2, text);
+            arrowRegister.Add(arrow);
         }
 
-        public void AddPair(string key1, (string key, string text, string shape) element2, string arrowName, string text = null)
+        public void AddPair(string key1, (string key, string text, string shape) dataElement2, string arrowName, string text = null)
         {
-            var arrowType = Type.GetType("Flowcharts." + arrowName);
-            var element1 = elementList[key1];
-            elementList.AddPair(arrowName, (key1, element1.Text, element1.shapeString), element2);
+            var element1 = elementRegister[key1];
+            var element2 = Factory.CreateElement(xmlWriter,dataElement2.key, dataElement2.text, dataElement2.shape, orientationName);
+            elementRegister.AddPair(arrowName, element1, element2);
 
-            IArrow arrow = (IArrow)Activator.CreateInstance(arrowType, new object[] { xmlWriter, element1, elementList[element2.key], text });
-
-            arrowList.Add(arrow);
+            IArrow arrow = Factory.CreateIArrow(xmlWriter, arrowName, element1, element2, text);
+            arrowRegister.Add(arrow);
         }
 
-        public void AddPair((string key, string text, string shape) element1, string key2, string arrowName, string text = null)
+        public void AddPair((string key, string text, string shape) dataElement1, string key2, string arrowName, string text = null)
         {
-            var arrowType = Type.GetType("Flowcharts." + arrowName);
-            var element2 = elementList[key2];
-            elementList.AddPair(arrowName, element1, (key2, element2.Text, element2.shapeString));
+            var element1 = Factory.CreateElement(xmlWriter, dataElement1.key, dataElement1.text, dataElement1.shape, orientationName);
+            var element2 = elementRegister[key2];
+            elementRegister.AddPair(arrowName, element1, element2);
 
-            IArrow arrow = (IArrow)Activator.CreateInstance(arrowType, new object[] { xmlWriter, element1, element2, text });
-
-            arrowList.Add(arrow);
+            IArrow arrow = Factory.CreateIArrow(xmlWriter, arrowName, element1, element2, text);
+            arrowRegister.Add(arrow);
         }
 
         public void AddPair(string key1, string key2, string arrowName, string text = null)
         {
             var arrowType = Type.GetType("Flowcharts." + arrowName);
-            var element1 = elementList[key1];
-            var element2 = elementList[key2];
-            elementList.AddPair(arrowName, (key1, element1.Text, element1.shapeString), (key2, element2.Text, element2.shapeString));
+
+            var element1 = elementRegister[key1];
+            var element2 = elementRegister[key2];
+
+            elementRegister.AddPair(arrowName, element1, element2);
 
             IArrow arrow = (IArrow)Activator.CreateInstance(arrowType, new object[] { xmlWriter, element1, element2, text });
 
-            arrowList.Add(arrow);
+            arrowRegister.Add(arrow);
         }
 
 
-        public void Draw() => new DrawnFlowchart(xmlWriter, memoryStream, grid, arrowList, elementList).Draw();
+        public void DrawFlowchart()
+        {
+            Factory.CreateDrawnFlowchart(xmlWriter, MemoryStream, Grid, arrowRegister, elementRegister).Draw();
+        }
     }
 }

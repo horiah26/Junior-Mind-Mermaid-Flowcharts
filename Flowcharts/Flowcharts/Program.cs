@@ -30,7 +30,7 @@
             flowchart.AddPair("A152", ("A2"), "BackArrow");
             flowchart.AddPair("A14", ("A10"), "BackArrow");
 
-            flowchart.Draw();      
+            flowchart.DrawFlowchart();      
         }
     }
 }
