@@ -4,34 +4,34 @@ namespace Flowcharts
 {
     class ElementArrayWithRaisedRows
     {
-        readonly Element[,] elementArray;
+        readonly Element[,] ElementArray;
         readonly List<int> emptyRows;
-        readonly int rowSize;
-        readonly int columnSize;
+        readonly int Rows;
+        readonly int Columns;
 
-        public ElementArrayWithRaisedRows(Element[,] elementArray, List<int> emptyRows)
+        public ElementArrayWithRaisedRows(Element[,] ElementArray, List<int> emptyRows)
         {
-            this.elementArray = elementArray;
+            this.ElementArray = ElementArray;
             this.emptyRows = emptyRows;
 
-            rowSize = elementArray.GetLength(0);
-            columnSize = elementArray.GetLength(1);
+            Rows = ElementArray.GetLength(0);
+            Columns = ElementArray.GetLength(1);
         }
 
         public Element[,] RaiseRows()
         {
             foreach(var emptyRow in emptyRows)
             {
-                for(int i = emptyRow; i < rowSize - 1; i++)
+                for(int i = emptyRow; i < Rows - 1; i++)
                 {
-                    for(int j = 0; j < columnSize; j++)
+                    for(int j = 0; j < Columns; j++)
                     {
-                        elementArray[i, j] = elementArray[i + 1, j];
+                        ElementArray[i, j] = ElementArray[i + 1, j];
                     }
                 }
             }
 
-            return elementArray;
+            return ElementArray;
         }
     }
 }

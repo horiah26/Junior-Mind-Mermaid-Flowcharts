@@ -7,7 +7,7 @@
 
         public OrientationLeftRight(){}
 
-        public void Initialize(int Column, int Row, int columnSize, int rowSize) 
+        public void Initialize(int Column, int Row, int Columns, int Rows) 
         {
             this.Column = Column;
             this.Row = Row;

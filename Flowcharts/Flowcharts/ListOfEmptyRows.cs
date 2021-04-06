@@ -4,26 +4,26 @@ namespace Flowcharts
 {
     class ListOfEmptyRows
     {
-        readonly Element[,] elementArray;
+        readonly Element[,] ElementArray;
 
-        public ListOfEmptyRows(Element[,] elementArray)
+        public ListOfEmptyRows(Element[,] ElementArray)
         {
-            this.elementArray = elementArray;
+            this.ElementArray = ElementArray;
         }
 
         public List<int> GetEmptyRows()
         {
             List<int> emptyRows = new List<int>() { };
 
-            for (int i = 0; i < elementArray.GetLength(0); i++)
+            for (int i = 0; i < ElementArray.GetLength(0); i++)
             {
                 List<Element> rowList = new List<Element>() { };
 
-                for (int j = 0; j < elementArray.GetLength(1); j++)
+                for (int j = 0; j < ElementArray.GetLength(1); j++)
                 {
-                    if (elementArray[i, j] != null)
+                    if (ElementArray[i, j] != null)
                     {
-                        rowList.Add(elementArray[i, j]);
+                        rowList.Add(ElementArray[i, j]);
                     }
                 }
 

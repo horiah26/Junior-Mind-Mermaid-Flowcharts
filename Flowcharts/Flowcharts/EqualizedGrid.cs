@@ -4,18 +4,21 @@ using System.Linq;
 
 namespace Flowcharts
 {
-    class EqualizedGrid
+    class EqualizedGrid : IGrid
     {
-        Grid newGrid;
+        public Element[,] ElementArray { get; private set; }
 
-        public EqualizedGrid(Grid grid)
+        public EqualizedGrid(IGrid grid)
         {
-            newGrid = new Grid(grid);
+            ElementArray = ArrayOperations.CloneArray(grid);
+            LevelColumns();
         }
 
-        public void LevelColumns()
+        private void LevelColumns()
         {
-            for(int i = 1; i < newGrid.Columns; i++)
+            int columns = ElementArray.GetLength(1);
+
+            for (int i = 1; i < columns; i++)
             {
                 Level(i);
             }
@@ -23,7 +26,7 @@ namespace Flowcharts
 
         public void Level(int columnIndex)
         {
-            var column = new ExtractedColumn(newGrid, columnIndex).GetColumn();
+            var column = new ExtractedColumn(ElementArray, columnIndex).GetColumn();
 
             var averageParentsRow = GetAverageRowOfParents(column);
 
@@ -33,10 +36,10 @@ namespace Flowcharts
 
             if (difference > 0)
             {
-                newGrid.elementArray = new ElementArrayWithLoweredColumn(newGrid, 0, columnIndex, difference).GetNewArray();
+                ElementArray = ArrayOperations.LowerColumns(ElementArray, 0, columnIndex, difference);
             }
 
-            newGrid = new UpdatedGrid(newGrid).Get();
+            ArrayOperations.Update(ElementArray);
         }
 
 
@@ -58,12 +61,6 @@ namespace Flowcharts
             }
 
             return 0;
-        }
-
-        public Grid Get()
-        {
-            LevelColumns();
-            return newGrid;
         }
     }
 }

@@ -2,15 +2,17 @@
 
 namespace Flowcharts
 {
-    internal class GridAdjustedForArrows
+    internal class GridAdjustedForArrows : IGrid
     {
-        private readonly Grid newGrid;
         readonly List<IArrow> arrows;
 
-        public GridAdjustedForArrows(Grid grid, List<IArrow> arrows)
+        public Element[,] ElementArray { get; private set; }
+
+        public GridAdjustedForArrows(IGrid grid, List<IArrow> arrows)
         {
-            newGrid = new Grid(grid);
+            ElementArray = ArrayOperations.CloneArray(grid);
             this.arrows = arrows;
+            AdjustForArrows();
         }
 
         private void AdjustForArrows()
@@ -22,17 +24,11 @@ namespace Flowcharts
                 if(fromElement.Row == toElement.Row && toElement.Column - toElement.Column != 1)
                 {
                     for(int i = fromElement.Column + 1; i < toElement.Column; i++)
-                    {
-                        newGrid.elementArray = new ElementArrayWithLoweredColumn(newGrid, fromElement.Row, i, 1).GetNewArray();
+                    {                        
+                        ElementArray = ArrayOperations.LowerColumns(ElementArray, fromElement.Row, i, 1);
                     }
                 }
             }
-        }
-
-        internal Grid Get()
-        {
-            AdjustForArrows();
-            return newGrid;
         }
     }
 }

@@ -8,20 +8,21 @@ namespace Flowcharts
 {
     public class DrawnFlowchart
     {
-        readonly Grid organizedGrid;
+        readonly IGrid organizedGrid;
         readonly OrderedArrows orderedArrows;
         readonly MemoryStream memoryStream = Memory.MemoryStream;
-        readonly XmlWriter xmlWriter = Xml.XmlWriter;
+        readonly XmlWriter xmlWriter = Writer.XmlWriter;
 
-        readonly int rowSize;
-        readonly int columnSize;
+        readonly int Rows;
+        readonly int Columns;
 
-        public DrawnFlowchart(Grid organizedGrid, OrderedArrows orderedArrows)
+        public DrawnFlowchart(IGrid organizedGrid, OrderedArrows orderedArrows)
         {
             this.orderedArrows = orderedArrows;
             this.organizedGrid = organizedGrid;
 
-            (rowSize, columnSize) = organizedGrid.GetSize();
+            Rows = organizedGrid.ElementArray.GetLength(0);
+            Columns = organizedGrid.ElementArray.GetLength(1);
         }
 
         public void Draw()
@@ -59,7 +60,7 @@ namespace Flowcharts
         {
             foreach (Element element in organizedGrid)
             {
-                element.Draw(columnSize, rowSize);
+                element.Draw(Columns, Rows);
             }
         }
     }

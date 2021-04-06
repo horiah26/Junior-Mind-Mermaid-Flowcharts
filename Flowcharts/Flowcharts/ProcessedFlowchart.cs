@@ -7,11 +7,11 @@ namespace Flowcharts
 {
     public class ProcessedFlowchart
     {
-        Grid grid;
+        IGrid grid;
         readonly ArrowRegister arrowRegister;
         readonly ElementRegister elementRegister;
 
-        public ProcessedFlowchart(Grid grid, ArrowRegister arrowRegister, ElementRegister elementRegister)
+        public ProcessedFlowchart(IGrid grid, ArrowRegister arrowRegister, ElementRegister elementRegister)
         {
             this.grid = grid;
             this.arrowRegister = arrowRegister;
@@ -20,7 +20,7 @@ namespace Flowcharts
 
         public void Process()
         {
-            grid = GridOperations.CreateGrid(elementRegister);
+            grid = GridOperations.DictionaryToGrid(elementRegister);
 
             var organizedGrid = GridOperations.CreateOrganizedGrid(grid, arrowRegister);
             var orderedArrows = Factory.CreateOrderedArrows(arrowRegister);

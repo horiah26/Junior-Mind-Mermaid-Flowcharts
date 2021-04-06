@@ -9,11 +9,11 @@ namespace Flowcharts
         readonly int rows;
         readonly int columns;
 
-        public ResizedElementArray(Element[,] elementArray, int rows, int columns)
+        public ResizedElementArray(Element[,] ElementArray, int rows, int columns)
         {
             this.rows = rows;
             this.columns = columns;
-            originalArray = elementArray;
+            originalArray = ElementArray;
             newArray = new Element[rows, columns];
         }
 

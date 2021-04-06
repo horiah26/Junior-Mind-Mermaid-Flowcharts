@@ -11,12 +11,12 @@ namespace Flowcharts
             this.element = element;
         }
 
-        public AverageRowOfChildren(Grid grid, int row, int column)
+        public AverageRowOfChildren(Element[,] elementArray, int row, int column)
         {
-            element = grid.elementArray[row, column];
+            element = elementArray[row, column];
         }
 
-        public double GetAverage()
+        public double Get()
         {
             if (element != null && element.childElements.Count != 0)
             {

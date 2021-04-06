@@ -4,23 +4,32 @@ namespace Flowcharts
 {
     public class ExtractedColumn
     {
-        readonly Grid grid;
         readonly int column;
+        readonly int Rows;
+        Element[,] elementArray;
         List<Element> extractedColumn;
 
-        public ExtractedColumn(Grid grid, int column)
+        //public ExtractedColumn(IGrid grid, int column)
+        //{
+        //    this.column = column;
+        //    elementArray = grid.ElementArray;
+        //    Rows = elementArray.GetLength(0);
+        //}
+
+        public ExtractedColumn(Element[,] elementArray, int column)
         {
-            this.grid = grid;
             this.column = column;
+            this.elementArray = elementArray;
+            Rows = elementArray.GetLength(0);
         }
 
         public IEnumerable<Element> GetColumn()
         {
             extractedColumn = new List<Element> { };
 
-            for(int i = 0; i < grid.Rows; i++)
+            for(int i = 0; i < Rows; i++)
             {
-                extractedColumn.Add(grid.elementArray[i, column]);
+                extractedColumn.Add(elementArray[i, column]);
             }
 
             return extractedColumn;

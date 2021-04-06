@@ -44,7 +44,7 @@ namespace Flowcharts
             return new OrderedArrows(arrowRegister);
         }
 
-        public static DrawnFlowchart CreateDrawnFlowchart(Grid organizedGrid, OrderedArrows orderedArrows)
+        public static DrawnFlowchart CreateDrawnFlowchart(IGrid organizedGrid, OrderedArrows orderedArrows)
         {
             return new DrawnFlowchart(organizedGrid, orderedArrows);
         }

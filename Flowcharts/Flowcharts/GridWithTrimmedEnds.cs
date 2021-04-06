@@ -1,26 +1,21 @@
 ﻿namespace Flowcharts
 {
-    class GridWithTrimmedEnds
+    class GridWithTrimmedEnds : IGrid
     {
-        readonly Grid newGrid;
-        Element[,] elementArray;
+        public Element[,] ElementArray { get; private set; }
 
-        public GridWithTrimmedEnds(Grid grid)
+        public GridWithTrimmedEnds(IGrid grid)
         {
-            newGrid = grid;
-            elementArray = grid.elementArray;
+            ElementArray = ArrayOperations.CloneArray(grid);
+            RemoveNullColumnsAndRowsAtTheEnds();
         }
- 
-        public Grid GetWithoutNull()
+
+        public void RemoveNullColumnsAndRowsAtTheEnds()
         {
-            var emptyRows = new ListOfEmptyRows(elementArray).GetEmptyRows();
+            var emptyRows = ArrayOperations.GetEmptyRows(ElementArray);
 
-            elementArray = new ElementArrayWithRaisedRows(elementArray, emptyRows).RaiseRows();
-            elementArray = new ElementArrayWithoutEmptyRows(elementArray, emptyRows.Count, elementArray.GetLength(0), elementArray.GetLength(1)).GetArray();
-
-            newGrid.elementArray = elementArray;
-            
-            return new UpdatedGrid(newGrid).Get();
+            ElementArray = ArrayOperations.RaiseAllRows(ElementArray, emptyRows);
+            ElementArray = new ElementArrayWithoutEmptyRows(ElementArray, emptyRows.Count, ElementArray.GetLength(0), ElementArray.GetLength(1)).GetArray();                      
         }
     }
 }

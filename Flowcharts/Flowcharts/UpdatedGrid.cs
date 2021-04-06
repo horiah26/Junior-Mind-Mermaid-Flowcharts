@@ -2,29 +2,29 @@
 {
     public class UpdatedGrid
     {
-        readonly Grid newGrid;
+        readonly IGrid newGrid;
 
-        public UpdatedGrid(Grid grid)
+        public UpdatedGrid(IGrid grid)
         {
             newGrid = new Grid(grid);
         }
 
         public void UpdateGrid()
         {
-            for (int i = 0; i < newGrid.elementArray.GetLength(0); i++)
+            for (int i = 0; i < newGrid.ElementArray.GetLength(0); i++)
             {
-                for (int j = 0; j < newGrid.elementArray.GetLength(1); j++)
+                for (int j = 0; j < newGrid.ElementArray.GetLength(1); j++)
                 {
-                    if (newGrid.elementArray[i, j] != null)
+                    if (newGrid.ElementArray[i, j] != null)
                     {
-                        newGrid.elementArray[i, j].Row = i;
-                        newGrid.elementArray[i, j].Column = j;
+                        newGrid.ElementArray[i, j].Row = i;
+                        newGrid.ElementArray[i, j].Column = j;
                     }
                 }
             }
         }
 
-        public Grid Get()
+        public IGrid Get()
         {
             UpdateGrid();
             return newGrid;

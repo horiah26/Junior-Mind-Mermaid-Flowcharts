@@ -2,15 +2,15 @@
 
 namespace Flowcharts
 {
-    class GridAdjustedForBackArrow
+    class GridAdjustedForBackArrow : IGrid
     {
-        Grid newGrid;
         readonly List<BackArrow> arrows;
+        public Element[,] ElementArray { get; private set; }
 
         public GridAdjustedForBackArrow(Grid grid, List<IArrow> arrows)
         {
             this.arrows = ExtractBackArrows(arrows);
-            newGrid = new Grid(grid);
+            ElementArray = ArrayOperations.CloneArray(grid);
         }
 
         public void AdjustForBackArrows()
@@ -24,16 +24,19 @@ namespace Flowcharts
 
             UpdateListOfBackArrows(ref backArrowPoints, arrows);
 
-            foreach (var element in newGrid)
+            foreach (var element in ElementArray)
             {
-                UpdateListOfBackArrows(ref backArrowPoints, arrows);
-
-                foreach (var (row, forwardColum, backColumn) in backArrowPoints)
+                if(element != null)
                 {
-                    if (element.Row == row && backColumn < element.Column && element.Column < forwardColum)
+                    UpdateListOfBackArrows(ref backArrowPoints, arrows);
+
+                    foreach (var (row, forwardColum, backColumn) in backArrowPoints)
                     {
-                        newGrid.elementArray = new ElementArrayWithLoweredColumn(newGrid, row, element.Column, 1).GetNewArray();
-                        newGrid = new UpdatedGrid(newGrid).Get();
+                        if (element.Row == row && backColumn < element.Column && element.Column < forwardColum)
+                        {
+                            ElementArray = ArrayOperations.LowerColumns(ElementArray, row, element.Column, 1);
+                            ArrayOperations.Update(ElementArray);
+                        }
                     }
                 }
             }
@@ -67,12 +70,6 @@ namespace Flowcharts
             }
 
             return backArrows;
-        }
-
-        public Grid Get()
-        {
-            AdjustForBackArrows();
-            return new UpdatedGrid(newGrid).Get();
         }
     }
 }

@@ -4,7 +4,7 @@ namespace Flowcharts
 {
     public class Arrow : IArrow
     {
-        public XmlWriter xmlWriter = Xml.XmlWriter;
+        public XmlWriter xmlWriter = Writer.XmlWriter;
         public Element fromElement;
         public Element toElement;
         public string text = null;

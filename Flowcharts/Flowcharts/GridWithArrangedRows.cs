@@ -2,51 +2,47 @@
 
 namespace Flowcharts
 {
-    class GridWithArrangedRows
+    class GridWithArrangedRows : IGrid
     {
-        Grid newGrid;
+        public Element[,] ElementArray { get; private set; }
 
-        public GridWithArrangedRows(Grid grid)
+        public GridWithArrangedRows(IGrid grid)
         {
-            newGrid = new Grid(grid);
+            ElementArray = ArrayOperations.CloneArray(grid);
+            ArrangeRows();
         }
 
         public void ArrangeRows()
         {
-            int lastColumnIndex = new LastColumn(newGrid).Index;
+            int lastColumnIndex = new LastColumn(ElementArray).Index;
+            int Rows = ElementArray.GetLength(0);
 
             for (int column = lastColumnIndex; column >= 0; column--)
             {
-                for (int row = 0; row < newGrid.Rows; row++)
+                for (int row = 0; row < Rows; row++)
                 {
-                    if (newGrid.elementArray[row, column] != null)
+                    if (ElementArray[row, column] != null)
                     {
                         MoveColumnInPlace(row, column);
                     }
                 }
 
-                newGrid = new UpdatedGrid(newGrid).Get();
+                ArrayOperations.Update(ElementArray);
             }
 
-            newGrid = new UpdatedGrid(newGrid).Get();
+            ArrayOperations.Update(ElementArray);
         }
 
         private void MoveColumnInPlace(int row, int column)
         {
-            double averageRowOfChildren = new AverageRowOfChildren(newGrid, row, column).GetAverage();
+            double averageRowOfChildren = ArrayOperations.GetAverageRowOfChildren(ElementArray, row, column);
 
             int difference = (int)Math.Ceiling(averageRowOfChildren - row);
 
             if (difference > 0)
             {
-                newGrid.elementArray = new ElementArrayWithLoweredColumn(newGrid, row, column, difference).GetNewArray();
+                ElementArray = ArrayOperations.LowerColumns(ElementArray, row, column, difference);
             }
-        }
-
-        public Grid Get()
-        {
-            ArrangeRows();
-            return new UpdatedGrid(newGrid).Get();
         }
     }
 }

@@ -4,19 +4,19 @@
     {
         int Column;
         int Row;
-        int columnSize;
+        int Columns;
 
         public OrientationRightLeft(){}
-        public void Initialize(int Column, int Row, int columnSize, int rowSize)
+        public void Initialize(int Column, int Row, int Columns, int Rows)
         {
             this.Column = Column;
             this.Row = Row;
-            this.columnSize = columnSize;
+            this.Columns = Columns;
         }
 
         public (int Column, int Row) GetColumnRow()
         {
-            return (columnSize - Column - 1, Row);
+            return (Columns - Column - 1, Row);
         }
     }
 }

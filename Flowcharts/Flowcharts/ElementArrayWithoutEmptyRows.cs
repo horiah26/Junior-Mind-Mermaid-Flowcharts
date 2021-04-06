@@ -2,28 +2,28 @@
 {
     class ElementArrayWithoutEmptyRows
     {
-        readonly Element[,] elementArray;
-        readonly int rowSize;
-        readonly int columnSize;
+        readonly Element[,] ElementArray;
+        readonly int Rows;
+        readonly int Columns;
         readonly int deletedRows;
 
-        public ElementArrayWithoutEmptyRows(Element[,] elementArray, int deletedRows, int rowSize, int columnSize)
+        public ElementArrayWithoutEmptyRows(Element[,] ElementArray, int deletedRows, int Rows, int Columns)
         {
-            this.elementArray = elementArray;
+            this.ElementArray = ElementArray;
             this.deletedRows = deletedRows;
-            this.rowSize = rowSize;
-            this.columnSize = columnSize;
+            this.Rows = Rows;
+            this.Columns = Columns;
         }
 
         public Element[,] GetArray()
         {
-            var newArray = new Element[rowSize - deletedRows, columnSize];
+            var newArray = new Element[Rows - deletedRows, Columns];
 
-            for (int i = 0; i < rowSize - deletedRows; i++)
+            for (int i = 0; i < Rows - deletedRows; i++)
             {
-                for (int j = 0; j < columnSize; j++)
+                for (int j = 0; j < Columns; j++)
                 {
-                    newArray[i, j] = elementArray[i, j];
+                    newArray[i, j] = ElementArray[i, j];
                 }
             }
 

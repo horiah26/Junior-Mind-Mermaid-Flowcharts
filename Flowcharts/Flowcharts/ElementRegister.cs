@@ -28,6 +28,11 @@ namespace Flowcharts
 
         public void AddPair(string arrowName, Element element1, Element element2)
         {
+            var textLimit = new IsLengthWithinLimit();
+
+            textLimit.Check(element1.Text);
+            textLimit.Check(element2.Text);
+
             if (!dictionary.ContainsKey(element1.Key))
             {
                 dictionary.Add(element1.Key, element1);
@@ -59,5 +64,10 @@ namespace Flowcharts
                 yield return item.Value;
             }
         }
-    }
+
+        public void Check(string text)
+        {
+
+        }
+            }
 }

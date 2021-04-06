@@ -4,46 +4,46 @@ namespace Flowcharts
 {
     class ArrayWithAddedElement
     {
-        Element[,] elementArray;
+        Element[,] ElementArray;
         readonly Element element;
         readonly int row;
         readonly int column;
-        readonly int columnSize;
-        readonly int rowSize;
+        readonly int Columns;
+        readonly int Rows;
 
-        public ArrayWithAddedElement(Element[,] elementArray, Element element, int row, int column)
+        public ArrayWithAddedElement(Element[,] ElementArray, Element element, int row, int column)
         {
-            this.elementArray = elementArray;
+            this.ElementArray = ElementArray;
             this.element = element;
             this.row = row;
             this.column = column;
-            rowSize = elementArray.GetLength(0);
-            columnSize = elementArray.GetLength(1);
+            Rows = ElementArray.GetLength(0);
+            Columns = ElementArray.GetLength(1);
         }
 
         public void Add()
         {
-            if (row > rowSize - 1)
+            if (row > Rows - 1)
             {
-               elementArray = new ResizedElementArray(elementArray, row + 1, columnSize).GetArray();
+               ElementArray = new ResizedElementArray(ElementArray, row + 1, Columns).GetArray();
             }
-            if (column > columnSize - 1)
+            if (column > Columns - 1)
             {
-                elementArray = new ResizedElementArray(elementArray, rowSize, column + 1).GetArray();
+                ElementArray = new ResizedElementArray(ElementArray, Rows, column + 1).GetArray();
             }
 
-            if (elementArray[row, column] != null)
+            if (ElementArray[row, column] != null)
             {
                 throw new InvalidOperationException("Element occupied");
             }
 
-            elementArray[row, column] = element;
+            ElementArray[row, column] = element;
         }
 
         public Element[,] GetArray()
         {
             Add();
-            return elementArray;
+            return ElementArray;
         }
     }
 }

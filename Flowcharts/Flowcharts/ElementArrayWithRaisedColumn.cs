@@ -3,14 +3,14 @@
     class ElementArrayWithRaisedColumn
     {
         readonly Grid grid;
-        readonly Element[,] elementArray;
+        readonly Element[,] ElementArray;
         readonly double row;
         readonly int column;
         readonly int positions;
 
         public ElementArrayWithRaisedColumn(Grid grid, double row, int column, int positions)
         {
-            elementArray = grid.elementArray;
+            ElementArray = grid.ElementArray;
             this.grid = grid;
             this.row = row;
             this.column = column;
@@ -25,7 +25,7 @@
         public Element[,] GetNewGrid()
         {
             RaiseColumn();
-            return elementArray;
+            return ElementArray;
         }
     }
 }

@@ -1,39 +1,37 @@
 ﻿namespace Flowcharts
 {
-    class GridWithFilledSpots
+    class GridWithFilledSpots : IGrid
     {
-        Grid newGrid;
+        public Element[,] ElementArray { get; private set; }
 
-        public GridWithFilledSpots(Grid grid)
+        public GridWithFilledSpots(IGrid grid)
         {
-            newGrid = new Grid(grid);
+            ElementArray = ArrayOperations.CloneArray(grid);
+            FillEmptySpots();
         }
 
         public void FillEmptySpots()
         {
-            int lastColumnIndex = new LastColumn(newGrid).Index;
+            int lastColumnIndex = new LastColumn(ElementArray).Index;
+            int Rows = ElementArray.GetLength(0);
 
             for (int column = lastColumnIndex - 1; column >= 0; column--)
             {
-                for (int row = 0; row < newGrid.Rows; row++)
+                for (int row = 0; row < Rows; row++)
                 {
-                    if (newGrid.elementArray[row, column] != null && newGrid.elementArray[row, column + 1] == null && newGrid.elementArray[row, column].MinColumnOfChildren() - 1 > column)
+                    if (ElementArray[row, column] != null && ElementArray[row, column + 1] == null && ElementArray[row, column].MinColumnOfChildren() - 1 > column)
                     {
-                        int difference = newGrid.elementArray[row, column].MinColumnOfChildren() - column - 1;
+                        int difference = ElementArray[row, column].MinColumnOfChildren() - column - 1;
 
-                        newGrid.elementArray[row, column + difference] = newGrid.elementArray[row, column];
+                        ElementArray[row, column + difference] = ElementArray[row, column];
 
-                        newGrid.elementArray[row, column] = null;
-                        newGrid = new UpdatedGrid(newGrid).Get();
+                        ElementArray[row, column] = null;
+                        ArrayOperations.Update(ElementArray);
                     }
                 }
             }
-        }
 
-        public Grid Get()
-        {
-            FillEmptySpots();
-            return new UpdatedGrid(newGrid).Get(); ;
+            ArrayOperations.Update(ElementArray);
         }
     }
 }

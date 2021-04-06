@@ -16,7 +16,7 @@ namespace Flowcharts
         readonly string OrientationName;
         public string shapeName = "Rectangle";
 
-        readonly XmlWriter xmlWriter = Xml.XmlWriter;
+        readonly XmlWriter xmlWriter = Writer.XmlWriter;
         public string Text { get; private set; }
         public string Key { get; private set; }
 
@@ -31,7 +31,9 @@ namespace Flowcharts
             CheckLength(Text);
 
             this.Text = Text;
-            this.OrientationName = Orientation.OrientationName;
+            OrientationName = Orientation.OrientationName;
+            Type orientationType = Type.GetType("Flowcharts.Orientation" + OrientationName);
+            orientation = (IOrientation)Activator.CreateInstance(orientationType);
             this.Key = Key;
             this.shapeName = shapeName;
         }
@@ -53,14 +55,9 @@ namespace Flowcharts
             Column = maxPreviousColumn + 1;
         }
 
-        public void Draw(int columnSize, int rowSize)
+        public void Draw(int Columns, int Rows)
         {
-            Type orientationType = Type.GetType("Flowcharts.Orientation" + OrientationName);
-            IOrientation orientation = (IOrientation)Activator.CreateInstance(orientationType);
-
-            orientation.Initialize(Column, Row, columnSize, rowSize);
-
-            this.orientation = orientation;
+            orientation.Initialize(Column, Row, Columns, Rows);
 
             var InOut = new DrawnElement(xmlWriter, orientation, Text, shapeName).Draw();
 

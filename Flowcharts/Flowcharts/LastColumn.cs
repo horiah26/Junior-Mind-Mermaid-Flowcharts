@@ -5,20 +5,20 @@ namespace Flowcharts
 {
     public class LastColumn
     {
-        readonly Grid grid;
+        readonly Element[,] elementArray;
         public int Index { get; private set; }
         public IEnumerable<Element> Column { get; private set; }
 
-        public LastColumn(Grid grid)
+        public LastColumn(Element[,] elementArray)
         {
-            this.grid = grid;
+            this.elementArray = elementArray;
             GetColumn();
         }
 
         private IEnumerable<Element> GetColumn()
         {
             GetIndex();
-            var Column = new ExtractedColumn(grid, Index).GetColumn().Where(x => x != null);
+            var Column = new ExtractedColumn(elementArray, Index).GetColumn().Where(x => x != null);
             this.Column = Column;
             return Column;
         }
@@ -27,9 +27,9 @@ namespace Flowcharts
         {
             int index = 0;
 
-            foreach(var element in grid)
+            foreach(var element in elementArray)
             {
-                if(element.Column > index)
+                if(element != null && element.Column > index)
                 {
                     index = element.Column;
                 }

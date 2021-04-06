@@ -6,7 +6,7 @@ using System.Xml;
 
 namespace Flowcharts
 {
-    public static class Xml
+    public static class Writer
     {
         public static XmlWriter XmlWriter { get; private set; }
 

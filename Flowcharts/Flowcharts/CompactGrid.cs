@@ -1,17 +1,20 @@
-﻿namespace Flowcharts
-{
-    internal class CompactGrid
-    {
-        Grid newGrid;
+﻿using System.Collections.Generic;
 
-        public CompactGrid(Grid grid)
+namespace Flowcharts
+{
+    internal class CompactGrid : IGrid
+    {
+        public Element[,] ElementArray { get; private set; }
+
+        public CompactGrid(IGrid grid)
         {
-            newGrid = new Grid(grid);
+            ElementArray = ArrayOperations.CloneArray(grid);
+            MakeColumnsCompact();
         }
 
         public void MakeColumnsCompact()
         {
-            int lastColumnIndex = new LastColumn(newGrid).Index;
+            int lastColumnIndex = new LastColumn(ElementArray).Index;
 
             for (int i = 0; i <= lastColumnIndex; i++)
             {
@@ -25,26 +28,21 @@
             do
             {
                 moved = false;
+                int Rows = ElementArray.GetLength(0);
 
-                for (int j = 1; j < newGrid.Rows; j++)
+                for (int j = 1; j < Rows; j++)
                 {
-                    if (newGrid.elementArray[j, i] != null && newGrid.elementArray[j - 1, i] == null)
+                    if (ElementArray[j, i] != null && ElementArray[j - 1, i] == null)
                     {
-                        newGrid.elementArray[j - 1, i] = newGrid.elementArray[j, i];
-                        newGrid.elementArray[j, i] = null;
+                        ElementArray[j - 1, i] = ElementArray[j, i];
+                        ElementArray[j, i] = null;
                         moved = true;
                     }
                 }
 
-                newGrid = new UpdatedGrid(newGrid).Get();
+                ArrayOperations.Update(ElementArray);
 
             } while (moved == true);
-        }
-
-        internal Grid Get()
-        {
-            MakeColumnsCompact();
-            return newGrid; 
         }
     }
 }

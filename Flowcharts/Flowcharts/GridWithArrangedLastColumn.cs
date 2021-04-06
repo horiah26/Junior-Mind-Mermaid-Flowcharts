@@ -1,50 +1,50 @@
-﻿using System;
-using System.Linq;
+﻿//using System;
+//using System.Linq;
 
-namespace Flowcharts
-{
-    class GridWithArrangedLastColumn
-    {
-        Grid newGrid;
+//namespace Flowcharts
+//{
+//    class GridWithArrangedLastColumn
+//    {
+//        IGrid newGrid;
 
-        public GridWithArrangedLastColumn(Grid grid)
-        {
-            newGrid = new Grid(grid);
-        }
+//        public GridWithArrangedLastColumn(Grid grid)
+//        {
+//            newGrid = new Grid(grid);
+//        }
 
-        public void Level()
-        {
-            var lastColumn = new LastColumn(newGrid);
+//        public void Level()
+//        {
+//            var lastColumn = new LastColumn(newGrid);
              
-            int indexOfLastColumn = lastColumn.Index;
+//            int indexOfLastColumn = lastColumn.Index;
 
-            var averageParents = (double)lastColumn.Column.Average(x => GetAverageRowOfParents(x));
-            var averageThis = (double)lastColumn.Column.Average(x => x.Row);
+//            var averageParents = (double)lastColumn.Column.Average(x => GetAverageRowOfParents(x));
+//            var averageThis = (double)lastColumn.Column.Average(x => x.Row);
 
-            var difference = Convert.ToInt32(averageParents - averageThis); 
+//            var difference = Convert.ToInt32(averageParents - averageThis); 
 
-            if (difference > 0)
-            {
-                newGrid.elementArray = new ElementArrayWithLoweredColumn(newGrid, 0, indexOfLastColumn, difference).GetNewArray();
-            }
+//            if (difference > 0)
+//            {
+//                newGrid.ElementArray = new ElementArrayWithLoweredColumn(newGrid, 0, indexOfLastColumn, difference).GetNewArray();
+//            }
 
-            newGrid = new UpdatedGrid(newGrid).Get();
-        }
+//            newGrid = new UpdatedGrid(newGrid).Get();
+//        }
 
-        private double GetAverageRowOfParents(Element element)
-        {
-            if (element.parentElements.Count != 0)
-            {
-                return element.parentElements.Average(x => x.Row);
-            }
+//        private double GetAverageRowOfParents(Element element)
+//        {
+//            if (element.parentElements.Count != 0)
+//            {
+//                return element.parentElements.Average(x => x.Row);
+//            }
 
-            return element.Row;
-        }
+//            return element.Row;
+//        }
 
-        public Grid Get()
-        {
-            Level();
-            return newGrid;
-        }
-    }
-}
+//        public Grid Get()
+//        {
+//            Level();
+//            return newGrid;
+//        }
+//    }
+//}
