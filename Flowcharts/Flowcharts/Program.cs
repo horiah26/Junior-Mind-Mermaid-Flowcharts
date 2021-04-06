@@ -13,8 +13,8 @@
             flowchart.AddPair("A2", ("A3", "Approved ?", "Rectangle"), "Arrow");
             flowchart.AddPair("A3", ("A152", "Modify terms and conditions to Comply with requirements", "Rectangle"), "Arrow", "No");
             flowchart.AddPair("A3", ("A4", "Is service to be provided by an independednt contractor?", "Rectangle"), "Arrow", "Yes");
-            flowchart.AddPair("A3", ("A5", "Modify terms and conditions to Comply with requirements", "Rectangle"), "Arrow", "No");
-            flowchart.AddPair("A5", ("A2", "Complete purchace requisition form (Use CCPR if payment is made by credit card)", "Rectangle"), "BackArrow");
+            flowchart.AddPair("A3", ("A5", "Modify terms", "Rectangle"), "Arrow");
+            flowchart.AddPair("A5", ("A2"), "BackArrow");
             flowchart.AddPair("A4", ("A6", "Are there an independent Contractor's Agreement and W-9 on file?", "Rectangle"), "Arrow", "Yes");
             flowchart.AddPair("A4", ("A7", "Obtain P.O. from Controller", "Rectangle"), "Arrow", "No");
             flowchart.AddPair("A6", ("A9", "No", "Rectangle"), "Arrow");

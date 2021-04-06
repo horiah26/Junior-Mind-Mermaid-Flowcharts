@@ -8,15 +8,14 @@ namespace Flowcharts
     public class DrawnFlowchart
     {
         Grid grid;
-        readonly XmlWriter xmlWriter;
+        readonly XmlWriter xmlWriter = Xml.XmlWriter;
         readonly ArrowRegister arrowList;
         readonly ElementRegister elementList;
         readonly MemoryStream memoryStream;
 
-        public DrawnFlowchart(XmlWriter xmlWriter, MemoryStream memoryStream, Grid grid, ArrowRegister arrowList, ElementRegister elementList)
+        public DrawnFlowchart(MemoryStream memoryStream, Grid grid, ArrowRegister arrowList, ElementRegister elementList)
         {
             this.grid = grid;
-            this.xmlWriter = xmlWriter;
             this.memoryStream = memoryStream;
             this.arrowList = arrowList;
             this.elementList = elementList;

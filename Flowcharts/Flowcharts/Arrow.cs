@@ -4,14 +4,13 @@ namespace Flowcharts
 {
     public class Arrow : IArrow
     {
-        public XmlWriter xmlWriter;
+        public XmlWriter xmlWriter = Xml.XmlWriter;
         public Element fromElement;
         public Element toElement;
         public string text = null;
 
-        public Arrow(XmlWriter xmlWriter, Element fromElement, Element toElement, string text)
+        public Arrow(Element fromElement, Element toElement, string text)
         {
-            this.xmlWriter = xmlWriter;
             this.fromElement = fromElement;
             this.toElement = toElement;
             this.text = text;

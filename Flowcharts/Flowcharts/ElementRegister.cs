@@ -8,13 +8,9 @@ namespace Flowcharts
     public class ElementRegister : IEnumerable<Element>
     {
         public Dictionary<string, Element> dictionary = new Dictionary<string, Element> { };
-        readonly XmlWriter xmlWriter;
-        readonly string orientationName;
 
-        public ElementRegister(XmlWriter xmlWriter, string orientationName) 
+        public ElementRegister() 
         {
-            this.xmlWriter = xmlWriter;
-            this.orientationName = orientationName;
         }
 
         public Element this[string key]

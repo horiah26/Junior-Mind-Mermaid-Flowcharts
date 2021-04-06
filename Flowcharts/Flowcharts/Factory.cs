@@ -18,25 +18,25 @@ namespace Flowcharts
             return new ArrowRegister();
         }
 
-        public static ElementRegister CreateElementRegister(XmlWriter xmlWriter, string orientationName)
+        public static ElementRegister CreateElementRegister()
         {
-            return new ElementRegister(xmlWriter, orientationName);
+            return new ElementRegister();
         }
 
-        public static DrawnFlowchart CreateDrawnFlowchart(XmlWriter xmlWriter,MemoryStream MemoryStream, Grid Grid, ArrowRegister arrowRegister, ElementRegister elementRegister)
+        public static DrawnFlowchart CreateDrawnFlowchart(MemoryStream MemoryStream, Grid Grid, ArrowRegister arrowRegister, ElementRegister elementRegister)
         {
-            return new DrawnFlowchart(xmlWriter, MemoryStream, Grid, arrowRegister, elementRegister);
+            return new DrawnFlowchart(MemoryStream, Grid, arrowRegister, elementRegister);
         }
 
-        public static IArrow CreateIArrow(XmlWriter xmlWriter, string arrowName, Element element1, Element element2, string text)
+        public static IArrow CreateIArrow(string arrowName, Element element1, Element element2, string text)
         {
             var arrowType = Type.GetType("Flowcharts." + arrowName);
-            return (IArrow)Activator.CreateInstance(arrowType, new object[] { xmlWriter, element1, element2, text });
+            return (IArrow)Activator.CreateInstance(arrowType, new object[] { element1, element2, text });
         }
 
-        public static Element CreateElement(XmlWriter xmlWriter, string key, string text, string shape, string orientationName)
+        public static Element CreateElement(string key, string text, string shape)
         {
-            return new Element(xmlWriter, key, text, shape, orientationName);
+            return new Element(key, text, shape);
         }
     }
 }

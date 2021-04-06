@@ -4,7 +4,7 @@ namespace Flowcharts
 {
     internal class Link : Arrow
     {
-        public Link(XmlWriter xmlWriter, Element fromElement, Element toElement, string text) : base(xmlWriter, fromElement, toElement, text)
+        public Link(Element fromElement, Element toElement, string text) : base(fromElement, toElement, text)
         {
 
         }

@@ -4,7 +4,7 @@ namespace Flowcharts
 {
     class DottedLink : Arrow
     {
-        public DottedLink(XmlWriter xmlWriter, Element fromElement, Element toElement, string text) : base(xmlWriter, fromElement, toElement, text)
+        public DottedLink(Element fromElement, Element toElement, string text) : base(fromElement, toElement, text)
         {
 
         }

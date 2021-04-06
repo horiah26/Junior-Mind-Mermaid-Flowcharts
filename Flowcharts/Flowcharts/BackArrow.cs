@@ -4,9 +4,8 @@ namespace Flowcharts
 {
     class BackArrow : Arrow
     {
-        public BackArrow(XmlWriter xmlWriter, Element fromElement, Element toElement, string text) : base(xmlWriter, fromElement, toElement, text)
+        public BackArrow(Element fromElement, Element toElement, string text) : base(fromElement, toElement, text)
         {
-            this.xmlWriter = xmlWriter;
             this.fromElement = fromElement;
             this.toElement = toElement;
         }
