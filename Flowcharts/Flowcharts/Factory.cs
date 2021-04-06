@@ -23,9 +23,9 @@ namespace Flowcharts
             return new ElementRegister();
         }
 
-        public static DrawnFlowchart CreateDrawnFlowchart(MemoryStream MemoryStream, Grid Grid, ArrowRegister arrowRegister, ElementRegister elementRegister)
+        public static ProcessedFlowchart CreateProcessedFlowchart(Grid grid, ArrowRegister arrowRegister, ElementRegister elementRegister)
         {
-            return new DrawnFlowchart(MemoryStream, Grid, arrowRegister, elementRegister);
+            return new ProcessedFlowchart(grid, arrowRegister, elementRegister);
         }
 
         public static IArrow CreateIArrow(string arrowName, Element element1, Element element2, string text)
@@ -37,6 +37,16 @@ namespace Flowcharts
         public static Element CreateElement(string key, string text, string shape)
         {
             return new Element(key, text, shape);
+        }
+
+        public static OrderedArrows CreateOrderedArrows(ArrowRegister arrowRegister)
+        {
+            return new OrderedArrows(arrowRegister);
+        }
+
+        public static DrawnFlowchart CreateDrawnFlowchart(Grid organizedGrid, OrderedArrows orderedArrows)
+        {
+            return new DrawnFlowchart(organizedGrid, orderedArrows);
         }
     }
 }

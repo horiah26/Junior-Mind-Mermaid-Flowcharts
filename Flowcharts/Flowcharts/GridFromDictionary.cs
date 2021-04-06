@@ -5,16 +5,16 @@ namespace Flowcharts
     public class GridFromDictionary
     {
         readonly Grid grid = new Grid();
-        readonly ElementRegister elementList;
+        readonly ElementRegister elementRegister;
 
-        public GridFromDictionary(ElementRegister elementList)
+        public GridFromDictionary(ElementRegister elementRegister)
         {
-            this.elementList = elementList;
+            this.elementRegister = elementRegister;
         }
 
         public Grid GetGrid()
         {
-            var columns = elementList.GroupBy(x => x.Column);
+            var columns = elementRegister.GroupBy(x => x.Column);
 
             foreach (var column in columns)
             {

@@ -36,9 +36,9 @@ namespace Flowcharts
             elementArray = new ArrayWithAddedElement(elementArray, element, row, column).GetArray();
         }
 
-        public (int, int) GetGridSize()
+        public (int, int) GetSize()
         {
-            return (Rows, Columns);
+            return (elementArray.GetLength(0), elementArray.GetLength(1));
         }
 
         public Element ElementAt(int row, int column)

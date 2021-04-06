@@ -25,7 +25,7 @@ namespace Flowcharts
         {
             Orientation.SetOrientation(orientationName);
 
-            MemoryStream = memoryStream;
+            Memory.SetMemoryStream(memoryStream);
             Xml.CreateWriter(memoryStream);
 
             InitializeFlowchart();
@@ -83,7 +83,7 @@ namespace Flowcharts
 
         public void DrawFlowchart()
         {
-            Factory.CreateDrawnFlowchart(MemoryStream, Grid, arrowRegister, elementRegister).Draw();
+            Factory.CreateProcessedFlowchart(Grid, arrowRegister, elementRegister).Process();
         }
     }
 }

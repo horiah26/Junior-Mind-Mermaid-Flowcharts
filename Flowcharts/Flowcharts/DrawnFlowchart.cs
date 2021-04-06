@@ -1,78 +1,51 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
-using System.Linq;
+using System.Text;
 using System.Xml;
 
 namespace Flowcharts
 {
     public class DrawnFlowchart
     {
-        Grid grid;
+        readonly Grid organizedGrid;
+        readonly OrderedArrows orderedArrows;
+        readonly MemoryStream memoryStream = Memory.MemoryStream;
         readonly XmlWriter xmlWriter = Xml.XmlWriter;
-        readonly ArrowRegister arrowList;
-        readonly ElementRegister elementList;
-        readonly MemoryStream memoryStream;
 
-        public DrawnFlowchart(MemoryStream memoryStream, Grid grid, ArrowRegister arrowList, ElementRegister elementList)
+        readonly int rowSize;
+        readonly int columnSize;
+
+        public DrawnFlowchart(Grid organizedGrid, OrderedArrows orderedArrows)
         {
-            this.grid = grid;
-            this.memoryStream = memoryStream;
-            this.arrowList = arrowList;
-            this.elementList = elementList;
+            this.orderedArrows = orderedArrows;
+            this.organizedGrid = organizedGrid;
+
+            (rowSize, columnSize) = organizedGrid.GetSize();
         }
 
         public void Draw()
         {
-            InitializeSVG(xmlWriter);
+            DrawBeginning();
+            DrawElements();
+            orderedArrows.DrawArrows();
+            DrawElements();
+            DrawEnd();
+        }
 
-            grid = new GridFromDictionary(elementList).GetGrid();
+        public void DrawBeginning()
+        {
+            const string svgNs = "http://www.w3.org/2000/svg";
 
-            int lastOccupiedColumn = (elementList.Max(x => x.Column));
+            xmlWriter.WriteStartDocument();
+            xmlWriter.WriteStartElement("svg", svgNs);
 
-            var organizedGrid = new OrganizedGrid(grid, arrowList.GetList()).GetOrganizedGrid();
+            xmlWriter.WriteAttributeString("width", "3000");
+            xmlWriter.WriteAttributeString("height", "3000");
+        }
 
-            (int rowSize, int columnSize) = new GridSize(organizedGrid).GetSize();
-
-            foreach (Element element in organizedGrid)
-            {
-                element.Draw(columnSize, rowSize);
-            }
-
-            var forwardArrows = new List<Arrow>() { };
-            var backArrows = new List<Arrow>() { };
-
-            foreach (Arrow arrow in arrowList)
-            {
-                if(typeof(BackArrow) == arrow.GetType())
-                {
-                    backArrows.Add(arrow);
-                }
-                else
-                {
-                    forwardArrows.Add(arrow);
-                }
-            }
-
-            foreach(var backArrow in backArrows)
-            {
-                backArrow.Draw();
-            }
-
-            foreach(var arrow in forwardArrows)
-            {
-                arrow.Draw();
-            }
-
-            foreach (Arrow arrow in arrowList)
-            {
-                arrow.Write();
-            }
-
-            foreach (Element element in organizedGrid)
-            {
-                element.Draw(columnSize, rowSize);
-            }
-
+        public void DrawEnd()
+        {
             xmlWriter.WriteEndDocument();
             xmlWriter.Close();
 
@@ -82,15 +55,12 @@ namespace Flowcharts
             }
         }
 
-        private void InitializeSVG(XmlWriter thisWriter)
+        public void DrawElements()
         {
-            const string svgNs = "http://www.w3.org/2000/svg";
-
-            thisWriter.WriteStartDocument();
-            thisWriter.WriteStartElement("svg", svgNs);
-
-            thisWriter.WriteAttributeString("width", "3000");
-            thisWriter.WriteAttributeString("height", "3000");
+            foreach (Element element in organizedGrid)
+            {
+                element.Draw(columnSize, rowSize);
+            }
         }
     }
 }
