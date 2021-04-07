@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Text;
-using System.Xml;
 
 namespace Flowcharts
 {
@@ -13,38 +9,38 @@ namespace Flowcharts
             return new Grid();
         }
 
-        public static ArrowRegister CreateArrowRegister()
+        public static ArrowRegister ArrowRegister()
         {
             return new ArrowRegister();
         }
 
-        public static ElementRegister CreateElementRegister()
+        public static ElementRegister ElementRegister()
         {
             return new ElementRegister();
         }
 
-        public static ProcessedFlowchart CreateProcessedFlowchart(Grid grid, ArrowRegister arrowRegister, ElementRegister elementRegister)
+        public static ProcessedFlowchart ProcessedFlowchart(Grid grid, ArrowRegister arrowRegister, ElementRegister elementRegister)
         {
             return new ProcessedFlowchart(grid, arrowRegister, elementRegister);
         }
 
-        public static IArrow CreateIArrow(string arrowName, Element element1, Element element2, string text)
+        public static IArrow IArrow(string arrowName, Element element1, Element element2, string text)
         {
             var arrowType = Type.GetType("Flowcharts." + arrowName);
             return (IArrow)Activator.CreateInstance(arrowType, new object[] { element1, element2, text });
         }
 
-        public static Element CreateElement(string key, string text, string shape)
+        public static Element Element(string key, string text, string shape)
         {
             return new Element(key, text, shape);
         }
 
-        public static OrderedArrows CreateOrderedArrows(ArrowRegister arrowRegister)
+        public static OrderedArrows OrderedArrows(IArrowRegister arrowRegister)
         {
             return new OrderedArrows(arrowRegister);
         }
 
-        public static DrawnFlowchart CreateDrawnFlowchart(IGrid organizedGrid, OrderedArrows orderedArrows)
+        public static DrawnFlowchart DrawnFlowchart(IGrid organizedGrid, OrderedArrows orderedArrows)
         {
             return new DrawnFlowchart(organizedGrid, orderedArrows);
         }

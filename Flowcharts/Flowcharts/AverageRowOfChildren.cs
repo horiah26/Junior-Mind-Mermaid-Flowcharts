@@ -27,8 +27,7 @@ namespace Flowcharts
             }
 
             if (element != null && element.childElements.Count != 0)
-            {
-                
+            {                
                 double val = (element.childElements.Max(x => x.Row) + element.childElements.Min(x => x.Row)) / 2;
                 return val;
             }

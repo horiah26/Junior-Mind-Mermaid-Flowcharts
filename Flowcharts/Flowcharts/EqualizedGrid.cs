@@ -26,7 +26,7 @@ namespace Flowcharts
 
         public void Level(int columnIndex)
         {
-            var column = new ExtractedColumn(ElementArray, columnIndex).GetColumn();
+            var column = ArrayOperations.ExtractColumn(ElementArray, columnIndex);
 
             var averageParentsRow = GetAverageRowOfParents(column);
 
@@ -41,7 +41,6 @@ namespace Flowcharts
 
             ArrayOperations.Update(ElementArray);
         }
-
 
         private double GetAverageRowOfParents(IEnumerable<Element> column)
         {

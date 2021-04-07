@@ -7,12 +7,12 @@
         readonly int Columns;
         readonly int deletedRows;
 
-        public ElementArrayWithoutEmptyRows(Element[,] ElementArray, int deletedRows, int Rows, int Columns)
+        public ElementArrayWithoutEmptyRows(Element[,] ElementArray, int deletedRows)
         {
             this.ElementArray = ElementArray;
             this.deletedRows = deletedRows;
-            this.Rows = Rows;
-            this.Columns = Columns;
+            Rows = ElementArray.GetLength(0);
+            Columns = ElementArray.GetLength(1);
         }
 
         public Element[,] GetArray()

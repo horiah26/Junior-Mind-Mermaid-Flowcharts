@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Flowcharts
 {
@@ -9,7 +7,7 @@ namespace Flowcharts
     {
         public List<IArrow> ArrowList { get; private set; }
 
-        public OrderedArrows(ArrowRegister arrowRegister)
+        public OrderedArrows(IArrowRegister arrowRegister)
         {
             ArrowList = arrowRegister.ArrowList;
             ArrangeArrows();

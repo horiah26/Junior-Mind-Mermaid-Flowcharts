@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace Flowcharts
 {
@@ -39,6 +37,30 @@ namespace Flowcharts
         public static Element[,] LowerColumns(Element[,] ElementArray, double row, int column, int positions)
         {
             return new ElementArrayWithLoweredColumn(ElementArray, row, column, positions).Get();
+        }
+
+        public static List<IArrow> PairArrows(IArrowRegister arrowRegister, IGrid grid)
+        {
+            return new PairedArrows(arrowRegister, grid).ArrowList;
+        }
+
+        public static int GetIndexOfLastColumn(Element[,] ElementArray)
+        {
+            return new LastColumn(ElementArray).Index;
+        }
+        public static IEnumerable<Element> GetLastColumn(Element[,] ElementArray)
+        {
+            return new LastColumn(ElementArray).Column;
+        }
+
+        public static IEnumerable<Element> ExtractColumn(Element[,] ElementArray, int index)
+        {
+            return new ExtractedColumn(ElementArray, index).GetColumn();
+        }
+
+        public static Element[,] EliminateEmptyRows(Element[,] ElementArray, int deletedRows)
+        {
+            return new ElementArrayWithoutEmptyRows(ElementArray, deletedRows).GetArray();
         }
     }
 }

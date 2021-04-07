@@ -1,9 +1,4 @@
-﻿using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Xml;
-
-namespace Flowcharts
+﻿namespace Flowcharts
 {
     public class ProcessedFlowchart
     {
@@ -22,9 +17,9 @@ namespace Flowcharts
         {
             grid = GridOperations.DictionaryToGrid(elementRegister);
 
-            var organizedGrid = GridOperations.CreateOrganizedGrid(grid, arrowRegister);
-            var orderedArrows = Factory.CreateOrderedArrows(arrowRegister);
-            var drawnFlowchart = Factory.CreateDrawnFlowchart(organizedGrid, orderedArrows);
+            var organizedGrid = GridOperations.OrganizedGrid(grid, arrowRegister);
+            var orderedArrows = Factory.OrderedArrows(arrowRegister);
+            var drawnFlowchart = Factory.DrawnFlowchart(organizedGrid, orderedArrows);
             drawnFlowchart.Draw();
         }
     }

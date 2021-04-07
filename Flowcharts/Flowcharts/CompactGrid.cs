@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace Flowcharts
+﻿namespace Flowcharts
 {
     internal class CompactGrid : IGrid
     {
@@ -9,12 +7,11 @@ namespace Flowcharts
         public CompactGrid(IGrid grid)
         {
             ElementArray = ArrayOperations.CloneArray(grid);
-            System.Console.WriteLine();
         }
 
         public void MakeColumnsCompact()
         {
-            int lastColumnIndex = new LastColumn(ElementArray).Index;
+            int lastColumnIndex = ArrayOperations.GetIndexOfLastColumn(ElementArray);
 
             for (int i = 0; i <= lastColumnIndex; i++)
             {

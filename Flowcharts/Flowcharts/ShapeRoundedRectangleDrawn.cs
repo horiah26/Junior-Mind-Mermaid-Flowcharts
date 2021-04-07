@@ -21,7 +21,7 @@ namespace Flowcharts
             this.length = length;
         }
 
-        public void Draw(string points)
+        public void Draw()
         {
             xmlWriter.WriteStartElement("rect");
 

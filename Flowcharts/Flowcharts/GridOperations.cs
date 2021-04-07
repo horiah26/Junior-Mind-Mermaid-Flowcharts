@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Flowcharts
+﻿namespace Flowcharts
 {
     static class GridOperations
     {
@@ -16,7 +12,7 @@ namespace Flowcharts
             return new Grid(elementArray);
         }
 
-        public static IGrid CreateOrganizedGrid(IGrid grid, IArrowRegister arrowRegister)
+        public static IGrid OrganizedGrid(IGrid grid, IArrowRegister arrowRegister)
         {
             return new OrganizedGrid(grid, arrowRegister).GetOrganizedGrid();
         }
@@ -49,6 +45,11 @@ namespace Flowcharts
         public static IGrid AdjustForArrows(IGrid grid, IArrowRegister arrowRegister)
         {
             return new GridAdjustedForArrows(grid, arrowRegister);
+        }
+
+        public static IGrid DistanceTwins(IGrid grid)
+        {
+            return new GridWithEquallyDistanceTwins(grid);
         }
     }
 }

@@ -6,15 +6,8 @@ namespace Flowcharts
     {
         readonly int column;
         readonly int Rows;
-        Element[,] elementArray;
+        readonly Element[,] elementArray;
         List<Element> extractedColumn;
-
-        //public ExtractedColumn(IGrid grid, int column)
-        //{
-        //    this.column = column;
-        //    elementArray = grid.ElementArray;
-        //    Rows = elementArray.GetLength(0);
-        //}
 
         public ExtractedColumn(Element[,] elementArray, int column)
         {

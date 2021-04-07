@@ -12,26 +12,26 @@
 
         public void FillEmptySpots()
         {
-            int lastColumnIndex = new LastColumn(ElementArray).Index;
+            int lastColumnIndex = ArrayOperations.GetIndexOfLastColumn(ElementArray);                
             int Rows = ElementArray.GetLength(0);
 
             for (int column = lastColumnIndex - 1; column >= 0; column--)
             {
                 for (int row = 0; row < Rows; row++)
                 {
-                    if (ElementArray[row, column] != null && ElementArray[row, column + 1] == null && ElementArray[row, column].MinColumnOfChildren() - 1 > column)
+                    if (ElementArray[row, column] != null && ElementArray[row, column + 1] == null && ElementArray[row, column].MinColumnOfChildren() - 1 > column && ElementArray[row, column].parentElements.Count == 0)
                     {
                         int difference = ElementArray[row, column].MinColumnOfChildren() - column - 1;
 
                         ElementArray[row, column + difference] = ElementArray[row, column];
 
                         ElementArray[row, column] = null;
-                        ElementArray = ArrayOperations.Update(ElementArray);
+                        ArrayOperations.Update(ElementArray);
                     }
                 }
             }
 
-            ElementArray = ArrayOperations.Update(ElementArray);
+            ArrayOperations.Update(ElementArray);
         }
     }
 }

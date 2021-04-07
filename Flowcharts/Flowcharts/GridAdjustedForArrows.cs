@@ -11,7 +11,7 @@ namespace Flowcharts
         public GridAdjustedForArrows(IGrid grid, IArrowRegister arrowRegister)
         {
             ElementArray = ArrayOperations.CloneArray(grid);
-            arrowList = new PairedArrows(arrowRegister, grid).ArrowList;
+            arrowList = ArrayOperations.PairArrows(arrowRegister, grid);
             AdjustForArrows();
         }
 

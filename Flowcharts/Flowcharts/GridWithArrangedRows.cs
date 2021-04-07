@@ -14,7 +14,7 @@ namespace Flowcharts
 
         public void ArrangeRows()
         {
-            int lastColumnIndex = new LastColumn(ElementArray).Index;
+            int lastColumnIndex = ArrayOperations.GetIndexOfLastColumn(ElementArray);
             int Rows = ElementArray.GetLength(0);
 
             for (int column = lastColumnIndex; column >= 0; column--)

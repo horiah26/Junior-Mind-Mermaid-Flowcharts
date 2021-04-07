@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Text;
 using System.Xml;
 
 namespace Flowcharts
@@ -61,7 +59,6 @@ namespace Flowcharts
             foreach (Element element in organizedGrid)
             {
                 element.Draw(Columns, Rows);
-                Console.WriteLine();
             }
         }
     }

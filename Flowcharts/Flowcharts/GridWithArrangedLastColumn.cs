@@ -1,50 +1,62 @@
-﻿//using System;
-//using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
-//namespace Flowcharts
-//{
-//    class GridWithArrangedLastColumn
-//    {
-//        IGrid newGrid;
+namespace Flowcharts
+{
+    class GridWithArrangedLastColumn : IGrid
+    {
+        public Element[,] ElementArray { get; set; }
 
-//        public GridWithArrangedLastColumn(Grid grid)
-//        {
-//            newGrid = new Grid(grid);
-//        }
+        public GridWithArrangedLastColumn(IGrid grid)
+        {
+            ElementArray = grid.ElementArray;
+            Level();
+        }
 
-//        public void Level()
-//        {
-//            var lastColumn = new LastColumn(newGrid);
-             
-//            int indexOfLastColumn = lastColumn.Index;
+        public void Level()
+        {
+            var lastColumn = ArrayOperations.GetLastColumn(ElementArray);
+            int indexOfLastColumn = ArrayOperations.GetIndexOfLastColumn(ElementArray);
 
-//            var averageParents = (double)lastColumn.Column.Average(x => GetAverageRowOfParents(x));
-//            var averageThis = (double)lastColumn.Column.Average(x => x.Row);
+            if (lastColumn.Count() == 1)
+            {
+                List<int> indexOfParentsFromLastColumn = new List<int>() { };
 
-//            var difference = Convert.ToInt32(averageParents - averageThis); 
+                foreach (var parent in lastColumn.First().parentElements)
+                {
+                    if (parent.Column == indexOfLastColumn - 1)
+                    {
+                        indexOfParentsFromLastColumn.Add(parent.Row);
+                    }
+                }
 
-//            if (difference > 0)
-//            {
-//                newGrid.ElementArray = new ElementArrayWithLoweredColumn(newGrid, 0, indexOfLastColumn, difference).GetNewArray();
-//            }
+                int averageRowOfParentsFromPreviousColumn = (int)Math.Floor(indexOfParentsFromLastColumn.Average(x => x));
+                lastColumn.First().Row = averageRowOfParentsFromPreviousColumn;
+                return;
+            }
 
-//            newGrid = new UpdatedGrid(newGrid).Get();
-//        }
+            var averageParents = (double)lastColumn.Average(x => GetAverageRowOfParents(x));
+            var averageThis = (double)lastColumn.Average(x => x.Row);
 
-//        private double GetAverageRowOfParents(Element element)
-//        {
-//            if (element.parentElements.Count != 0)
-//            {
-//                return element.parentElements.Average(x => x.Row);
-//            }
+            var difference = Convert.ToInt32(averageParents - averageThis);
 
-//            return element.Row;
-//        }
+            if (difference > 0)
+            {
+                ElementArray = ArrayOperations.LowerColumns(ElementArray, 0, indexOfLastColumn, difference);
+            }
 
-//        public Grid Get()
-//        {
-//            Level();
-//            return newGrid;
-//        }
-//    }
-//}
+            ArrayOperations.Update(ElementArray);
+        }
+
+        private double GetAverageRowOfParents(Element element)
+        {
+            if (element.parentElements.Count != 0)
+            {
+                return element.parentElements.Average(x => x.Row);
+            }
+
+            return element.Row;
+        }
+    }
+}

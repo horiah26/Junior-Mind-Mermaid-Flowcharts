@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace Flowcharts
+﻿namespace Flowcharts
 {
     class OrganizedGrid
     {
@@ -20,10 +18,11 @@ namespace Flowcharts
             var arrangedGrid = GridOperations.ArrangeRows(compactGrid);
             var equalizedGrid = GridOperations.Equalize(arrangedGrid);
             var trimmedGrid = GridOperations.TrimEnds(equalizedGrid);
-            var gridAdjustedForArrows = GridOperations.AdjustForArrows(trimmedGrid, arrowRegister);
-            var filledGrid2 = GridOperations.FillSpots(gridAdjustedForArrows);
-
-            return filledGrid2;
+            //var gridAdjustedForArrows = GridOperations.AdjustForArrows(trimmedGrid, arrowRegister);
+            var filledGrid2 = GridOperations.FillSpots(trimmedGrid);
+            var distancedGrid = GridOperations.DistanceTwins(filledGrid2);
+            var last = new GridWithArrangedLastColumn(distancedGrid);
+            return last;
         }
     }
 }

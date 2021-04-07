@@ -1,6 +1,5 @@
 ﻿using System.Linq;
 using System.Xml;
-using System.Collections.Generic;
 
 namespace Flowcharts
 {
