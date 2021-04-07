@@ -38,6 +38,22 @@ namespace Flowcharts
             this.shapeName = shapeName;
         }
 
+        public Element(Element element)
+        {
+            In = element.In;
+            Out = element.Out;
+            BackArrowEntry = element.BackArrowEntry;
+            Text = element.Text + "a";
+            Key = element.Key;
+            orientation = element.orientation;
+            OrientationName = element.OrientationName;
+            parentElements = element.parentElements;
+            childElements = element.childElements;
+            Column = element.Column;
+            Row = element.Row;
+            shapeName = element.shapeName;        
+        }
+
         public void AddParent(Element previous)
         {
             parentElements.Add(previous);
@@ -59,11 +75,11 @@ namespace Flowcharts
         {
             orientation.Initialize(Column, Row, Columns, Rows);
 
-            var InOut = new DrawnElement(xmlWriter, orientation, Text, shapeName).Draw();
+            var IO = new DrawnElement(xmlWriter, orientation, Text, shapeName).Draw();
 
-            In = InOut.In;
-            Out = InOut.Out;
-            BackArrowEntry = InOut.BackArrowEntry;
+            In = IO.In;
+            Out = IO.Out;
+            BackArrowEntry = IO.BackArrowEntry;
         }
     
 

@@ -26,12 +26,12 @@
                         ElementArray[row, column + difference] = ElementArray[row, column];
 
                         ElementArray[row, column] = null;
-                        ArrayOperations.Update(ElementArray);
+                        ElementArray = ArrayOperations.Update(ElementArray);
                     }
                 }
             }
 
-            ArrayOperations.Update(ElementArray);
+            ElementArray = ArrayOperations.Update(ElementArray);
         }
     }
 }

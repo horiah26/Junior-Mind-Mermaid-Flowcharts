@@ -18,7 +18,7 @@ namespace Flowcharts
 
         public static IGrid CreateOrganizedGrid(IGrid grid, ArrowRegister arrowRegister)
         {
-            return new OrganizedGrid(grid, arrowRegister.GetList()).GetOrganizedGrid();
+            return new OrganizedGrid(grid, arrowRegister.ArrowList).GetOrganizedGrid();
         }
 
         public static IGrid FillSpots(IGrid grid)
@@ -28,7 +28,7 @@ namespace Flowcharts
 
         public static IGrid MakeRowsCompact(IGrid grid)
         {
-            return new CompactGrid(grid);
+            return new CompactGrid(grid).Get();
         }
 
         public static IGrid ArrangeRows(IGrid grid)

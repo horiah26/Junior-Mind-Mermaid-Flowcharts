@@ -1,24 +1,26 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Flowcharts
 {
-    public class OrderedArrows
+    public class OrderedArrows : IArrowRegister
     {
-        readonly ArrowRegister arrowRegister;
+        public List<IArrow> ArrowList { get; private set; }
 
         public OrderedArrows(ArrowRegister arrowRegister)
         {
-            this.arrowRegister = arrowRegister;
+            ArrowList = arrowRegister.ArrowList;
+            ArrangeArrows();
         }
 
-        private List<Arrow> ArrangeArrows()
+        private void ArrangeArrows()
         {
-            var forwardArrows = new List<Arrow>() { };
-            var backArrows = new List<Arrow>() { };
+            var forwardArrows = new List<IArrow>() { };
+            var backArrows = new List<IArrow>() { };
 
-            foreach (Arrow arrow in arrowRegister)
+            foreach (IArrow arrow in ArrowList)
             {
                 if (typeof(BackArrow) == arrow.GetType())
                 {
@@ -32,23 +34,28 @@ namespace Flowcharts
 
             backArrows.AddRange(forwardArrows);
 
-            return backArrows;
+            ArrowList = backArrows;
         }
 
         public void DrawArrows()
         {
-           var arrows = ArrangeArrows();
-
-            foreach (Arrow arrow in arrows)
+            foreach (IArrow arrow in ArrowList)
             {
                 arrow.Draw();
             }
 
-            foreach (Arrow arrow in arrows)
+            foreach (IArrow arrow in ArrowList)
             {
                 arrow.Write();
             }
+        }
 
+        public IEnumerator GetEnumerator()
+        {
+            foreach (var arrow in ArrowList)
+            {
+                yield return arrow;
+            }
         }
     }
 }

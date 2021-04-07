@@ -3,25 +3,23 @@ using System.Collections.Generic;
 
 namespace Flowcharts
 {
-    public class ArrowRegister : IEnumerable
+    public class ArrowRegister : IArrowRegister
     {
-        public List<IArrow> arrows = new List<IArrow> { };
+        public List<IArrow> ArrowList { get; private set; }
 
-        public ArrowRegister() { }
+        public ArrowRegister() 
+        {
+            ArrowList = new List<IArrow>() { };
+        }
 
         public void Add(IArrow arrow)
         {
-            arrows.Add(arrow);
-        }
-
-        public List<IArrow> GetList()
-        {
-            return arrows;
+            ArrowList.Add(arrow);
         }
 
         public IEnumerator GetEnumerator()
         {
-            foreach(var arrow in arrows)
+            foreach (var arrow in ArrowList)
             {
                 yield return arrow;
             }

@@ -9,7 +9,7 @@ namespace Flowcharts
         public CompactGrid(IGrid grid)
         {
             ElementArray = ArrayOperations.CloneArray(grid);
-            MakeColumnsCompact();
+            System.Console.WriteLine();
         }
 
         public void MakeColumnsCompact()
@@ -43,6 +43,12 @@ namespace Flowcharts
                 ArrayOperations.Update(ElementArray);
 
             } while (moved == true);
+        }
+
+        public IGrid Get()
+        {
+            MakeColumnsCompact();
+            return this;
         }
     }
 }

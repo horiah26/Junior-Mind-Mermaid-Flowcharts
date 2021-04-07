@@ -6,7 +6,7 @@ namespace Flowcharts
 {
     class ArrayClone
     {
-        Element[,] originalArray;
+        readonly Element[,] originalArray;
 
         public ArrayClone(Element[,] ElementArray) 
         {
@@ -26,7 +26,7 @@ namespace Flowcharts
                 {
                     if(originalArray[i,j] != null)
                     {
-                        newArray[i, j] = new Element(originalArray[i, j].Key, originalArray[i, j].Text, originalArray[i, j].shapeName);
+                        newArray[i, j] = new Element(originalArray[i, j]);
                     }
                 }
             }

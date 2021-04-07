@@ -15,6 +15,7 @@ namespace Flowcharts
 
         public IGrid GetOrganizedGrid()
         {
+            var a = grid;
             var filledGrid = GridOperations.FillSpots(grid);
             var compactGrid = GridOperations.MakeRowsCompact(filledGrid);
             var arrangedGrid = GridOperations.ArrangeRows(compactGrid);

@@ -64,10 +64,5 @@ namespace Flowcharts
                 yield return item.Value;
             }
         }
-
-        public void Check(string text)
-        {
-
-        }
-            }
+    }
 }

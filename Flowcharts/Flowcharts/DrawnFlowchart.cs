@@ -9,16 +9,16 @@ namespace Flowcharts
     public class DrawnFlowchart
     {
         readonly IGrid organizedGrid;
-        readonly OrderedArrows orderedArrows;
+        readonly IArrowRegister orderedArrows;
         readonly MemoryStream memoryStream = Memory.MemoryStream;
         readonly XmlWriter xmlWriter = Writer.XmlWriter;
 
         readonly int Rows;
         readonly int Columns;
 
-        public DrawnFlowchart(IGrid organizedGrid, OrderedArrows orderedArrows)
+        public DrawnFlowchart(IGrid organizedGrid, IArrowRegister orderedArrows)
         {
-            this.orderedArrows = orderedArrows;
+            this.orderedArrows = new PairedArrows(orderedArrows, organizedGrid);
             this.organizedGrid = organizedGrid;
 
             Rows = organizedGrid.ElementArray.GetLength(0);
@@ -61,6 +61,7 @@ namespace Flowcharts
             foreach (Element element in organizedGrid)
             {
                 element.Draw(Columns, Rows);
+                Console.WriteLine();
             }
         }
     }
