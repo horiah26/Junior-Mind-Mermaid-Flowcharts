@@ -4,20 +4,20 @@ namespace Flowcharts
 {
     internal class GridAdjustedForArrows : IGrid
     {
-        readonly List<IArrow> arrows;
+        readonly List<IArrow> arrowList;
 
         public Element[,] ElementArray { get; private set; }
 
-        public GridAdjustedForArrows(IGrid grid, List<IArrow> arrows)
+        public GridAdjustedForArrows(IGrid grid, IArrowRegister arrowRegister)
         {
             ElementArray = ArrayOperations.CloneArray(grid);
-            this.arrows = arrows;
+            arrowList = new PairedArrows(arrowRegister, grid).ArrowList;
             AdjustForArrows();
         }
 
         private void AdjustForArrows()
         {
-            foreach(IArrow arrow in arrows)
+            foreach(IArrow arrow in arrowList)
             {
                 (Element fromElement, Element toElement) = arrow.GetElementPair();
 

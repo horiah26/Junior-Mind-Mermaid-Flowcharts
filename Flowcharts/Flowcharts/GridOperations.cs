@@ -16,9 +16,9 @@ namespace Flowcharts
             return new Grid(elementArray);
         }
 
-        public static IGrid CreateOrganizedGrid(IGrid grid, ArrowRegister arrowRegister)
+        public static IGrid CreateOrganizedGrid(IGrid grid, IArrowRegister arrowRegister)
         {
-            return new OrganizedGrid(grid, arrowRegister.ArrowList).GetOrganizedGrid();
+            return new OrganizedGrid(grid, arrowRegister).GetOrganizedGrid();
         }
 
         public static IGrid FillSpots(IGrid grid)
@@ -46,9 +46,9 @@ namespace Flowcharts
             return new GridWithTrimmedEnds(grid);
         }
 
-        public static IGrid AdjustForArrows(IGrid grid, List<IArrow> arrows)
+        public static IGrid AdjustForArrows(IGrid grid, IArrowRegister arrowRegister)
         {
-            return new GridAdjustedForArrows(grid, arrows);
+            return new GridAdjustedForArrows(grid, arrowRegister);
         }
     }
 }

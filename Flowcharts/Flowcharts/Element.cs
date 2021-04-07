@@ -43,7 +43,7 @@ namespace Flowcharts
             In = element.In;
             Out = element.Out;
             BackArrowEntry = element.BackArrowEntry;
-            Text = element.Text + "a";
+            Text = element.Text;
             Key = element.Key;
             orientation = element.orientation;
             OrientationName = element.OrientationName;

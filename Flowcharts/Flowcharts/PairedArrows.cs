@@ -7,7 +7,8 @@ namespace Flowcharts
     class PairedArrows : IArrowRegister
     {
         public List<IArrow> ArrowList { get; private set; }
-        Element[,] elementArray;
+
+        readonly Element[,] elementArray;
 
         public PairedArrows(IArrowRegister arrowRegister, IGrid grid)
         {
