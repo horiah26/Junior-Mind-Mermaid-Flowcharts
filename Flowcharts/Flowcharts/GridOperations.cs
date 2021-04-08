@@ -12,9 +12,9 @@
             return new Grid(elementArray);
         }
 
-        public static IGrid OrganizedGrid(IGrid grid, IArrowRegister arrowRegister)
+        public static IGrid OrganizedGrid(IGrid grid)
         {
-            return new OrganizedGrid(grid, arrowRegister).GetOrganizedGrid();
+            return new OrganizedGrid(grid).GetOrganizedGrid();
         }
 
         public static IGrid FillSpots(IGrid grid)
@@ -32,9 +32,9 @@
             return new GridWithArrangedRows(grid);
         }
 
-        public static IGrid Equalize(IGrid grid)
+        public static IGrid Linearize(IGrid grid)
         {
-            return new EqualizedGrid(grid);
+            return new LiniarizedGrid(grid);
         }
 
         public static IGrid TrimEnds(IGrid grid)
@@ -50,6 +50,11 @@
         public static IGrid DistanceTwins(IGrid grid)
         {
             return new GridWithEquallyDistanceTwins(grid);
+        }
+
+        public static IGrid ArrangeLastColumn(IGrid grid)
+        {
+            return new GridWithArrangedLastColumn(grid);
         }
     }
 }

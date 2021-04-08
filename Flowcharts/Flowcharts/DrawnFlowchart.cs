@@ -34,7 +34,8 @@ namespace Flowcharts
 
         public void DrawBeginning()
         {
-            const string svgNs = "http://www.w3.org/2000/svg";
+            const string svgNs = "http:
+                www.w3.org/2000/svg";
 
             xmlWriter.WriteStartDocument();
             xmlWriter.WriteStartElement("svg", svgNs);

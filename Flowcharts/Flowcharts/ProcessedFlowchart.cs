@@ -17,7 +17,7 @@
         {
             grid = GridOperations.DictionaryToGrid(elementRegister);
 
-            var organizedGrid = GridOperations.OrganizedGrid(grid, arrowRegister);
+            var organizedGrid = GridOperations.OrganizedGrid(grid);
             var orderedArrows = Factory.OrderedArrows(arrowRegister);
             var drawnFlowchart = Factory.DrawnFlowchart(organizedGrid, orderedArrows);
             drawnFlowchart.Draw();

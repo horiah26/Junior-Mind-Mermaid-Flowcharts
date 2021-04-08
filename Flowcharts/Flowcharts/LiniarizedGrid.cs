@@ -4,11 +4,11 @@ using System.Linq;
 
 namespace Flowcharts
 {
-    class EqualizedGrid : IGrid
+    class LiniarizedGrid : IGrid
     {
         public Element[,] ElementArray { get; private set; }
 
-        public EqualizedGrid(IGrid grid)
+        public LiniarizedGrid(IGrid grid)
         {
             ElementArray = ArrayOperations.CloneArray(grid);
             LevelColumns();
@@ -21,7 +21,7 @@ namespace Flowcharts
             for (int i = 1; i < columns; i++)
             {
                 Level(i);
-            }
+            }         
         }
 
         public void Level(int columnIndex)

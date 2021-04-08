@@ -7,34 +7,58 @@
             string fileName = "test";
             string path = null;
 
+            string arrow = "Arrow";
+            string backArrow = "BackArrow";
+            string rectangle = "Rectangle";
+            string rhombus = "Rhombus";
+
             var flowchart = new Flowchart("LeftRight", fileName, path);
 
-            flowchart.AddPair(("A1", "Ordering services", "Stadium"), ("A2", "Complete purchace requisition form (Use CCPR if payment is made by credit card)", "Rectangle"), "Arrow");
-            flowchart.AddPair("A2", ("A3", "Approved ?", "Rectangle"), "Arrow");
-            flowchart.AddPair("A3", ("A4", "Is service to be provided by an independednt contractor?", "Rectangle"), "Arrow", "Yes");
-            flowchart.AddPair("A3", ("A5", "Modify terms and conditions to Comply with requirements", "Rectangle"), "Arrow", "No");
-            flowchart.AddPair("A5", ("A2", "Complete purchace requisition form (Use CCPR if payment is made by credit card)", "Rectangle"), "BackArrow");
-            flowchart.AddPair("A4", ("A6", "Are there an independent Contractor's Agreement and W-9 on file?", "Rectangle"), "Arrow", "Yes");
-            flowchart.AddPair("A4", ("A7", "Obtain P.O. from Controller", "Rectangle"), "Arrow", "No");
-            flowchart.AddPair("A6", ("A9", "No", "Rectangle"), "Arrow");
-            flowchart.AddPair("A6", ("A10", "Yes", "Rectangle"), "Arrow");
-            flowchart.AddPair("A7", ("A8", "Place Request for services with Vendor or contractor", "Circle"), "Arrow");
-            flowchart.AddPair("A9", ("A11", "Obtain independent contractor's agreement and W-9", "Rectangle"), "Arrow");
-            flowchart.AddPair("A11", ("A6"), "BackArrow");
-            flowchart.AddPair("A10", ("A7"), "BackArrow");
+            //flowchart.AddPair(("A1", "Ordering services", "Stadium"), ("A2", "Complete purchace requisition form (Use CCPR if payment is made by credit card)", rectangle), arrow);
+            //flowchart.AddPair("A2", ("A3", "Approved ?", rectangle), arrow);
+            //flowchart.AddPair("A3", ("A4", "Is service to be provided by an independednt contractor?", rectangle), arrow, "Yes");
+            //flowchart.AddPair("A3", ("A5", "Modify terms and conditions to Comply with requirements", rectangle), arrow, "No");
+            //flowchart.AddPair("A5", ("A2", "Complete purchace requisition form (Use CCPR if payment is made by credit card)", rectangle), backArrow);
+            //flowchart.AddPair("A4", ("A6", "Are there an independent Contractor's Agreement and W-9 on file?", rectangle), arrow, "Yes");
+            //flowchart.AddPair("A4", ("A7", "Obtain P.O. from Controller", rectangle), arrow, "No");
+            //flowchart.AddPair("A6", ("A9", "No", rectangle), arrow);
+            //flowchart.AddPair("A6", ("A10", "Yes", rectangle), arrow);
+            //flowchart.AddPair("A7", ("A8", "Place Request for services with Vendor or contractor", "Circle"), arrow);
+            //flowchart.AddPair("A9", ("A11", "Obtain independent contractor's agreement and W-9", rectangle), arrow);
+            //flowchart.AddPair("A11", ("A6"), backArrow);
+            //flowchart.AddPair("A10", ("A7"), backArrow);
 
-            //flowchart.AddPair(("Collect", "Collect late payments", "Stadium"), ("Send", "Send Collection Letter", "Rectangle"), "Arrow");
-            //flowchart.AddPair("Send", ("Rhombus1", "Payment received within one week?", "Rhombus"), "Arrow");
-            //flowchart.AddPair("Rhombus1", ("Assistant", "Accounting Assistant Calls Customer for Payment", "Rectangle"), "Arrow", "No");
-            //flowchart.AddPair("Rhombus1", ("Forward", "Forward Payment to Payment Processing", "Parallelogram"), "Arrow", "Yes");
-            //flowchart.AddPair("Assistant", ("Received?", "Payment Received?", "Rhombus"), "Arrow");
-            //flowchart.AddPair("Received?", "Forward", "BackArrow", "Yes");
-            //flowchart.AddPair("Received?", ("Payment>1000", "Payment > $1000?", "Rectangle"), "Arrow", "No");
-            //flowchart.AddPair("Payment>1000", ("Invoice", "Write Off Invoice as closed", "Rectangle"), "Arrow", "No");
-            //flowchart.AddPair("Payment>1000", ("Agency", "Contact Collection Agency", "Rectangle"), "Arrow", "Yes");
-            //flowchart.AddPair("Agency", ("End", "End", "Stadium"), "Arrow");
-            //flowchart.AddPair("Invoice", "End", "Arrow");
-            //flowchart.AddPair("Forward", "End", "Arrow");
+            //flowchart.AddPair(("Collect", "Collect late payments", "Stadium"), ("Send", "Send Collection Letter", rectangle), arrow);
+            //flowchart.AddPair("Send", ("Rhombus1", "Payment received within one week?", rhombus), arrow);
+            //flowchart.AddPair("Rhombus1", ("Assistant", "Accounting Assistant Calls Customer for Payment", rectangle), arrow, "No");
+            //flowchart.AddPair("Rhombus1", ("Forward", "Forward Payment to Payment Processing", "Parallelogram"), arrow, "Yes");
+            //flowchart.AddPair("Assistant", ("Received?", "Payment Received?", rhombus), arrow);
+            //flowchart.AddPair("Received?", "Forward", backArrow, "Yes");
+            //flowchart.AddPair("Received?", ("Payment>1000", "Payment > $1000?", rectangle), arrow, "No");
+            //flowchart.AddPair("Payment>1000", ("Invoice", "Write Off Invoice as closed", rectangle), arrow, "No");
+            //flowchart.AddPair("Payment>1000", ("Agency", "Contact Collection Agency", rectangle), arrow, "Yes");
+            //flowchart.AddPair("Agency", ("End", "End", "Stadium"), arrow);
+            //flowchart.AddPair("Invoice", "End", arrow);
+            //flowchart.AddPair("Forward", "End", arrow);
+
+            flowchart.AddPair(("Arrives", "Patient arrives", "Stadium"), ("System?", "Patient in the system?", rhombus), arrow);
+            flowchart.AddPair("System?", ("Nurse?", "Nurse available?", rhombus), arrow, "Yes");
+            flowchart.AddPair("System?", ("Paperwork", "Patient needs to complete paperwork", rectangle), arrow, "No");
+            flowchart.AddPair("Paperwork", "System?", backArrow);
+            flowchart.AddPair("Nurse?", ("Pulse", "Take pulse, blood pressure, weight, urine", rectangle), arrow, "Yes");
+            flowchart.AddPair("Nurse?", ("Waiting room", "Waiting room", rectangle), arrow, "No");
+            flowchart.AddPair("Waiting room", "Nurse?", backArrow);
+            flowchart.AddPair("Pulse", ("Doctor?", "Doctor available?", rhombus), arrow);
+            flowchart.AddPair("Doctor?", ("PatientDoctor", "Patient with doctor", rectangle), arrow, "Yes");
+            flowchart.AddPair("Doctor?", ("Waiting room2", "Waiting room", rectangle), arrow, "No");
+            flowchart.AddPair("Waiting room2", "Doctor?", backArrow);
+            flowchart.AddPair("PatientDoctor", ("FollowUp?", "Need follow-up appointment?", rhombus), "Arrow");
+            flowchart.AddPair("FollowUp?", ("MakeAppointment", "Make an appointment", rectangle), arrow, "Yes");
+            flowchart.AddPair("FollowUp?", ("Medication?", "Need medication?", rhombus), arrow, "No");
+            flowchart.AddPair("Medication?", ("Pharmacy", "Patient sent to pharmacy?", rectangle), arrow, "Yes");
+            flowchart.AddPair("Pharmacy", ("Dispense", "Dispense medication", rectangle), arrow);
+            flowchart.AddPair("Dispense", ("End", "Patient leaves", "Stadium"), arrow);
+            flowchart.AddPair("MakeAppointment", "End", arrow);
 
             flowchart.DrawFlowchart();
         }
