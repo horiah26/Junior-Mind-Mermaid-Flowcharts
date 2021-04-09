@@ -9,7 +9,8 @@ namespace Flowcharts
     {
         public (double x, double y) In;
         public (double x, double y) Out;
-        public (double x, double y) BackArrowEntry;
+        public (double x, double y) BackArrowLeft;
+        public (double x, double y) BackArrowRight;
 
         public IOrientation orientation;
 
@@ -42,7 +43,8 @@ namespace Flowcharts
         {
             In = element.In;
             Out = element.Out;
-            BackArrowEntry = element.BackArrowEntry;
+            BackArrowLeft = element.BackArrowLeft;
+            BackArrowRight = element.BackArrowRight;
             Text = element.Text;
             Key = element.Key;
             orientation = element.orientation;
@@ -79,7 +81,8 @@ namespace Flowcharts
 
             In = IO.In;
             Out = IO.Out;
-            BackArrowEntry = IO.BackArrowEntry;
+            BackArrowLeft = IO.BackArrowLeft;
+            BackArrowRight = IO.BackArrowRight;
         }
     
 

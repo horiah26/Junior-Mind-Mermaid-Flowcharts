@@ -6,7 +6,8 @@ namespace Flowcharts
     {
         (double x, double y) In;
         (double x, double y) Out;
-        (double x, double y) BackArrowEntry;
+        (double x, double y) BackArrowLeft;
+        (double x, double y) BackArrowRight;
 
         readonly IOrientation orientation;
         readonly double xPos;
@@ -33,37 +34,41 @@ namespace Flowcharts
             if (typeof(OrientationLeftRight) == orientation.GetType())
             {
                 In = (xPos - linesAdjustment / correctionFactor - 5, yPos);
-                Out = (xPos + length / 2, yPos);
+                Out = (xPos + maxDimension - linesAdjustment / correctionFactor, yPos);
 
-                BackArrowEntry = (xPos + maxDimension - linesAdjustment / correctionFactor, yPos);
+                BackArrowLeft = (xPos + maxDimension / 2 - linesAdjustment / correctionFactor, yPos - maxDimension / 2);
+                BackArrowRight = (xPos + maxDimension / 2 - linesAdjustment / correctionFactor, yPos + maxDimension / 2);
             }
             else if (typeof(OrientationRightLeft) == orientation.GetType())
             {
                 In = (xPos + maxDimension - linesAdjustment / correctionFactor + 5, yPos);
-                Out = (xPos + length / 2, yPos);
+                Out = (xPos - linesAdjustment / correctionFactor, yPos);
 
-                BackArrowEntry = (xPos - linesAdjustment / correctionFactor - 5, yPos);
+                BackArrowLeft = (xPos + maxDimension / 2 - linesAdjustment / correctionFactor, yPos - maxDimension / 2);
+                BackArrowRight = (xPos + maxDimension / 2 - linesAdjustment / correctionFactor, yPos + maxDimension / 2);
             }
             else if (typeof(OrientationTopDown) == orientation.GetType())
             {
                 In = (xPos + maxDimension / 2 - linesAdjustment / correctionFactor, yPos - maxDimension / 2 - 5);
-                Out = (xPos + maxDimension / 2 - linesAdjustment / correctionFactor, yPos);
+                Out = (xPos + maxDimension / 2 - linesAdjustment / correctionFactor, yPos + maxDimension / 2);
 
-                BackArrowEntry = (xPos + maxDimension / 2 - linesAdjustment / correctionFactor, yPos + maxDimension / 2);
+                BackArrowLeft = (xPos - linesAdjustment / correctionFactor, yPos);
+                BackArrowRight = (xPos + maxDimension - linesAdjustment / correctionFactor, yPos);
             }
             else if (typeof(OrientationDownTop) == orientation.GetType())
             {
                 In = (xPos + maxDimension / 2 - linesAdjustment / correctionFactor, yPos + maxDimension / 2 + 5);
-                Out = (xPos + maxDimension / 2 - linesAdjustment / correctionFactor, yPos);
+                Out = (xPos + maxDimension / 2 - linesAdjustment / correctionFactor, yPos - maxDimension / 2);
 
-                BackArrowEntry = (xPos + maxDimension / 2 - linesAdjustment / correctionFactor, yPos - maxDimension / 2 - 20);
+                BackArrowLeft = (xPos - linesAdjustment / correctionFactor, yPos);
+                BackArrowRight = (xPos + maxDimension - linesAdjustment / correctionFactor, yPos);
             }
             else
             {
                 throw new FormatException("Orientation has not been writeen correctly");
             }
 
-            return new IOPoints(In, Out, BackArrowEntry);
+            return new IOPoints(In, Out, BackArrowLeft, BackArrowRight);
         }
     }
 }

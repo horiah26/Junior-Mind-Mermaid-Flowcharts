@@ -25,44 +25,49 @@ namespace Flowcharts
         {
             (double x, double y) In;
             (double x, double y) Out;
-            (double x, double y) BackArrowEntry;
+            (double x, double y) BackArrowLeft;
+            (double x, double y) BackArrowRight;
 
             double numberOfLines = lines.Length;
 
             if (typeof(OrientationLeftRight) == orientation.GetType())
             {
                 In = (xPos - numberOfLines * 10 - 3, yPos);
-                Out = (xPos + length / 2, yPos);
+                Out = (xPos + length + numberOfLines * 10, yPos);
 
-                BackArrowEntry = (xPos + length + numberOfLines * 10, yPos);
+                BackArrowLeft = (xPos + length / 2, yPos - height / 2);
+                BackArrowRight = (xPos + length / 2, yPos + height / 2);
             }
             else if (typeof(OrientationRightLeft) == orientation.GetType())
             {
                 In = (xPos + length + 5 + numberOfLines * 10, yPos);
-                Out = (xPos + length / 2, yPos);
+                Out = (xPos - numberOfLines * 10, yPos);
 
-                BackArrowEntry = (xPos - numberOfLines * 10 - 10, yPos);
+                BackArrowLeft = (xPos + length / 2, yPos - height / 2);
+                BackArrowRight = (xPos + length / 2, yPos + height / 2);
             }
             else if (typeof(OrientationTopDown) == orientation.GetType())
             {
                 In = (xPos + length / 2, yPos - height / 2 - 4);
                 Out = (xPos + length / 2, yPos + height / 2);
 
-                BackArrowEntry = (xPos + length / 2, yPos);
+                BackArrowLeft = (xPos - numberOfLines * 10, yPos);
+                BackArrowRight = (xPos + length + numberOfLines * 10, yPos);
             }
             else if (typeof(OrientationDownTop) == orientation.GetType())
             {
                 In = (xPos + length / 2, yPos + height / 2 + 4);
-                Out = (xPos + length / 2, yPos);
+                Out = (xPos + length / 2, yPos - height / 2);
 
-                BackArrowEntry = (xPos + length / 2, yPos - height / 2 - 20);
+                BackArrowLeft = (xPos - numberOfLines * 10, yPos);
+                BackArrowRight = (xPos + length + numberOfLines * 10, yPos);
             }
             else
             {
                 throw new FormatException("Orientation has not been writeen correctly");
             }
 
-            return new IOPoints(In, Out, BackArrowEntry);
+            return new IOPoints(In, Out, BackArrowLeft, BackArrowRight);
         }
     }
 }

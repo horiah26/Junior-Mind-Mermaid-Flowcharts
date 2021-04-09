@@ -6,7 +6,8 @@ namespace Flowcharts
     {
         (double x, double y) In;
         (double x, double y) Out;
-        (double x, double y) BackArrowEntry;
+        (double x, double y) BackArrowLeft;
+        (double x, double y) BackArrowRight;
 
         readonly IOrientation orientation;
         readonly double xPos;
@@ -28,37 +29,41 @@ namespace Flowcharts
             if (typeof(OrientationLeftRight) == orientation.GetType())
             {
                 In = (xPos - 24, yPos);
-                Out = (xPos + length / 2, yPos);
+                Out = (xPos + length + 20, yPos);
 
-                BackArrowEntry = (xPos + length + 24, yPos);
+                BackArrowLeft = (xPos + length / 2, yPos - height / 2);
+                BackArrowRight = (xPos + length / 2, yPos + height / 2);
             }
             else if (typeof(OrientationRightLeft) == orientation.GetType())
             {
                 In = (xPos + length + 24, yPos);
-                Out = (xPos + length / 2, yPos);
+                Out = (xPos - 20, yPos);
 
-                BackArrowEntry = (xPos - 38, yPos);
+                BackArrowLeft = (xPos + length / 2, yPos - height / 2);
+                BackArrowRight = (xPos + length / 2, yPos + height / 2);
             }
             else if (typeof(OrientationTopDown) == orientation.GetType())
             {
                 In = (xPos + length / 2, yPos - height / 2 - 4);
-                Out = (xPos + length / 2, yPos);
+                Out = (xPos + length / 2, yPos + height / 2);
 
-                BackArrowEntry = (xPos + length / 2, yPos + height / 2);
+                BackArrowLeft = (xPos - 20, yPos);
+                BackArrowRight = (xPos + length + 20, yPos);
             }
             else if (typeof(OrientationDownTop) == orientation.GetType())
             {
                 In = (xPos + length / 2, yPos + height / 2 + 4);
-                Out = (xPos + length / 2, yPos);
+                Out = (xPos + length / 2, yPos - height / 2);
 
-                BackArrowEntry = (xPos + length / 2, yPos - height / 2 - 20);
+                BackArrowLeft = (xPos - 20, yPos);
+                BackArrowRight = (xPos + length + 20, yPos);
             }
             else
             {
                 throw new FormatException("Orientation has not been writeen correctly");
             }
 
-            return new IOPoints(In, Out, BackArrowEntry);
+            return new IOPoints(In, Out, BackArrowLeft, BackArrowRight);
         }
     }
 }

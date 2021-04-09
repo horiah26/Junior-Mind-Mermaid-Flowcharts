@@ -6,7 +6,8 @@ namespace Flowcharts
     {
         (double x, double y) In;
         (double x, double y) Out;
-        (double x, double y) BackArrowEntry;
+        (double x, double y) BackArrowLeft;
+        (double x, double y) BackArrowRight;
 
         readonly IOrientation orientation;
         readonly double xPos;
@@ -26,37 +27,40 @@ namespace Flowcharts
             if (typeof(OrientationLeftRight) == orientation.GetType())
             {
                 In = (xPos - radius - 3, yPos);
-                Out = (xPos, yPos);
+                Out = (xPos + radius, yPos);
 
-                BackArrowEntry = (xPos + radius, yPos);
+                BackArrowLeft = (xPos, yPos - radius);
+                BackArrowRight = (xPos, yPos + radius);
             }
             else if (typeof(OrientationRightLeft) == orientation.GetType())
             {
                 In = (xPos + radius + 5, yPos);
-                Out = (xPos, yPos);
+                Out = (xPos - radius, yPos);
 
-                BackArrowEntry = (xPos - radius - 20, yPos);
+                BackArrowLeft = (xPos, yPos - radius);
+                BackArrowRight = (xPos, yPos + radius);
             }
             else if (typeof(OrientationTopDown) == orientation.GetType())
             {
                 In = (xPos, yPos - radius - 4);
-                Out = (xPos, yPos );
-
-                BackArrowEntry = (xPos, yPos + radius);
-            }
+                Out = (xPos, yPos + radius);
+                BackArrowLeft = (xPos - radius, yPos);
+                BackArrowRight = (xPos + radius, yPos);
+            }        
             else if (typeof(OrientationDownTop) == orientation.GetType())
             {
-                Out = (xPos, yPos);
+                Out = (xPos, yPos - radius);
                 In = (xPos, yPos + radius + 4);
 
-                BackArrowEntry = (xPos, yPos - radius - 20);
+                BackArrowLeft = (xPos - radius, yPos);
+                BackArrowRight = (xPos + radius, yPos);
             }
             else
             {
                 throw new FormatException("Orientation has not been writeen correctly");
             }
 
-            return new IOPoints(In, Out, BackArrowEntry);
+            return new IOPoints(In, Out, BackArrowLeft, BackArrowRight);
         }
     }
 }
