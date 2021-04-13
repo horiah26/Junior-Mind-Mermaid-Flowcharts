@@ -6,21 +6,21 @@ namespace Flowcharts
     public class Arrow : IArrow
     {
         public XmlWriter xmlWriter = Writer.XmlWriter;
-        public Element fromElement { get; set; }
-        public Element toElement { get; set; }
+        public Element FromElement { get; set; }
+        public Element ToElement { get; set; }
 
         public string text = null;
 
         public Arrow(Element fromElement, Element toElement, string text)
         {
-            this.fromElement = fromElement;
-            this.toElement = toElement;
+            this.FromElement = fromElement;
+            this.ToElement = toElement;
             this.text = text;
         }
 
         public virtual void Draw()
         {
-            ArrowOperations.DrawArrow(GetArrowEnds());
+            ArrowOperations.DrawArrow(GetArrowPoints());
         }
 
         public void Write()
@@ -32,14 +32,14 @@ namespace Flowcharts
             }
         }
 
-        public virtual string[] GetArrowEnds()
+        public virtual string[] GetArrowPoints()
         {
             string[] points = new string[4];
 
-            points[0] = fromElement.Out.x.ToString();
-            points[1] = fromElement.Out.y.ToString();
-            points[2] = toElement.In.x.ToString();
-            points[3] = toElement.In.y.ToString();
+            points[0] = FromElement.Out.x.ToString();
+            points[1] = FromElement.Out.y.ToString();
+            points[2] = ToElement.In.x.ToString();
+            points[3] = ToElement.In.y.ToString();
 
             return points;
         }
@@ -48,12 +48,12 @@ namespace Flowcharts
         {
             var lines = TextOperations.SplitText(text);
 
-            return ArrowOperations.GetArrowTextPosition(fromElement, toElement, lines);
+            return ArrowOperations.GetArrowTextPosition(FromElement, ToElement, lines);
         }
 
         public (Element fromElement, Element toElement) GetElementPair()
         {
-            return (fromElement, toElement);
+            return (FromElement, ToElement);
         }
     }
 }

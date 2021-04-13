@@ -27,11 +27,11 @@ namespace Flowcharts
                     {
                         if (element.Key == toElement.Key)
                         {
-                            arrow.fromElement = element;
+                            arrow.FromElement = element;
                         }
                         if (element.Key == fromElement.Key)
                         {
-                            arrow.toElement = element;
+                            arrow.ToElement = element;
                         }
                     }
                 }

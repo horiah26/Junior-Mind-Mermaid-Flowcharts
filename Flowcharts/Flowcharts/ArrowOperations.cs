@@ -26,5 +26,15 @@ namespace Flowcharts
         {
             return new ArrowTextPosition(fromElement, toElement, lines).GetCoordinates();
         }
+
+        public static string[] GetBackArrowPoints(Element fromElement, Element toElement)
+        {
+            return new BackArrowPoints(fromElement, toElement).GetPoints();
+        }
+
+        public static string[] GetSideArrowPoints(Element fromElement, Element toElement)
+        {
+            return new SideArrowPoints(fromElement, toElement).GetPoints();
+        }
     }
 }

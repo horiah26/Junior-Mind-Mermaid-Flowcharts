@@ -27,7 +27,6 @@ namespace Flowcharts
         {
             var lines = TextOperations.SplitText(text);
             WrittenText writtenText = new WrittenText(xPosition, yPosition, lines);
-            Console.WriteLine(writtenText);
             writtenText.Write();
         }
 

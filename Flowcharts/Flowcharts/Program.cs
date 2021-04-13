@@ -13,21 +13,21 @@
             string rhombus = "Rhombus";
             string stadium = "Stadium";
 
-            var flowchart = new Flowchart("LeftRight", fileName, path);
+            var flowchart = new Flowchart("DownTop", fileName, path);
 
-            flowchart.AddPair(("A1", "Ordering services", "Stadium"), ("A2", "Complete purchace requisition form (Use CCPR if payment is made by credit card)", rectangle), arrow);
-            flowchart.AddPair("A2", ("A3", "Approved ?", rectangle), arrow);
-            flowchart.AddPair("A3", ("A4", "Is service to be provided by an independednt contractor?", rectangle), arrow, "Yes");
-            flowchart.AddPair("A3", ("A5", "Modify terms and conditions to Comply with requirements", rectangle), arrow, "No");
-            flowchart.AddPair("A5", ("A2", "Complete purchace requisition form (Use CCPR if payment is made by credit card)", rectangle), backArrow);
-            flowchart.AddPair("A4", ("A6", "Are there an independent Contractor's Agreement and W-9 on file?", rectangle), arrow, "Yes");
-            flowchart.AddPair("A4", ("A7", "Obtain P.O. from Controller", rectangle), arrow, "No");
-            flowchart.AddPair("A6", ("A9", "No", rectangle), arrow);
-            flowchart.AddPair("A6", ("A10", "Yes", rectangle), arrow);
-            flowchart.AddPair("A7", ("A8", "Place Request for services with Vendor or contractor", "Circle"), arrow);
-            flowchart.AddPair("A9", ("A11", "Obtain independent contractor's agreement and W-9", rectangle), arrow);
-            flowchart.AddPair("A11", "A6", backArrow);
-            flowchart.AddPair("A10", "A7", backArrow);
+            //flowchart.AddPair(("A1", "Ordering services", "Stadium"), ("A2", "Complete purchace requisition form (Use CCPR if payment is made by credit card)", rectangle), arrow);
+            //flowchart.AddPair("A2", ("A3", "Approved ?", rectangle), arrow);
+            //flowchart.AddPair("A3", ("A4", "Is service to be provided by an independednt contractor?", rectangle), arrow, "Yes");
+            //flowchart.AddPair("A3", ("A5", "Modify terms and conditions to Comply with requirements", rectangle), arrow, "No");
+            //flowchart.AddPair("A5", ("A2", "Complete purchace requisition form (Use CCPR if payment is made by credit card)", rectangle), backArrow);
+            //flowchart.AddPair("A4", ("A6", "Are there an independent Contractor's Agreement and W-9 on file?", rectangle), arrow, "Yes");
+            //flowchart.AddPair("A4", ("A7", "Obtain P.O. from Controller", rectangle), arrow, "No");
+            //flowchart.AddPair("A6", ("A9", "No", rectangle), arrow);
+            //flowchart.AddPair("A6", ("A10", "Yes", rectangle), arrow);
+            //flowchart.AddPair("A7", ("A8", "Place Request for services with Vendor or contractor", "Circle"), arrow);
+            //flowchart.AddPair("A9", ("A11", "Obtain independent contractor's agreement and W-9", rectangle), arrow);
+            //flowchart.AddPair("A11", "A6", backArrow);
+            //flowchart.AddPair("A10", "A7", backArrow);
 
             //flowchart.AddPair(("Collect", "Collect late payments", "Stadium"), ("Send", "Send Collection Letter", rectangle), arrow);
             //flowchart.AddPair("Send", ("Rhombus1", "Payment received within one week?", rhombus), arrow);
@@ -71,12 +71,13 @@
             //flowchart.AddPair("Ring4", "Phone rings", backArrow, "No");
             //flowchart.AddPair("Voice", "End", arrow);
 
-            //flowchart.AddPair(("Start", "Receive order from customer", rectangle), ("Design?", "Is design required?", rhombus), arrow);
-            //flowchart.AddPair("Design?", ("Design", "Design to requirements", rectangle), arrow, "Yes");
-            //flowchart.AddPair("Design?", ("Buy materials", "Buy materials", rectangle), arrow, "No");
-            ////flowchart.AddPair("Design", "Buy materials", arrow);
-            //flowchart.AddPair("Buy materials", ("Receive parts", "Receive parts from customers", rectangle), arrow);
-            //flowchart.AddPair("Buy materials", ("Receive material", "Receive material", rectangle), arrow);
+            flowchart.AddPair(("Start", "Receive order from customer", rectangle), ("Design?", "Is design required?", rhombus), arrow);
+            flowchart.AddPair("Design?", ("Design", "Design to requirements", rectangle), arrow, "Yes");
+            flowchart.AddPair("Design?", ("Buy materials", "Buy materials", rectangle), arrow, "No");
+            flowchart.AddPair("Buy materials", ("Receive parts", "Receive parts from customers", rectangle), arrow);
+            flowchart.AddPair("Buy materials", ("Receive material", "Receive material", rectangle), arrow);
+            flowchart.AddPair("Receive parts", "Receive material", "SideArrow" ,"sfgasgwe wet ");
+            flowchart.AddPair("Buy materials", "Design", "SideArrow","taseras s ");
 
 
 

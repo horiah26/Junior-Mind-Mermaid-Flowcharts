@@ -8,7 +8,7 @@
 
         public override void Draw()
         {
-            var points = GetArrowEnds();
+            var points = GetArrowPoints();
             xmlWriter.WriteStartElement("defs");
             xmlWriter.WriteStartElement("marker");
 

@@ -9,7 +9,7 @@
 
         public override void Draw()
         {
-            var points = GetArrowEnds();
+            var points = GetArrowPoints();
 
             xmlWriter.WriteStartElement("line");
 

@@ -8,7 +8,7 @@ namespace Flowcharts
     {
         public Dictionary<string, Element> dictionary = new Dictionary<string, Element> { };
 
-        public ElementRegister() 
+        public ElementRegister()
         {
         }
 
@@ -41,7 +41,7 @@ namespace Flowcharts
                 dictionary.Add(element2.Key, element2);
             }
 
-            if(arrowName != "BackArrow")
+            if (arrowName != "BackArrow"  && arrowName != "SideArrow")
             {
                 dictionary[element1.Key].AddChild(dictionary[element2.Key]);
                 dictionary[element2.Key].AddParent(dictionary[element1.Key]);

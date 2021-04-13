@@ -4,24 +4,18 @@ using System.Text;
 
 namespace Flowcharts
 {
-    class SideArrow : IArrow
+    class SideArrow : Arrow
     {
-        public Element fromElement { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public Element toElement { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-
-        public void Draw()
+        public SideArrow(Element fromElement, Element toElement, string text) :base(fromElement, toElement, text)
         {
-            throw new NotImplementedException();
+            this.FromElement = fromElement;
+            this.text = text;
+            this.ToElement = toElement;
         }
 
-        public (Element fromElement, Element toElement) GetElementPair()
+        public override string[] GetArrowPoints()
         {
-            throw new NotImplementedException();
-        }
-
-        public void Write()
-        {
-            throw new NotImplementedException();
+            return ArrowOperations.GetSideArrowPoints(FromElement, ToElement);
         }
     }
 }
