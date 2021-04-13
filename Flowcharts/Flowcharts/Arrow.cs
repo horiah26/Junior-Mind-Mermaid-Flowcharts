@@ -10,12 +10,14 @@ namespace Flowcharts
         public Element ToElement { get; set; }
 
         public string text = null;
+        public bool PushChildrenForward { get; protected set; }
 
         public Arrow(Element fromElement, Element toElement, string text)
         {
-            this.FromElement = fromElement;
-            this.ToElement = toElement;
+            FromElement = fromElement;
+            ToElement = toElement;
             this.text = text;
+            PushChildrenForward = true;
         }
 
         public virtual void Draw()

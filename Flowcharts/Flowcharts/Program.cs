@@ -79,8 +79,6 @@
             flowchart.AddPair("Receive parts", "Receive material", "SideArrow" ,"sfgasgwe wet ");
             flowchart.AddPair("Buy materials", "Design", "SideArrow","taseras s ");
 
-
-
             flowchart.DrawFlowchart();
         }
     }

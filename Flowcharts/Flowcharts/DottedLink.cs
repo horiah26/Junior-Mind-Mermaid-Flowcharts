@@ -4,7 +4,6 @@
     {
         public DottedLink(Element fromElement, Element toElement, string text) : base(fromElement, toElement, text)
         {
-
         }
 
         public override void Draw()

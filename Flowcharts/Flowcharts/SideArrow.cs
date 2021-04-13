@@ -8,9 +8,10 @@ namespace Flowcharts
     {
         public SideArrow(Element fromElement, Element toElement, string text) :base(fromElement, toElement, text)
         {
-            this.FromElement = fromElement;
+            FromElement = fromElement;
+            ToElement = toElement;
             this.text = text;
-            this.ToElement = toElement;
+            PushChildrenForward = false;
         }
 
         public override string[] GetArrowPoints()

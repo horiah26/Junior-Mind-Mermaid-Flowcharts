@@ -41,7 +41,9 @@ namespace Flowcharts
                 dictionary.Add(element2.Key, element2);
             }
 
-            if (arrowName != "BackArrow"  && arrowName != "SideArrow")
+            var arrow = Factory.IArrow(arrowName, element1, element2, "");
+
+            if (arrow.PushChildrenForward)
             {
                 dictionary[element1.Key].AddChild(dictionary[element2.Key]);
                 dictionary[element2.Key].AddParent(dictionary[element1.Key]);

@@ -6,8 +6,9 @@ namespace Flowcharts
     {
         public BackArrow(Element fromElement, Element toElement, string text) : base(fromElement, toElement, text)
         {
-            this.FromElement = fromElement;
-            this.ToElement = toElement;
+            FromElement = fromElement;
+            ToElement = toElement;
+            PushChildrenForward = false;
         }
 
         override public void Draw()
