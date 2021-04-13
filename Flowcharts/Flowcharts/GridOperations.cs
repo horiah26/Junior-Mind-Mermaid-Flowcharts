@@ -49,7 +49,8 @@
 
         public static IGrid DistanceTwins(IGrid grid)
         {
-            return new GridWithEquallyDistanceTwins(grid);
+            var linearizedGrid = GridOperations.Linearize(grid);
+            return new GridWithEquallyDistanceTwins(linearizedGrid);
         }
 
         public static IGrid ArrangeLastColumn(IGrid grid)

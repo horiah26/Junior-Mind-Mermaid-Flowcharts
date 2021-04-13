@@ -18,8 +18,9 @@
             var trimmedGrid = GridOperations.TrimEnds(linearizedGrid);
             var filledGrid2 = GridOperations.FillSpots(trimmedGrid);
             var distancedGrid = GridOperations.DistanceTwins(filledGrid2);
-            var linearizedGrid2 = GridOperations.Linearize(distancedGrid);
-            var last = GridOperations.ArrangeLastColumn(linearizedGrid2);
+            var distancedGrid2 = GridOperations.DistanceTwins(distancedGrid);
+            var trimmedGrid2 = GridOperations.TrimEnds(distancedGrid2);
+            var last = GridOperations.ArrangeLastColumn(trimmedGrid2);
 
             return last;
         }

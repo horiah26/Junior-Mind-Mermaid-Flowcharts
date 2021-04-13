@@ -4,13 +4,13 @@ namespace Flowcharts
 {
     class ShapeRhombus : ShapePolygon
     {
-        public ShapeRhombus(XmlWriter xmlWriter, IOrientation orientation, string text) : base(xmlWriter, orientation, text)
+        public ShapeRhombus(string text) : base(text)
         {
         }
 
         public override (IOPoints, double textAlignment) Draw()
         {
-            lines = new SplitText(text).GetLines();
+            lines = TextOperations.SplitText(text);
 
             (height, length) = GetSize();
 

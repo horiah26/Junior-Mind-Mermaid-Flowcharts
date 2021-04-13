@@ -141,7 +141,7 @@
 
         override public void Draw()
         {
-            new DrawnBackArrow(xmlWriter, fromElement, toElement, GetArrowEnds()).Draw();
+            ArrowOperations.DrawBackArrow(fromElement, toElement, GetArrowEnds());
         }
     }
 }

@@ -4,7 +4,7 @@ namespace Flowcharts
 {
     class ShapeRoundedRectangle : ShapePolygon
     {
-        public ShapeRoundedRectangle(XmlWriter xmlWriter, IOrientation orientation, string text) : base(xmlWriter, orientation, text)
+        public ShapeRoundedRectangle(string text) : base(text)
         {
         }
 

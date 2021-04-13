@@ -27,7 +27,7 @@ namespace Flowcharts
                 for (int i = columns - 1; i >= 0; i--)
                 {
                     int rows = ElementArray.GetLength(0);
-                    for (int j = 0; j < rows; j++)
+                    for (int j = 0; j < rows - 1; j++)
                     {
                         if (ElementArray[j, i] != null
                             && ElementArray[j, i].childElements.Count == 2

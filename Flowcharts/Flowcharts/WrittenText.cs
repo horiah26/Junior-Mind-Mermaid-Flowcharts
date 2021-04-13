@@ -5,14 +5,13 @@ namespace Flowcharts
 {
     public class WrittenText
     {
-        readonly XmlWriter xmlWriter;
+        readonly XmlWriter xmlWriter = Writer.XmlWriter;
         readonly double xPosition;
         readonly double yPosition;
         readonly string[] lines;
 
-        public WrittenText(XmlWriter xmlWriter, double xPosition, double yPosition, string[] lines) 
+        public WrittenText(double xPosition, double yPosition, string[] lines) 
         {
-            this.xmlWriter = xmlWriter;
             this.xPosition = xPosition;
             this.yPosition = yPosition;
             this.lines = lines;

@@ -12,7 +12,7 @@ namespace Flowcharts
 
         public Flowchart(string orientationName, string FileName = null, string path = null)
         {
-            Orientation.SetOrientation(orientationName);
+            StaticOrientation.SetOrientation(orientationName);
 
             Writer.CreateWriter(FileName, path);
 
@@ -21,7 +21,7 @@ namespace Flowcharts
 
         public Flowchart(string orientationName, MemoryStream memoryStream)
         {
-            Orientation.SetOrientation(orientationName);
+            StaticOrientation.SetOrientation(orientationName);
 
             Memory.SetMemoryStream(memoryStream);
             Writer.CreateWriter(memoryStream);

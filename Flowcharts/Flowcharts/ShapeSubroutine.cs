@@ -4,7 +4,7 @@ namespace Flowcharts
 {
     class ShapeSubroutine : ShapePolygon
     {
-        public ShapeSubroutine(XmlWriter xmlWriter, IOrientation orientation, string text) : base(xmlWriter, orientation, text)
+        public ShapeSubroutine(string text) : base( text)
         {
         }
 

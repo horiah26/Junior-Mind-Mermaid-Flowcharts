@@ -4,16 +4,12 @@ namespace Flowcharts
 {
     class DrawnArrow
     {
-        public XmlWriter xmlWriter;
-        public Element fromElement;
-        public Element toElement;
+        public XmlWriter xmlWriter = Writer.XmlWriter;
+
         readonly string[] points;
 
-        public DrawnArrow(XmlWriter xmlWriter, Element fromElement, Element toElement, string[] points)
+        public DrawnArrow(string[] points)
         {
-            this.xmlWriter = xmlWriter;
-            this.fromElement = fromElement;
-            this.toElement = toElement;
             this.points = points;
         }
 

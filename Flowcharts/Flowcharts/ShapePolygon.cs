@@ -2,10 +2,10 @@
 
 namespace Flowcharts
 {
-    abstract class ShapePolygon : IShape
+    abstract public class ShapePolygon : IShape
     {
         public IOrientation orientation;
-        public XmlWriter xmlWriter;
+        public XmlWriter xmlWriter = Writer.XmlWriter;
 
         public double xPos;
         public double yPos;
@@ -14,20 +14,19 @@ namespace Flowcharts
         public double length;
 
         public string[] lines;
-        readonly public string text;
+        public string text;
 
         protected string coordinates;
 
-        public ShapePolygon(XmlWriter xmlWriter, IOrientation orientation, string text)
+        public ShapePolygon(string text)
         {
-            this.orientation = orientation;
-            this.xmlWriter = xmlWriter;
+            orientation = StaticOrientation.Orientation;
             this.text = text;
         }
 
         public virtual (IOPoints, double textAlignment) Draw()
         {
-            lines = new SplitText(text).GetLines();
+            lines = TextOperations.SplitText(text);
 
             (height, length) = GetSize();
 
@@ -44,11 +43,16 @@ namespace Flowcharts
         {
             xmlWriter.WriteStartElement("polygon");
             xmlWriter.WriteAttributeString("points", coordinates);
-            xmlWriter.WriteAttributeString("style", "fill:white;stroke:black;stroke-width:3");
+            Color();
             xmlWriter.WriteEndElement();
         }
 
-        public (double xPos, double yPos) CalculatePosition()
+        public virtual void Color()
+        {
+            xmlWriter.WriteAttributeString("style", "fill:white;stroke:black;stroke-width:3");
+        }
+
+        public virtual (double xPos, double yPos) CalculatePosition()
         {
             var position = orientation.GetColumnRow();
             return new ShapePolygonPosition(orientation, position, lines).GetPosition();

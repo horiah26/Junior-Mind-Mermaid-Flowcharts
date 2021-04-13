@@ -4,13 +4,13 @@ namespace Flowcharts
 {
     class ShapeBanner : ShapePolygon
     {
-        public ShapeBanner(XmlWriter xmlWriter, IOrientation orientation, string text): base(xmlWriter, orientation, text)
+        public ShapeBanner(string text) : base(text)
         {
         }
 
         public override (IOPoints, double textAlignment) Draw()
         {
-            lines = new SplitText(text).GetLines();
+            lines = TextOperations.SplitText(text);
 
             (height, length) = GetSize();
 

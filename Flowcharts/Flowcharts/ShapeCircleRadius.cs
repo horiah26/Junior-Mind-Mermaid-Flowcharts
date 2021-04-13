@@ -13,7 +13,7 @@ namespace Flowcharts
 
         public double GetRadius()
         {
-            var lines = new SplitText(text).GetLines();
+            var lines = TextOperations.SplitText(text);
             var numberOfLines = lines.Length;
 
             var sizeOfText = new TextSizeCalculator(lines).Calculate();

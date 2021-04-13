@@ -1,44 +1,41 @@
-﻿using System.Xml;
-using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
 
 namespace Flowcharts
 {
-    class TextOnArrow
+    public class TextOnArrow
     {
-        readonly XmlWriter xmlWriter;
-        readonly Element fromElement;
-        readonly Element toElement;
+        readonly double xPosition;
+        readonly double yPosition;
         readonly string text;
 
-        public TextOnArrow(XmlWriter xmlWriter, Element fromElement, Element toElement, string text)
+        public TextOnArrow(double xPosition, double yPosition, string text)
         {
-            this.xmlWriter = xmlWriter;
-            this.fromElement = fromElement;
-            this.toElement = toElement;
+            this.xPosition = xPosition;
+            this.yPosition = yPosition;
             this.text = text;
         }
 
         public void DrawAndWrite()
         {
-            var lines = new SplitText(text).GetLines();
-
             Draw();
-            WriteText(lines);
+            WriteText();
         }
 
-        public void WriteText(string[] lines)
+        public void WriteText()
         {
-            int maxLineLength = lines.Max(x => x.Length);
-            double xPosition = (fromElement.Out.x + toElement.In.x - maxLineLength * 7) / 2;
-            double yPosition = (fromElement.Out.y + toElement.In.y + 15 - lines.Length * 12) / 2;
-
             WrittenText textWriter = new WrittenText(xmlWriter, xPosition, yPosition, lines);
             textWriter.Write();
+            var lines = TextOperations.SplitText(text);
+            WrittenText writtenText = new WrittenText(xPosition, yPosition, lines);
+            Console.WriteLine(writtenText);
+            writtenText.Write();
         }
 
         public void Draw()
         {
-            new ShapeArrowRectangle(fromElement.orientation, xmlWriter, fromElement, toElement, text).Draw();
+            new ShapeArrowRectangle(text, xPosition, yPosition).Draw();
         }
     }
 }

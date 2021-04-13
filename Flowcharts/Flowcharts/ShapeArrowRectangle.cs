@@ -1,63 +1,24 @@
-﻿using System.Xml;
-
+﻿
 namespace Flowcharts
 {
-    class ShapeArrowRectangle : IShape
+    public class ShapeArrowRectangle : ShapePolygon
     {
-        readonly IOrientation orientation;
-        readonly XmlWriter xmlWriter;
 
-        double xPos;
-        double yPos;
-        double height;
-        double length;
-        readonly string text;
-        string[] lines;
-        int numberOfLines;
-        readonly Element fromElement;
-        readonly Element toElement;
-
-
-        public ShapeArrowRectangle(IOrientation orientation, XmlWriter xmlWriter, Element fromElement, Element toElement, string text)
+        public ShapeArrowRectangle(string text, double xPos, double yPos) : base(text)
         {
-            this.orientation = orientation;
-            this.xmlWriter = xmlWriter;
-            this.fromElement = fromElement;
-            this.toElement = toElement;
             this.text = text;
+            this.xPos = xPos;
+            this.yPos = yPos;
         }
 
-        public (IOPoints, double textAlignment) Draw()
+        public override (double xPos, double yPos) CalculatePosition()
         {
-            lines = new SplitText(text).GetLines();
-            numberOfLines = lines.Length;
-
-            (height, length) = GetSize();
-
-            (xPos, yPos) = GetPosition();
-
-            IOPoints InOut = DrawRectangle();
-            return (InOut, length);
+            return (xPos - 10, yPos + lines.Length * 7 - 12);
         }
 
-        public (double xPos, double yPos) GetPosition()
+        public override void Color()
         {
-            var maxLengthOfLine = new TextSizeCalculator(lines).Calculate();
-
-            double xPosition = (fromElement.Out.x + toElement.In.x - (maxLengthOfLine) * 7) / 2;
-            double yPosition = (fromElement.Out.y + toElement.In.y - 35 - numberOfLines * 12) / 2;
-
-            return (xPosition, yPosition);
+            xmlWriter.WriteAttributeString("style", "fill: rgb(220, 220, 220); stroke-width: 4; stroke: rgb(255, 255, 255)");
         }
-
-        public (double height, double length) GetSize()
-        {
-            return new ShapeRectangleSize(text).GetSize();
-        }
-
-        public virtual IOPoints DrawRectangle()
-        {
-            return new ShapeRectangleDrawn(xmlWriter, orientation, xPos, yPos, height, length, "fill:rgb(220,220,220);stroke-width:4;stroke:rgb(255,255,255)").Draw();
-        }
-    }
+    }    
 }

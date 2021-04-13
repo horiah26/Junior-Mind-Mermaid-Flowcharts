@@ -33,7 +33,7 @@ namespace Flowcharts
         {
             (distanceFromEdge, unitLength, unitHeight) = new GridSpacing(orientation).GetSpacing();
 
-            lines = new SplitText(text).GetLines();
+            lines = TextOperations.SplitText(text);
             var numberOfLines = lines.Length;
 
             (height, length) = GetSize();

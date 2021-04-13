@@ -1,4 +1,5 @@
-﻿using System.Xml;
+﻿using System.Linq;
+using System.Xml;
 
 namespace Flowcharts
 {
@@ -19,14 +20,15 @@ namespace Flowcharts
 
         public virtual void Draw()
         {
-            new DrawnArrow(xmlWriter, fromElement, toElement, GetArrowEnds()).Draw();
+            ArrowOperations.DrawArrow(GetArrowEnds());
         }
 
         public void Write()
         {
             if (text != null)
             {
-                new TextOnArrow(xmlWriter, fromElement, toElement, text).DrawAndWrite();
+                (double xPosition, double yPosition) = CalculatePosition();
+                ArrowOperations.WriteTextArrow(xPosition, yPosition, text);
             }
         }
 
@@ -40,6 +42,13 @@ namespace Flowcharts
             points[3] = toElement.In.y.ToString();
 
             return points;
+        }
+
+        public virtual (double xPosition, double yPosition) CalculatePosition()
+        {
+            var lines = TextOperations.SplitText(text);
+
+            return ArrowOperations.GetArrowTextPosition(fromElement, fromElement, lines);
         }
 
         public (Element fromElement, Element toElement) GetElementPair()

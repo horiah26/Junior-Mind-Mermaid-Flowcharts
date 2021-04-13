@@ -14,7 +14,7 @@
 
         public (double height, double length) GetSize()
         {
-            var lines = new SplitText(text).GetLines();
+            var lines = TextOperations.SplitText(text);
             var numberOfLines = lines.Length;
 
             height = 40 + (numberOfLines - 1) * 17;

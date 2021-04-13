@@ -26,22 +26,17 @@ namespace Flowcharts
             xmlWriter.WriteStartElement("rect");
 
             xmlWriter.WriteAttributeString("x", xPos.ToString());
-            xmlWriter.WriteAttributeString("y", yPos.ToString());
+            xmlWriter.WriteAttributeString("y", (yPos - height / 2).ToString());
 
-            xmlWriter.WriteAttributeString("rx", 10.ToString());
-            xmlWriter.WriteAttributeString("ry", 10.ToString());
+            xmlWriter.WriteAttributeString("rx", 7.ToString());
+            xmlWriter.WriteAttributeString("ry", 7.ToString());
 
             xmlWriter.WriteAttributeString("width", length.ToString());
             xmlWriter.WriteAttributeString("height", height.ToString());
 
-            Color();
+            xmlWriter.WriteAttributeString("style", "fill:rgb(255,255,255);stroke-width:2;stroke:rgb(0,0,0)");
 
             xmlWriter.WriteEndElement();
-        }
-
-        virtual public void Color()
-        {
-            xmlWriter.WriteAttributeString("style", "fill:rgb(255,255,255);stroke-width:2;stroke:rgb(0,0,0)");
         }
     }
 }

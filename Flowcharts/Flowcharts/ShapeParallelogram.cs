@@ -7,9 +7,9 @@ namespace Flowcharts
     {
         private readonly double inclination;
 
-        public ShapeParallelogram(XmlWriter xmlWriter, IOrientation orientation, string text) : base(xmlWriter, orientation, text)
+        public ShapeParallelogram(string text) : base(text)
         {
-            var lines = new SplitText(text).GetLines();
+            var lines = TextOperations.SplitText(text);
             inclination = Math.Sqrt(lines.Length) * 15;
         }
 

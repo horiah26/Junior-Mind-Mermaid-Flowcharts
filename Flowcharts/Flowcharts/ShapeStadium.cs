@@ -4,7 +4,7 @@ namespace Flowcharts
 {
     class ShapeStadium : ShapeParallelogram
     {
-        public ShapeStadium(XmlWriter xmlWriter, IOrientation orientation, string text) : base(xmlWriter, orientation, text)
+        public ShapeStadium(string text) : base( text)
         {
 
         }

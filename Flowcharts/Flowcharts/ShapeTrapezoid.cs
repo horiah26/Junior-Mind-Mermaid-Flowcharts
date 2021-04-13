@@ -7,9 +7,9 @@ namespace Flowcharts
     {    
         private readonly double inclination;
 
-        public ShapeTrapezoid(XmlWriter xmlWriter, IOrientation orientation, string text) : base(xmlWriter, orientation, text)
+        public ShapeTrapezoid(string text) : base(text)
         {
-            lines = new SplitText(text).GetLines();
+            lines = TextOperations.SplitText(text);
             inclination = Math.Sqrt(lines.Length) * 20;
         }
 

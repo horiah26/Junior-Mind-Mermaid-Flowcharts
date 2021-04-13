@@ -2,7 +2,7 @@
 {
     class UpdatedArray
     {
-        Element[,] elementArray;
+        readonly Element[,] elementArray;
 
         public UpdatedArray(Element[,] elementArray)
         {

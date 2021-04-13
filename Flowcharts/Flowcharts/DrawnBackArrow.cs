@@ -4,14 +4,13 @@ namespace Flowcharts
 {
     class DrawnBackArrow
     {
-        public XmlWriter xmlWriter;
+        public XmlWriter xmlWriter = Writer.XmlWriter;
         public Element fromElement;
         public Element toElement;
         readonly string[] points;
 
-        public DrawnBackArrow(XmlWriter xmlWriter, Element fromElement, Element toElement, string[] points)
+        public DrawnBackArrow(Element fromElement, Element toElement, string[] points)
         {
-            this.xmlWriter = xmlWriter;
             this.fromElement = fromElement;
             this.toElement = toElement;
             this.points = points;

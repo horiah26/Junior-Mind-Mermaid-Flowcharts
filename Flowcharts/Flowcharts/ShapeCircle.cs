@@ -14,10 +14,10 @@ namespace Flowcharts
         double radius;
         readonly string text;
 
-        public ShapeCircle(XmlWriter xmlWriter, IOrientation orientation, string text)
+        public ShapeCircle(string text)
         {
-            this.orientation = orientation;
-            this.xmlWriter = xmlWriter;
+            orientation = StaticOrientation.Orientation;
+            xmlWriter = Writer.XmlWriter;
             this.text = text;
         }
 
