@@ -25,8 +25,6 @@ namespace Flowcharts
 
         public void WriteText()
         {
-            WrittenText textWriter = new WrittenText(xmlWriter, xPosition, yPosition, lines);
-            textWriter.Write();
             var lines = TextOperations.SplitText(text);
             WrittenText writtenText = new WrittenText(xPosition, yPosition, lines);
             Console.WriteLine(writtenText);

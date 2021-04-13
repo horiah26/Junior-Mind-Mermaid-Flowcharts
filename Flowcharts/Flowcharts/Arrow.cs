@@ -48,7 +48,7 @@ namespace Flowcharts
         {
             var lines = TextOperations.SplitText(text);
 
-            return ArrowOperations.GetArrowTextPosition(fromElement, fromElement, lines);
+            return ArrowOperations.GetArrowTextPosition(fromElement, toElement, lines);
         }
 
         public (Element fromElement, Element toElement) GetElementPair()
