@@ -25,7 +25,7 @@ namespace Flowcharts
             {
                 moved = false;
                 int columns = ElementArray.GetLength(1);
-                for (int i = columns - 1; i >= 0; i--)
+                for (int i = 0; i < columns - 1; i++)
                 {
                     int rows = ElementArray.GetLength(0);
 

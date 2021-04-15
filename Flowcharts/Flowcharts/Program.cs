@@ -16,7 +16,7 @@
             string yes = "Yes";
             string no = "No";
 
-            for(int i = 1; i < 8; i++)
+            for(int i = 9; i < 10; i++)
             {
                 var flowchart = new Flowchart("LeftRight", fileName + i, path);
                 GetCase(i, flowchart);
@@ -152,6 +152,53 @@
                     flowchart.AddPair("SMB2", ("Spreadsheets", "Sales Ops sends spreadsheets", rounded), arrow);
                     flowchart.AddPair("AM2", ("Spreadsheets", "Sales Ops sends spreadsheets", rounded), arrow);
                     flowchart.AddPair("Spreadsheets", ("Uploads", "Sales Ops uploads account changes to Salesforce", rounded), arrow);
+                }
+                else if (i == 8)
+                {
+                    flowchart.AddPair(("Start", "Customer Payment Processing", stadium), ("Receive Payment", "Receive Payment in Mail", rectangle), arrow);
+                    flowchart.AddPair("Receive Payment", ("Invoice?", "Does Payment Correspond To Outsanding Invoice?", rhombus), arrow);
+                    flowchart.AddPair("Invoice?", ("Forward copy", "Forward Copy of Check to Sales Department to Write Order?", rectangle), arrow, no);
+                    flowchart.AddPair("Forward copy", ("Create Invoice", "Create Invoice For Order", rectangle), arrow);
+                    flowchart.AddPair("Invoice?", ("Match Payment", "Match Payment to Invoice", rectangle), arrow, yes);
+                    flowchart.AddPair("Create Invoice", "Match Payment", "SideArrow");
+                    flowchart.AddPair("Match Payment", ("Accounts Match?", "Accounts Match?", rectangle), arrow);
+                    flowchart.AddPair("Accounts Match?", ("Record Receipt", "Record Receipt in Accounting System and Deposit Check", stadium), arrow, yes);
+                    flowchart.AddPair("Accounts Match?", ("Discrepancy?", "Is Discrepancy Over $500?", rectangle), arrow, no);
+                    flowchart.AddPair("Discrepancy?", ("Write off", "Write off Discrepancy", rectangle), arrow, no);
+                    flowchart.AddPair("Discrepancy?", ("Overpayment?", "Is Discrepancy an Overpayment?", rectangle), arrow, yes);
+                    flowchart.AddPair("Write off", "Record Receipt", "BackArrow");
+
+                    flowchart.AddPair("Overpayment?", ("Issue Refund", "Issue Refund for Amount of Overpayment", rectangle), arrow, yes);
+                    flowchart.AddPair("Overpayment?", ("Contact Costumer", "Contact Customer to Request Balance of Payment", rectangle), arrow, no);
+
+                    flowchart.AddPair("Issue Refund", "Record Receipt", "BackArrow");
+                    flowchart.AddPair("Contact Costumer", "Receive Payment", "BackArrow");
+                }
+                else if (i == 9)
+                {
+                    flowchart.AddPair(("Start", "Start", stadium), ("Emergency?", "Is it an Emergency?", rhombus), arrow);
+                    flowchart.AddPair("Emergency?", ("War?", "Did the US declare War?", rhombus), arrow, yes);
+                    flowchart.AddPair("War?", ("Zombie?", "Is it a Zombie Attack?", rhombus), arrow, no);
+                    flowchart.AddPair("Zombie?", ("Fire?", "Is there a Fire?", rhombus), arrow, no);
+                    flowchart.AddPair("Fire?", ("Dead?", "Is Someone Dead?", rhombus), arrow, no);
+                    flowchart.AddPair("Dead?", ("Sad later", "I'll be sad later. Let me be happy now", rectangle), arrow, yes);
+                    flowchart.AddPair("Sad later", ("End", "End", stadium), arrow);
+
+                    flowchart.AddPair("War?", ("Evacuating?", "Are we evacuating?", rhombus), arrow, yes);
+                    flowchart.AddPair("Zombie?", "Evacuating?", "SideArrow", yes);
+                    flowchart.AddPair("Fire?", "Evacuating?", "SideArrow", yes);
+                    flowchart.AddPair("Evacuating?", ("Knock", "KNOCK!", rectangle), arrow, yes);
+
+
+                    flowchart.AddPair("Emergency?", ("Visiting?", "Is someone visiting?", rhombus), arrow, no);
+
+                    flowchart.AddPair("Visiting?", ("They can wait", "They can wait", rectangle), arrow, yes);
+                    flowchart.AddPair("Visiting?", ("Going somewhere?", "Are you going somewhere?", rhombus), arrow, no);
+                    flowchart.AddPair("Going somewhere?", ("Tell me later", "Tell me later", rectangle), arrow, no);
+                    flowchart.AddPair("Going somewhere?", ("Leave a note", "Leave a note", rectangle), arrow, yes);
+
+                    flowchart.AddPair("Evacuating?", "Tell me later", arrow, yes);
+                    flowchart.AddPair("Dead?", "Tell me later", "SideArrow", yes);
                 }
             }
         }

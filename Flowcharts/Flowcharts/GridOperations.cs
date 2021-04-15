@@ -49,17 +49,15 @@
 
         public static IGrid DistanceTwinsAndLinearize(IGrid grid)
         {
-            //int columns = grid.ElementArray.GetLength(1);
+            var linearizedGrid = Linearize(grid);
+            var distancedGrid = new GridWithEquallyDistanceTwins(linearizedGrid);
 
-            //var linearizedGrid = Linearize(grid);
-            //var distancedGrid = new GridWithEquallyDistanceTwins(linearizedGrid);
+            for (int i = 0; i < 2; i++)
+            {
+                linearizedGrid = Linearize(distancedGrid);
+                distancedGrid = new GridWithEquallyDistanceTwins(linearizedGrid);
+            }
 
-            //for (int i = 0; i < columns; i++)
-            //{
-            //    linearizedGrid = Linearize(distancedGrid);
-            //    distancedGrid = new GridWithEquallyDistanceTwins(linearizedGrid);
-            //}
-            var distancedGrid = new GridWithEquallyDistanceTwins(grid);
             return distancedGrid;
         }
   

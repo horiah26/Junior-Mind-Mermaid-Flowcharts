@@ -14,13 +14,14 @@ namespace Flowcharts
             LevelColumns();
             LinearizeIndividualElements();
             LinearizeInLoweredTwinSituation();
+            LinearizeInTwinsSituationForward();
         }
 
         private void LevelColumns()
         {
             int columns = ElementArray.GetLength(1);
 
-            for (int i = 1; i < columns; i++)
+            for (int i = 0; i < columns; i++)
             {
                 Level(i);
             }
@@ -44,6 +45,11 @@ namespace Flowcharts
             if (difference > 0)
             {
                 ElementArray = ArrayOperations.LowerColumns(ElementArray, 0, columnIndex, difference);
+            }
+
+            if (difference < 0)
+            {
+                ElementArray = ArrayOperations.LowerColumns(ElementArray, 0, columnIndex + 1, -difference);
             }
 
             ArrayOperations.Update(ElementArray);
@@ -171,6 +177,44 @@ namespace Flowcharts
                     }
                 }
             }
+        }
+
+        private void LinearizeInTwinsSituationForward()
+        {
+            var rows = ElementArray.GetLength(0);
+            var columns = ElementArray.GetLength(1);
+
+            ElementArray = new ResizedElementArray(ElementArray, rows + 1, columns).GetArray();
+
+            for (int i = 1; i < rows - 1; i++)
+            {
+                for (int j = 0; j < columns - 1; j++)
+                {
+                    if (ElementArray[i, j] != null
+                        && ElementArray[i, j].childElements.Count() == 2
+                        && ElementArray[i, j].parentElements.Count() == 1
+                        && ElementArray[i, j].parentElements.First().childElements.Count() == 1
+                        && ElementArray[i - 1, j + 1] == ElementArray[i, j].childElements[0]
+                        && ElementArray[i + 1, j + 1] == ElementArray[i, j].childElements[1]
+                        && ElementArray[i, j].parentElements.First().Row > i
+                        )
+                    {                     
+                        if(ElementArray[i + 1, j] == null
+                            && ElementArray[i, j + 1] == null
+                            && ElementArray[i + 2, j + 1] == null)
+                        {
+                            ElementArray[i + 1, j] = ElementArray[i, j];
+                            ElementArray[i, j] = null;
+
+                            ElementArray[i, j + 1] = ElementArray[i - 1, j + 1];
+                            ElementArray[i - 1, j + 1] = null;
+
+                            ElementArray[i + 2, j + 1] = ElementArray[i + 1, j + 1];
+                            ElementArray[i + 1, j + 1] = null;
+                        }
+                    }
+                }
+            }            
         }
     }
 }

@@ -24,8 +24,6 @@ namespace Flowcharts
                 int max = lastColumn.First().parentElements.Max(x => x.Row);
 
                 lastColumn.First().Row = (min + max) / 2;
-
-                return;
             }
         }
     }
