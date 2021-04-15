@@ -39,8 +39,8 @@ namespace Flowcharts
             xmlWriter.WriteStartDocument();
             xmlWriter.WriteStartElement("svg", svgNs);
 
-            xmlWriter.WriteAttributeString("width", "3000");
-            xmlWriter.WriteAttributeString("height", "3000");
+            xmlWriter.WriteAttributeString("width", "5000");
+            xmlWriter.WriteAttributeString("height", "5000");
         }
 
         public void DrawEnd()

@@ -48,7 +48,7 @@ namespace Flowcharts
                 ElementArray = ArrayOperations.LowerColumns(ElementArray, 0, columnIndex, difference);
             }
 
-            if (difference < 0)
+            if (difference < 0 && columnIndex < ElementArray.GetLength(1) - 1)
             {
                 ElementArray = ArrayOperations.LowerColumns(ElementArray, 0, columnIndex + 1, -difference);
             }

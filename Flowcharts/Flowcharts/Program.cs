@@ -9,6 +9,7 @@
 
             string arrow = "Arrow";
             string backArrow = "BackArrow";
+            string sideArrow = "SideArrow";
             string rectangle = "Rectangle";
             string rhombus = "Rhombus";
             string stadium = "Stadium";
@@ -16,7 +17,7 @@
             string yes = "Yes";
             string no = "No";
 
-            for(int i = 1; i < 11; i++)
+            for(int i = 1; i < 13; i++)
             {
                 var flowchart = new Flowchart("LeftRight", fileName + i, path);
                 GetCase(i, flowchart);
@@ -98,7 +99,7 @@
                     flowchart.AddPair("Design?", ("Buy materials", "Buy materials", rectangle), arrow, no);
                     flowchart.AddPair("Buy materials", ("Receive parts", "Receive parts from customers", rectangle), arrow);
                     flowchart.AddPair("Buy materials", ("Receive material", "Receive material", rectangle), arrow);
-                    flowchart.AddPair("Design", "Buy materials", "SideArrow");
+                    flowchart.AddPair("Design", "Buy materials", sideArrow);
                     flowchart.AddPair("Receive parts", ("Acceptable?", "Is material acceptable?", rhombus), arrow);
                     flowchart.AddPair("Receive material", "Acceptable?", arrow);
                     flowchart.AddPair("Acceptable?", ("Inspection results", "Inspection results", "Parallelogram"), arrow);
@@ -160,7 +161,7 @@
                     flowchart.AddPair("Invoice?", ("Forward copy", "Forward Copy of Check to Sales Department to Write Order?", rectangle), arrow, no);
                     flowchart.AddPair("Forward copy", ("Create Invoice", "Create Invoice For Order", rectangle), arrow);
                     flowchart.AddPair("Invoice?", ("Match Payment", "Match Payment to Invoice", rectangle), arrow, yes);
-                    flowchart.AddPair("Create Invoice", "Match Payment", "SideArrow");
+                    flowchart.AddPair("Create Invoice", "Match Payment", sideArrow);
                     flowchart.AddPair("Match Payment", ("Accounts Match?", "Accounts Match?", rectangle), arrow);
                     flowchart.AddPair("Accounts Match?", ("Record Receipt", "Record Receipt in Accounting System and Deposit Check", stadium), arrow, yes);
                     flowchart.AddPair("Accounts Match?", ("Discrepancy?", "Is Discrepancy Over $500?", rectangle), arrow, no);
@@ -185,8 +186,8 @@
                     flowchart.AddPair("Sad later", ("End", "End", stadium), arrow);
 
                     flowchart.AddPair("War?", ("Evacuating?", "Are we evacuating?", rhombus), arrow, yes);
-                    flowchart.AddPair("Zombie?", "Evacuating?", "SideArrow", yes);
-                    flowchart.AddPair("Fire?", "Evacuating?", "SideArrow", yes);
+                    flowchart.AddPair("Zombie?", "Evacuating?", sideArrow, yes);
+                    flowchart.AddPair("Fire?", "Evacuating?", sideArrow, yes);
                     flowchart.AddPair("Evacuating?", ("Knock", "KNOCK!", rectangle), arrow, yes);
 
 
@@ -198,7 +199,7 @@
                     flowchart.AddPair("Going somewhere?", ("Leave a note", "Leave a note", rectangle), arrow, yes);
 
                     flowchart.AddPair("Evacuating?", "Tell me later", arrow, yes);
-                    flowchart.AddPair("Dead?", "Tell me later", "SideArrow", yes);
+                    flowchart.AddPair("Dead?", "Tell me later", sideArrow, yes);
                 }
                 else if (i == 10)
                 {
@@ -220,6 +221,54 @@
                     flowchart.AddPair("History", ("TreatTB", "If likely TB diagnosis, treat TB", rhombus), arrow);
                     flowchart.AddPair("TreatTB", ("Treat Other", "If other diagnosis more likely, treat as needed and watch for TB symptoms", rhombus), arrow);
 
+                }
+                else if (i == 11)
+                {
+                    flowchart.AddPair(("Start", "Start", rectangle), ("Meet 1", "Meet criteria?", rectangle), arrow);
+                    flowchart.AddPair("Meet 1", ("Yes1", "Yes", rectangle), arrow);
+                    flowchart.AddPair("Meet 1", ("No1", "No", rectangle), arrow);
+
+                    flowchart.AddPair("Yes1", ("Meet 2", "Meet criteria?", rectangle), arrow);
+                    flowchart.AddPair("Meet 2", ("Yes2", "Yes", rectangle), arrow);
+                    flowchart.AddPair("Meet 2", ("No2", "No", rectangle), arrow);
+
+                    flowchart.AddPair("Yes2", ("Meet 3", "Meet criteria?", rectangle), arrow);
+                    flowchart.AddPair("Meet 3", ("Yes3", "Yes", rectangle), arrow);
+                    flowchart.AddPair("Meet 3", ("No3", "No", rectangle), arrow);
+
+                    flowchart.AddPair("Yes3", ("Meet 4", "Meet criteria?", rectangle), arrow);
+                    flowchart.AddPair("Meet 4", ("Yes4", "Yes", rectangle), arrow);
+                    flowchart.AddPair("Meet 4", ("No4", "No", rectangle), arrow);
+
+                    flowchart.AddPair("Yes4", ("Meet 5", "Meet criteria?", rectangle), arrow);
+                    flowchart.AddPair("Meet 5", ("Yes5", "Yes", rectangle), arrow);
+                    flowchart.AddPair("Meet 5", "No4", sideArrow);
+
+                    flowchart.AddPair("Yes5", ("Meet 6", "Meet criteria?", rectangle), arrow);
+                    flowchart.AddPair("Meet 6", ("Yes6", "Yes", rectangle), arrow);
+                    flowchart.AddPair("Meet 6", ("No6", "No", rectangle), arrow);
+
+                    flowchart.AddPair("No1", ("END1", "Process Ended (Option 1)", rectangle), arrow);
+                    flowchart.AddPair("No2", "END1", arrow);
+                    flowchart.AddPair("No3", "END1", sideArrow);
+                    flowchart.AddPair("No4", "END1", sideArrow);
+                    flowchart.AddPair("No6", ("END2", "Process Ended (Option 2)", rectangle), arrow);
+                    flowchart.AddPair("Yes6", ("END3", "End goal met", rectangle), arrow);
+                }
+                else if (i == 12)
+                {
+                    flowchart.AddPair(("Start", "Start", rectangle), ("Declare", "Declare variables a, b and c?", rectangle), arrow);
+                    flowchart.AddPair("Declare", ("Read", "Read a, b and c", rectangle), arrow);
+                    flowchart.AddPair("Read", ("a>b?", "is a > b?", rhombus), arrow);
+                    flowchart.AddPair("a>b?", ("b>c?", "is b > c?", rhombus), arrow, "False");
+                    flowchart.AddPair("a>b?", ("a>c?", "is a > c?", rhombus), arrow, "True");
+                    flowchart.AddPair("b>c?", ("print b", "print b", rectangle), arrow, "True");
+                    flowchart.AddPair("b>c?", ("print c", "print c", rectangle), arrow, "False");
+                    flowchart.AddPair("a>c?", "print c", arrow, "False");
+                    flowchart.AddPair("a>c?", ("print a", "print a", rectangle), arrow, "True");
+                    flowchart.AddPair("print c", ("stop", "Stop", stadium), arrow);
+                    flowchart.AddPair("print a", "stop", arrow);
+                    flowchart.AddPair("print b", "stop", arrow);
                 }
             }
         }
