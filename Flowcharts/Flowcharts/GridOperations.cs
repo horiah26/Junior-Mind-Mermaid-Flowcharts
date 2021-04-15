@@ -58,7 +58,7 @@
                 distancedGrid = new GridWithEquallyDistanceTwins(linearizedGrid);
             }
 
-            return distancedGrid;
+            return TrimEnds(distancedGrid);
         }
   
         

@@ -16,7 +16,7 @@
             string yes = "Yes";
             string no = "No";
 
-            for(int i = 9; i < 10; i++)
+            for(int i = 1; i < 11; i++)
             {
                 var flowchart = new Flowchart("LeftRight", fileName + i, path);
                 GetCase(i, flowchart);
@@ -199,6 +199,27 @@
 
                     flowchart.AddPair("Evacuating?", "Tell me later", arrow, yes);
                     flowchart.AddPair("Dead?", "Tell me later", "SideArrow", yes);
+                }
+                else if (i == 10)
+                {
+                    flowchart.AddPair(("Start", "Patient exposed to TB", stadium), ("Adult", "Adult", rectangle), arrow);
+                    flowchart.AddPair("Adult", ("Common symptoms?", "Has common TB symptoms?", rectangle), arrow);
+                    flowchart.AddPair("Common symptoms?", ("Report back", "Have patient report back if unwell; return in 1 month for checkup", rectangle), arrow, no);
+                    flowchart.AddPair("Common symptoms?", ("Treat", "Treat as likely TB patient and perform full TB exam", rectangle), arrow, yes);
+
+                    flowchart.AddPair("Start", ("Child", "Child", rectangle), arrow);
+                    flowchart.AddPair("Child", ("TB test?", "Can TB test be given?", rhombus), arrow ,yes);
+                    flowchart.AddPair("TB test?", ("Administer test", "Administer TB test", rectangle), arrow);
+                    flowchart.AddPair("Administer test", ("Assess results", "Assess TB test results and child condition", rectangle), arrow);
+                    flowchart.AddPair("Assess results", ("A", "A", "Circle"), arrow);
+                    flowchart.AddPair("Child", ("Child well?", "Child well?", rhombus), arrow, no);
+                    flowchart.AddPair("Child well?", ("6 months", "6 months preventive isoniazid", rhombus), arrow, yes);
+                    flowchart.AddPair("6 months", ("Parent", "Have parent bring in if child shows any symptoms", rhombus), arrow);
+
+                    flowchart.AddPair("Child well?", ("History", "Take full history. Examine for TB", rhombus), arrow, no);
+                    flowchart.AddPair("History", ("TreatTB", "If likely TB diagnosis, treat TB", rhombus), arrow);
+                    flowchart.AddPair("TreatTB", ("Treat Other", "If other diagnosis more likely, treat as needed and watch for TB symptoms", rhombus), arrow);
+
                 }
             }
         }
