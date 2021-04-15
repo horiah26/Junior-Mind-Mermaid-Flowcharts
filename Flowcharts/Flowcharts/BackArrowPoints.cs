@@ -33,7 +33,7 @@ namespace Flowcharts
 
             double angleCorrectionFactor = 4;
 
-            if (typeof(OrientationLeftRight) == fromElement.orientation.GetType() || typeof(OrientationDownTop) == fromElement.orientation.GetType())
+            if (typeof(OrientationLeftRight) == fromElement.Orientation.GetType() || typeof(OrientationDownTop) == fromElement.Orientation.GetType())
             {
                 if (toElement.Row < fromElement.Row)
                 {
@@ -71,7 +71,7 @@ namespace Flowcharts
                 points[3] = (yMiddle + yAngleCorrection).ToString();
             }
 
-            if (typeof(OrientationLeftRight) == fromElement.orientation.GetType())
+            if (typeof(OrientationLeftRight) == fromElement.Orientation.GetType())
             {
                 if (toElement.Row == fromElement.Row)
                 {
@@ -89,7 +89,7 @@ namespace Flowcharts
                     points[5] = (toElement.BackArrowLeft.y - 5).ToString();
                 }
             }
-            else if (typeof(OrientationRightLeft) == fromElement.orientation.GetType())
+            else if (typeof(OrientationRightLeft) == fromElement.Orientation.GetType())
             {
                 if (toElement.Row == fromElement.Row)
                 {
@@ -107,7 +107,7 @@ namespace Flowcharts
                     points[5] = (toElement.BackArrowLeft.y - 5).ToString();
                 }
             }
-            else if (typeof(OrientationTopDown) == fromElement.orientation.GetType())
+            else if (typeof(OrientationTopDown) == fromElement.Orientation.GetType())
             {
                 if (toElement.Row == fromElement.Row)
                 {
@@ -143,6 +143,7 @@ namespace Flowcharts
                     points[5] = (toElement.BackArrowLeft.y).ToString();
                 }
             }
+
             return points;
         }
     }    

@@ -14,15 +14,15 @@
             int Rows = originalArray.GetLength(0);
             int Columns = originalArray.GetLength(1);
 
-            Element[,] newArray = new Element[Rows, Columns];
-
+            Element[,] newArray = ArrayOperations.CreateArray(Rows, Columns);
+                
             for (int i = 0; i < Rows; i++)
             {
                 for (int j = 0; j < Columns; j++)
                 {
                     if(originalArray[i,j] != null)
                     {
-                        newArray[i, j] = new Element(originalArray[i, j]);
+                        newArray[i, j] = Factory.Element(originalArray[i, j]);
                     }
                 }
             }

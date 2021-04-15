@@ -12,10 +12,10 @@ namespace Flowcharts
         public (double x, double y) BackArrowLeft;
         public (double x, double y) BackArrowRight;
 
-        public IOrientation orientation;
+        public IOrientation Orientation { get; private set; }
 
-        public string shapeName = "Rectangle";
-        
+        private string shapeName = "Rectangle";
+        public Type ShapeType { get; private set; }
         public string Text { get; private set; }
         public string Key { get; private set; }
 
@@ -27,23 +27,23 @@ namespace Flowcharts
 
         public Element(string Key, string Text, string shapeName)
         {
-            CheckLength(Text);
+            TextOperations.CheckLength(Text);
 
             this.Text = Text;
-            orientation = StaticOrientation.Orientation;
+            Orientation = StaticOrientation.Orientation;
             this.Key = Key;
             this.shapeName = shapeName;
         }
 
         public Element(Element element)
-        {
+        {            
             In = element.In;
             Out = element.Out;
             BackArrowLeft = element.BackArrowLeft;
             BackArrowRight = element.BackArrowRight;
             Text = element.Text;
             Key = element.Key;
-            orientation = element.orientation;
+            Orientation = element.Orientation;
             parentElements = element.parentElements;
             childElements = element.childElements;
             Column = element.Column;
@@ -54,7 +54,7 @@ namespace Flowcharts
         public void AddParent(Element previous)
         {
             parentElements.Add(previous);
-            UpdateColumn();
+            Column = parentElements.Max(x => x.Column) + 1;
         }
 
         public void AddChild(Element next)
@@ -62,45 +62,17 @@ namespace Flowcharts
             childElements.Add(next);
         }
 
-        public void UpdateColumn()
-        {
-            var maxPreviousColumn = parentElements.Max(x => x.Column);
-            Column = maxPreviousColumn + 1;
-        }
-
         public void Draw(int Columns, int Rows)
         {
-            orientation.Initialize(Column, Row, Columns, Rows);
+            Orientation.Initialize(Column, Row, Columns, Rows);
 
-            var IO = new DrawnElement(orientation, Text, shapeName).Draw();
+            var IO = ElementOperations.Draw(Orientation, Text, shapeName);
 
             In = IO.In;
             Out = IO.Out;
+
             BackArrowLeft = IO.BackArrowLeft;
             BackArrowRight = IO.BackArrowRight;
-        }
-    
-
-        public int MinColumnOfChildren()
-        {
-            int minColumn = 0;
-
-            if (childElements.Count != 0)
-            {
-                minColumn = childElements.Min(x => x.Column);
-            }
-
-            return minColumn;
-        }
-
-        private void CheckLength(string text)
-        {
-            int limit = 85;
-
-            if (text.Length > limit)
-            {
-                throw new ArgumentException("Text length cannot exceed {0} characters" + limit);
-            }
         }
     }
 }

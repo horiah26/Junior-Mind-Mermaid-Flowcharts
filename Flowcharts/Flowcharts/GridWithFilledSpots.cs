@@ -19,9 +19,9 @@
             {
                 for (int row = 0; row < Rows; row++)
                 {
-                    if (ElementArray[row, column] != null && ElementArray[row, column + 1] == null && ElementArray[row, column].MinColumnOfChildren() - 1 > column && ElementArray[row, column].parentElements.Count == 0)
+                    if (ElementArray[row, column] != null && ElementArray[row, column + 1] == null && ElementOperations.MinColumnOfChildren(ElementArray[row, column]) - 1 > column && ElementArray[row, column].parentElements.Count == 0)
                     {
-                        int difference = ElementArray[row, column].MinColumnOfChildren() - column - 1;
+                        int difference = ElementOperations.MinColumnOfChildren(ElementArray[row, column]) - column - 1;
 
                         ElementArray[row, column + difference] = ElementArray[row, column];
 

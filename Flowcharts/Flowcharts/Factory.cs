@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 
 namespace Flowcharts
 {
@@ -43,6 +44,21 @@ namespace Flowcharts
         public static DrawnFlowchart DrawnFlowchart(IGrid organizedGrid, OrderedArrows orderedArrows)
         {
             return new DrawnFlowchart(organizedGrid, orderedArrows);
+        }
+
+        public static Flowchart Flowchart(string orientationName, string FileName = null, string path = null)
+        {
+            return new Flowchart(orientationName, FileName, path);
+        }
+
+        public static Flowchart Flowchart(string orientationName, MemoryStream memoryStream)
+        {
+            return new Flowchart(orientationName, memoryStream);
+        }
+
+        public static Element Element(Element element)
+        {
+            return new Element(element);
         }
     }
 }

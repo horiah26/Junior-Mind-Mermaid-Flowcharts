@@ -62,5 +62,15 @@ namespace Flowcharts
         {
             return new ElementArrayWithoutEmptyRows(ElementArray, deletedRows).GetArray();
         }
+
+        public static Element[,] CreateArray(int rows, int columns)
+        {
+            return new Element[rows, columns];
+        }
+
+        public static Element[,] Resize(Element[,] ElementArray, int rows, int columns)
+        {
+            return new ResizedElementArray(ElementArray, rows, columns).GetArray();
+        }
     }
 }

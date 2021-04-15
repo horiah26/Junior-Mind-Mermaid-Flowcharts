@@ -19,11 +19,10 @@
 
             for(int i = 1; i < 13; i++)
             {
-                var flowchart = new Flowchart("LeftRight", fileName + i, path);
+                var flowchart = Factory.Flowchart("LeftRight", fileName + i, path);
                 GetCase(i, flowchart);
                 flowchart.DrawFlowchart();
             }
-
 
             void GetCase(int i, Flowchart flowchart)
             {

@@ -19,7 +19,7 @@ namespace Flowcharts
         {
             string[] points = new string[4];
 
-            if (typeof(OrientationLeftRight) == fromElement.orientation.GetType() || typeof(OrientationRightLeft) == fromElement.orientation.GetType())
+            if (typeof(OrientationLeftRight) == fromElement.Orientation.GetType() || typeof(OrientationRightLeft) == fromElement.Orientation.GetType())
             {
                 if (fromElement.Row < toElement.Row)
                 {
