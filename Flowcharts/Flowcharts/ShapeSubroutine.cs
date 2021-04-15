@@ -8,7 +8,6 @@ namespace Flowcharts
         {
         }
 
-
         public override string CalculateCornerPoints()
         {
             return new ShapeSubroutinePoints(xPos, yPos, height, length).GetPoints();
@@ -16,7 +15,7 @@ namespace Flowcharts
 
         public override IOPoints GetIO()
         {
-            return new ShapeSubroutineIO(orientation, xPos, yPos, height, length).GetIO();
+            return new ShapeSubroutineIO(xPos, yPos, height, length).GetIO();
         }
     }
 }

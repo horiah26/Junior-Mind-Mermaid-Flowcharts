@@ -4,16 +4,13 @@ namespace Flowcharts
 {
     class ShapeCircleDrawn
     {
-        readonly XmlWriter xmlWriter;
-        readonly IOrientation orientation;
+        readonly XmlWriter xmlWriter = Writer.XmlWriter;
         readonly double xPos;
         readonly double yPos;
         readonly double radius;
 
-        public ShapeCircleDrawn(XmlWriter xmlWriter, IOrientation orientation, double xPos, double yPos, double radius)
+        public ShapeCircleDrawn(double xPos, double yPos, double radius)
         {
-            this.xmlWriter = xmlWriter;
-            this.orientation = orientation;
             this.xPos = xPos;
             this.yPos = yPos;
             this.radius = radius;
@@ -34,7 +31,7 @@ namespace Flowcharts
 
             xmlWriter.WriteEndElement();
 
-            return new ShapeCircleIO(orientation, xPos, yPos, radius).GetIO(); ;
+            return new ShapeCircleIO(xPos, yPos, radius).GetIO(); ;
         }
     }
 }

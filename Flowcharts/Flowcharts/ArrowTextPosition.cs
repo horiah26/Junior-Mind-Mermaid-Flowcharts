@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Flowcharts
 {
-    class ArrowTextPosition : IArrowPosition
+    class ArrowTextPosition
     {
         readonly Element fromElement;
         readonly Element toElement;

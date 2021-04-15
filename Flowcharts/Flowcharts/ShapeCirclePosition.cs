@@ -7,20 +7,15 @@
         private int unitHeight;
         double xPos;
         double yPos;
-        readonly IOrientation orientation;
-        readonly string text;
-        readonly double radius;
+        readonly IOrientation orientation = StaticOrientation.Orientation;
 
-        public ShapeCirclePosition(IOrientation orientation, string text, double radius)
-        {
-            this.orientation = orientation;
-            this.text = text;
-            this.radius = radius;
+        public ShapeCirclePosition()
+        {            
         }
 
         public (double xPos, double yPos) GetPosition()
         {
-            (distanceFromEdge, unitLength, unitHeight) = new GridSpacing(orientation).GetSpacing();
+            (distanceFromEdge, unitLength, unitHeight) = ElementOperations.GetSpacing();
 
             var (Column, Row) = orientation.GetColumnRow();
 

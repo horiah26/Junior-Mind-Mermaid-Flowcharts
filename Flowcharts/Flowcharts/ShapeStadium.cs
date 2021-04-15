@@ -16,7 +16,7 @@ namespace Flowcharts
 
         public override IOPoints GetIO()
         {
-            return new ShapeStadiumIO(orientation, xPos, yPos, height, length).GetIO();
+            return new ShapeStadiumIO(xPos, yPos, height, length).GetIO();
         }
     }
 }

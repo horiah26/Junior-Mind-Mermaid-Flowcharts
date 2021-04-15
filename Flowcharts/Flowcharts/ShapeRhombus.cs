@@ -32,7 +32,7 @@ namespace Flowcharts
 
         public override IOPoints GetIO()
         {
-            return new ShapeRhombusIO(orientation, xPos, yPos, height, length, lines).GetIO();
+            return new ShapeRhombusIO(xPos, yPos, height, length, lines).GetIO();
         }
     }
 }

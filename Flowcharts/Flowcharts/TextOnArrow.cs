@@ -26,8 +26,7 @@ namespace Flowcharts
         public void WriteText()
         {
             var lines = TextOperations.SplitText(text);
-            WrittenText writtenText = new WrittenText(xPosition, yPosition, lines);
-            writtenText.Write();
+            TextOperations.WriteText(xPosition, yPosition, lines);
         }
 
         public void Draw()

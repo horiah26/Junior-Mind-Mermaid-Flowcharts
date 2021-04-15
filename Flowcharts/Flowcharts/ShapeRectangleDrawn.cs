@@ -4,9 +4,7 @@ namespace Flowcharts
 {
     class ShapeRectangleDrawn
     {
-        readonly XmlWriter xmlWriter;
-
-        readonly IOrientation orientation;
+        readonly XmlWriter xmlWriter = Writer.XmlWriter;
         readonly double xPos;
         readonly double yPos;
         readonly double height;
@@ -14,10 +12,8 @@ namespace Flowcharts
         readonly string color;
 
 
-        public ShapeRectangleDrawn(XmlWriter xmlWriter, IOrientation orientation, double xPos, double yPos, double height, double length, string color)
+        public ShapeRectangleDrawn(double xPos, double yPos, double height, double length, string color)
         {
-            this.xmlWriter = xmlWriter;
-            this.orientation = orientation;
             this.xPos = xPos;
             this.yPos = yPos;
             this.height = height;
@@ -29,7 +25,7 @@ namespace Flowcharts
         {
             xmlWriter.WriteStartElement("rect");
 
-            var InOut = new ShapeRectangleIO(orientation, xPos, yPos, height, length).GetIO();
+            var InOut = new ShapeRectangleIO(xPos, yPos, height, length).GetIO();
 
             xmlWriter.WriteAttributeString("x", xPos.ToString());
             xmlWriter.WriteAttributeString("y", yPos.ToString());

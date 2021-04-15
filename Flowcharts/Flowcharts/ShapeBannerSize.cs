@@ -13,7 +13,7 @@ namespace Flowcharts
 
         public (double height, double length) GetSize()
         {
-            var sizeOfText = new TextSizeCalculator(lines).Calculate();
+            var sizeOfText = TextOperations.CalculateSizeOfText(lines);
             var maxLineLength = lines.Max(x => x.Length);
             var numberOfLines = lines.Length;
 

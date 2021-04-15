@@ -3,9 +3,9 @@ using System.Linq;
 
 namespace Flowcharts
 {
-    class ElementArrayWithRaisedRows
+    class ElementArrayWithRaisedRows : IElementArray
     {
-        readonly Element[,] ElementArray;
+        public Element[,] ElementArray { get; private set; }
         readonly List<int> emptyRows;
         readonly int Rows;
         readonly int Columns;

@@ -14,7 +14,7 @@ namespace Flowcharts
             this.rows = rows;
             this.columns = columns;
             originalArray = ElementArray;
-            newArray = new Element[rows, columns];
+            newArray = ArrayOperations.CreateArray(rows, columns);
         }
 
         private void Resize()

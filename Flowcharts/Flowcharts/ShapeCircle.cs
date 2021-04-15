@@ -5,8 +5,6 @@ namespace Flowcharts
 {
     class ShapeCircle : IShape
     {        
-        private readonly XmlWriter xmlWriter;
-        readonly IOrientation orientation;
         IOPoints InOut;
 
         double xPos;
@@ -16,8 +14,6 @@ namespace Flowcharts
 
         public ShapeCircle(string text)
         {
-            orientation = StaticOrientation.Orientation;
-            xmlWriter = Writer.XmlWriter;
             this.text = text;
         }
 
@@ -34,12 +30,12 @@ namespace Flowcharts
 
         public IOPoints DrawCircle()
         {
-            return new ShapeCircleDrawn(xmlWriter, orientation, xPos, yPos, radius).Draw();
+            return new ShapeCircleDrawn(xPos, yPos, radius).Draw();
         }
 
         public (double xPos, double yPos) GetPosition()
         {
-            return new ShapeCirclePosition(orientation, text, radius).GetPosition();
+            return new ShapeCirclePosition().GetPosition();
         }
 
         public (double height, double length) GetSize()

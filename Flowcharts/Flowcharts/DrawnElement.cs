@@ -5,22 +5,21 @@ namespace Flowcharts
 {
     class DrawnElement
     {
-        readonly IOrientation orientation;
+        readonly IOrientation orientation = StaticOrientation.Orientation;
         private readonly int distanceFromEdge;
         private readonly int unitLength;
         private readonly int unitHeight;
         double textAlignment;
         readonly string text;
-        readonly string shapeName;
+        readonly Type shapeType;
         IShape shape;
 
-        public DrawnElement(IOrientation orientation, string text, string shapeName) 
+        public DrawnElement(string text, Type shapeType) 
         {
-            this.orientation = orientation;
             this.text = text;
-            this.shapeName = shapeName;
+            this.shapeType = shapeType;
 
-            (distanceFromEdge, unitLength, unitHeight) = new GridSpacing(orientation).GetSpacing();
+            (distanceFromEdge, unitLength, unitHeight) = ElementOperations.GetSpacing();
         }
 
         public IOPoints Draw()
@@ -53,7 +52,6 @@ namespace Flowcharts
 
         public IOPoints DrawBox()
         {
-            Type shapeType = Type.GetType("Flowcharts.Shape" + shapeName);
             shape = (IShape)Activator.CreateInstance(shapeType, new object[] { text });
 
             (IOPoints InOut, double textAlignment) = shape.Draw();

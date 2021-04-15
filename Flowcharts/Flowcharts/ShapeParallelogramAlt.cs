@@ -15,12 +15,12 @@ namespace Flowcharts
 
         public override string CalculateCornerPoints()
         {
-            return new ShapeParallelogramAltPoints(xPos, yPos, height, length, lines, inclination).GetPoints();
+            return new ShapeParallelogramAltPoints(xPos, yPos, height, length, inclination).GetPoints();
         }
 
         public override IOPoints GetIO()
         {
-            return new ShapeParallelogramIO(orientation, xPos, yPos, height, length, inclination).GetIO();
+            return new ShapeParallelogramIO(xPos, yPos, height, length, inclination).GetIO();
         }
     }
 }

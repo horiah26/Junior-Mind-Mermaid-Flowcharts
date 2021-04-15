@@ -34,17 +34,12 @@
 
         public static IGrid Linearize(IGrid grid)
         {
-            return new LiniarizedGrid(grid);
+            return new LinearizedGrid(grid);
         }
 
         public static IGrid TrimEnds(IGrid grid)
         {
             return new GridWithTrimmedEnds(grid);
-        }
-
-        public static IGrid AdjustForArrows(IGrid grid, IArrowRegister arrowRegister)
-        {
-            return new GridAdjustedForArrows(grid, arrowRegister);
         }
 
         public static IGrid DistanceTwinsAndLinearize(IGrid grid)
@@ -59,14 +54,11 @@
             }
 
             return TrimEnds(distancedGrid);
-        }
-  
-        
+        }        
 
         public static IGrid ArrangeLastColumn(IGrid grid)
         {
             return new GridWithArrangedLastColumn(grid);
         }
-
     }
 }

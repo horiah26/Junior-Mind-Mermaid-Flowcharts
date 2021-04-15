@@ -22,6 +22,7 @@ namespace Flowcharts
 
             return (GetIO(), length * 0.7 + 30);
         }
+
         public override (double height, double length) GetSize()
         {
             return new ShapeBannerSize(lines).GetSize();
@@ -34,7 +35,7 @@ namespace Flowcharts
 
         public override IOPoints GetIO()
         {
-            return new ShapeBannerIO(orientation, xPos, yPos, height, length).GetIO();
+            return new ShapeBannerIO(xPos, yPos, height, length).GetIO();
         }
     }
 }

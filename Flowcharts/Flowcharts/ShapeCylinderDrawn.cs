@@ -10,9 +10,9 @@ namespace Flowcharts
         private readonly double height;
         private readonly double length;
 
-        public ShapeCylinderDrawn(XmlWriter xmlWriter, double xPos, double yPos, double height, double length)
+        public ShapeCylinderDrawn(double xPos, double yPos, double height, double length)
         {
-            this.xmlWriter = xmlWriter;
+            this.xmlWriter = Writer.XmlWriter; ;
             this.xPos = xPos;
             this.yPos = yPos;
             this.height = height;

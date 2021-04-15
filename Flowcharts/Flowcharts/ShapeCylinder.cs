@@ -15,23 +15,21 @@ namespace Flowcharts
         public double height;
         public double length;
 
-        public XmlWriter xmlWriter;
-        public IOrientation orientation;
+        public XmlWriter xmlWriter = Writer.XmlWriter;
+        public IOrientation orientation = StaticOrientation.Orientation;
         public string[] lines;
 
         IOPoints InOut;
         readonly string text;
 
-        public ShapeCylinder(XmlWriter xmlWriter, IOrientation orientation, string text)
+        public ShapeCylinder(string text)
         {
-            this.orientation = orientation;
-            this.xmlWriter = xmlWriter;
             this.text = text;
         }
 
         public (IOPoints, double textAlignment) Draw()
         {
-            (distanceFromEdge, unitLength, unitHeight) = new GridSpacing(orientation).GetSpacing();
+            (distanceFromEdge, unitLength, unitHeight) = ElementOperations.GetSpacing();
 
             lines = TextOperations.SplitText(text);
             var numberOfLines = lines.Length;
@@ -46,14 +44,14 @@ namespace Flowcharts
             yPos -= height / 2; ;
             DrawFigure();
 
-            InOut = new ShapeCylinderIO(orientation, xPos, yPos, height, length, numberOfLines).GetIO();
+            InOut = new ShapeCylinderIO(xPos, yPos, height, length, numberOfLines).GetIO();
 
             return (InOut, length);
         }
 
         public void DrawFigure()
         {
-            new ShapeCylinderDrawn(xmlWriter, xPos, yPos, height, length).Draw();
+            new ShapeCylinderDrawn(xPos, yPos, height, length).Draw();
         }
 
         public (double height, double length) GetSize()
@@ -64,7 +62,7 @@ namespace Flowcharts
         public (double xPos, double yPos) CalculatePosition()
         {
             var position = orientation.GetColumnRow();
-            return new ShapePolygonPosition(orientation, position, lines).GetPosition();
+            return new ShapePolygonPosition(position, lines).GetPosition();
         }
     }
 }

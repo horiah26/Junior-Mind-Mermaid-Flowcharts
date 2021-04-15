@@ -20,7 +20,7 @@ namespace Flowcharts
 
         public override IOPoints GetIO()
         {
-            return new ShapeHexagonIO(orientation, xPos, yPos, height, length, lines).GetIO();
+            return new ShapeHexagonIO(xPos, yPos, height, length, lines).GetIO();
         }
     }
 }

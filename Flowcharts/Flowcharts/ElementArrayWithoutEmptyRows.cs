@@ -1,8 +1,8 @@
 ﻿namespace Flowcharts
 {
-    class ElementArrayWithoutEmptyRows
+    class ElementArrayWithoutEmptyRows : IElementArray
     {
-        readonly Element[,] ElementArray;
+        public Element[,] ElementArray { get; private set; }
         readonly int Rows;
         readonly int Columns;
         readonly int deletedRows;
@@ -17,7 +17,7 @@
 
         public Element[,] GetArray()
         {
-            var newArray = new Element[Rows - deletedRows, Columns];
+            var newArray = ArrayOperations.CreateArray(Rows - deletedRows, Columns);
 
             for (int i = 0; i < Rows - deletedRows; i++)
             {

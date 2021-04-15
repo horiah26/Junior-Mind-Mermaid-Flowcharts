@@ -12,15 +12,16 @@ namespace Flowcharts
         public GridWithEquallyDistanceTwins(IGrid grid)
         {
             ElementArray = grid.ElementArray;
-            CheckIfTwins();
-            CheckIfTwins2();
+            HandleSituation1();
+            HandleSituation2();
         }
 
-        public void CheckIfTwins()
+        public void HandleSituation1()
         {          
             ArrayOperations.Update(ElementArray);
 
             bool moved;
+
             do
             {
                 moved = false;
@@ -90,7 +91,7 @@ namespace Flowcharts
             ElementArray = ArrayOperations.LowerColumns(ElementArray, row + 1, column + 1, 1);
         }
 
-        public void CheckIfTwins2()
+        public void HandleSituation2()
         {
             int rows = ElementArray.GetLength(0);
             int columns = ElementArray.GetLength(1);
@@ -112,6 +113,7 @@ namespace Flowcharts
                 }
             }
         }
+
         private void LowerPreviousColumns(int column)
         {
             for (int i = 0; i <= column; i++)

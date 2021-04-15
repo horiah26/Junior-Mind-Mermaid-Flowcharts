@@ -11,7 +11,7 @@ namespace Flowcharts
             FromElement = fromElement;
             ToElement = toElement;
             this.text = text;
-            PushChildrenForward = false;
+            PushesChildrenForward = false;
         }
 
         public override string[] GetArrowPoints()

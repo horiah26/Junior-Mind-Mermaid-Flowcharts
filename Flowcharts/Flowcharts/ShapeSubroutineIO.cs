@@ -9,15 +9,14 @@ namespace Flowcharts
         (double x, double y) BackArrowLeft;
         (double x, double y) BackArrowRight;
 
-        private readonly IOrientation orientation;
+        private readonly IOrientation orientation = StaticOrientation.Orientation;
         private readonly double xPos;
         private readonly double yPos;
         private readonly double height;
         private readonly double length;
 
-        public ShapeSubroutineIO(IOrientation orientation, double xPos, double yPos, double height, double length)
+        public ShapeSubroutineIO(double xPos, double yPos, double height, double length)
         {
-            this.orientation = orientation;
             this.xPos = xPos;
             this.yPos = yPos;
             this.height = height;
@@ -63,7 +62,7 @@ namespace Flowcharts
                 throw new FormatException("Orientation has not been writeen correctly");
             }
 
-            return new IOPoints(In, Out, BackArrowLeft, BackArrowRight);
+            return ElementOperations.CreateIO(In, Out, BackArrowLeft, BackArrowRight);
         }
     }
 }

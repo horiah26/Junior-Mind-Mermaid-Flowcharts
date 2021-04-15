@@ -18,7 +18,7 @@ namespace Flowcharts
         private IEnumerable<Element> GetColumn()
         {
             GetIndex();
-            var Column = new ExtractedColumn(elementArray, Index).GetColumn().Where(x => x != null);
+            var Column = ArrayOperations.ExtractColumn(elementArray, Index).Where(x => x != null);
             this.Column = Column;
             return Column;
         }

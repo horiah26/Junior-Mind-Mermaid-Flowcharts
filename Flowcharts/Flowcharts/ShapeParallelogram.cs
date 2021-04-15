@@ -20,7 +20,7 @@ namespace Flowcharts
 
         public override IOPoints GetIO()
         {
-            return new ShapeParallelogramIO(orientation, xPos, yPos, height, length, inclination).GetIO();
+            return new ShapeParallelogramIO(xPos, yPos, height, length, inclination).GetIO();
         }
     }
 }

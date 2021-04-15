@@ -12,9 +12,20 @@ namespace Flowcharts
             return new MinimumColumnOfChildren(element).Get();
         }
 
-        public static IOPoints Draw(IOrientation orientation, string text, string shapeName)
+        public static IOPoints Draw(string text, Type shapeType)
         {
-            return new DrawnElement(orientation, text, shapeName).Draw();
+            return new DrawnElement(text, shapeType).Draw();
         }
+
+        public static (int distanceFromEdge, int unitLength, int unitHeight) GetSpacing()
+        {
+            return new GridSpacing().GetSpacing();
+        }
+        
+        public static IOPoints CreateIO((double x, double y) In, (double x, double y) Out, (double x, double y) BackArrowLeft, (double x, double y) BackArrowRight)
+        {
+            return new IOPoints(In,  Out,  BackArrowLeft,  BackArrowRight);
+        }
+    
     }
 }

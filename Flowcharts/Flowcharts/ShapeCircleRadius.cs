@@ -16,7 +16,7 @@ namespace Flowcharts
             var lines = TextOperations.SplitText(text);
             var numberOfLines = lines.Length;
 
-            var sizeOfText = new TextSizeCalculator(lines).Calculate();
+            var sizeOfText = TextOperations.CalculateSizeOfText(lines);
             var maxLineLength = lines.Max(x => x.Length);
 
             if (maxLineLength == 1)

@@ -16,7 +16,7 @@ namespace Flowcharts
 
         public DrawnFlowchart(IGrid organizedGrid, IArrowRegister orderedArrows)
         {
-            this.orderedArrows = new PairedArrows(orderedArrows, organizedGrid);
+            this.orderedArrows = ArrayOperations.CreatePairedArrows(orderedArrows, organizedGrid);
             this.organizedGrid = organizedGrid;
 
             Rows = organizedGrid.ElementArray.GetLength(0);

@@ -35,6 +35,5 @@ namespace Flowcharts
 
             return emptyRows;
         }
-
     }
 }

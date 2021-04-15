@@ -3,20 +3,12 @@ using System.Linq;
 
 namespace Flowcharts
 {
-    class ElementArrayWithLoweredColumn
+    class ElementArrayWithLoweredColumn : IElementArray
     {
-        Element[,] ElementArray;
+        public Element[,] ElementArray { get; private set; }
         readonly double row;
         readonly int column;
         readonly int positions;
-
-        public ElementArrayWithLoweredColumn(IGrid grid, double row, int column, int positions)
-        {
-            ElementArray = grid.ElementArray;
-            this.row = row;
-            this.column = column;
-            this.positions = positions;
-        }
 
         public ElementArrayWithLoweredColumn(Element[,] ElementArray, double row, int column, int positions)
         {
@@ -33,14 +25,15 @@ namespace Flowcharts
                 return;
             }
 
-            var extractedColumn = new ExtractedColumn(ElementArray, column).GetColumn();
+            var extractedColumn = ArrayOperations.ExtractColumn(ElementArray, column);
+
             int emptyPositionsAtTheEnd = extractedColumn.Reverse().TakeWhile(x => x == null).Count();
 
             int difference = positions - emptyPositionsAtTheEnd;
 
             if (difference > 0)
             {
-                ElementArray = new ResizedElementArray(ElementArray, ElementArray.GetLength(0) + difference, ElementArray.GetLength(1)).GetArray();
+                ElementArray = ArrayOperations.Resize(ElementArray, ElementArray.GetLength(0) + difference, ElementArray.GetLength(1));                 
             }
 
             for (int i = ElementArray.GetLength(0) - 1; i >= row; i--)

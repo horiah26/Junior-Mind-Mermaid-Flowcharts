@@ -29,19 +29,14 @@ namespace Flowcharts
             return new ElementArrayWithRaisedRows(elementArray, emptyRows).RaiseRows();
         }
 
-        public static Element[,] LowerColumns(IGrid grid, double row, int column, int positions)
-        {
-            return new ElementArrayWithLoweredColumn(grid, row, column, positions).Get();
-        }
-
         public static Element[,] LowerColumns(Element[,] ElementArray, double row, int column, int positions)
         {
             return new ElementArrayWithLoweredColumn(ElementArray, row, column, positions).Get();
         }
 
-        public static List<IArrow> PairArrows(IArrowRegister arrowRegister, IGrid grid)
+        public static IArrowRegister CreatePairedArrows(IArrowRegister arrowRegister, IGrid grid)
         {
-            return new PairedArrows(arrowRegister, grid).ArrowList;
+            return new PairedArrows(arrowRegister, grid);
         }
 
         public static int GetIndexOfLastColumn(Element[,] ElementArray)
@@ -71,6 +66,26 @@ namespace Flowcharts
         public static Element[,] Resize(Element[,] ElementArray, int rows, int columns)
         {
             return new ResizedElementArray(ElementArray, rows, columns).GetArray();
+        }
+
+        public static Element[,] AddElement(Element[,] ElementArray, Element element, int row, int column)
+        {
+            return new ArrayWithAddedElement(ElementArray, element, row, column).GetArray();
+        }
+
+        public static Element[,] LevelColumns(Element[,] ElementArray)
+        {
+            return new ElementArrayWithLeveledColumns(ElementArray).ElementArray;
+        }
+
+        public static Element[,] LevelElementsIndividually(Element[,] ElementArray)
+        {
+            return new ElementArrayWithIndividualLinearizedElements(ElementArray).ElementArray;
+        }
+
+        public static Element[,] ArrangeTwinSituations(Element[,] ElementArray)
+        {
+            return new ElementArrayWithArrangedTwins(ElementArray).ElementArray;
         }
     }
 }

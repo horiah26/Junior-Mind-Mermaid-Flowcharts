@@ -8,7 +8,7 @@
         private readonly double length;
         readonly double gap;
 
-        public ShapeParallelogramAltPoints(double xPos, double yPos, double height, double length, string[] lines, double gap)
+        public ShapeParallelogramAltPoints(double xPos, double yPos, double height, double length, double gap)
         {
             this.xPos = xPos;
             this.yPos = yPos;

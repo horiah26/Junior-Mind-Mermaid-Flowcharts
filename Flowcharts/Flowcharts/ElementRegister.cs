@@ -27,10 +27,8 @@ namespace Flowcharts
 
         public void AddPair(string arrowName, Element element1, Element element2)
         {
-            var textLimit = new IsLengthWithinLimit();
-
-            textLimit.Check(element1.Text);
-            textLimit.Check(element2.Text);
+            TextOperations.TextLengthWithinLimit(element1.Text);
+            TextOperations.TextLengthWithinLimit(element2.Text);
 
             if (!dictionary.ContainsKey(element1.Key))
             {
@@ -43,7 +41,7 @@ namespace Flowcharts
 
             var tempArrow = Factory.IArrow(arrowName, element1, element2, "");
 
-            if (tempArrow.PushChildrenForward)
+            if (tempArrow.PushesChildrenForward)
             {
                 dictionary[element1.Key].AddChild(dictionary[element2.Key]);
                 dictionary[element2.Key].AddParent(dictionary[element1.Key]);

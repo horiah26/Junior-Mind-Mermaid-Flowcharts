@@ -16,7 +16,7 @@ namespace Flowcharts
             new WrittenText(xPosition, yPosition, lines).Write();
         }
 
-        public static void CheckLength(string text)
+        public static void TextLengthWithinLimit(string text)
         {
             int limit = 85;
 
@@ -24,6 +24,26 @@ namespace Flowcharts
             {
                 throw new ArgumentException("Text length cannot exceed {0} characters" + limit);
             }
+        }
+
+        public static double CalculateSizeOfText(string[] lines)
+        {
+            return new TextSizeCalculator(lines).Calculate();
+        }
+
+        public static TextSizePair Pair(double value, char letter)
+        {
+            return new TextSizePair(value, letter);
+        }
+
+        public static double CalculateLength(string[] lines)
+        {
+            return new ShapeLengthCalculator(lines).GetLength();
+        }
+
+        public static List<TextSizePair> GetSizeList()
+        {
+            return new TextSizeList().GetList();
         }
     }
 }

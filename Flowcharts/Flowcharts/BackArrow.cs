@@ -8,7 +8,7 @@ namespace Flowcharts
         {
             FromElement = fromElement;
             ToElement = toElement;
-            PushChildrenForward = false;
+            PushesChildrenForward = false;
         }
 
         override public void Draw()

@@ -11,10 +11,7 @@ namespace Flowcharts
         public (double x, double y) Out;
         public (double x, double y) BackArrowLeft;
         public (double x, double y) BackArrowRight;
-
         public IOrientation Orientation { get; private set; }
-
-        private string shapeName = "Rectangle";
         public Type ShapeType { get; private set; }
         public string Text { get; private set; }
         public string Key { get; private set; }
@@ -22,17 +19,17 @@ namespace Flowcharts
         public List<Element> parentElements = new List<Element> { };
         public List<Element> childElements = new List<Element> { };
 
-        public int Column = 0;
-        public int Row = 0;
+        public int Column { get; set; }
+        public int Row { get; set; }
 
         public Element(string Key, string Text, string shapeName)
         {
-            TextOperations.CheckLength(Text);
+            TextOperations.TextLengthWithinLimit(Text);
 
+            ShapeType = Type.GetType("Flowcharts.Shape" + shapeName);
             this.Text = Text;
             Orientation = StaticOrientation.Orientation;
             this.Key = Key;
-            this.shapeName = shapeName;
         }
 
         public Element(Element element)
@@ -48,7 +45,7 @@ namespace Flowcharts
             childElements = element.childElements;
             Column = element.Column;
             Row = element.Row;
-            shapeName = element.shapeName;        
+            ShapeType = element.ShapeType;
         }
 
         public void AddParent(Element previous)
@@ -66,7 +63,7 @@ namespace Flowcharts
         {
             Orientation.Initialize(Column, Row, Columns, Rows);
 
-            var IO = ElementOperations.Draw(Orientation, Text, shapeName);
+            var IO = ElementOperations.Draw(Text, ShapeType);
 
             In = IO.In;
             Out = IO.Out;

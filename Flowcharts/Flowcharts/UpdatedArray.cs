@@ -1,37 +1,37 @@
 ﻿namespace Flowcharts
 {
-    class UpdatedArray
+    class UpdatedArray : IElementArray
     {
-        readonly Element[,] elementArray;
+        public Element[,] ElementArray { get; private set; }
 
         public UpdatedArray(Element[,] elementArray)
         {
-            this.elementArray = elementArray;
+            this.ElementArray = elementArray;
         }
 
         public Element[,] Update()
         {
-            for (int i = 0; i < elementArray.GetLength(0); i++)
+            for (int i = 0; i < ElementArray.GetLength(0); i++)
             {
-                for (int j = 0; j < elementArray.GetLength(1); j++)
+                for (int j = 0; j < ElementArray.GetLength(1); j++)
                 {
-                    if (elementArray[i, j] != null)
+                    if (ElementArray[i, j] != null)
                     {
-                        elementArray[i, j].Row = i;
-                        elementArray[i, j].Column = j;
+                        ElementArray[i, j].Row = i;
+                        ElementArray[i, j].Column = j;
                     }
                 }
             }
 
             UpdateParentsChildren();
-            return elementArray;
+            return ElementArray;
         }
 
         public void UpdateParentsChildren()
         {
-            foreach (var element in elementArray)
+            foreach (var element in ElementArray)
             {
-                foreach (var element2 in elementArray)
+                foreach (var element2 in ElementArray)
                 {
                     if (element != null && element2 != null)
                     {

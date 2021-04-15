@@ -4,7 +4,7 @@ namespace Flowcharts
 {
     abstract public class ShapePolygon : IShape
     {
-        public IOrientation orientation;
+        public IOrientation orientation = StaticOrientation.Orientation;
         public XmlWriter xmlWriter = Writer.XmlWriter;
 
         public double xPos;
@@ -20,7 +20,6 @@ namespace Flowcharts
 
         public ShapePolygon(string text)
         {
-            orientation = StaticOrientation.Orientation;
             this.text = text;
         }
 
@@ -55,7 +54,7 @@ namespace Flowcharts
         public virtual (double xPos, double yPos) CalculatePosition()
         {
             var position = orientation.GetColumnRow();
-            return new ShapePolygonPosition(orientation, position, lines).GetPosition();
+            return new ShapePolygonPosition(position, lines).GetPosition();
         }
 
         public virtual (double height, double length) GetSize()
@@ -70,7 +69,7 @@ namespace Flowcharts
 
         public virtual IOPoints GetIO()
         {
-            return new ShapeRectangleIO(orientation, xPos, yPos, height, length).GetIO();
+            return new ShapeRectangleIO(xPos, yPos, height, length).GetIO();
         }
     }
 }

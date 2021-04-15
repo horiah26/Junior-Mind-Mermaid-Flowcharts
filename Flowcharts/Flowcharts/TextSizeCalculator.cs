@@ -15,7 +15,7 @@ namespace Flowcharts
         public double Calculate()
         {
             double totalSize = 0;
-            var sizeList = new TextSizeList().GetList();
+            var sizeList = TextOperations.GetSizeList();
 
             var maxLine = lines.OrderByDescending(x => x.Length).First();
 

@@ -4,11 +4,10 @@ namespace Flowcharts
 {
     class GridSpacing
     {
-        readonly IOrientation orientation;
+        readonly IOrientation orientation = StaticOrientation.Orientation;
 
-        public GridSpacing(IOrientation orientation)
+        public GridSpacing()
         {
-            this.orientation = orientation;
         }
 
         public (int distanceFromEdge, int unitLength, int unitHeight) GetSpacing()
