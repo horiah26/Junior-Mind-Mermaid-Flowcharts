@@ -26,8 +26,6 @@ namespace Flowcharts
 
         public IOPoints GetIO()
         {
-            double gap = 20;
-
             if (typeof(OrientationLeftRight) == orientation.GetType())
             {
                 In = (xPos - 5 - 7, yPos);

@@ -9,7 +9,7 @@
 
         public ElementArrayWithoutEmptyRows(Element[,] ElementArray, int deletedRows)
         {
-            this.ElementArray = ElementArray;
+            this.ElementArray = ArrayOperations.Update(ElementArray);
             this.deletedRows = deletedRows;
             Rows = ElementArray.GetLength(0);
             Columns = ElementArray.GetLength(1);

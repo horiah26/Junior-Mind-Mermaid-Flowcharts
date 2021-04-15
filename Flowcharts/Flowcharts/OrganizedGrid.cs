@@ -17,12 +17,14 @@
             var linearizedGrid = GridOperations.Linearize(arrangedGrid);
             var trimmedGrid = GridOperations.TrimEnds(linearizedGrid);
             var filledGrid2 = GridOperations.FillSpots(trimmedGrid);
-            var distancedGrid = GridOperations.DistanceTwins(filledGrid2);
-            var distancedGrid2 = GridOperations.DistanceTwins(distancedGrid);
+            var distancedGrid = GridOperations.DistanceTwinsAndLinearize(filledGrid2);
+            var linearizedGrid2 = GridOperations.Linearize(distancedGrid);
+            var distancedGrid2 = GridOperations.DistanceTwinsAndLinearize(linearizedGrid2);
             var trimmedGrid2 = GridOperations.TrimEnds(distancedGrid2);
+            var linearizedGrid3 = GridOperations.Linearize(trimmedGrid2);
             var last = GridOperations.ArrangeLastColumn(trimmedGrid2);
 
-            return last;
+            return linearizedGrid3;
         }
     }
 }

@@ -47,15 +47,28 @@
             return new GridAdjustedForArrows(grid, arrowRegister);
         }
 
-        public static IGrid DistanceTwins(IGrid grid)
+        public static IGrid DistanceTwinsAndLinearize(IGrid grid)
         {
-            var linearizedGrid = GridOperations.Linearize(grid);
-            return new GridWithEquallyDistanceTwins(linearizedGrid);
+            //int columns = grid.ElementArray.GetLength(1);
+
+            //var linearizedGrid = Linearize(grid);
+            //var distancedGrid = new GridWithEquallyDistanceTwins(linearizedGrid);
+
+            //for (int i = 0; i < columns; i++)
+            //{
+            //    linearizedGrid = Linearize(distancedGrid);
+            //    distancedGrid = new GridWithEquallyDistanceTwins(linearizedGrid);
+            //}
+            var distancedGrid = new GridWithEquallyDistanceTwins(grid);
+            return distancedGrid;
         }
+  
+        
 
         public static IGrid ArrangeLastColumn(IGrid grid)
         {
             return new GridWithArrangedLastColumn(grid);
         }
+
     }
 }

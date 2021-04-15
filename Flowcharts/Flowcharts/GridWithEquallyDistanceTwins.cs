@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
 
 namespace Flowcharts
 {
@@ -27,20 +28,54 @@ namespace Flowcharts
                 for (int i = columns - 1; i >= 0; i--)
                 {
                     int rows = ElementArray.GetLength(0);
+
                     for (int j = 0; j < rows - 1; j++)
                     {
                         if (ElementArray[j, i] != null
-                            && ElementArray[j, i].childElements.Count == 2
+                            && ElementArray[j, i].childElements.Where(x=>x.Column == i + 1).Count() == 2
                             && ElementArray[j, i + 1] != null
                             && ElementArray[j + 1, i + 1] != null
                             && ElementArray[j, i].childElements[0].Key == ElementArray[j, i + 1].Key
                             && ElementArray[j, i].childElements[1].Key == ElementArray[j + 1, i + 1].Key
-                            )
+                            ||
+                            ElementArray[j, i] != null
+                            && ElementArray[j, i].childElements.Where(x => x.Column == i + 1).Count() == 2
+                            && ElementArray[j, i + 1] != null
+                            && ElementArray[j + 1, i + 1] != null
+                            && ElementArray[j, i].childElements[0].Key == ElementArray[j, i + 1].Key
+                            && ElementArray[j, i].childElements[1].Key == ElementArray[j + 1, i + 1].Key)
                         {
                             LowerPreviousColumns(i);
                             LowerColumnFromRow(i, j);
                             moved = true;
                             ArrayOperations.Update(ElementArray);
+                        }           
+                    }
+                }
+            }
+            while (moved);
+
+            do
+            {
+                moved = false;
+                int columns = ElementArray.GetLength(1);
+                for (int i = columns - 2; i >= 0; i--)
+                {
+                    var rows = ElementArray.GetLength(0);
+                    for (int j = 1; j < rows ; j++)
+                    {
+                        if (ElementArray[j, i] != null
+                            && ElementArray[j, i + 1] != null
+                            && ElementArray[j - 1, i + 1] != null
+                            && ElementArray[j, i].childElements.Where(x => x.Column == i + 1).Count() == 2
+                            && ElementArray[j, i].childElements[0].Key == ElementArray[j - 1, i + 1].Key
+                            && ElementArray[j, i].childElements[1].Key == ElementArray[j, i + 1].Key
+                            )
+
+                        {
+                            LowerPreviousColumns(i);
+                            LowerColumnFromRow(i , j - 1);
+                            moved = true;                            
                         }
                     }
                 }

@@ -14,8 +14,11 @@
         {
             var emptyRows = ArrayOperations.GetEmptyRows(ElementArray);
 
-            ElementArray = ArrayOperations.RaiseAllRows(ElementArray, emptyRows);
-            ElementArray = ArrayOperations.EliminateEmptyRows(ElementArray, emptyRows.Count);                                   
+            if(emptyRows.Count != 0)
+            {
+                ElementArray = ArrayOperations.RaiseAllRows(ElementArray, emptyRows);
+                ElementArray = ArrayOperations.EliminateEmptyRows(ElementArray, emptyRows.Count);
+            }
         }
     }
 }
