@@ -25,7 +25,6 @@ namespace Flowcharts
         public static IOPoints CreateIO((double x, double y) In, (double x, double y) Out, (double x, double y) BackArrowLeft, (double x, double y) BackArrowRight)
         {
             return new IOPoints(In,  Out,  BackArrowLeft,  BackArrowRight);
-        }
-    
+        }    
     }
 }

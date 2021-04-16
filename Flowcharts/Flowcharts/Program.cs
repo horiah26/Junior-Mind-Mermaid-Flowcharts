@@ -17,12 +17,9 @@
             string yes = "Yes";
             string no = "No";
 
-            for(int i = 1; i < 13; i++)
-            {
-                var flowchart = Factory.Flowchart("LeftRight", fileName + i, path);
-                GetCase(i, flowchart);
-                flowchart.DrawFlowchart();
-            }
+            var flowchart = Factory.Flowchart("TopDown", fileName, path);
+            GetCase(7, flowchart);
+            flowchart.DrawFlowchart();         
 
             void GetCase(int i, Flowchart flowchart)
             {
@@ -134,24 +131,24 @@
                 }
                 else if (i == 7)
                 {
-                    flowchart.AddPair(("Start", "AE or SDR sells a business package", rounded), ("AE?", "Account owned by AE?", rhombus), arrow);
-                    flowchart.AddPair("AE?", ("Keeps ownership", "AE keeps ownership of the account", rhombus), arrow, yes);
-                    flowchart.AddPair("AE?", ("Opportunity?", "AE has an open opportunity on the account?", rhombus), arrow, no);
-                    flowchart.AddPair("Opportunity?", ("Opportunity", "AE has an open opportunity on the account", rounded), arrow, yes);
-                    flowchart.AddPair("Opportunity?", ("No opportunity", "No open opportunity on the account", rounded), arrow, no);
-                    flowchart.AddPair("Opportunity", ("Employees?2", "How many employees?", rhombus), arrow);
+                    flowchart.AddPair(("Start", "AE or SDR sells a business package", "ParallelogramAlt"), ("AE?", "Account owned by AE?", rhombus), arrow);
+                    flowchart.AddPair("AE?", ("Keeps ownership", "AE keeps ownership of the account", stadium), arrow, yes);
+                    flowchart.AddPair("AE?", ("Opportunity?", "AE has an open opportunity on the account?", "Banner"), "ThickLink", no);
+                    flowchart.AddPair("Opportunity?", ("Opportunity", "AE has an open opportunity on the account", "Parallelogram"), arrow, yes);
+                    flowchart.AddPair("Opportunity?", ("No opportunity", "No open opportunity on the account", rectangle), arrow, no);
+                    flowchart.AddPair("Opportunity", ("Employees?2", "How many employees?", "Banner"), "ThickLink");
 
-                    flowchart.AddPair("Employees?2", ("SMB2", "Hand off account to SMB AM. Round Robin after 120 days", rounded), arrow, "< 100 employees");
+                    flowchart.AddPair("Employees?2", ("SMB2", "Hand off account to SMB AM. Round Robin after 120 days", "Hexagon"), arrow, "< 100 employees");
                     flowchart.AddPair("Employees?2", ("AM2", "Hand off account to AM. Round Robin after 120 days", rounded), arrow, "101 - 5000 +");
 
-                    flowchart.AddPair("No opportunity", ("Employees?", "How many employees?", rhombus), arrow);
-                    flowchart.AddPair("Employees?", ("SMB", "Hand off account to SMB AM. Round Robin after 120 days", rounded), arrow, "< 100 employees");
-                    flowchart.AddPair("Employees?", ("AM", "Hand off account to AM. Round Robin after 120 days", rounded), arrow, "101 - 5000 +");
-                    flowchart.AddPair("SMB", ("Spreadsheets", "Sales Ops sends spreadsheets", rounded), arrow);
-                    flowchart.AddPair("AM", ("Spreadsheets", "Sales Ops sends spreadsheets", rounded), arrow);
-                    flowchart.AddPair("SMB2", ("Spreadsheets", "Sales Ops sends spreadsheets", rounded), arrow);
-                    flowchart.AddPair("AM2", ("Spreadsheets", "Sales Ops sends spreadsheets", rounded), arrow);
-                    flowchart.AddPair("Spreadsheets", ("Uploads", "Sales Ops uploads account changes to Salesforce", rounded), arrow);
+                    flowchart.AddPair("No opportunity", ("Employees?", "How many employees?", "Banner"), "Link");
+                    flowchart.AddPair("Employees?", ("SMB", "Hand off account to SMB AM. Round Robin after 120 days", "Subroutine"), arrow, "< 100 employees");
+                    flowchart.AddPair("Employees?", ("AM", "Hand off account to AM. Round Robin after 120 days", "Trapezoid"), arrow, "101 - 5000 +");
+                    flowchart.AddPair("SMB", ("Spreadsheets", "Sales Ops sends spreadsheets", "Banner"), "ThickLink");
+                    flowchart.AddPair("AM", ("Spreadsheets", "Sales Ops sends spreadsheets", "ParallelogramAlt"), "Link");
+                    flowchart.AddPair("SMB2", ("Spreadsheets", "Sales Ops sends spreadsheets", rounded), "DottedLink");
+                    flowchart.AddPair("AM2", ("Spreadsheets", "Sales Ops sends spreadsheets", "Banner"), "DottedLink");
+                    flowchart.AddPair("Spreadsheets", ("Uploads", "Sales Ops uploads account changes to Salesforce", "Cylinder"), arrow);
                 }
                 else if (i == 8)
                 {
@@ -213,12 +210,12 @@
                     flowchart.AddPair("Administer test", ("Assess results", "Assess TB test results and child condition", rectangle), arrow);
                     flowchart.AddPair("Assess results", ("A", "A", "Circle"), arrow);
                     flowchart.AddPair("Child", ("Child well?", "Child well?", rhombus), arrow, no);
-                    flowchart.AddPair("Child well?", ("6 months", "6 months preventive isoniazid", rhombus), arrow, yes);
-                    flowchart.AddPair("6 months", ("Parent", "Have parent bring in if child shows any symptoms", rhombus), arrow);
+                    flowchart.AddPair("Child well?", ("6 months", "6 months preventive isoniazid", rectangle), arrow, yes);
+                    flowchart.AddPair("6 months", ("Parent", "Have parent bring in if child shows any symptoms", rectangle), arrow);
 
-                    flowchart.AddPair("Child well?", ("History", "Take full history. Examine for TB", rhombus), arrow, no);
-                    flowchart.AddPair("History", ("TreatTB", "If likely TB diagnosis, treat TB", rhombus), arrow);
-                    flowchart.AddPair("TreatTB", ("Treat Other", "If other diagnosis more likely, treat as needed and watch for TB symptoms", rhombus), arrow);
+                    flowchart.AddPair("Child well?", ("History", "Take full history. Examine for TB", rectangle), arrow, no);
+                    flowchart.AddPair("History", ("TreatTB", "If likely TB diagnosis, treat TB", rectangle), arrow);
+                    flowchart.AddPair("TreatTB", ("Treat Other", "If other diagnosis more likely, treat as needed and watch for TB symptoms", rectangle), arrow);
 
                 }
                 else if (i == 11)

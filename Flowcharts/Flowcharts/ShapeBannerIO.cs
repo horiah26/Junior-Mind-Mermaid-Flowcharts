@@ -43,16 +43,16 @@ namespace Flowcharts
             }
             else if (typeof(OrientationTopDown) == orientation.GetType())
             {
-                In = (xPos + length / 2 - length / 10 - 15, yPos - height / 2 - 5);
-                Out = (xPos + length / 2 - length / 10  - 15, yPos + height/2);
+                In = (xPos + length / 2 - length / 10 , yPos - height / 2 - 5);
+                Out = (xPos + length / 2 - length / 10  , yPos + height/2);
 
                 BackArrowLeft = (xPos - 20, yPos);
                 BackArrowRight = (xPos + length - length / 10 - 15, yPos);
             }
             else if (typeof(OrientationDownTop) == orientation.GetType())
             {
-                In = (xPos + length / 2 - length / 10 - 15, yPos + height / 2 + 4);
-                Out = (xPos + length / 2 - length / 10 - 15, yPos - height / 2);
+                In = (xPos + length / 2 - length / 10, yPos + height / 2 + 4);
+                Out = (xPos + length / 2 - length / 10, yPos - height / 2);
 
                 BackArrowLeft = (xPos - 20, yPos);
                 BackArrowRight = (xPos + length - length / 10 - 15, yPos);
