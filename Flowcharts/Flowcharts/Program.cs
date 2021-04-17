@@ -16,10 +16,12 @@
             string rounded = "RoundedRectangle";
             string yes = "Yes";
             string no = "No";
-
-            var flowchart = Factory.Flowchart("TopDown", fileName, path);
-            GetCase(7, flowchart);
-            flowchart.DrawFlowchart();         
+            for(int i = 1; i < 13; i++)
+            {
+                var flowchart = Factory.Flowchart("TopDown", fileName + i, path);
+                GetCase(i, flowchart);
+                flowchart.DrawFlowchart();
+            }       
 
             void GetCase(int i, Flowchart flowchart)
             {
