@@ -1,19 +1,19 @@
 ﻿namespace Flowcharts
 {
-    class RhombusSizeAndAdjustment
+    class ShapeRhombusSizeAndAdjustment
     {
         readonly double length;
         readonly double height;
         readonly int numberOfLines;
 
-        public RhombusSizeAndAdjustment(double length, double height, string[] lines)
+        public ShapeRhombusSizeAndAdjustment(double length, double height, string[] lines)
         {
             this.length = length;
             this.height = height;
             numberOfLines = lines.Length;
         }
 
-        public RhombusSizeAndAdjustment(double length, double height, int numberOfLines)
+        public ShapeRhombusSizeAndAdjustment(double length, double height, int numberOfLines)
         {
             this.length = length;
             this.height = height;

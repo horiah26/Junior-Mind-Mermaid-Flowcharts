@@ -28,7 +28,7 @@ namespace Flowcharts
 
         public IOPoints GetIO()
         {
-            (var linesAdjustment, var maxDimension, var correctionFactor) = new RhombusSizeAndAdjustment(length, height, lines).Get();
+            (var linesAdjustment, var maxDimension, var correctionFactor) = new ShapeRhombusSizeAndAdjustment(length, height, lines).Get();
 
             if (typeof(OrientationLeftRight) == orientation.GetType())
             {

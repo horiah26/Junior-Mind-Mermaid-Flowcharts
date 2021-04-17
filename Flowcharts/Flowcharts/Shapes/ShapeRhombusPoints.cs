@@ -19,7 +19,7 @@
 
         public string GetPoints()
         {
-            (var linesAdjustment, var maxDimension,var correctionFactor) = new RhombusSizeAndAdjustment(length, height, numberOfLines).Get();
+            (var linesAdjustment, var maxDimension,var correctionFactor) = new ShapeRhombusSizeAndAdjustment(length, height, numberOfLines).Get();
 
             string up = (xPos + maxDimension / 2 - linesAdjustment / correctionFactor).ToString() + "," + (yPos - maxDimension / 2).ToString();
             string down = (xPos + maxDimension / 2 - linesAdjustment / correctionFactor).ToString() + "," + (yPos + maxDimension / 2).ToString();
