@@ -1,0 +1,12 @@
+   (("Start", "Start", "Rectangle"), ("Declare", "Declare variables a, b and c?", "Rectangle"), "Arrow");
+   (("Declare"), ("Read", "Read a, b and c", "Rectangle"), "Arrow");
+   (("Read"), ("a>b?", "is a > b?", "Rhombus"), "Arrow");
+   (("a>b?"), ("b>c?", "is b > c?", "Rhombus"), "Arrow", "False");
+   (("a>b?"), ("a>c?", "is a > c?", "Rhombus"), "Arrow", "True");
+   (("b>c?"), ("print b", "print b", "Rectangle"), "Arrow", "True");
+   (("b>c?"), ("print c", "print c", "Rectangle"), "Arrow", "False");
+   (("a>c?"), ("print c"), "Arrow", "False");
+   (("a>c?"), ("print a", "print a", "Rectangle"), "Arrow", "True");
+   (("print c"), ("stop", "Stop", "Stadium"), "Arrow");
+   (("print a"), ("stop"), "Arrow");
+   (("print b"), ("stop"), "Arrow");

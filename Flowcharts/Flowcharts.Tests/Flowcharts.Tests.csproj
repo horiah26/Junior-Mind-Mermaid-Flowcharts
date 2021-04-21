@@ -23,4 +23,8 @@
     <ProjectReference Include="..\Flowcharts\Flowcharts.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="FileTests\" />
+  </ItemGroup>
+
 </Project>

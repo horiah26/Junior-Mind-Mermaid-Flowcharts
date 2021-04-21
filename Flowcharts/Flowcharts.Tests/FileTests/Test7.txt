@@ -1,0 +1,18 @@
+  (("Start", "AE or SDR sells a business package", "ParallelogramAlt"), ("AE?", "Account owned by AE?", "Rhombus"), "Arrow");
+   (("AE?"), ("Keeps ownership", "AE keeps ownership of the account", "Stadium"), "Arrow", "Yes");
+   (("AE?"), ("Opportunity?", "AE has an open opportunity on the account?", "Banner"), "ThickLink", "No");
+   (("Opportunity?"), ("Opportunity", "AE has an open opportunity on the account", "Parallelogram"), "Arrow", "Yes");
+   (("Opportunity?"), ("No opportunity", "No open opportunity on the account", "Rectangle"), "Arrow", "No");
+   (("Opportunity"), ("Employees?2", "How many employees?", "Banner"), "ThickLink");
+
+   (("Employees?2"), ("SMB2", "Hand off account to SMB AM. Round Robin after 120 days", "Hexagon"), "Arrow", "< 100 employees");
+   (("Employees?2"), ("AM2", "Hand off account to AM. Round Robin after 120 days", "RoundedRectangle"), "Arrow", "101 - 5000 +");
+
+   (("No opportunity"), ("Employees?", "How many employees?", "Banner"), "Link");
+   (("Employees?"), ("SMB", "Hand off account to SMB AM. Round Robin after 120 days", "Subroutine"), "Arrow", "< 100 employees");
+   (("Employees?"), ("AM", "Hand off account to AM. Round Robin after 120 days", "Trapezoid"), "Arrow", "101 - 5000 +");
+   (("SMB"), ("Spreadsheets", "Sales Ops sends spreadsheets", "Banner"), "ThickLink");
+   (("AM"), ("Spreadsheets", "Sales Ops sends spreadsheets", "ParallelogramAlt"), "Link");
+   (("SMB2"), ("Spreadsheets", "Sales Ops sends spreadsheets", "RoundedRectangle"), "DottedLink");
+   (("AM2"), ("Spreadsheets", "Sales Ops sends spreadsheets", "Banner"), "DottedLink");
+   (("Spreadsheets"), ("Uploads", "Sales Ops uploads account changes to Salesforce", "Cylinder"), "Arrow");

@@ -1,0 +1,18 @@
+(("Start", "Start", "Stadium"), ("Emergency?", "Is it an Emergency?", "Rhombus"), "Arrow"); 
+(("Emergency?"), ("War?", "Did the US declare War?", "Rhombus"), "Arrow", "Yes");  
+(("War?"), ("Zombie?", "Is it a Zombie Attack?", "Rhombus"), "Arrow", "No");  
+(("Zombie?"), ("Fire?", "Is there a Fire?", "Rhombus"), "Arrow", "No");  
+(("Fire?"), ("Dead?", "Is Someone Dead?", "Rhombus"), "Arrow", "No");  
+(("Dead?"), ("Sad later", "I'll be sad later. Let me be happy now", "Rectangle"), "Arrow", "Yes");  
+(("Sad later"), ("End", "End", "Stadium"), "Arrow");
+(("War?"), ("Evacuating?", "Are we evacuating?", "Rhombus"), "Arrow", "Yes");  
+(("Zombie?"), ("Evacuating?"), "SideArrow", "Yes");  
+(("Fire?"), ("Evacuating?"), "SideArrow", "Yes"); 
+(("Evacuating?"), ("Knock", "KNOCK!", "Rectangle"), "Arrow", "Yes");
+(("Emergency?"), ("Visiting?", "Is someone visiting?", "Rhombus"), "Arrow", "No");
+(("Visiting?"), ("They can wait", "They can wait", "Rectangle"), "Arrow", "Yes");  
+(("Visiting?"), ("Going somewhere?", "Are you going somewhere?", "Rhombus"), "Arrow", "No"); 
+(("Going somewhere?"), ("Tell me later", "Tell me later", "Rectangle"), "Arrow", "No");  
+(("Going somewhere?"), ("Leave a note", "Leave a note", "Rectangle"), "Arrow", "Yes");
+(("Evacuating?"), ("Tell me later"), "Arrow", "Yes");  
+(("Dead?"), ("Tell me later"), "SideArrow", "Yes");

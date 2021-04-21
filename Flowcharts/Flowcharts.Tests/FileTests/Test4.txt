@@ -1,0 +1,9 @@
+ (("Call", "Phone call is placed", "Stadium"), ("Ringer?", "Is ringer turned on?", "Rhombus"), "Arrow");
+ (("Ringer?"), ("Phone rings", "Phone rings", "Rectangle"), "Arrow", "Yes");
+ (("Ringer?"), ("Voice", "Voice mail picks up", "Rectangle"), "Arrow", "No");
+ (("Phone rings"), ("User", "Does user pick up?", "Rhombus"), "Arrow");
+ (("User"), ("Ring4", "Is it ring #4?", "Rhombus"), "Arrow", "No");
+ (("User"), ("End", "Phone call is complete", "Stadium"), "Arrow", "Yes");
+ (("Ring4"), ("Voice"), "BackArrow", "Yes");
+ (("Ring4"), ("Phone rings"), "BackArrow", "No");
+ (("Voice"), ("End"), "Arrow");

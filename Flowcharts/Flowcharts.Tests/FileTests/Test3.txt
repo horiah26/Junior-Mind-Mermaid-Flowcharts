@@ -1,0 +1,18 @@
+(("Arrives", "Patient arrives", "Stadium"), ("System?", "Patient in the system?", "Rhombus"), "Arrow");
+(("System?"), ("Nurse?", "Nurse available?", "Rhombus"), "Arrow", "Yes");
+(("System?"), ("Paperwork", "Patient needs to complete paperwork", "Rectangle"), "Arrow", "No");
+(("Paperwork"), ("System?"), "BackArrow");
+(("Nurse?"), ("Pulse", "Take pulse, blood pressure, weight, urine", "Rectangle"), "Arrow", "Yes");
+(("Nurse?"), ("Waiting room", "Waiting room", "Rectangle"), "Arrow", "No");
+(("Waiting room"), ("Nurse?"), "BackArrow");
+(("Pulse"), ("Doctor?", "Doctor available?", "Rhombus"), "Arrow");
+(("Doctor?"), ("PatientDoctor", "Patient with doctor", "Rectangle"), "Arrow", "Yes");
+(("Doctor?"), ("Waiting room2", "Waiting room", "Rectangle"), "Arrow", "No");
+(("Waiting room2"), ("Doctor?"), "BackArrow");
+(("PatientDoctor"), ("FollowUp?", "Need follow-up appointment?", "Rhombus"), "Arrow");
+(("FollowUp?"), ("MakeAppointment", "Make an appointment", "Rectangle"), "Arrow", "Yes");
+(("FollowUp?"), ("Medication?", "Need medication?", "Rhombus"), "Arrow", "No");
+(("Medication?"), ("Pharmacy", "Patient sent to pharmacy?", "Rectangle"), "Arrow", "Yes");
+(("Pharmacy"), ("Dispense", "Dispense medication", "Rectangle"), "Arrow");
+(("Dispense"), ("End", "Patient leaves", "Stadium"), "Arrow");
+(("MakeAppointment"), ("End"), "Arrow");

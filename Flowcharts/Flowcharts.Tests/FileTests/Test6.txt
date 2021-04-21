@@ -1,0 +1,16 @@
+ (("Order placed", "Order is placed online", "Stadium"), ("Confirmation", "Email confirmation is sent to both the customer and the web email", "Rectangle"), "Arrow");
+ (("Confirmation"), ("Order checked", "Order is checked on Reference point to confirm purchased goods", "Rectangle"), "Arrow");
+ (("Order checked"), ("In stock?", "Are the purchased goods in stock?", "Rhombus"), "Arrow");
+ (("In stock?"), ("Cat & Dan", "Cat and Dan are contacted for an ETA of the goods", "Rectangle"), "Arrow", "No");
+ (("In stock?"), ("Allocated", "Stock is allocated in the designated areas", "Rectangle"), "Arrow", "Yes");
+ (("In stock?"), ("Customer contacted", "Customer is contacted to arrange delivery or collection", "Rectangle"), "Arrow", "Yes");
+ (("Cat & Dan"), ("Calendar appointment", "Calendar appointment is scheduled for ETA date", "Rectangle"), "Arrow");
+ (("Cat & Dan"), ("Customer ETA", "Customer is called and informed of ETA", "Rectangle"), "Arrow");
+ (("Calendar appointment"), ("Goods arrive", "Goods arrive in stock and are allocated", "Rectangle"), "Arrow");
+ (("Goods arrive"), ("Customer contacted"), "Arrow");
+ (("Customer contacted"), ("UK?", "Is customer based in the UK?", "Rhombus"), "Arrow");
+ (("UK?"), ("Post office", "Take goods to the Post Office", "Rectangle"), "Arrow", "Yes");
+ (("UK?"), ("Reference point", "Enter on Reference point delivery / collection details", "Rectangle"), "Arrow", "No");
+ (("Post office"), ("Postage", "Pay postage and VAT", "Rectangle"), "Arrow");
+ (("Postage"), ("End", "Customer recieves goods and reference point is updated", "Stadium"), "Arrow");
+ (("Reference point"), ("End"), "Arrow");
