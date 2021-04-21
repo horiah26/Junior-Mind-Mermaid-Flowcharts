@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Flowcharts": {
+      "commandName": "Project",
+      "commandLineArgs": "C:\\Users\\Horia\\Source\\Repos\\horiah26\\HanganHoriaJuniorMind\\Flowcharts\\Flowcharts\\bin\\Debug\\netcoreapp3.1\\Test12.txt"
+    }
+  }
+}
