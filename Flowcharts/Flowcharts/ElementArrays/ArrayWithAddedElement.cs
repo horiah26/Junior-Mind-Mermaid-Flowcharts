@@ -25,11 +25,11 @@ namespace Flowcharts
         {
             if (row > Rows - 1)
             {
-                ElementArray = ArrayOperations.Resize(ElementArray, row + 1, Columns);
+                ElementArray = ArrayOperations.Resize(ElementArray, row + 1, ElementArray.GetLength(1));
             }
             if (column > Columns - 1)
             {
-                ElementArray = ArrayOperations.Resize(ElementArray, Rows, column + 1);
+                ElementArray = ArrayOperations.Resize(ElementArray, ElementArray.GetLength(0), column + 1);
             }
 
             if (ElementArray[row, column] != null)

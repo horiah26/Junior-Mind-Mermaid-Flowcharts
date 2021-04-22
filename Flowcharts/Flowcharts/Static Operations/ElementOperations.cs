@@ -19,7 +19,7 @@ namespace Flowcharts
 
         public static (int distanceFromEdge, int unitLength, int unitHeight) GetSpacing()
         {
-            return new GridSpacing().GetSpacing();
+            return GridSpacing.GetSpacing();
         }
         
         public static IOPoints CreateIO((double x, double y) In, (double x, double y) Out, (double x, double y) BackArrowLeft, (double x, double y) BackArrowRight)

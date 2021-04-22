@@ -2,28 +2,47 @@
 
 namespace Flowcharts
 {
-    class GridSpacing
+    static class GridSpacing
     {
-        readonly IOrientation orientation = StaticOrientation.Orientation;
+        static int distanceFromEdgeHorizontal = 150;
+        static int unitLengthHorizontal = 200;
+        static int unitHeightHorizontal = 150;
 
-        public GridSpacing()
-        {
-        }
+        static int distanceFromEdgeVertical = 150;
+        static int unitLengthVertical = 200;
+        static int unitHeightVertical = 200;
 
-        public (int distanceFromEdge, int unitLength, int unitHeight) GetSpacing()
+
+        public static (int distanceFromEdge, int unitLength, int unitHeight) GetSpacing()
         {
+            IOrientation orientation = StaticOrientation.Orientation;
+
             if (typeof(OrientationRightLeft) == orientation.GetType() || typeof(OrientationLeftRight) == orientation.GetType())
             {
-                return (150, 200, 150);
+                return (distanceFromEdgeHorizontal, unitLengthHorizontal, unitHeightHorizontal);
             }
             else if (typeof(OrientationTopDown) == orientation.GetType() || typeof(OrientationDownTop) == orientation.GetType())
             {
-                return (150, 200, 200);
+                return (distanceFromEdgeVertical, unitLengthVertical, unitHeightVertical);
             }
             else
             {
                 throw new ArgumentException("Orientation must be one of the following: RightLeft | LeftRight | TopDown | DownTop");
             }
+        }
+
+        public static void SetHorizontal(int distanceFromEdgeHorizontal, int unitLengthHorizontal, int unitHeightHorizontal)
+        {
+            GridSpacing.distanceFromEdgeHorizontal = distanceFromEdgeHorizontal;
+            GridSpacing.unitLengthHorizontal = unitLengthHorizontal;
+            GridSpacing.unitHeightHorizontal = unitHeightHorizontal;
+        }
+
+        public static void SetVertical(int distanceFromEdgeVertical, int unitLengthVertical, int unitHeightVertical)
+        {
+            GridSpacing.distanceFromEdgeVertical = distanceFromEdgeVertical;
+            GridSpacing.unitLengthVertical = unitLengthVertical;
+            GridSpacing.unitHeightVertical = unitHeightVertical;
         }
     }
 }
