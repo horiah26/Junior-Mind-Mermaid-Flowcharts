@@ -31,12 +31,10 @@ namespace Flowcharts
             //    flowchart.DrawFlowchart();
             //}
             //
-            var flowchart = Factory.Flowchart("LeftRight", "test");
 
-            flowchart.AddPair(("A", "A", rectangle), ("B", "B", rectangle), arrow);
-            flowchart.AddPair(("A", "A", rectangle), ("C", "C", rectangle), arrow);
-            flowchart.AddPair(("A", "A", rectangle), ("D", "D", rectangle), arrow);
-            flowchart.AddPair("D", ("E", "E", rectangle), arrow);
+            var flowchart = Factory.Flowchart("LeftRight", "test");
+            flowchart.AddPair(("A", "A", rectangle), ("B", "B", "Rectangle"), arrow);
+            flowchart.AddPair("B", "A", "BackArrow");
 
             flowchart.DrawFlowchart();
         }
