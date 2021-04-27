@@ -7,7 +7,7 @@ namespace Flowcharts
     {
         static void Main(string[] args)
         {
-            string rectangle = "Rectangle";
+            string shape = "Banner";
             string arrow = "Arrow";
 
             //string[] text;
@@ -32,9 +32,11 @@ namespace Flowcharts
             //}
             //
 
-            var flowchart = Factory.Flowchart("LeftRight", "test");
-            flowchart.AddPair(("A", " asfas fadfa sfasA", "Parallelogram"), ("B", " asdas asf afgsaeg adB", "ParallelogramAlt"), arrow);
-            flowchart.AddPair("B", "A", "BackArrow");
+            var flowchart = Factory.Flowchart("TopDown", "test");
+            shape = "Subroutine";
+            flowchart.AddPair(("A", "A", shape), ("B", "BB", shape), arrow);
+            flowchart.AddPair(("A2", "AAAAAAAA", shape), ("B2", "BBB BBBBBB BBBBBB BBBBBB BB", shape), arrow);
+            flowchart.AddPair(("A4", "AAA AAAAAA A A AAAAAA A AA AAAA AAAAA AA AAAAA AAAA", shape), ("B4", "BBBB BBBB BBBB BBBBBBB BBBBBB BBBBB BBBB BBB BB BBB", shape), arrow);
 
             flowchart.DrawFlowchart();
         }
