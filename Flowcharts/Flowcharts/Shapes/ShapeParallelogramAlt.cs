@@ -9,7 +9,7 @@ namespace Flowcharts
 
         public ShapeParallelogramAlt(string text) : base( text)
         {
-            lines = TextOperations.SplitText(text);
+            var lines = TextOperations.SplitText(text);
             inclination = Math.Sqrt(lines.Length) * 15;
         }
 

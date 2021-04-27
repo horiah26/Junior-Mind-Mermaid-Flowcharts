@@ -21,7 +21,7 @@
         {
             string leftUp = (xPos).ToString() + "," + (yPos + height / 2).ToString();
             string leftDown = (xPos - gap).ToString() + "," + (yPos - height / 2).ToString();
- 
+
             string rightUp = (xPos + length + gap).ToString() + "," + (yPos + height / 2).ToString();
 
             string rightDown = (xPos + length).ToString() + "," + (yPos - height / 2).ToString();

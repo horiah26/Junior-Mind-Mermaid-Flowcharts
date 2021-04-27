@@ -33,7 +33,7 @@ namespace Flowcharts
             //
 
             var flowchart = Factory.Flowchart("LeftRight", "test");
-            flowchart.AddPair(("A", "A", rectangle), ("B", "B", "Rectangle"), arrow);
+            flowchart.AddPair(("A", " asfas fadfa sfasA", "Parallelogram"), ("B", " asdas asf afgsaeg adB", "ParallelogramAlt"), arrow);
             flowchart.AddPair("B", "A", "BackArrow");
 
             flowchart.DrawFlowchart();
