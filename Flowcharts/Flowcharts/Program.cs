@@ -10,8 +10,8 @@ namespace Flowcharts
             string shape = "Banner";
             string arrow = "Arrow";
 
-            //string[] text;
-            //string path = null;
+            string[] text;
+            string path = null;
 
             //if (args.Length > 0)
             //{
@@ -30,13 +30,16 @@ namespace Flowcharts
             //    new SpecsToFlowchart(flowchart, reader).AddToFlowchart();
             //    flowchart.DrawFlowchart();
             //}
-            //
 
-            var flowchart = Factory.Flowchart("TopDown", "test");
-            shape = "Subroutine";
-            flowchart.AddPair(("A", "A", shape), ("B", "BB", shape), arrow);
-            flowchart.AddPair(("A2", "AAAAAAAA", shape), ("B2", "BBB BBBBBB BBBBBB BBBBBB BB", shape), arrow);
-            flowchart.AddPair(("A4", "AAA AAAAAA A A AAAAAA A AA AAAA AAAAA AA AAAAA AAAA", shape), ("B4", "BBBB BBBB BBBB BBBBBBB BBBBBB BBBBB BBBB BBB BB BBB", shape), arrow);
+            var flowchart = Factory.Flowchart("LeftRight", "test");
+
+            flowchart.AddPair(("Start", "Start", "Stadium"), ("A1", "A1", "Rectangle"), "Arrow");
+            flowchart.AddPair("Start", ("A2", "A2", "Rectangle"), "Arrow");
+            flowchart.AddPair("A2", ("C2", "C2", "Rectangle"), "Arrow");
+            flowchart.AddPair("A1", ("B1", "B1", "Rectangle"), "Arrow");
+            flowchart.AddPair("A1", ("B2", "B2", "Rectangle"), "Arrow");
+            flowchart.AddPair("B1", ("C1", "C1", "Rectangle"), "Arrow");
+            flowchart.AddPair("B2", ("C2", "C2", "Rectangle"), "SideArrow");
 
             flowchart.DrawFlowchart();
         }

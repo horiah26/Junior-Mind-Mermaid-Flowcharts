@@ -1373,5 +1373,442 @@ namespace Flowcharts.Tests
             Assert.Equal("BBBB BBBB BBBBBBBBBBB BBBBBB BBBBBBBBB BBB BB BBB", texts[5].InnerText);
         }
 
+        [Fact]
+        public void FlowchartForBiggestNumberOfThreeWorks()
+        {
+            var stream = new MemoryStream();
+            Writer.CreateWriter(stream);
+
+            var flowchart = new Flowchart("LeftRight", stream);
+
+            flowchart.AddPair(("Start", "Start", "Rectangle"), ("Declare", "Declare variables a, b and c", "Rectangle"), "Arrow");
+            flowchart.AddPair(("Declare"), ("Read", "Read a, b and c", "Rectangle"), "Arrow");
+            flowchart.AddPair(("Read"), ("a>b?", "is a > b?", "Rhombus"), "Arrow");
+            flowchart.AddPair(("a>b?"), ("b>c?", "is b > c?", "Rhombus"), "Arrow", "False");
+            flowchart.AddPair(("a>b?"), ("a>c?", "is a > c?", "Rhombus"), "Arrow", "True");
+            flowchart.AddPair(("b>c?"), ("print b", "print b", "Rectangle"), "Arrow", "True");
+            flowchart.AddPair(("b>c?"), ("print c", "print c", "Rectangle"), "Arrow", "False");
+            flowchart.AddPair(("a>c?"), ("print c"), "Arrow", "False");
+            flowchart.AddPair(("a>c?"), ("print a", "print a", "Rectangle"), "Arrow", "True");
+            flowchart.AddPair(("print c"), ("stop", "Stop", "Stadium"), "Arrow");
+            flowchart.AddPair(("print a"), ("stop"), "Arrow");
+            flowchart.AddPair(("print b"), ("stop"), "Arrow");
+
+            flowchart.DrawFlowchart();
+
+            XmlDocument xmlDoc = new XmlDocument();
+            xmlDoc.Load(stream);
+
+            var elements = xmlDoc.SelectNodes("/*[name()='svg']/*[name()='polygon']");
+            Assert.Equal("1279.25,153 1279.25,113 1220.75,113 1220.75,153", elements[0].Attributes[0].Value);
+            Assert.Equal("1050.75,240.5 1008.25,283 1050.75,325.5 1093.25,283", elements[1].Attributes[0].Value);
+            Assert.Equal("277,453 277,413 223,413 223,453", elements[2].Attributes[0].Value);
+            Assert.Equal("528,461.5 528,404.5 372,404.5 372,461.5", elements[3].Attributes[0].Value);
+            Assert.Equal("715,453 715,413 585,413 585,453", elements[4].Attributes[0].Value);
+            Assert.Equal("850.75,390.5 808.25,433 850.75,475.5 893.25,433", elements[5].Attributes[0].Value);
+            Assert.Equal("1279.25,453 1279.25,413 1220.75,413 1220.75,453", elements[6].Attributes[0].Value);
+            Assert.Equal("1474,451.8 1474,414.2 1426,414.2 1426,451.8", elements[7].Attributes[0].Value);
+            Assert.Equal("1050.75,540.5 1008.25,583 1050.75,625.5 1093.25,583", elements[8].Attributes[0].Value);
+            Assert.Equal("1279.25,753 1279.25,713 1220.75,713 1220.75,753", elements[9].Attributes[0].Value);
+
+            var texts = xmlDoc.SelectNodes("/*[name()='svg']/*[name()='text']");
+
+            Assert.Equal("1230.75", texts[0].Attributes[0].Value);
+            Assert.Equal("137", texts[0].Attributes[1].Value);
+            Assert.Equal("print b", texts[0].InnerText);
+
+            Assert.Equal("1027.825", texts[1].Attributes[0].Value);
+            Assert.Equal("287", texts[1].Attributes[1].Value);
+            Assert.Equal("is b > c?", texts[1].InnerText);
+
+            Assert.Equal("233", texts[2].Attributes[0].Value);
+            Assert.Equal("437", texts[2].Attributes[1].Value);
+            Assert.Equal("Start", texts[2].InnerText);
+
+            Assert.Equal("382", texts[3].Attributes[0].Value);
+            Assert.Equal("428.5", texts[3].Attributes[1].Value);
+            Assert.Equal("Declare variables a,b and c", texts[3].InnerText);
+
+            Assert.Equal("595", texts[4].Attributes[0].Value);
+            Assert.Equal("437", texts[4].Attributes[1].Value);
+            Assert.Equal("Read a, b and c", texts[4].InnerText);
+
+            Assert.Equal("827.825", texts[5].Attributes[0].Value);
+            Assert.Equal("437", texts[5].Attributes[1].Value);
+            Assert.Equal("is a > b?", texts[5].InnerText);
+
+            Assert.Equal("1230.75", texts[6].Attributes[0].Value);
+            Assert.Equal("437", texts[6].Attributes[1].Value);
+            Assert.Equal("print c", texts[6].InnerText);
+
+            Assert.Equal("1436.5", texts[7].Attributes[0].Value);
+            Assert.Equal("437", texts[7].Attributes[1].Value);
+            Assert.Equal("Stop", texts[7].InnerText);
+
+            Assert.Equal("1027.825", texts[8].Attributes[0].Value);
+            Assert.Equal("587", texts[8].Attributes[1].Value);
+            Assert.Equal("is a > c?", texts[8].InnerText);
+
+            Assert.Equal("1230.75", texts[9].Attributes[0].Value);
+            Assert.Equal("737", texts[9].Attributes[1].Value);
+            Assert.Equal("print a", texts[9].InnerText);
+        }
+
+        [Fact]
+        public void WorksForEightGreatGrandChildren()
+        {
+            var stream = new MemoryStream();
+            Writer.CreateWriter(stream);
+
+            var flowchart = new Flowchart("LeftRight", stream);
+
+            flowchart.AddPair(("A", "A", "Rectangle"), ("B1", "B1", "Rectangle"), "Arrow");
+            flowchart.AddPair("A", ("B2", "B2", "Rectangle"), "Arrow");
+
+            flowchart.AddPair("B1", ("C1", "C1", "Rectangle"), "Arrow");
+            flowchart.AddPair("B1", ("C2", "C2", "Rectangle"), "Arrow");
+
+            flowchart.AddPair("B2", ("C3", "C3", "Rectangle"), "Arrow");
+            flowchart.AddPair("B2", ("C4", "C4", "Rectangle"), "Arrow");
+
+            flowchart.AddPair("C1", ("D1", "D1", "Rectangle"), "Arrow");
+            flowchart.AddPair("C1", ("D2", "D2", "Rectangle"), "Arrow");
+
+            flowchart.AddPair("C2", ("D3", "D3", "Rectangle"), "Arrow");
+            flowchart.AddPair("C2", ("D4", "D4", "Rectangle"), "Arrow");
+
+            flowchart.AddPair("C3", ("D5", "D5", "Rectangle"), "Arrow");
+            flowchart.AddPair("C3", ("D6", "D6", "Rectangle"), "Arrow");
+
+            flowchart.AddPair("C4", ("D7", "D7", "Rectangle"), "Arrow");
+            flowchart.AddPair("C4", ("D8", "D8", "Rectangle"), "Arrow");
+
+            flowchart.DrawFlowchart();
+
+            XmlDocument xmlDoc = new XmlDocument();
+            xmlDoc.Load(stream);
+
+            var elements = xmlDoc.SelectNodes("/*[name()='svg']/*[name()='polygon']");
+            Assert.Equal("868.5,153 868.5,113 831.5,113 831.5,153", elements[0].Attributes[0].Value);
+            Assert.Equal("668.5,303 668.5,263 631.5,263 631.5,303", elements[1].Attributes[0].Value);
+            Assert.Equal("868.5,453 868.5,413 831.5,413 831.5,453", elements[2].Attributes[0].Value);
+            Assert.Equal("468.5,603 468.5,563 431.5,563 431.5,603", elements[3].Attributes[0].Value);
+            Assert.Equal("868.5,603 868.5,563 831.5,563 831.5,603", elements[4].Attributes[0].Value);
+            Assert.Equal("668.5,753 668.5,713 631.5,713 631.5,753", elements[5].Attributes[0].Value);
+            Assert.Equal("265,903 265,863 235,863 235,903", elements[6].Attributes[0].Value);
+            Assert.Equal("868.5,903 868.5,863 831.5,863 831.5,903", elements[7].Attributes[0].Value);
+            Assert.Equal("868.5,1053 868.5,1013 831.5,1013 831.5,1053", elements[8].Attributes[0].Value);
+            Assert.Equal("668.5,1203 668.5,1163 631.5,1163 631.5,1203", elements[9].Attributes[0].Value);
+            Assert.Equal("868.5,1353 868.5,1313 831.5,1313 831.5,1353", elements[10].Attributes[0].Value);
+            Assert.Equal("468.5,1503 468.5,1463 431.5,1463 431.5,1503", elements[11].Attributes[0].Value);
+            Assert.Equal("868.5,1503 868.5,1463 831.5,1463 831.5,1503", elements[12].Attributes[0].Value);
+            Assert.Equal("668.5,1653 668.5,1613 631.5,1613 631.5,1653", elements[13].Attributes[0].Value);
+            Assert.Equal("868.5,1803 868.5,1763 831.5,1763 831.5,1803", elements[14].Attributes[0].Value);
+
+            var texts = xmlDoc.SelectNodes("/*[name()='svg']/*[name()='text']");
+
+            Assert.Equal("841.5", texts[0].Attributes[0].Value);
+            Assert.Equal("137", texts[0].Attributes[1].Value);
+            Assert.Equal("D1", texts[0].InnerText);
+
+            Assert.Equal("641.5", texts[1].Attributes[0].Value);
+            Assert.Equal("287", texts[1].Attributes[1].Value);
+            Assert.Equal("C1", texts[1].InnerText);
+
+            Assert.Equal("841.5", texts[2].Attributes[0].Value);
+            Assert.Equal("437", texts[2].Attributes[1].Value);
+            Assert.Equal("D2", texts[2].InnerText);
+
+            Assert.Equal("441.5", texts[3].Attributes[0].Value);
+            Assert.Equal("587", texts[3].Attributes[1].Value);
+            Assert.Equal("B1", texts[3].InnerText);
+
+            Assert.Equal("841.5", texts[4].Attributes[0].Value);
+            Assert.Equal("587", texts[4].Attributes[1].Value);
+            Assert.Equal("D3", texts[4].InnerText);
+
+            Assert.Equal("641.5", texts[5].Attributes[0].Value);
+            Assert.Equal("737", texts[5].Attributes[1].Value);
+            Assert.Equal("C2", texts[5].InnerText);
+
+            Assert.Equal("245", texts[6].Attributes[0].Value);
+            Assert.Equal("887", texts[6].Attributes[1].Value);
+            Assert.Equal("A", texts[6].InnerText);
+
+            Assert.Equal("841.5", texts[7].Attributes[0].Value);
+            Assert.Equal("887", texts[7].Attributes[1].Value);
+            Assert.Equal("D4", texts[7].InnerText);
+
+            Assert.Equal("841.5", texts[8].Attributes[0].Value);
+            Assert.Equal("1037", texts[8].Attributes[1].Value);
+            Assert.Equal("D5", texts[8].InnerText);
+
+            Assert.Equal("641.5", texts[9].Attributes[0].Value);
+            Assert.Equal("1187", texts[9].Attributes[1].Value);
+            Assert.Equal("C3", texts[9].InnerText);
+
+            Assert.Equal("841.5", texts[10].Attributes[0].Value);
+            Assert.Equal("1337", texts[10].Attributes[1].Value);
+            Assert.Equal("D6", texts[10].InnerText);
+
+            Assert.Equal("441.5", texts[11].Attributes[0].Value);
+            Assert.Equal("1487", texts[11].Attributes[1].Value);
+            Assert.Equal("B2", texts[11].InnerText);
+
+            Assert.Equal("841.5", texts[12].Attributes[0].Value);
+            Assert.Equal("1487", texts[12].Attributes[1].Value);
+            Assert.Equal("D7", texts[12].InnerText);
+
+            Assert.Equal("641.5", texts[13].Attributes[0].Value);
+            Assert.Equal("1637", texts[13].Attributes[1].Value);
+            Assert.Equal("C4", texts[13].InnerText);
+
+            Assert.Equal("841.5", texts[14].Attributes[0].Value);
+            Assert.Equal("1787", texts[14].Attributes[1].Value);
+            Assert.Equal("D8", texts[14].InnerText);
+        }
+
+
+        [Fact]
+        public void SimpleFlowchartWorks()
+        {
+            var stream = new MemoryStream();
+            Writer.CreateWriter(stream);
+
+            var flowchart = new Flowchart("LeftRight", stream);
+
+            flowchart.AddPair(("Start", "Start", "Stadium"), ("Process", "Process", "Rectangle"), "Arrow");
+            flowchart.AddPair("Process", ("Decision", "Decision", "Rhombus"), "Arrow");
+            flowchart.AddPair("Decision", ("Data", "Data", "Parallelogram"), "Arrow", "Yes");
+            flowchart.AddPair("Decision", ("A", "A", "Circle"), "Arrow", "No");
+            flowchart.AddPair("Data", ("Document", "Document", "RoundedRectangle"), "Arrow");
+            flowchart.AddPair(("A2", "A2", "Circle"), "Document", "Arrow");
+            flowchart.AddPair("Document", ("End", "End", "Rectangle"), "Arrow");
+
+            flowchart.DrawFlowchart();
+
+            XmlDocument xmlDoc = new XmlDocument();
+            xmlDoc.Load(stream);
+
+            var elements = xmlDoc.SelectNodes("/*[name()='svg']/*[name()='polygon']");
+            Assert.Equal("888.5,153 873.5,113 811.5,113 826.5,153", elements[0].Attributes[0].Value);
+            Assert.Equal("277.5,301.8 277.5,264.2 222.5,264.2 222.5,301.8", elements[1].Attributes[0].Value);
+            Assert.Equal("485.75,303 485.75,263 414.25,263 414.25,303", elements[2].Attributes[0].Value);
+            Assert.Equal("650.75,237.25 605,283 650.75,328.75 696.5,283", elements[3].Attributes[0].Value);
+            Assert.Equal("1272.5,303 1272.5,263 1227.5,263 1227.5,303", elements[4].Attributes[0].Value);
+            Assert.Equal("779.75,224.5 779.75,184.5 734.75,184.5 734.75,224.5", elements[5].Attributes[0].Value);
+            Assert.Equal("781.75,375 781.75,335 744.75,335 744.75,375", elements[6].Attributes[0].Value);
+            Assert.Equal("888.5,153 873.5,113 811.5,113 826.5,153", elements[7].Attributes[0].Value);
+
+            var texts = xmlDoc.SelectNodes("/*[name()='svg']/*[name()='text']");
+
+            Assert.Equal("836.5", texts[0].Attributes[0].Value);
+            Assert.Equal("137", texts[0].Attributes[1].Value);
+            Assert.Equal("Data", texts[0].InnerText);
+
+            Assert.Equal("233", texts[1].Attributes[0].Value);
+            Assert.Equal("287", texts[1].Attributes[1].Value);
+            Assert.Equal("Start", texts[1].InnerText);
+
+            Assert.Equal("424.25", texts[2].Attributes[0].Value);
+            Assert.Equal("287", texts[2].Attributes[1].Value);
+            Assert.Equal("Process", texts[2].InnerText);
+
+            Assert.Equal("624.9", texts[3].Attributes[0].Value);
+            Assert.Equal("287", texts[3].Attributes[1].Value);
+            Assert.Equal("Decision", texts[3].InnerText);
+
+            Assert.Equal("1017.75", texts[4].Attributes[0].Value);
+            Assert.Equal("287", texts[4].Attributes[1].Value);
+            Assert.Equal("Document", texts[4].InnerText);
+
+            Assert.Equal("1237.5", texts[5].Attributes[0].Value);
+            Assert.Equal("287", texts[5].Attributes[1].Value);
+            Assert.Equal("End", texts[5].InnerText);
+
+            Assert.Equal("641.3", texts[6].Attributes[0].Value);
+            Assert.Equal("446", texts[6].Attributes[1].Value);
+            Assert.Equal("A2", texts[6].InnerText);
+
+            Assert.Equal("843", texts[7].Attributes[0].Value);
+            Assert.Equal("447", texts[7].Attributes[1].Value);
+            Assert.Equal("A", texts[7].InnerText);
+        }
+
+        [Fact]
+        public void SimpleFlowchartWorks2()
+        {
+            var stream = new MemoryStream();
+            Writer.CreateWriter(stream);
+
+            var flowchart = new Flowchart("LeftRight", stream);
+
+            flowchart.AddPair(("Description", "Description", "Stadium"), ("Step1", "Step1", "Rectangle"), "Arrow");
+            flowchart.AddPair("Description", ("Step2", "Step2", "Rectangle"), "Arrow");
+            flowchart.AddPair("Description", ("Step3", "Step3", "Rectangle"), "Arrow");
+            flowchart.AddPair("Step1", ("Goal1", "Goal1", "Rectangle"), "Arrow");
+            flowchart.AddPair("Step1", ("Goal2", "Goal2", "Rectangle"), "Arrow");
+            flowchart.AddPair("Step2", ("Goal1", "Goal1", "Rectangle"), "Arrow");
+            flowchart.AddPair("Step2", ("Goal2", "Goal2", "Rectangle"), "Arrow");
+            flowchart.AddPair("Step3", ("Goal1", "Goal1", "Rectangle"), "Arrow");
+            flowchart.AddPair("Step3", ("Goal2", "Goal2", "Rectangle"), "Arrow");
+
+            flowchart.DrawFlowchart();
+
+            XmlDocument xmlDoc = new XmlDocument();
+            xmlDoc.Load(stream);
+
+            var elements = xmlDoc.SelectNodes("/*[name()='svg']/*[name()='polygon']");
+            Assert.Equal("480.5,153 480.5,113 419.5,113 419.5,153", elements[0].Attributes[0].Value);
+            Assert.Equal("680.5,153 680.5,113 619.5,113 619.5,153", elements[1].Attributes[0].Value);
+            Assert.Equal("302.5,301.8 302.5,264.2 197.5,264.2 197.5,301.8", elements[2].Attributes[0].Value);
+            Assert.Equal("480.5,303 480.5,263 419.5,263 419.5,303", elements[3].Attributes[0].Value);
+            Assert.Equal("480.5,453 480.5,413 419.5,413 419.5,453", elements[4].Attributes[0].Value);
+            Assert.Equal("680.5,453 680.5,413 619.5,413 619.5,453", elements[5].Attributes[0].Value);
+
+            var texts = xmlDoc.SelectNodes("/*[name()='svg']/*[name()='text']");
+
+            Assert.Equal("429.5", texts[0].Attributes[0].Value);
+            Assert.Equal("137", texts[0].Attributes[1].Value);
+            Assert.Equal("Step1", texts[0].InnerText);
+
+            Assert.Equal("629.5", texts[1].Attributes[0].Value);
+            Assert.Equal("137", texts[1].Attributes[1].Value);
+            Assert.Equal("Goal1", texts[1].InnerText);
+
+            Assert.Equal("208", texts[2].Attributes[0].Value);
+            Assert.Equal("287", texts[2].Attributes[1].Value);
+            Assert.Equal("Description", texts[2].InnerText);
+
+            Assert.Equal("429.5", texts[3].Attributes[0].Value);
+            Assert.Equal("287", texts[3].Attributes[1].Value);
+            Assert.Equal("Step2", texts[3].InnerText);
+
+            Assert.Equal("429.5", texts[4].Attributes[0].Value);
+            Assert.Equal("437", texts[4].Attributes[1].Value);
+            Assert.Equal("Step3", texts[4].InnerText);
+
+            Assert.Equal("629.5", texts[5].Attributes[0].Value);
+            Assert.Equal("437", texts[5].Attributes[1].Value);
+            Assert.Equal("Goal2", texts[5].InnerText);
+        }
+
+        [Fact]
+        public void SimpleFlowchartWorks3()
+        {
+            var stream = new MemoryStream();
+            Writer.CreateWriter(stream);
+
+            var flowchart = new Flowchart("LeftRight", stream);
+
+            flowchart.AddPair(("Start", "Start", "Stadium"), ("Want?", "Do I Want to do this?", "Rhombus"), "Arrow");
+            flowchart.AddPair("Want?", ("Don't", "Don't Do it", "Rectangle"), "Arrow", "No");
+            flowchart.AddPair("Want?", ("Disaster?", "Will it likely end in disaster?", "Rhombus"), "Arrow", "Yes");
+            flowchart.AddPair("Disaster?", ("Story?", "Would it make a good story?", "Rhombus"), "Arrow", "Yes");
+            flowchart.AddPair("Disaster?", ("Do it", "Do it", "Rectangle"), "Arrow", "No");
+            flowchart.AddPair("Story?", "Do it", "BackArrow", "Yes");
+            flowchart.AddPair("Story?", "Don't", "BackArrow", "No");
+
+            flowchart.DrawFlowchart();
+
+            XmlDocument xmlDoc = new XmlDocument();
+            xmlDoc.Load(stream);
+
+            var elements = xmlDoc.SelectNodes("/*[name()='svg']/*[name()='polygon']");
+            Assert.Equal("698.75,153 698.75,113 601.25,113 601.25,153", elements[0].Attributes[0].Value);
+            Assert.Equal("277.5,301.8 277.5,264.2 222.5,264.2 222.5,301.8", elements[1].Attributes[0].Value);
+            Assert.Equal("451.5,198 366.5,283 451.5,368 536.5,283", elements[2].Attributes[0].Value);
+            Assert.Equal("851.5,175.25 743.75,283 851.5,390.75 959.25,283", elements[3].Attributes[0].Value);
+            Assert.Equal("651.5,344.75 563.25,433 651.5,521.25 739.75,433", elements[4].Attributes[0].Value);
+            Assert.Equal("877,603 877,563 823,563 823,603", elements[5].Attributes[0].Value);
+
+            var texts = xmlDoc.SelectNodes("/*[name()='svg']/*[name()='text']");
+
+            Assert.Equal("611.25", texts[0].Attributes[0].Value);
+            Assert.Equal("137", texts[0].Attributes[1].Value);
+            Assert.Equal("Don't Do it", texts[0].InnerText);
+
+            Assert.Equal("233", texts[1].Attributes[0].Value);
+            Assert.Equal("287", texts[1].Attributes[1].Value);
+            Assert.Equal("Start", texts[1].InnerText);
+
+            Assert.Equal("395.65", texts[2].Attributes[0].Value);
+            Assert.Equal("278.5", texts[2].Attributes[1].Value);
+            Assert.Equal("Do I Want to dothis?", texts[2].InnerText);
+
+            Assert.Equal("775.175", texts[3].Attributes[0].Value);
+            Assert.Equal("278.5", texts[3].Attributes[1].Value);
+            Assert.Equal("Would it make a goodstory?", texts[3].InnerText);
+
+            Assert.Equal("592.725", texts[4].Attributes[0].Value);
+            Assert.Equal("428.5", texts[4].Attributes[1].Value);
+            Assert.Equal("Will it likely endin disaster?", texts[4].InnerText);
+
+            Assert.Equal("833", texts[5].Attributes[0].Value);
+            Assert.Equal("587", texts[5].Attributes[1].Value);
+            Assert.Equal("Do it", texts[5].InnerText);
+        }
+
+
+        [Fact]
+        public void SimpleFlowchartWorks4()
+        {
+            var stream = new MemoryStream();
+            Writer.CreateWriter(stream);
+
+            var flowchart = new Flowchart("LeftRight", stream);
+
+            flowchart.AddPair(("Start", "Start", "Stadium"), ("A1", "A1", "Rectangle"), "Arrow");
+            flowchart.AddPair("Start", ("A2", "A2", "Rectangle"), "Arrow");
+            flowchart.AddPair("A2", ("C2", "C2", "Rectangle"), "Arrow");
+            flowchart.AddPair("A1", ("B1", "B1", "Rectangle"), "Arrow");
+            flowchart.AddPair("A1", ("B2", "B2", "Rectangle"), "Arrow");
+            flowchart.AddPair("B1", ("C1", "C1", "Rectangle"), "Arrow");
+            flowchart.AddPair("B2", ("C2", "C2", "Rectangle"), "SideArrow");
+
+            flowchart.DrawFlowchart();
+
+            XmlDocument xmlDoc = new XmlDocument();
+            xmlDoc.Load(stream);
+
+            var elements = xmlDoc.SelectNodes("/*[name()='svg']/*[name()='polygon']");
+            Assert.Equal("668.5,153 668.5,113 631.5,113 631.5,153", elements[0].Attributes[0].Value);
+            Assert.Equal("468.5,303 468.5,263 431.5,263 431.5,303", elements[1].Attributes[0].Value);
+            Assert.Equal("668.5,303 668.5,263 631.5,263 631.5,303", elements[2].Attributes[0].Value);
+            Assert.Equal("868.5,303 868.5,263 831.5,263 831.5,303", elements[3].Attributes[0].Value);
+            Assert.Equal("277.5,451.8 277.5,414.2 222.5,414.2 222.5,451.8", elements[4].Attributes[0].Value);
+            Assert.Equal("468.5,453 468.5,413 431.5,413 431.5,453", elements[5].Attributes[0].Value);
+            Assert.Equal("668.5,603 668.5,563 631.5,563 631.5,603", elements[6].Attributes[0].Value);
+
+            var texts = xmlDoc.SelectNodes("/*[name()='svg']/*[name()='text']");
+
+            Assert.Equal("641.5", texts[0].Attributes[0].Value);
+            Assert.Equal("137", texts[0].Attributes[1].Value);
+            Assert.Equal("C2", texts[0].InnerText);
+
+            Assert.Equal("441.5", texts[1].Attributes[0].Value);
+            Assert.Equal("287", texts[1].Attributes[1].Value);
+            Assert.Equal("A2", texts[1].InnerText);
+
+            Assert.Equal("641.5", texts[2].Attributes[0].Value);
+            Assert.Equal("287", texts[2].Attributes[1].Value);
+            Assert.Equal("B1", texts[2].InnerText);
+
+            Assert.Equal("841.5", texts[3].Attributes[0].Value);
+            Assert.Equal("287", texts[3].Attributes[1].Value);
+            Assert.Equal("C1", texts[3].InnerText);
+
+            Assert.Equal("233", texts[4].Attributes[0].Value);
+            Assert.Equal("437", texts[4].Attributes[1].Value);
+            Assert.Equal("Start", texts[4].InnerText);
+
+            Assert.Equal("441.5", texts[5].Attributes[0].Value);
+            Assert.Equal("437", texts[5].Attributes[1].Value);
+            Assert.Equal("A1", texts[5].InnerText);
+
+            Assert.Equal("641.5", texts[6].Attributes[0].Value);
+            Assert.Equal("587", texts[6].Attributes[1].Value);
+            Assert.Equal("B2", texts[6].InnerText);
+        }
     }
 }
