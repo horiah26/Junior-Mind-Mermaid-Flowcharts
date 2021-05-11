@@ -21,8 +21,11 @@
             var linearizedGrid3 = GridOperations.Linearize(trimmedGrid2);
             var last = GridOperations.ArrangeLastColumn(linearizedGrid3);
             var trimmed = GridOperations.TrimEnds(last);
-   
-            return trimmed;
+            var subsys = new GridWithSubsystems(trimmed);
+            var linearizedSubsys = new GridWithLinearizedSubsystem(subsys);
+            var trimm = GridOperations.TrimEnds(linearizedSubsys);
+
+            return trimm;
         }
     }
 }

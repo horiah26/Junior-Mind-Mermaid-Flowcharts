@@ -7,6 +7,8 @@ namespace Flowcharts
 {
     public class Element
     {
+        public Subsystem Subsystem { get; set;}
+
         public (double x, double y) In;
         public (double x, double y) Out;
         public (double x, double y) BackArrowLeft;
@@ -46,6 +48,7 @@ namespace Flowcharts
             Column = element.Column;
             Row = element.Row;
             ShapeType = element.ShapeType;
+            Subsystem = element.Subsystem;
         }
 
         public void AddParent(Element previous)

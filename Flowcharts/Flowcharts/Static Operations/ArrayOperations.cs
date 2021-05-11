@@ -31,7 +31,8 @@ namespace Flowcharts
 
         public static Element[,] LowerColumns(Element[,] ElementArray, double row, int column, int positions)
         {
-            return new ElementArrayWithLoweredColumn(ElementArray, row, column, positions).Get();
+            var array = new ElementArrayWithLoweredColumn(ElementArray, row, column, positions).Get();
+            return Update(array);
         }
 
         public static IArrowRegister CreatePairedArrows(IArrowRegister arrowRegister, IGrid grid)

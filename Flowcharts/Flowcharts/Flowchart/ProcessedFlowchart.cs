@@ -5,6 +5,7 @@
         IGrid grid;
         readonly ArrowRegister arrowRegister;
         readonly ElementRegister elementRegister;
+        DrawnFlowchart drawnFlowchart;
 
         public ProcessedFlowchart(IGrid grid, ArrowRegister arrowRegister, ElementRegister elementRegister)
         {
@@ -13,13 +14,20 @@
             this.elementRegister = elementRegister;
         }
 
-        public void Process()
+        public (IGrid grid, IArrowRegister orderedArrows) Process()
         {
             grid = GridOperations.DictionaryToGrid(elementRegister);
 
             var organizedGrid = GridOperations.OrganizedGrid(grid);
             var orderedArrows = Factory.OrderedArrows(arrowRegister);
-            var drawnFlowchart = Factory.DrawnFlowchart(organizedGrid, orderedArrows);
+            drawnFlowchart = Factory.DrawnFlowchart(organizedGrid, orderedArrows);
+
+            return (organizedGrid, orderedArrows);
+        }
+
+        public void Draw()
+        {
+            Process();
             drawnFlowchart.Draw();
         }
     }

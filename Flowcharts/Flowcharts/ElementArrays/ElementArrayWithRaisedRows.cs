@@ -10,6 +10,7 @@ namespace Flowcharts
         readonly int Rows;
         readonly int Columns;
 
+
         public ElementArrayWithRaisedRows(Element[,] ElementArray, List<int> emptyRows)
         {
             this.ElementArray = ElementArray;
@@ -23,16 +24,13 @@ namespace Flowcharts
         {
             foreach(var emptyRow in emptyRows)
             {
-                if(emptyRow < GetFirstOccupiedRow())
+                for (int i = emptyRow; i < Rows - 1; i++)
                 {
-                    for (int i = emptyRow; i < Rows - 1; i++)
+                    for (int j = 0; j < Columns; j++)
                     {
-                        for (int j = 0; j < Columns; j++)
-                        {
-                            ElementArray[i, j] = ElementArray[i + 1, j];
-                            ElementArray[i + 1, j] = null;
-                            ArrayOperations.Update(ElementArray);
-                        }
+                        ElementArray[i, j] = ElementArray[i + 1, j];
+                        ElementArray[i + 1, j] = null;
+                        ArrayOperations.Update(ElementArray);
                     }
                 }
             }

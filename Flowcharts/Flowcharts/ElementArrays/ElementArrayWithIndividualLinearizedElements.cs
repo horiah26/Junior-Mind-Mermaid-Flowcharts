@@ -18,11 +18,15 @@ namespace Flowcharts
             var rows = ElementArray.GetLength(0);
             var columns = ElementArray.GetLength(1);
 
-            for (int i = 1; i < rows; i++)
+            for (int i = 0; i < rows; i++)
             {
                 for (int j = 0; j < columns; j++)
                 {
                     bool moved = true;
+                    if(ElementArray[i,j] != null)
+                    {
+                        var txt = ElementArray[i, j].Text;
+                    }
 
                     while (ElementArray[i, j] != null
                         && ElementArray[i, j].parentElements.Count() == 1
