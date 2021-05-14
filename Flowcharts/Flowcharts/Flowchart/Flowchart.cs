@@ -36,7 +36,7 @@ namespace Flowcharts
             Grid = Factory.CreateGrid();
         }
 
-        public void AddPair((string key, string text, string shape) dataElement1, (string key, string text, string shape) dataElement2, string arrowName, string text = null, Subsystem subsystem = null)
+        public void AddPair((string key, string text, string shape) dataElement1, (string key, string text, string shape) dataElement2, string arrowName, string text = null)
         {
             var element1 = Factory.Element(dataElement1.key, dataElement1.text, dataElement1.shape);
             var element2 = Factory.Element(dataElement2.key, dataElement2.text, dataElement2.shape);
@@ -47,13 +47,13 @@ namespace Flowcharts
             arrowRegister.Add(arrow);
         }
 
-        public void AddPair(Subsystem subsystem, (string key, string text, string shape) dataElement1, (string key, string text, string shape) dataElement2, string arrowName, string text = null)
+        public void AddPair((string key, string text, string shape, Subsystem subsystem) dataElement1, (string key, string text, string shape, Subsystem subsystem) dataElement2, string arrowName, string text = null)
         {
             var element1 = Factory.Element(dataElement1.key, dataElement1.text, dataElement1.shape);
             var element2 = Factory.Element(dataElement2.key, dataElement2.text, dataElement2.shape);
 
-            element1.Subsystem = subsystem;
-            element2.Subsystem = subsystem;
+            element1.Subsystem = dataElement1.subsystem;
+            element2.Subsystem = dataElement2.subsystem;
 
             elementRegister.AddPair(arrowName, element1, element2);
 
@@ -71,14 +71,14 @@ namespace Flowcharts
             arrowRegister.Add(arrow);
         }
 
-        public void AddPair(Subsystem subsystem, string key1, (string key, string text, string shape) dataElement2, string arrowName, string text = null)
+        public void AddPair(string key1, (string key, string text, string shape, Subsystem subsystem) dataElement2, string arrowName, string text = null)
         {
             var element1 = elementRegister[key1];
             var element2 = Factory.Element(dataElement2.key, dataElement2.text, dataElement2.shape);
-            elementRegister.AddPair(arrowName, element1, element2);
 
-            element1.Subsystem = subsystem;
-            element2.Subsystem = subsystem;
+            element2.Subsystem = dataElement2.subsystem;
+
+            elementRegister.AddPair(arrowName, element1, element2);
 
             IArrow arrow = Factory.IArrow(arrowName, element1, element2, text);
             arrowRegister.Add(arrow);
@@ -88,20 +88,20 @@ namespace Flowcharts
         {
             var element1 = Factory.Element(dataElement1.key, dataElement1.text, dataElement1.shape);
             var element2 = elementRegister[key2];
+            
             elementRegister.AddPair(arrowName, element1, element2);
 
             IArrow arrow = Factory.IArrow(arrowName, element1, element2, text);
             arrowRegister.Add(arrow);
         }
 
-        public void AddPair(Subsystem subsystem, (string key, string text, string shape) dataElement1, string key2, string arrowName, string text = null)
+        public void AddPair((string key, string text, string shape, Subsystem subsystem) dataElement1, string key2, string arrowName, string text = null)
         {
             var element1 = Factory.Element(dataElement1.key, dataElement1.text, dataElement1.shape);
             var element2 = elementRegister[key2];
-            elementRegister.AddPair(arrowName, element1, element2);
+            element1.Subsystem = dataElement1.subsystem;
 
-            element1.Subsystem = subsystem;
-            element2.Subsystem = subsystem;
+            elementRegister.AddPair(arrowName, element1, element2);
 
             IArrow arrow = Factory.IArrow(arrowName, element1, element2, text);
             arrowRegister.Add(arrow);
@@ -111,21 +111,6 @@ namespace Flowcharts
         {
             var element1 = elementRegister[key1];
             var element2 = elementRegister[key2];
-
-            elementRegister.AddPair(arrowName, element1, element2);
-
-            IArrow arrow = Factory.IArrow(arrowName, element1, element2, text);
-
-            arrowRegister.Add(arrow);
-        }
-
-        public void AddPair(Subsystem subsystem, string key1, string key2, string arrowName, string text = null)
-        {
-            var element1 = elementRegister[key1];
-            var element2 = elementRegister[key2];
-
-            element1.Subsystem = subsystem;
-            element2.Subsystem = subsystem;
 
             elementRegister.AddPair(arrowName, element1, element2);
 

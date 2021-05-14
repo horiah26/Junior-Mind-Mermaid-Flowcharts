@@ -13,6 +13,7 @@ namespace Flowcharts
             this.ElementArray = ElementArray;
             LinearizeIndividualElements();
         }
+
         private void LinearizeIndividualElements()
         {
             var rows = ElementArray.GetLength(0);

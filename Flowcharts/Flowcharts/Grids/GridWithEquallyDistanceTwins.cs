@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Linq;
+﻿using System.Linq;
 
 namespace Flowcharts
 {
@@ -14,6 +11,7 @@ namespace Flowcharts
             ElementArray = grid.ElementArray;
             HandleSituation1();
             HandleSituation2();
+            HandleSituation3();
         }
 
         public void HandleSituation1()
@@ -39,12 +37,26 @@ namespace Flowcharts
                             && ElementArray[j, i].childElements[0].Key == ElementArray[j, i + 1].Key
                             && ElementArray[j, i].childElements[1].Key == ElementArray[j + 1, i + 1].Key
                             ||
+                            (ElementArray[j, i] != null
+                            && ElementArray[j, i].childElements.Where(x => x.Column == i + 1).Count() == 2
+                            && ElementArray[j, i + 1] != null
+                            && ElementArray[j + 1, i + 1] != null
+                            && ElementArray[j, i].childElements[1].Key == ElementArray[j, i + 1].Key
+                            && ElementArray[j, i].childElements[0].Key == ElementArray[j + 1, i + 1].Key
+                            ||
                             ElementArray[j, i] != null
                             && ElementArray[j, i].childElements.Where(x => x.Column == i + 1).Count() == 2
                             && ElementArray[j, i + 1] != null
                             && ElementArray[j + 1, i + 1] != null
                             && ElementArray[j, i].childElements[0].Key == ElementArray[j, i + 1].Key
-                            && ElementArray[j, i].childElements[1].Key == ElementArray[j + 1, i + 1].Key)
+                            && ElementArray[j, i].childElements[1].Key == ElementArray[j + 1, i + 1].Key
+                            ||
+                            ElementArray[j, i] != null
+                            && ElementArray[j, i].childElements.Where(x => x.Column == i + 1).Count() == 2
+                            && ElementArray[j, i + 1] != null
+                            && ElementArray[j + 1, i + 1] != null
+                            && ElementArray[j, i].childElements[1].Key == ElementArray[j, i + 1].Key
+                            && ElementArray[j, i].childElements[0].Key == ElementArray[j + 1, i + 1].Key))
                         {
                             LowerPreviousColumns(i);
                             LowerColumnFromRow(i, j);
@@ -106,7 +118,9 @@ namespace Flowcharts
                         && ElementArray[j, i + 1] != null
                         && ElementArray[j + 2, i + 1] != null
                         && ElementArray[j, i].childElements[0].Key == ElementArray[j, i + 1].Key
-                        && ElementArray[j, i].childElements[1].Key == ElementArray[j + 2, i + 1].Key)
+                        && ElementArray[j, i].childElements[1].Key == ElementArray[j + 2, i + 1].Key
+                        && ElementArray[j, i].childElements.First().parentElements.Count() == 1
+                        && ElementArray[j, i].childElements.Last().parentElements.Count() == 1)
                     {
                         LowerPreviousColumns(i);
                     }
@@ -143,6 +157,45 @@ namespace Flowcharts
                     }
                 }
             }
+        }
+
+
+        public void HandleSituation3()
+        {
+            ArrayOperations.Update(ElementArray);
+
+            bool moved;
+
+            do
+            {
+                moved = false;
+                int columns = ElementArray.GetLength(1);
+                for (int i = 0; i < columns - 1; i++)
+                {
+                    int rows = ElementArray.GetLength(0);
+
+                    for (int j = 2; j < rows; j++)
+                    {
+                        if (ElementArray[j, i] != null
+                            && ElementArray[j, i].childElements.Where(x => x.Column == i + 1).Count() == 2
+                            && ElementArray[j, i].childElements.First().parentElements.Count() == 1
+                            && ElementArray[j, i].childElements.Last().parentElements.Count() == 1
+                            && ElementArray[j - 2, i + 1] != null
+                            && ElementArray[j, i + 1] != null
+                            && ElementArray[j, i].childElements[0].Key == ElementArray[j - 2, i + 1].Key
+                            && ElementArray[j, i].childElements[1].Key == ElementArray[j, i + 1].Key)
+                        {
+                            LowerPreviousColumns(i);
+                            LowerColumnFromRow(i, j);
+                            moved = true;
+                            ElementArray = ArrayOperations.Update(ElementArray);
+                        }
+                    }
+                }
+            }
+            while (moved);
+
+            ArrayOperations.Update(ElementArray);
         }
     }
 }

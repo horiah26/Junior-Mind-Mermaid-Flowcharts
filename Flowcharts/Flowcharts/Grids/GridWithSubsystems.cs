@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Linq;
 
 namespace Flowcharts
@@ -24,7 +22,7 @@ namespace Flowcharts
         {
             List<Subsystem> subsystems = IdentifySubsystems();
 
-            foreach(var subsystem in subsystems)
+            foreach (var subsystem in subsystems)
             {
                 MoveOtherElementsOutOfSubsystem(subsystem);
             }
@@ -39,11 +37,11 @@ namespace Flowcharts
                 moved = false;
                 UpdateSystemLocation(subsystem);
 
-                int medRow = (highestRow + lowestRow) / 2;
+                double medRow = (highestRow + lowestRow) / 2.0;
 
-                for (int column = highestColumn; column > lowestColumn; column--)
+                for (int column = highestColumn; column >= lowestColumn; column--)
                 {
-                    for (int row = lowestRow; row <= highestRow; row++)
+                    for (int row = highestRow; row >= lowestRow; row--)
                     {
                         UpdateSystemLocation(subsystem);
                         if (ElementArray[row, column] != null && ElementArray[row, column].Subsystem != subsystem)
@@ -67,9 +65,11 @@ namespace Flowcharts
                                     }
                                     else
                                     {
+                                        throw new System.Exception("Not implemented");
                                         //MakeRoomForNewElement(lowestRow - 1, column);
                                     }
                                 }
+                                ElementArray = ArrayOperations.Update(ElementArray);
                             }
                             else
                             {
@@ -82,23 +82,33 @@ namespace Flowcharts
                                 else
                                 {
                                     MakeRoomForNewElement(row, column);
+                                    UpdateSystemLocation(subsystem);
                                 }
                             }
                         }
                     }
                 }
-            }           
+            }
         }
 
         private void MakeRoomForNewElement(int row, int column)
         {
+            if(ElementArray.GetLength(0) <= highestRow + 1)
+            {
+                ElementArray = ArrayOperations.Resize(ElementArray, highestRow + 2, ElementArray.GetLength(1));
+            }
             if (ElementArray[highestRow + 1, column] != null)
             {
-                ElementArray = ArrayOperations.LowerColumns(ElementArray, highestRow, column, 1);  
-            }
+                ElementArray = ArrayOperations.LowerColumns(ElementArray, highestRow + 1, column, 1);
 
-            ElementArray[highestRow + 1, column] = ElementArray[row, column];
-            ElementArray[row, column] = null;
+                ElementArray[highestRow + 1, column] = ElementArray[row, column];
+                ElementArray[row, column] = null;
+            }
+            else
+            {
+                ElementArray[highestRow + 1, column] = ElementArray[row, column];
+                ElementArray[row, column] = null;
+            }
 
             ArrayOperations.Update(ElementArray);
         }

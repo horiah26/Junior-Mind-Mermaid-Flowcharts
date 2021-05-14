@@ -8,7 +8,7 @@
         {
             this.grid = grid;
         }
-
+        
         public IGrid GetOrganizedGrid()
         {
             var filledGrid = GridOperations.FillSpots(grid);
@@ -24,8 +24,9 @@
             var subsys = new GridWithSubsystems(trimmed);
             var linearizedSubsys = new GridWithLinearizedSubsystem(subsys);
             var trimm = GridOperations.TrimEnds(linearizedSubsys);
-
-            return trimm;
+            var distancedGrid2 = GridOperations.DistanceTwinsAndLinearize(trimm);
+            var trimm2 = GridOperations.TrimEnds(distancedGrid2);
+            return trimm2;
         }
     }
 }
