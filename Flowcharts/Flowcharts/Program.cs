@@ -72,22 +72,43 @@
             //flowchart.AddPair(("Evacuating?"), ("Tell me later"), "Arrow", "Yes");
             //flowchart.AddPair(("Dead?"), ("Tell me later"), "SideArrow", "Yes");
 
-          //flowchart.AddPair(("Start", "AE or SDR sells a business package", "ParallelogramAlt"), ("AE?", "Account owned by AE?", "Rhombus"), "Arrow");
-          //flowchart.AddPair(("AE?"), ("Keeps ownership", "AE keeps ownership of the account", "Stadium"), "Arrow", "Yes");
-          //flowchart.AddPair(("AE?"), ("Opportunity?", "AE has an open opportunity on the account?", "Banner"), "ThickLink", "No");
-          //flowchart.AddPair(("Opportunity?"), ("Opportunity", "AE has an open opportunity on the account", "Parallelogram", sys), "Arrow", "Yes");
-          //flowchart.AddPair(("Opportunity?"), ("No opportunity", "No open opportunity on the account", "Rectangle"), "Arrow", "No");
-          //flowchart.AddPair(("Opportunity"), ("Employees?2", "How many employees?", "Banner"), "ThickLink");
-          //flowchart.AddPair(("Employees?2"), ("SMB2", "Hand off account to SMB AM. Round Robin after 120 days", "Hexagon", sys), "Arrow", "< 100 employees");
-          //flowchart.AddPair(("Employees?2"), ("AM2", "Hand off account to AM. Round Robin after 120 days", "RoundedRectangle"), "Arrow", "101 - 5000 +");
-          //flowchart.AddPair(("No opportunity"), ("Employees?", "How many employees?", "Banner"), "Link");
-          //flowchart.AddPair(("Employees?"), ("SMB", "Hand off account to SMB AM. Round Robin after 120 days", "Subroutine"), "Arrow", "< 100 employees");
-          //flowchart.AddPair(("Employees?"), ("AM", "Hand off account to AM. Round Robin after 120 days", "Trapezoid"), "Arrow", "101 - 5000 +");
-          //flowchart.AddPair(("SMB"), ("Spreadsheets", "Sales Ops sends spreadsheets", "Banner"), "ThickLink");
-          //flowchart.AddPair(("AM"), ("Spreadsheets", "Sales Ops sends spreadsheets", "ParallelogramAlt"), "Link");
-          //flowchart.AddPair(("SMB2"), ("Spreadsheets", "Sales Ops sends spreadsheets", "RoundedRectangle"), "DottedLink");
-          //flowchart.AddPair(("AM2"), ("Spreadsheets", "Sales Ops sends spreadsheets", "Banner"), "DottedLink");
-          //flowchart.AddPair(("Spreadsheets"), ("Uploads", "Sales Ops uploads account changes to Salesforce", "Cylinder"), "Arrow");
+            //flowchart.AddPair(("Start", "AE or SDR sells a business package", "ParallelogramAlt"), ("AE?", "Account owned by AE?", "Rhombus"), "Arrow");
+            //flowchart.AddPair(("AE?"), ("Keeps ownership", "AE keeps ownership of the account", "Stadium"), "Arrow", "Yes");
+            //flowchart.AddPair(("AE?"), ("Opportunity?", "AE has an open opportunity on the account?", "Banner"), "ThickLink", "No");
+            //flowchart.AddPair(("Opportunity?"), ("Opportunity", "AE has an open opportunity on the account", "Parallelogram", sys), "Arrow", "Yes");
+            //flowchart.AddPair(("Opportunity?"), ("No opportunity", "No open opportunity on the account", "Rectangle"), "Arrow", "No");
+            //flowchart.AddPair(("Opportunity"), ("Employees?2", "How many employees?", "Banner"), "ThickLink");
+            //flowchart.AddPair(("Employees?2"), ("SMB2", "Hand off account to SMB AM. Round Robin after 120 days", "Hexagon", sys), "Arrow", "< 100 employees");
+            //flowchart.AddPair(("Employees?2"), ("AM2", "Hand off account to AM. Round Robin after 120 days", "RoundedRectangle"), "Arrow", "101 - 5000 +");
+            //flowchart.AddPair(("No opportunity"), ("Employees?", "How many employees?", "Banner"), "Link");
+            //flowchart.AddPair(("Employees?"), ("SMB", "Hand off account to SMB AM. Round Robin after 120 days", "Subroutine"), "Arrow", "< 100 employees");
+            //flowchart.AddPair(("Employees?"), ("AM", "Hand off account to AM. Round Robin after 120 days", "Trapezoid"), "Arrow", "101 - 5000 +");
+            //flowchart.AddPair(("SMB"), ("Spreadsheets", "Sales Ops sends spreadsheets", "Banner"), "ThickLink");
+            //flowchart.AddPair(("AM"), ("Spreadsheets", "Sales Ops sends spreadsheets", "ParallelogramAlt"), "Link");
+            //flowchart.AddPair(("SMB2"), ("Spreadsheets", "Sales Ops sends spreadsheets", "RoundedRectangle"), "DottedLink");
+            //flowchart.AddPair(("AM2"), ("Spreadsheets", "Sales Ops sends spreadsheets", "Banner"), "DottedLink");
+            //flowchart.AddPair(("Spreadsheets"), ("Uploads", "Sales Ops uploads account changes to Salesforce", "Cylinder"), "Arrow");
+
+            flowchart.AddPair(("A", "A", "Rectangle"), ("B1", "B1", "Rectangle"), "Arrow");
+            flowchart.AddPair("A", ("B2", "B2", "Rectangle"), "Arrow");
+
+            flowchart.AddPair("B1", ("C1", "C1", "Rectangle"), "Arrow");
+            flowchart.AddPair("B1", ("C2", "C2", "Rectangle"), "Arrow");
+
+            flowchart.AddPair("B2", ("C3", "C3", "Rectangle"), "Arrow");
+            flowchart.AddPair("B2", ("C4", "C4", "Rectangle"), "Arrow");
+
+            flowchart.AddPair("C1", ("D1", "D1", "Rectangle"), "Arrow");
+            flowchart.AddPair("C1", ("D2", "D2", "Rectangle"), "Arrow");
+
+            flowchart.AddPair("C2", ("D3", "D3", "Rectangle"), "Arrow");
+            flowchart.AddPair("C2", ("D4", "D4", "Rectangle"), "Arrow");
+
+            flowchart.AddPair("C3", ("D5", "D5", "Rectangle"), "Arrow");
+            flowchart.AddPair("C3", ("D6", "D6", "Rectangle"), "Arrow");
+
+            flowchart.AddPair("C4", ("D7", "D7", "Rectangle"), "Arrow");
+            flowchart.AddPair("C4", ("D8", "D8", "Rectangle"), "Arrow");
 
             flowchart.DrawFlowchart();
         }

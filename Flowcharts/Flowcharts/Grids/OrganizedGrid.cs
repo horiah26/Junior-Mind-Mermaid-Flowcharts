@@ -26,7 +26,7 @@
             var trimm = GridOperations.TrimEnds(linearizedSubsys);
             var distancedGrid2 = new GridWithDistancedTwinsInSubsystems(trimm);
             var trimm2 = GridOperations.TrimEnds(distancedGrid2);
-            return trimm2;
+            return trimmed;
         }
     }
 }
