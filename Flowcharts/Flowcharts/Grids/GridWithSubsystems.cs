@@ -48,7 +48,7 @@ namespace Flowcharts
                         {
                             moved = true;
 
-                            if (row < medRow)
+                            if (row <= medRow)
                             {
                                 if (lowestRow == 0)
                                 {
@@ -65,10 +65,15 @@ namespace Flowcharts
                                     }
                                     else
                                     {
-                                        throw new System.Exception("Not implemented");
-                                        //MakeRoomForNewElement(lowestRow - 1, column);
+                                        for(int i = 0; i <= ElementArray.GetLength(1) && i != column; i++)
+                                        {
+                                            ElementArray = ArrayOperations.LowerColumns(ElementArray, 0, i, 1);
+                                        }
+
+                                        ElementArray = ArrayOperations.LowerColumns(ElementArray, row, column, 1);
                                     }
                                 }
+
                                 ElementArray = ArrayOperations.Update(ElementArray);
                             }
                             else

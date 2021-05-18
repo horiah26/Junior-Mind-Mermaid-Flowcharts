@@ -24,7 +24,7 @@
             var subsys = new GridWithSubsystems(trimmed);
             var linearizedSubsys = new GridWithLinearizedSubsystem(subsys);
             var trimm = GridOperations.TrimEnds(linearizedSubsys);
-            var distancedGrid2 = GridOperations.DistanceTwinsAndLinearize(trimm);
+            var distancedGrid2 = new GridWithDistancedTwinsInSubsystems(trimm);
             var trimm2 = GridOperations.TrimEnds(distancedGrid2);
             return trimm2;
         }

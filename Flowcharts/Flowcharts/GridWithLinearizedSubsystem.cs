@@ -31,6 +31,7 @@ namespace Flowcharts
 
                     while (ElementArray[i, j] != null
                         && ElementArray[i, j].parentElements.Count() == 1
+                        && ElementArray[i, j].parentElements.First().childElements.Count() == 1
                         && ElementArray[i, j].parentElements.First().Subsystem == ElementArray[i, j].Subsystem
                         && ElementArray[i, j].parentElements.First().Row != i
                         && ElementArray[i, j].childElements.Count() < 3
@@ -72,9 +73,8 @@ namespace Flowcharts
                     while (ElementArray[i, j] != null
                         && ElementArray[i, j].parentElements.Count() == 1
                         && ElementArray[i, j].parentElements.First().childElements.Count() == 1
-                        && ElementArray[i, j].parentElements.First().Subsystem == ElementArray[i, j].Subsystem
                         && ElementArray[i, j].parentElements.First().Row != i
-                        && ElementArray[i, j].childElements.Count() < 3
+                        && ElementArray[i, j].childElements.Count() == 0
                         && moved)
                     {
                         int difference = Convert.ToInt32(ElementArray[i, j].parentElements.Average(x => x.Row)) - i;
