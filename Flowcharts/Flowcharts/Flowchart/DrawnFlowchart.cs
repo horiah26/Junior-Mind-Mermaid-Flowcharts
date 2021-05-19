@@ -26,10 +26,21 @@ namespace Flowcharts
         public void Draw()
         {
             DrawBeginning();
+            DrawSubsystems();
             DrawElements();
             orderedArrows.DrawArrows();
             DrawElements();
             DrawEnd();
+        }
+
+        private void DrawSubsystems()
+        {
+            var subsystems = ArrayOperations.IdentifySubsystems(organizedGrid.ElementArray);
+
+            foreach(var subsystem in subsystems)
+            {
+                new DrawnSubsystem(subsystem, organizedGrid.ElementArray).Draw();
+            }
         }
 
         public void DrawBeginning()

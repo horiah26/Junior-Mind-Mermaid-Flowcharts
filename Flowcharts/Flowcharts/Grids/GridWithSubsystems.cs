@@ -20,7 +20,7 @@ namespace Flowcharts
 
         public void ArrangeSubsystems()
         {
-            List<Subsystem> subsystems = IdentifySubsystems();
+            List<Subsystem> subsystems = ArrayOperations.IdentifySubsystems(ElementArray);
 
             foreach (var subsystem in subsystems)
             {
@@ -134,21 +134,6 @@ namespace Flowcharts
             }
 
             return newArray;
-        }
-
-        public List<Subsystem> IdentifySubsystems()
-        {
-            List<Subsystem> subsystems = new List<Subsystem> { };
-
-            foreach(var element in ElementArray)
-            {
-                if (element != null && element.Subsystem != null) 
-                {
-                    subsystems.Add(element.Subsystem);
-                }
-            }
-
-            return subsystems.Distinct().ToList();
         }
 
         private void UpdateSystemLocation(Subsystem subsystem)
