@@ -32,7 +32,7 @@ namespace Flowcharts
                     while (ElementArray[i, j] != null
                         && ElementArray[i, j].parentElements.Count() == 1
                         && ElementArray[i, j].parentElements.First().childElements.Count() == 1
-                        && ElementArray[i, j].parentElements.First().Subsystem == ElementArray[i, j].Subsystem
+                        && ElementArray[i, j].parentElements.First().Subsystems == ElementArray[i, j].Subsystems
                         && ElementArray[i, j].parentElements.First().Row != i
                         && ElementArray[i, j].childElements.Count() < 3
                         && moved)

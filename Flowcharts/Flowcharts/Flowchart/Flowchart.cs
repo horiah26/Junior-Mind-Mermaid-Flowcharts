@@ -52,8 +52,14 @@ namespace Flowcharts
             var element1 = Factory.Element(dataElement1.key, dataElement1.text, dataElement1.shape);
             var element2 = Factory.Element(dataElement2.key, dataElement2.text, dataElement2.shape);
 
-            element1.Subsystem = dataElement1.subsystem;
-            element2.Subsystem = dataElement2.subsystem;
+            if (!element1.Subsystems.Contains(dataElement1.subsystem))
+            {
+                element1.Subsystems.Add(dataElement1.subsystem);
+            }
+            if (!element2.Subsystems.Contains(dataElement2.subsystem))
+            {
+                element2.Subsystems.Add(dataElement2.subsystem);
+            }
 
             elementRegister.AddPair(arrowName, element1, element2);
 
@@ -76,7 +82,10 @@ namespace Flowcharts
             var element1 = elementRegister[key1];
             var element2 = Factory.Element(dataElement2.key, dataElement2.text, dataElement2.shape);
 
-            element2.Subsystem = dataElement2.subsystem;
+            if (!element2.Subsystems.Contains(dataElement2.subsystem))
+            {
+                element2.Subsystems.Add(dataElement2.subsystem);
+            }
 
             elementRegister.AddPair(arrowName, element1, element2);
 
@@ -99,7 +108,11 @@ namespace Flowcharts
         {
             var element1 = Factory.Element(dataElement1.key, dataElement1.text, dataElement1.shape);
             var element2 = elementRegister[key2];
-            element1.Subsystem = dataElement1.subsystem;
+
+            if (!element1.Subsystems.Contains(dataElement1.subsystem))
+            {
+                element1.Subsystems.Add(dataElement1.subsystem);
+            }
 
             elementRegister.AddPair(arrowName, element1, element2);
 
@@ -119,14 +132,19 @@ namespace Flowcharts
             arrowRegister.Add(arrow);
         }
 
+        public void AddSubsystem(string key, Subsystem subsystem)
+        {
+            var element = elementRegister[key];
+
+            if (!element.Subsystems.Contains(subsystem))
+            {
+                element.Subsystems.Add(subsystem);
+            }
+        }
+
         public void DrawFlowchart()
         {
             Factory.ProcessedFlowchart(Grid, arrowRegister, elementRegister).Draw();
-        }
-
-        public (IGrid grid, IArrowRegister arrowRegister) GetComponents()
-        {
-            return Factory.ProcessedFlowchart(Grid, arrowRegister, elementRegister).Process();
         }
     }
 }

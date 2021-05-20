@@ -39,9 +39,9 @@ namespace Flowcharts
                             && ElementArray[j + 1, i + 1] != null
                             && ElementArray[j, i].childElements[0].Key == ElementArray[j, i + 1].Key
                             && ElementArray[j, i].childElements[1].Key == ElementArray[j + 1, i + 1].Key
-                            && ElementArray[j, i].Subsystem != null
-                            && ElementArray[j, i].Subsystem == ElementArray[j, i].childElements.First().Subsystem
-                            && ElementArray[j, i].Subsystem == ElementArray[j, i].childElements.Last().Subsystem
+                            && ElementArray[j, i].Subsystems != null
+                            && ElementArray[j, i].Subsystems == ElementArray[j, i].childElements.First().Subsystems
+                            && ElementArray[j, i].Subsystems == ElementArray[j, i].childElements.Last().Subsystems
                             ||
                             (ElementArray[j, i] != null
                             && ElementArray[j, i].childElements.Where(x => x.Column == i + 1).Count() == 2
@@ -49,9 +49,9 @@ namespace Flowcharts
                             && ElementArray[j + 1, i + 1] != null
                             && ElementArray[j, i].childElements[1].Key == ElementArray[j, i + 1].Key
                             && ElementArray[j, i].childElements[0].Key == ElementArray[j + 1, i + 1].Key
-                            && ElementArray[j, i].Subsystem != null
-                            && ElementArray[j, i].Subsystem == ElementArray[j, i].childElements.First().Subsystem
-                            && ElementArray[j, i].Subsystem == ElementArray[j, i].childElements.Last().Subsystem
+                            && ElementArray[j, i].Subsystems != null
+                            && ElementArray[j, i].Subsystems == ElementArray[j, i].childElements.First().Subsystems
+                            && ElementArray[j, i].Subsystems == ElementArray[j, i].childElements.Last().Subsystems
                             ||
                             ElementArray[j, i] != null
                             && ElementArray[j, i].childElements.Where(x => x.Column == i + 1).Count() == 2
@@ -59,9 +59,9 @@ namespace Flowcharts
                             && ElementArray[j + 1, i + 1] != null
                             && ElementArray[j, i].childElements[0].Key == ElementArray[j, i + 1].Key
                             && ElementArray[j, i].childElements[1].Key == ElementArray[j + 1, i + 1].Key
-                            && ElementArray[j, i].Subsystem != null
-                            && ElementArray[j, i].Subsystem == ElementArray[j, i].childElements.First().Subsystem
-                            && ElementArray[j, i].Subsystem == ElementArray[j, i].childElements.Last().Subsystem
+                            && ElementArray[j, i].Subsystems != null
+                            && ElementArray[j, i].Subsystems == ElementArray[j, i].childElements.First().Subsystems
+                            && ElementArray[j, i].Subsystems == ElementArray[j, i].childElements.Last().Subsystems
                             ||
                             ElementArray[j, i] != null
                             && ElementArray[j, i].childElements.Where(x => x.Column == i + 1).Count() == 2
@@ -69,9 +69,9 @@ namespace Flowcharts
                             && ElementArray[j + 1, i + 1] != null
                             && ElementArray[j, i].childElements[1].Key == ElementArray[j, i + 1].Key
                             && ElementArray[j, i].childElements[0].Key == ElementArray[j + 1, i + 1].Key)
-                            && ElementArray[j, i].Subsystem != null
-                            && ElementArray[j, i].Subsystem == ElementArray[j, i].childElements.First().Subsystem
-                            && ElementArray[j, i].Subsystem == ElementArray[j, i].childElements.Last().Subsystem)
+                            && ElementArray[j, i].Subsystems != null
+                            && ElementArray[j, i].Subsystems == ElementArray[j, i].childElements.First().Subsystems
+                            && ElementArray[j, i].Subsystems == ElementArray[j, i].childElements.Last().Subsystems)
                         {
                             LowerPreviousColumns(i);
                             LowerColumnFromRow(i, j);
@@ -98,9 +98,9 @@ namespace Flowcharts
                             && ElementArray[j, i].childElements.Where(x => x.Column == i + 1).Count() == 2
                             && ElementArray[j, i].childElements[0].Key == ElementArray[j - 1, i + 1].Key
                             && ElementArray[j, i].childElements[1].Key == ElementArray[j, i + 1].Key
-                            && ElementArray[j, i].Subsystem != null
-                            && ElementArray[j, i].Subsystem == ElementArray[j, i].childElements.First().Subsystem
-                            && ElementArray[j, i].Subsystem == ElementArray[j, i].childElements.Last().Subsystem
+                            && ElementArray[j, i].Subsystems != null
+                            && ElementArray[j, i].Subsystems == ElementArray[j, i].childElements.First().Subsystems
+                            && ElementArray[j, i].Subsystems == ElementArray[j, i].childElements.Last().Subsystems
                             )
 
                         {
@@ -139,9 +139,9 @@ namespace Flowcharts
                         && ElementArray[j, i].childElements[1].Key == ElementArray[j + 2, i + 1].Key
                         && ElementArray[j, i].childElements.First().parentElements.Count() == 1
                         && ElementArray[j, i].childElements.Last().parentElements.Count() == 1
-                            && ElementArray[j, i].Subsystem != null
-                        && ElementArray[j, i].Subsystem == ElementArray[j, i].childElements.First().Subsystem
-                        && ElementArray[j, i].Subsystem == ElementArray[j, i].childElements.Last().Subsystem)
+                            && ElementArray[j, i].Subsystems != null
+                        && ElementArray[j, i].Subsystems == ElementArray[j, i].childElements.First().Subsystems
+                        && ElementArray[j, i].Subsystems == ElementArray[j, i].childElements.Last().Subsystems)
                     {
                         LowerPreviousColumns(i);
                     }
@@ -205,9 +205,9 @@ namespace Flowcharts
                             && ElementArray[j, i + 1] != null
                             && ElementArray[j, i].childElements[0].Key == ElementArray[j - 2, i + 1].Key
                             && ElementArray[j, i].childElements[1].Key == ElementArray[j, i + 1].Key
-                            && ElementArray[j, i].Subsystem != null
-                            && ElementArray[j, i].Subsystem == ElementArray[j, i].childElements.First().Subsystem
-                            && ElementArray[j, i].Subsystem == ElementArray[j, i].childElements.Last().Subsystem)
+                            && ElementArray[j, i].Subsystems != null
+                            && ElementArray[j, i].Subsystems == ElementArray[j, i].childElements.First().Subsystems
+                            && ElementArray[j, i].Subsystems == ElementArray[j, i].childElements.Last().Subsystems)
                         {
                             LowerPreviousColumns(i);
                             LowerColumnFromRow(i, j);

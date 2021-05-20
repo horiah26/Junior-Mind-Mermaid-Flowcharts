@@ -7,7 +7,7 @@ namespace Flowcharts
 {
     public class Element
     {
-        public Subsystem Subsystem { get; set;}
+        public List<Subsystem> Subsystems { get; set;}
 
         public (double x, double y) In;
         public (double x, double y) Out;
@@ -32,6 +32,7 @@ namespace Flowcharts
             this.Text = Text;
             Orientation = StaticOrientation.Orientation;
             this.Key = Key;
+            Subsystems = new List<Subsystem> { };
         }
 
         public Element(Element element)
@@ -48,7 +49,7 @@ namespace Flowcharts
             Column = element.Column;
             Row = element.Row;
             ShapeType = element.ShapeType;
-            Subsystem = element.Subsystem;
+            Subsystems = element.Subsystems;
         }
 
         public void AddParent(Element previous)

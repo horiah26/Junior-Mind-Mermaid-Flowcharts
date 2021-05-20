@@ -27,9 +27,13 @@
             //    new SpecsToFlowchart(flowchart, reader).AddToFlowchart();
             //    flowchart.DrawFlowchart();
             //}
-            Subsystem sys = new Subsystem("sys");
-            var flowchart = Factory.Flowchart("TopDown", "test");
 
+            Subsystem sys = new Subsystem("Subystem 1");
+            Subsystem sys2 = new Subsystem("Subystem 2");
+            Subsystem sys3 = new Subsystem("Subystem 3");
+
+            var flowchart = Factory.Flowchart("LeftRight", "test");
+            GridSpacing.SetLarge();
             //flowchart.AddPair(("Start", "Start", "Stadium", sys), ("A1", "A1", "Stadium", sys), "Arrow");
             //flowchart.AddPair("Start", ("A2", "A2", "Stadium", sys), "Arrow");
             //flowchart.AddPair("A2", ("C3", "C3", "Rectangle"), "Arrow");
@@ -44,17 +48,19 @@
             flowchart.AddPair(("Send"), ("Rhombus1", "Payment received within one week?", "Rhombus", sys), "Arrow");
             flowchart.AddPair(("Rhombus1"), ("Assistant", "Accounting Assistant Calls Customer for Payment", "Rectangle", sys), "Arrow", "No");
             flowchart.AddPair(("Rhombus1"), ("Forward", "Forward Payment to Payment Processing", "Parallelogram", sys), "Arrow", "Yes");
-            flowchart.AddPair(("Assistant"), ("Received?", "Payment Received?", "Rhombus"), "Arrow");
+            flowchart.AddPair(("Assistant"), ("Received?", "Payment Received?", "Rhombus", sys2), "Arrow");
             flowchart.AddPair(("Received?"), ("Forward"), "BackArrow", "Yes");
-            flowchart.AddPair(("Received?"), ("Payment>1000", "Payment > $1000?", "Rectangle"), "Arrow", "No");
-            flowchart.AddPair(("Payment>1000"), ("Invoice", "Write Off Invoice as closed", "Rectangle"), "Arrow", "No");
-            flowchart.AddPair(("Payment>1000"), ("Agency", "Contact Collection Agency", "Rectangle"), "Arrow", "Yes");
+            flowchart.AddPair(("Received?"), ("Payment>1000", "Payment > $1000?", "Rectangle", sys2), "Arrow", "No");
+            flowchart.AddPair(("Payment>1000"), ("Invoice", "Write Off Invoice as closed", "Rectangle", sys2), "Arrow", "No");
+            flowchart.AddPair(("Payment>1000"), ("Agency", "Contact Collection Agency", "Rectangle", sys), "Arrow", "Yes"); //
             flowchart.AddPair(("Agency"), ("End", "End", "Stadium", sys), "Arrow");
             flowchart.AddPair(("Invoice"), ("End"), "Arrow");
             flowchart.AddPair(("Forward"), ("End"), "Arrow");
 
-            GridSpacing.SetHorizontal(300, 250, 250);
-            GridSpacing.SetVertical(300, 250, 250);
+            flowchart.AddSubsystem("End", sys2);
+            flowchart.AddSubsystem("End", sys3);
+            flowchart.AddSubsystem("Agency", sys3);
+
 
             //flowchart.AddPair(("Start", "Start", "Stadium"), ("Emergency?", "Is it an Emergency?", "Rhombus"), "Arrow");
             //flowchart.AddPair(("Emergency?"), ("War?", "Did the US declare War?", "Rhombus", sys), "Arrow", "Yes");
@@ -91,8 +97,6 @@
             //flowchart.AddPair(("SMB2"), ("Spreadsheets", "Sales Ops sends spreadsheets", "RoundedRectangle"), "DottedLink");
             //flowchart.AddPair(("AM2"), ("Spreadsheets", "Sales Ops sends spreadsheets", "Banner"), "DottedLink");
             //flowchart.AddPair(("Spreadsheets"), ("Uploads", "Sales Ops uploads account changes to Salesforce", "Cylinder"), "Arrow");
-
-
 
             flowchart.DrawFlowchart();
         }

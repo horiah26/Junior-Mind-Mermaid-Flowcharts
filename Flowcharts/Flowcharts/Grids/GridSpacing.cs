@@ -44,5 +44,11 @@ namespace Flowcharts
             GridSpacing.unitLengthVertical = unitLengthVertical;
             GridSpacing.unitHeightVertical = unitHeightVertical;
         }
+
+        public static void SetLarge()
+        {
+            SetHorizontal(300, 250, 250);
+            SetVertical(300, 250, 250);
+        }
     }
 }

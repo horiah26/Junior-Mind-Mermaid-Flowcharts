@@ -88,15 +88,5 @@ namespace Flowcharts
         {
             return new ElementArrayWithArrangedTwins(ElementArray).ElementArray;
         }
-
-        public static List<Subsystem> IdentifySubsystems(Element[,] ElementArray)
-        {
-            return new IdentifiedSubsystems(ElementArray).IdentifySubsystems();
-        } 
-
-        public static void DrawSubsystem(Subsystem subsystem)
-        {
-
-        }
     }
 }

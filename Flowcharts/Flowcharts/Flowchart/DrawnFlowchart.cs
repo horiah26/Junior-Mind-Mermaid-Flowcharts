@@ -35,11 +35,11 @@ namespace Flowcharts
 
         private void DrawSubsystems()
         {
-            var subsystems = ArrayOperations.IdentifySubsystems(organizedGrid.ElementArray);
+            var subsystems = SubsystemOperations.IdentifySubsystems(organizedGrid.ElementArray);
 
             foreach(var subsystem in subsystems)
             {
-                new DrawnSubsystem(subsystem, organizedGrid.ElementArray).Draw();
+                SubsystemOperations.DrawSubsystem(subsystem, organizedGrid.ElementArray);
             }
         }
 

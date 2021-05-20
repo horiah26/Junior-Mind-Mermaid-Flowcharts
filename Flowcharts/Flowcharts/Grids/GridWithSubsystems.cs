@@ -20,7 +20,7 @@ namespace Flowcharts
 
         public void ArrangeSubsystems()
         {
-            List<Subsystem> subsystems = ArrayOperations.IdentifySubsystems(ElementArray);
+            List<Subsystem> subsystems = SubsystemOperations.IdentifySubsystems(ElementArray);
 
             foreach (var subsystem in subsystems)
             {
@@ -44,7 +44,7 @@ namespace Flowcharts
                     for (int row = highestRow; row >= lowestRow; row--)
                     {
                         UpdateSystemLocation(subsystem);
-                        if (ElementArray[row, column] != null && ElementArray[row, column].Subsystem != subsystem)
+                        if (ElementArray[row, column] != null && !ElementArray[row, column].Subsystems.Contains(subsystem))
                         {
                             moved = true;
 

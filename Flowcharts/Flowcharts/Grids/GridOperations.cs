@@ -60,5 +60,20 @@
         {
             return new GridWithArrangedLastColumn(grid);
         }
+
+        public static IGrid ArrangeSubsystems(IGrid grid)
+        {
+            return new GridWithSubsystems(grid);
+        }
+
+        public static IGrid LinearizeSubsystems(IGrid grid)
+        {
+            return new GridWithLinearizedSubsystem(grid);
+        }
+
+        public static IGrid DistanceTwinsInSubsystems(IGrid grid)
+        {
+            return new GridWithDistancedTwinsInSubsystems(grid);
+        }
     }
 }

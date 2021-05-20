@@ -5,7 +5,7 @@ namespace Flowcharts
 {
     public class WrittenText
     {
-        readonly XmlWriter xmlWriter = Writer.XmlWriter;
+        readonly public XmlWriter xmlWriter = Writer.XmlWriter;
         readonly double xPosition;
         readonly double yPosition;
         readonly string[] lines;
@@ -24,7 +24,7 @@ namespace Flowcharts
             xmlWriter.WriteStartElement("text");
             xmlWriter.WriteAttributeString("x", (xPosition).ToString());
             xmlWriter.WriteAttributeString("y", yPosition.ToString());
-            xmlWriter.WriteAttributeString("fill", "black");
+            Color();
             xmlWriter.WriteString(lines[0]);
 
             for (int i = 1; i < lines.Count(); i++)
@@ -37,6 +37,11 @@ namespace Flowcharts
             }
 
             xmlWriter.WriteEndElement();
+        }
+
+        public virtual void Color()
+        {
+            xmlWriter.WriteAttributeString("fill", "black");
         }
 
     }

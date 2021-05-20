@@ -8,11 +8,7 @@ namespace Flowcharts
     public class Subsystem
     {
         public string Name { get; private set; }
-
-        int lowestRow;
-        int lowestColumn;
-        int highestRow;
-        int highestColumn;
+        public string Color { get; set; }
 
         public Subsystem(string name)
         {
@@ -27,7 +23,7 @@ namespace Flowcharts
             {
                 for (int j = 0; j < ElementArray.GetLength(1); j++)
                 {
-                    if (ElementArray[i, j] != null && ElementArray[i, j].Subsystem == this)
+                    if (ElementArray[i, j] != null && ElementArray[i, j].Subsystems.Contains(this))
                     {
                         coordinates.Add((i, j));
                     }
@@ -39,11 +35,6 @@ namespace Flowcharts
 
             int highestRow = coordinates.Max(x => x.row);
             int highestColumn = coordinates.Max(x => x.column);
-
-            this.lowestColumn = lowestColumn;
-            this.highestColumn = highestColumn;
-            this.lowestRow = lowestRow;
-            this.highestRow = highestRow;
 
             return (lowestRow, lowestColumn, highestRow, highestColumn);
         }

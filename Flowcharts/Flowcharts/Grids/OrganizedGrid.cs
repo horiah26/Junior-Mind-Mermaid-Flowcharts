@@ -21,10 +21,10 @@
             var linearizedGrid3 = GridOperations.Linearize(trimmedGrid2);
             var last = GridOperations.ArrangeLastColumn(linearizedGrid3);
             var trimmed = GridOperations.TrimEnds(last);
-            var subsys = new GridWithSubsystems(trimmed);
-            var linearizedSubsys = new GridWithLinearizedSubsystem(subsys);
+            var arrangedSubsystems = GridOperations.ArrangeSubsystems(trimmed);
+            var linearizedSubsys = GridOperations.LinearizeSubsystems(arrangedSubsystems);
             var trimm = GridOperations.TrimEnds(linearizedSubsys);
-            var distancedGrid2 = new GridWithDistancedTwinsInSubsystems(trimm);
+            var distancedGrid2 = GridOperations.DistanceTwinsInSubsystems(trimm);
             var trimm2 = GridOperations.TrimEnds(distancedGrid2);
             return trimm2;
         }

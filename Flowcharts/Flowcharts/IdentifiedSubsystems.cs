@@ -21,13 +21,19 @@ namespace Flowcharts
 
             foreach (var element in ElementArray)
             {
-                if (element != null && element.Subsystem != null)
+                if(element != null && element.Subsystems != null)
                 {
-                    subsystems.Add(element.Subsystem);
+                    foreach (var subsystem in element.Subsystems)
+                    {
+                        if (!subsystems.Contains(subsystem))
+                        {
+                            subsystems.Add(subsystem);
+                        }
+                    }
                 }
             }
 
-            return subsystems.Distinct().ToList();
+            return SubsystemOperations.ColorSubsystems(subsystems.Distinct().ToList());
         }
     }
 }
