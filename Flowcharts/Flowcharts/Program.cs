@@ -34,6 +34,7 @@
 
             var flowchart = Factory.Flowchart("LeftRight", "test");
             GridSpacing.SetLarge();
+
             //flowchart.AddPair(("Start", "Start", "Stadium", sys), ("A1", "A1", "Stadium", sys), "Arrow");
             //flowchart.AddPair("Start", ("A2", "A2", "Stadium", sys), "Arrow");
             //flowchart.AddPair("A2", ("C3", "C3", "Rectangle"), "Arrow");
@@ -44,23 +45,25 @@
             //flowchart.AddPair("B1", ("C1", "C1", "Rectangle"), "Arrow");
             //flowchart.AddPair("B2", ("C2", "C2", "Rectangle"), "SideArrow");
 
-            flowchart.AddPair(("Collect", "Collect late payments", "Stadium"), ("Send", "Send Collection Letter", "Rectangle"), "Arrow");
-            flowchart.AddPair(("Send"), ("Rhombus1", "Payment received within one week?", "Rhombus", sys), "Arrow");
-            flowchart.AddPair(("Rhombus1"), ("Assistant", "Accounting Assistant Calls Customer for Payment", "Rectangle", sys), "Arrow", "No");
-            flowchart.AddPair(("Rhombus1"), ("Forward", "Forward Payment to Payment Processing", "Parallelogram", sys), "Arrow", "Yes");
-            flowchart.AddPair(("Assistant"), ("Received?", "Payment Received?", "Rhombus", sys2), "Arrow");
-            flowchart.AddPair(("Received?"), ("Forward"), "BackArrow", "Yes");
-            flowchart.AddPair(("Received?"), ("Payment>1000", "Payment > $1000?", "Rectangle", sys2), "Arrow", "No");
-            flowchart.AddPair(("Payment>1000"), ("Invoice", "Write Off Invoice as closed", "Rectangle", sys2), "Arrow", "No");
-            flowchart.AddPair(("Payment>1000"), ("Agency", "Contact Collection Agency", "Rectangle", sys), "Arrow", "Yes"); //
-            flowchart.AddPair(("Agency"), ("End", "End", "Stadium", sys), "Arrow");
-            flowchart.AddPair(("Invoice"), ("End"), "Arrow");
-            flowchart.AddPair(("Forward"), ("End"), "Arrow");
+            //flowchart.AddPair(("Collect", "Collect late payments", "Stadium"), ("Send", "Send Collection Letter", "Rectangle"), "Arrow");
+            //flowchart.AddPair(("Send"), ("Rhombus1", "Payment received within one week?", "Rhombus", sys), "Arrow");
+            //flowchart.AddPair(("Rhombus1"), ("Assistant", "Accounting Assistant Calls Customer for Payment", "Rectangle", sys), "Arrow", "No");
+            //flowchart.AddPair(("Rhombus1"), ("Forward", "Forward Payment to Payment Processing", "Parallelogram", sys), "Arrow", "Yes");
+            //flowchart.AddPair(("Assistant"), ("Received?", "Payment Received?", "Rhombus", sys2), "Arrow");
+            //flowchart.AddPair(("Received?"), ("Forward"), "BackArrow", "Yes");
+            //flowchart.AddPair(("Received?"), ("Payment>1000", "Payment > $1000?", "Rectangle", sys2), "Arrow", "No");
+            //flowchart.AddPair(("Payment>1000"), ("Invoice", "Write Off Invoice as closed", "Rectangle", sys2), "Arrow", "No");
+            //flowchart.AddPair(("Payment>1000"), ("Agency", "Contact Collection Agency", "Rectangle", sys), "Arrow", "Yes"); //
+            //flowchart.AddPair(("Agency"), ("End", "End", "Stadium", sys), "Arrow");
+            //flowchart.AddPair(("Invoice"), ("End"), "Arrow");
+            //flowchart.AddPair(("Forward"), ("End"), "Arrow");
 
-            flowchart.AddSubsystem("End", sys2);
-            flowchart.AddSubsystem("End", sys3);
-            flowchart.AddSubsystem("Agency", sys3);
+            //flowchart.AddSubsystem("End", sys2);
+            //flowchart.AddSubsystem("End", sys3);
+            //flowchart.AddSubsystem("Agency", sys3);
 
+            //flowchart.AddPair(("Start", "Start", "Stadium", sys), ("A1", "A1", "Rectangle"), "Arrow");
+            //flowchart.AddPair("A1", ("B1", "B1", "Rectangle", sys), "Arrow");
 
             //flowchart.AddPair(("Start", "Start", "Stadium"), ("Emergency?", "Is it an Emergency?", "Rhombus"), "Arrow");
             //flowchart.AddPair(("Emergency?"), ("War?", "Did the US declare War?", "Rhombus", sys), "Arrow", "Yes");
@@ -69,11 +72,11 @@
             //flowchart.AddPair(("Fire?"), ("Dead?", "Is Someone Dead?", "Rhombus"), "Arrow", "No");
             //flowchart.AddPair(("Dead?"), ("Sad later", "I'll be sad later. Let me be happy now", "Rectangle"), "Arrow", "Yes");
             //flowchart.AddPair(("Sad later"), ("End", "End", "Stadium"), "Arrow");
-            //flowchart.AddPair(("War?"), ("Evacuating?", "Are we evacuating?", "Rhombus"), "Arrow", "Yes");
+            //flowchart.AddPair(("War?"), ("Evacuating?", "Are we evacuating?", "Rhombus", sys), "Arrow", "Yes");
             //flowchart.AddPair(("Zombie?"), ("Evacuating?"), "SideArrow", "Yes");
             //flowchart.AddPair(("Fire?"), ("Evacuating?"), "SideArrow", "Yes");
             //flowchart.AddPair(("Evacuating?"), ("Knock", "KNOCK!", "Rectangle"), "Arrow", "Yes");
-            //flowchart.AddPair(("Emergency?"), ("Visiting?", "Is someone visiting?", "Rhombus"), "Arrow", "No");
+            //flowchart.AddPair(("Emergency?"), ("Visiting?", "Is someone visiting?", "Rhombus", sys), "Arrow", "No");
             //flowchart.AddPair(("Visiting?"), ("They can wait", "They can wait", "Rectangle"), "Arrow", "Yes");
             //flowchart.AddPair(("Visiting?"), ("Going somewhere?", "Are you going somewhere?", "Rhombus"), "Arrow", "No");
             //flowchart.AddPair(("Going somewhere?"), ("Tell me later", "Tell me later", "Rectangle"), "Arrow", "No");
@@ -97,6 +100,16 @@
             //flowchart.AddPair(("SMB2"), ("Spreadsheets", "Sales Ops sends spreadsheets", "RoundedRectangle"), "DottedLink");
             //flowchart.AddPair(("AM2"), ("Spreadsheets", "Sales Ops sends spreadsheets", "Banner"), "DottedLink");
             //flowchart.AddPair(("Spreadsheets"), ("Uploads", "Sales Ops uploads account changes to Salesforce", "Cylinder"), "Arrow");
+
+            //flowchart.AddPair(("Start", "Start", "Stadium", sys), ("E1", "E1", "Rectangle", sys), "Arrow");
+            //flowchart.AddPair("Start", ("B1", "B1", "Rectangle"), "Arrow");
+            //flowchart.AddPair("Start", ("C1", "C1", "Rectangle"), "Arrow");
+            //flowchart.AddPair("Start", ("D1", "D1", "Rectangle"), "Arrow");
+            //flowchart.AddPair("D1", ("E1", "E1", "Rectangle"), "Arrow");
+            //flowchart.AddPair("B1", "E1", "Arrow");
+
+            //flowchart.AddSubsystem("B1", sys2);
+            //flowchart.AddSubsystem("E1", sys2);
 
             flowchart.DrawFlowchart();
         }

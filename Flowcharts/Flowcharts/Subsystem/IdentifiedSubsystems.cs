@@ -7,7 +7,6 @@ namespace Flowcharts
 {
     public class IdentifiedSubsystems
     {
-        public List<Subsystem> Subsystems { get; private set; }
         Element[,] ElementArray;
 
         public IdentifiedSubsystems(Element[,] ElementArray)

@@ -1810,5 +1810,279 @@ namespace Flowcharts.Tests
             Assert.Equal("587", texts[6].Attributes[1].Value);
             Assert.Equal("B2", texts[6].InnerText);
         }
+
+
+        [Fact]
+        public void SimpleSubsystemWorks()
+        {
+            var stream = new MemoryStream();
+            Writer.CreateWriter(stream);
+
+            var flowchart = new Flowchart("LeftRight", stream);
+            Subsystem sys = new Subsystem("Subystem 1");
+
+            flowchart.AddPair(("Start", "Start", "Stadium",sys), ("A1", "A1", "Rectangle", sys), "Arrow");
+
+            flowchart.DrawFlowchart();
+
+            XmlDocument xmlDoc = new XmlDocument();
+            xmlDoc.Load(stream);
+
+            var elements = xmlDoc.SelectNodes("/*[name()='svg']/*[name()='polygon']");
+            Assert.Equal("150,75 150,225 550,225 550,75", elements[0].Attributes[0].Value);
+            Assert.Equal("277.5,151.8 277.5,114.2 222.5,114.2 222.5,151.8", elements[1].Attributes[0].Value);
+            Assert.Equal("468.5,153 468.5,113 431.5,113 431.5,153", elements[2].Attributes[0].Value);
+ 
+            var texts = xmlDoc.SelectNodes("/*[name()='svg']/*[name()='text']");
+
+            Assert.Equal("150", texts[0].Attributes[0].Value);
+            Assert.Equal("55", texts[0].Attributes[1].Value);
+            Assert.Equal("Subystem 1", texts[0].InnerText);
+
+            Assert.Equal("233", texts[1].Attributes[0].Value);
+            Assert.Equal("137", texts[1].Attributes[1].Value);
+            Assert.Equal("Start", texts[1].InnerText);
+
+            Assert.Equal("441.5", texts[2].Attributes[0].Value);
+            Assert.Equal("137", texts[2].Attributes[1].Value);
+            Assert.Equal("A1", texts[2].InnerText);
+        }
+
+
+        [Fact]
+        public void SubsystemExcludesMiddleElement()
+        {
+            var stream = new MemoryStream();
+            Writer.CreateWriter(stream);
+
+            var flowchart = new Flowchart("LeftRight", stream);
+            Subsystem sys = new Subsystem("Subystem 1");
+
+            flowchart.AddPair(("Start", "Start", "Stadium", sys), ("A1", "A1", "Rectangle"), "Arrow");
+            flowchart.AddPair("A1", ("B1", "B1", "Rectangle", sys), "Arrow");
+
+            flowchart.DrawFlowchart();
+
+            XmlDocument xmlDoc = new XmlDocument();
+            xmlDoc.Load(stream);
+
+            var elements = xmlDoc.SelectNodes("/*[name()='svg']/*[name()='polygon']");
+            Assert.Equal("150,225 150,375 750,375 750,225", elements[0].Attributes[0].Value);
+            Assert.Equal("468.5,153 468.5,113 431.5,113 431.5,153", elements[1].Attributes[0].Value);
+            Assert.Equal("277.5,301.8 277.5,264.2 222.5,264.2 222.5,301.8", elements[2].Attributes[0].Value);
+
+            var texts = xmlDoc.SelectNodes("/*[name()='svg']/*[name()='text']");
+
+            Assert.Equal("150", texts[0].Attributes[0].Value);
+            Assert.Equal("205", texts[0].Attributes[1].Value);
+            Assert.Equal("Subystem 1", texts[0].InnerText);
+
+            Assert.Equal("441.5", texts[1].Attributes[0].Value);
+            Assert.Equal("137", texts[1].Attributes[1].Value);
+            Assert.Equal("A1", texts[1].InnerText);
+
+            Assert.Equal("233", texts[2].Attributes[0].Value);
+            Assert.Equal("287", texts[2].Attributes[1].Value);
+            Assert.Equal("Start", texts[2].InnerText);
+
+            Assert.Equal("641.5", texts[3].Attributes[0].Value);
+            Assert.Equal("287", texts[3].Attributes[1].Value);
+            Assert.Equal("B1", texts[3].InnerText);
+        }
+
+        [Fact]
+        public void SubsystemExcludesMultipleMiddleElements()
+        {
+            var stream = new MemoryStream();
+            Writer.CreateWriter(stream);
+
+            var flowchart = new Flowchart("LeftRight", stream);
+            Subsystem sys = new Subsystem("Subystem 1");
+
+            flowchart.AddPair(("Start", "Start", "Stadium", sys), ("E1", "E1", "Rectangle", sys), "Arrow");
+            flowchart.AddPair("Start", ("B1", "B1", "Rectangle"), "Arrow");
+            flowchart.AddPair("Start", ("C1", "C1", "Rectangle"), "Arrow");
+            flowchart.AddPair("Start", ("D1", "D1", "Rectangle"), "Arrow");
+            flowchart.AddPair("D1", ("E1", "E1", "Rectangle"), "Arrow");
+            flowchart.AddPair("B1", "E1", "Arrow");
+
+            flowchart.DrawFlowchart();
+            
+            XmlDocument xmlDoc = new XmlDocument();
+            xmlDoc.Load(stream);
+
+            var elements = xmlDoc.SelectNodes("/*[name()='svg']/*[name()='polygon']");
+            Assert.Equal("150,225 150,525 750,525 750,225", elements[0].Attributes[0].Value);
+            Assert.Equal("468.5,153 468.5,113 431.5,113 431.5,153", elements[1].Attributes[0].Value);
+            Assert.Equal("668.5,303 668.5,263 631.5,263 631.5,303", elements[2].Attributes[0].Value);
+            Assert.Equal("277.5,451.8 277.5,414.2 222.5,414.2 222.5,451.8", elements[3].Attributes[0].Value);
+            Assert.Equal("468.5,603 468.5,563 431.5,563 431.5,603", elements[4].Attributes[0].Value);
+            Assert.Equal("468.5,753 468.5,713 431.5,713 431.5,753", elements[5].Attributes[0].Value);
+
+            var texts = xmlDoc.SelectNodes("/*[name()='svg']/*[name()='text']");
+
+            Assert.Equal("150", texts[0].Attributes[0].Value);
+            Assert.Equal("205", texts[0].Attributes[1].Value);
+            Assert.Equal("Subystem 1", texts[0].InnerText);
+
+            Assert.Equal("441.5", texts[1].Attributes[0].Value);
+            Assert.Equal("137", texts[1].Attributes[1].Value);
+            Assert.Equal("B1", texts[1].InnerText);
+
+            Assert.Equal("641.5", texts[2].Attributes[0].Value);
+            Assert.Equal("287", texts[2].Attributes[1].Value);
+            Assert.Equal("E1", texts[2].InnerText);
+
+            Assert.Equal("233", texts[3].Attributes[0].Value);
+            Assert.Equal("437", texts[3].Attributes[1].Value);
+            Assert.Equal("Start", texts[3].InnerText);
+
+            Assert.Equal("441.5", texts[4].Attributes[0].Value);
+            Assert.Equal("587", texts[4].Attributes[1].Value);
+            Assert.Equal("C1", texts[4].InnerText);
+
+            Assert.Equal("441.5", texts[5].Attributes[0].Value);
+            Assert.Equal("737", texts[5].Attributes[1].Value);
+            Assert.Equal("D1", texts[5].InnerText);
+        }
+
+        [Fact]
+        public void ComplexSubsystemWorks()
+        {
+            var stream = new MemoryStream();
+            Writer.CreateWriter(stream);
+
+            var flowchart = new Flowchart("LeftRight", stream);
+            Subsystem sys = new Subsystem("Subystem 1");
+
+            flowchart.AddPair(("Start", "Start", "Stadium", sys), ("A1", "A1", "Stadium", sys), "Arrow");
+            flowchart.AddPair("Start", ("A2", "A2", "Stadium", sys), "Arrow");
+            flowchart.AddPair("A2", ("C3", "C3", "Rectangle"), "Arrow");
+            flowchart.AddPair("A2", ("C2", "C2", "Stadium"), "Arrow");
+            flowchart.AddPair("A2", ("C3", "C3", "Rectangle"), "Arrow");
+            flowchart.AddPair("A1", ("B1", "B1", "Rectangle", sys), "Arrow");
+            flowchart.AddPair("A1", ("B2", "B2", "Rectangle"), "Arrow");
+            flowchart.AddPair("B1", ("C1", "C1", "Rectangle"), "Arrow");
+            flowchart.AddPair("B2", ("C2", "C2", "Rectangle"), "SideArrow");
+
+            flowchart.DrawFlowchart();
+
+            XmlDocument xmlDoc = new XmlDocument();
+            xmlDoc.Load(stream);
+
+            var elements = xmlDoc.SelectNodes("/*[name()='svg']/*[name()='polygon']");
+            Assert.Equal("150,375 150,825 750,825 750,375", elements[0].Attributes[0].Value);
+            Assert.Equal("668.5,153 668.5,113 631.5,113 631.5,153", elements[1].Attributes[0].Value);
+            Assert.Equal("669,301.8 669,264.2 631,264.2 631,301.8", elements[2].Attributes[0].Value);
+            Assert.Equal("469,451.8 469,414.2 431,414.2 431,451.8", elements[3].Attributes[0].Value);
+            Assert.Equal("277.5,601.8 277.5,564.2 222.5,564.2 222.5,601.8", elements[4].Attributes[0].Value);
+            Assert.Equal("668.5,603 668.5,563 631.5,563 631.5,603", elements[5].Attributes[0].Value);
+            Assert.Equal("868.5,603 868.5,563 831.5,563 831.5,603", elements[6].Attributes[0].Value);
+            Assert.Equal("469,751.8 469,714.2 431,714.2 431,751.8", elements[7].Attributes[0].Value);
+
+            var texts = xmlDoc.SelectNodes("/*[name()='svg']/*[name()='text']");
+
+            Assert.Equal("150", texts[0].Attributes[0].Value);
+            Assert.Equal("355", texts[0].Attributes[1].Value);
+            Assert.Equal("Subystem 1", texts[0].InnerText);
+
+            Assert.Equal("641.5", texts[1].Attributes[0].Value);
+            Assert.Equal("137", texts[1].Attributes[1].Value);
+            Assert.Equal("C3", texts[1].InnerText);
+
+            Assert.Equal("641.5", texts[2].Attributes[0].Value);
+            Assert.Equal("287", texts[2].Attributes[1].Value);
+            Assert.Equal("C2", texts[2].InnerText);
+
+            Assert.Equal("441.5", texts[3].Attributes[0].Value);
+            Assert.Equal("437", texts[3].Attributes[1].Value);
+            Assert.Equal("A2", texts[3].InnerText);
+
+            Assert.Equal("233", texts[4].Attributes[0].Value);
+            Assert.Equal("587", texts[4].Attributes[1].Value);
+            Assert.Equal("Start", texts[4].InnerText);
+
+            Assert.Equal("641.5", texts[5].Attributes[0].Value);
+            Assert.Equal("587", texts[5].Attributes[1].Value);
+            Assert.Equal("B1", texts[5].InnerText);
+
+            Assert.Equal("841.5", texts[6].Attributes[0].Value);
+            Assert.Equal("587", texts[6].Attributes[1].Value);
+            Assert.Equal("C1", texts[6].InnerText);
+
+            Assert.Equal("441.5", texts[7].Attributes[0].Value);
+            Assert.Equal("737", texts[7].Attributes[1].Value);
+            Assert.Equal("A1", texts[7].InnerText);
+
+            Assert.Equal("641.5", texts[8].Attributes[0].Value);
+            Assert.Equal("887", texts[8].Attributes[1].Value);
+            Assert.Equal("B2", texts[8].InnerText);
+        }
+
+
+        [Fact]
+        public void MultipleSubsystemsWork()
+        {
+            var stream = new MemoryStream();
+            Writer.CreateWriter(stream);
+
+            var flowchart = new Flowchart("LeftRight", stream);
+            Subsystem sys = new Subsystem("Subystem 1");
+            Subsystem sys2 = new Subsystem("Subystem 2");
+
+            flowchart.AddPair(("Start", "Start", "Stadium", sys), ("E1", "E1", "Rectangle", sys), "Arrow");
+            flowchart.AddPair("Start", ("B1", "B1", "Rectangle"), "Arrow");
+            flowchart.AddPair("Start", ("C1", "C1", "Rectangle"), "Arrow");
+            flowchart.AddPair("Start", ("D1", "D1", "Rectangle"), "Arrow");
+            flowchart.AddPair("D1", ("E1", "E1", "Rectangle"), "Arrow");
+            flowchart.AddPair("B1", "E1", "Arrow");
+
+            flowchart.AddSubsystem("B1", sys2);
+            flowchart.AddSubsystem("E1", sys2);
+
+            flowchart.DrawFlowchart();
+
+            XmlDocument xmlDoc = new XmlDocument();
+            xmlDoc.Load(stream);
+
+            var elements = xmlDoc.SelectNodes("/*[name()='svg']/*[name()='polygon']");
+            Assert.Equal("350,75 350,375 750,375 750,75", elements[0].Attributes[0].Value);
+            Assert.Equal("150,225 150,375 750,375 750,225", elements[1].Attributes[0].Value);
+            Assert.Equal("468.5,153 468.5,113 431.5,113 431.5,153", elements[2].Attributes[0].Value);
+            Assert.Equal("277.5,301.8 277.5,264.2 222.5,264.2 222.5,301.8", elements[3].Attributes[0].Value);
+            Assert.Equal("668.5,303 668.5,263 631.5,263 631.5,303", elements[4].Attributes[0].Value);
+            Assert.Equal("468.5,453 468.5,413 431.5,413 431.5,453", elements[5].Attributes[0].Value);
+            Assert.Equal("468.5,603 468.5,563 431.5,563 431.5,603", elements[6].Attributes[0].Value);
+
+            var texts = xmlDoc.SelectNodes("/*[name()='svg']/*[name()='text']");
+
+            Assert.Equal("350", texts[0].Attributes[0].Value);
+            Assert.Equal("55", texts[0].Attributes[1].Value);
+            Assert.Equal("Subystem 2", texts[0].InnerText);
+
+            Assert.Equal("150", texts[1].Attributes[0].Value);
+            Assert.Equal("205", texts[1].Attributes[1].Value);
+            Assert.Equal("Subystem 1", texts[1].InnerText);
+
+            Assert.Equal("441.5", texts[2].Attributes[0].Value);
+            Assert.Equal("137", texts[2].Attributes[1].Value);
+            Assert.Equal("B1", texts[2].InnerText);
+
+            Assert.Equal("233", texts[3].Attributes[0].Value);
+            Assert.Equal("287", texts[3].Attributes[1].Value);
+            Assert.Equal("Start", texts[3].InnerText);
+
+            Assert.Equal("641.5", texts[4].Attributes[0].Value);
+            Assert.Equal("287", texts[4].Attributes[1].Value);
+            Assert.Equal("E1", texts[4].InnerText);
+
+            Assert.Equal("441.5", texts[5].Attributes[0].Value);
+            Assert.Equal("437", texts[5].Attributes[1].Value);
+            Assert.Equal("C1", texts[5].InnerText);
+
+            Assert.Equal("441.5", texts[6].Attributes[0].Value);
+            Assert.Equal("587", texts[6].Attributes[1].Value);
+            Assert.Equal("D1", texts[6].InnerText);
+        }
     }
 }
