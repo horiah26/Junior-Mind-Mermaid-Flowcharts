@@ -1,4 +1,6 @@
-﻿namespace Flowcharts
+﻿using System;
+
+namespace Flowcharts
 {
     class Program
     {
@@ -28,90 +30,226 @@
             //    flowchart.DrawFlowchart();
             //}
 
-            Subsystem sys = new Subsystem("Subystem 1");
-            Subsystem sys2 = new Subsystem("Subystem 2");
-            Subsystem sys3 = new Subsystem("Subystem 3");
 
-            var flowchart = Factory.Flowchart("LeftRight", "test");
-            GridSpacing.SetLarge();
 
-            //flowchart.AddPair(("Start", "Start", "Stadium", sys), ("A1", "A1", "Stadium", sys), "Arrow");
-            //flowchart.AddPair("Start", ("A2", "A2", "Stadium", sys), "Arrow");
-            //flowchart.AddPair("A2", ("C3", "C3", "Rectangle"), "Arrow");
-            //flowchart.AddPair("A2", ("C2", "C2", "Stadium"), "Arrow");
-            //flowchart.AddPair("A2", ("C3", "C3", "Rectangle"), "Arrow");
-            //flowchart.AddPair("A1", ("B1", "B1", "Rectangle", sys), "Arrow");
-            //flowchart.AddPair("A1", ("B2", "B2", "Rectangle"), "Arrow");
-            //flowchart.AddPair("B1", ("C1", "C1", "Rectangle"), "Arrow");
-            //flowchart.AddPair("B2", ("C2", "C2", "Rectangle"), "SideArrow");
+            //Console.WriteLine("Orientation? LeftRight / RightLeft / TopDown / DownTop");
+            //string orientation = Console.ReadLine();
 
-            //flowchart.AddPair(("Collect", "Collect late payments", "Stadium"), ("Send", "Send Collection Letter", "Rectangle"), "Arrow");
-            //flowchart.AddPair(("Send"), ("Rhombus1", "Payment received within one week?", "Rhombus", sys), "Arrow");
-            //flowchart.AddPair(("Rhombus1"), ("Assistant", "Accounting Assistant Calls Customer for Payment", "Rectangle", sys), "Arrow", "No");
-            //flowchart.AddPair(("Rhombus1"), ("Forward", "Forward Payment to Payment Processing", "Parallelogram", sys), "Arrow", "Yes");
-            //flowchart.AddPair(("Assistant"), ("Received?", "Payment Received?", "Rhombus", sys2), "Arrow");
-            //flowchart.AddPair(("Received?"), ("Forward"), "BackArrow", "Yes");
-            //flowchart.AddPair(("Received?"), ("Payment>1000", "Payment > $1000?", "Rectangle", sys2), "Arrow", "No");
-            //flowchart.AddPair(("Payment>1000"), ("Invoice", "Write Off Invoice as closed", "Rectangle", sys2), "Arrow", "No");
-            //flowchart.AddPair(("Payment>1000"), ("Agency", "Contact Collection Agency", "Rectangle", sys), "Arrow", "Yes"); //
-            //flowchart.AddPair(("Agency"), ("End", "End", "Stadium", sys), "Arrow");
-            //flowchart.AddPair(("Invoice"), ("End"), "Arrow");
-            //flowchart.AddPair(("Forward"), ("End"), "Arrow");
 
-            //flowchart.AddSubsystem("End", sys2);
-            //flowchart.AddSubsystem("End", sys3);
-            //flowchart.AddSubsystem("Agency", sys3);
+            string line = "";
+            while (line != "end")
+            {
+                line = Console.ReadLine();
+                if (line != "")
+                {
+                    AnalyzeLine(line);
+                }    
+            }
 
-            //flowchart.AddPair(("Start", "Start", "Stadium", sys), ("A1", "A1", "Rectangle"), "Arrow");
-            //flowchart.AddPair("A1", ("B1", "B1", "Rectangle", sys), "Arrow");
+            //var flowchart = Factory.Flowchart(orientation, "test");
+            //GridSpacing.SetLarge();
+                    
+            void AnalyzeLine(string line)
+            {               
+                var str = SeparateElements(line);
+                for (int i = 0; i < 2; i++) 
+                {
+                    IdentifyShape(str[i]);
+                }
+            }
 
-            //flowchart.AddPair(("Start", "Start", "Stadium"), ("Emergency?", "Is it an Emergency?", "Rhombus"), "Arrow");
-            //flowchart.AddPair(("Emergency?"), ("War?", "Did the US declare War?", "Rhombus", sys), "Arrow", "Yes");
-            //flowchart.AddPair(("War?"), ("Zombie?", "Is it a Zombie Attack?", "Rhombus"), "Arrow", "No");
-            //flowchart.AddPair(("Zombie?"), ("Fire?", "Is there a Fire?", "Rhombus"), "Arrow", "No");
-            //flowchart.AddPair(("Fire?"), ("Dead?", "Is Someone Dead?", "Rhombus"), "Arrow", "No");
-            //flowchart.AddPair(("Dead?"), ("Sad later", "I'll be sad later. Let me be happy now", "Rectangle"), "Arrow", "Yes");
-            //flowchart.AddPair(("Sad later"), ("End", "End", "Stadium"), "Arrow");
-            //flowchart.AddPair(("War?"), ("Evacuating?", "Are we evacuating?", "Rhombus", sys), "Arrow", "Yes");
-            //flowchart.AddPair(("Zombie?"), ("Evacuating?"), "SideArrow", "Yes");
-            //flowchart.AddPair(("Fire?"), ("Evacuating?"), "SideArrow", "Yes");
-            //flowchart.AddPair(("Evacuating?"), ("Knock", "KNOCK!", "Rectangle"), "Arrow", "Yes");
-            //flowchart.AddPair(("Emergency?"), ("Visiting?", "Is someone visiting?", "Rhombus", sys), "Arrow", "No");
-            //flowchart.AddPair(("Visiting?"), ("They can wait", "They can wait", "Rectangle"), "Arrow", "Yes");
-            //flowchart.AddPair(("Visiting?"), ("Going somewhere?", "Are you going somewhere?", "Rhombus"), "Arrow", "No");
-            //flowchart.AddPair(("Going somewhere?"), ("Tell me later", "Tell me later", "Rectangle"), "Arrow", "No");
-            //flowchart.AddPair(("Going somewhere?"), ("Leave a note", "Leave a note", "Rectangle"), "Arrow", "Yes");
-            //flowchart.AddPair(("Evacuating?"), ("Tell me later"), "Arrow", "Yes");
-            //flowchart.AddPair(("Dead?"), ("Tell me later"), "SideArrow", "Yes");
+            string[] SeparateElements(string line)
+            {
+                string element1 = null;
+                string element2 = null;
 
-            //flowchart.AddPair(("Start", "AE or SDR sells a business package", "ParallelogramAlt"), ("AE?", "Account owned by AE?", "Rhombus"), "Arrow");
-            //flowchart.AddPair(("AE?"), ("Keeps ownership", "AE keeps ownership of the account", "Stadium"), "Arrow", "Yes");
-            //flowchart.AddPair(("AE?"), ("Opportunity?", "AE has an open opportunity on the account?", "Banner"), "ThickLink", "No");
-            //flowchart.AddPair(("Opportunity?"), ("Opportunity", "AE has an open opportunity on the account", "Parallelogram", sys), "Arrow", "Yes");
-            //flowchart.AddPair(("Opportunity?"), ("No opportunity", "No open opportunity on the account", "Rectangle"), "Arrow", "No");
-            //flowchart.AddPair(("Opportunity"), ("Employees?2", "How many employees?", "Banner"), "ThickLink");
-            //flowchart.AddPair(("Employees?2"), ("SMB2", "Hand off account to SMB AM. Round Robin after 120 days", "Hexagon", sys), "Arrow", "< 100 employees");
-            //flowchart.AddPair(("Employees?2"), ("AM2", "Hand off account to AM. Round Robin after 120 days", "RoundedRectangle"), "Arrow", "101 - 5000 +");
-            //flowchart.AddPair(("No opportunity"), ("Employees?", "How many employees?", "Banner"), "Link");
-            //flowchart.AddPair(("Employees?"), ("SMB", "Hand off account to SMB AM. Round Robin after 120 days", "Subroutine"), "Arrow", "< 100 employees");
-            //flowchart.AddPair(("Employees?"), ("AM", "Hand off account to AM. Round Robin after 120 days", "Trapezoid"), "Arrow", "101 - 5000 +");
-            //flowchart.AddPair(("SMB"), ("Spreadsheets", "Sales Ops sends spreadsheets", "Banner"), "ThickLink");
-            //flowchart.AddPair(("AM"), ("Spreadsheets", "Sales Ops sends spreadsheets", "ParallelogramAlt"), "Link");
-            //flowchart.AddPair(("SMB2"), ("Spreadsheets", "Sales Ops sends spreadsheets", "RoundedRectangle"), "DottedLink");
-            //flowchart.AddPair(("AM2"), ("Spreadsheets", "Sales Ops sends spreadsheets", "Banner"), "DottedLink");
-            //flowchart.AddPair(("Spreadsheets"), ("Uploads", "Sales Ops uploads account changes to Salesforce", "Cylinder"), "Arrow");
+                string secondHalf = null;
+                string arrow = null;
+                string text = null;
 
-            //flowchart.AddPair(("Start", "Start", "Stadium", sys), ("E1", "E1", "Rectangle", sys), "Arrow");
-            //flowchart.AddPair("Start", ("B1", "B1", "Rectangle"), "Arrow");
-            //flowchart.AddPair("Start", ("C1", "C1", "Rectangle"), "Arrow");
-            //flowchart.AddPair("Start", ("D1", "D1", "Rectangle"), "Arrow");
-            //flowchart.AddPair("D1", ("E1", "E1", "Rectangle"), "Arrow");
-            //flowchart.AddPair("B1", "E1", "Arrow");
+                if (line.IndexOf("-->") != -1)
+                {
+                    var index = line.IndexOf("-->");
+                    element1 = line.Substring(0, index).Trim();
+                    secondHalf = line[(index + 3)..].Trim();
+                    (text, element2) = SeparateArrowTextFromElement2(secondHalf);
+                    arrow = "Arrow";
+                }
+                else if (line.IndexOf("/-->") != -1)
+                {
+                    var index = line.IndexOf("/-->");
+                    element1 = line.Substring(0, index).Trim();
+                    secondHalf = line[(index + 4)..].Trim();
+                    (text, element2) = SeparateArrowTextFromElement2(secondHalf);
+                    arrow = "SideArrow";
+                }
+                else if (line.IndexOf("---") != -1)
+                {
+                    var index = line.IndexOf("---");
+                    element1 = line.Substring(0, index).Trim();
+                    secondHalf = line[(index + 3)..].Trim();
+                    (text, element2) = SeparateArrowTextFromElement2(secondHalf);
+                    arrow = "Link";
+                }
+                else if (line.IndexOf("-.->") != -1)
+                {
+                    var index = line.IndexOf("-.->");
+                    element1 = line.Substring(0, index).Trim();
+                    secondHalf = line[(index + 4)..].Trim();
+                    (text, element2) = SeparateArrowTextFromElement2(secondHalf);
+                    arrow = "DottedLink";
+                }
+                else if (line.IndexOf("==>") != -1)
+                {
+                    var index = line.IndexOf("==>");
+                    element1 = line.Substring(0, index).Trim();
+                    secondHalf = line[(index + 3)..].Trim();
+                    (text, element2) = SeparateArrowTextFromElement2(secondHalf);
+                    arrow = "ThickLink";
+                }
+                
+                return new string[] { element1, element2, arrow, text };
+            }
 
-            //flowchart.AddSubsystem("B1", sys2);
-            //flowchart.AddSubsystem("E1", sys2);
+            (string text, string element2) SeparateArrowTextFromElement2(string secondHalf)
+            {
+                string text = null;
+                string element2 = secondHalf;
+                int textStart = secondHalf.IndexOf("|");
+                int textEnd = secondHalf.LastIndexOf("|");
 
-            flowchart.DrawFlowchart();
+                if (textStart != textEnd)
+                {
+                    text = secondHalf.Substring(textStart + 1, secondHalf.Length - textEnd - 1).Trim();
+                    element2 = secondHalf[(textEnd + 1)..].Trim();
+                }
+
+                return (text, element2);
+            }
+
+            (string key, string text, string shape) IdentifyShape(string element)
+            {
+                string key = null;
+                string text = null;
+                string shape = null;
+
+                int firstIndex = -1;
+                int middleIndex = -1;
+                int lastIndex = -1;
+
+                if (element.IndexOf("([") < element.IndexOf("])") && element.IndexOf("([") != -1 && element.IndexOf("])") != -1)
+                {
+                    shape = "Stadium";
+
+                    firstIndex = element.IndexOf("([");
+                    middleIndex = firstIndex + 2;
+                    lastIndex = element.IndexOf("])");
+                }
+                else if (element.IndexOf("[[") < element.IndexOf("]]") && element.IndexOf("[[") != -1 && element.IndexOf("]]") != -1)
+                {
+                    shape = "Subroutine";
+
+                    firstIndex = element.IndexOf("[[");
+                    middleIndex = firstIndex + 2;
+                    lastIndex = element.IndexOf("]]");
+                }
+                else if (element.IndexOf("[(") < element.IndexOf(")]") && element.IndexOf("[(") != -1 && element.IndexOf(")]") != -1)
+                {
+                    shape = "Cylinder";
+
+                    firstIndex = element.IndexOf("[(");
+                    middleIndex = firstIndex + 2;
+                    lastIndex = element.IndexOf(")]");
+                }
+                else if (element.IndexOf("((") < element.IndexOf("))") && element.IndexOf("((") != -1 && element.IndexOf("))") != -1)
+                {
+                    shape = "Circle";
+
+                    firstIndex = element.IndexOf("((");
+                    middleIndex = firstIndex + 2;
+                    lastIndex = element.IndexOf("))");
+                }
+                else if (element.IndexOf(">") < element.IndexOf("]") && element.IndexOf(">") != -1 && element.IndexOf("]") != -1)
+                {
+                    shape = "Banner";
+
+                    firstIndex = element.IndexOf(">");
+                    middleIndex = firstIndex + 1;
+                    lastIndex = element.IndexOf("]");
+                }
+                else if (element.IndexOf("{{") < element.IndexOf("}}") && element.IndexOf("{{") != -1 && element.IndexOf("}}") != -1)
+                {
+                    shape = "Hexagon";
+
+                    firstIndex = element.IndexOf("{{");
+                    middleIndex = firstIndex + 2;
+                    lastIndex = element.IndexOf("}}");
+
+                }
+                else if (element.IndexOf("{") < element.IndexOf("}") && element.IndexOf("{") != -1 && element.IndexOf("}") != -1)
+                {
+                    shape = "Rhombus";
+
+                    firstIndex = element.IndexOf("{");
+                    middleIndex = firstIndex + 1;
+                    lastIndex = element.IndexOf("}");
+                }
+                else if (element.IndexOf("[/") < element.IndexOf("/]") && element.IndexOf("[/") != -1 && element.IndexOf("/]") != -1)
+                {
+                    shape = "Parallelogram";
+
+                    firstIndex = element.IndexOf("[/");
+                    middleIndex = firstIndex + 2;
+                    lastIndex = element.IndexOf("/]");
+                }
+                else if (element.IndexOf("[\\") < element.IndexOf("\\]") && element.IndexOf("[\\") != -1 && element.IndexOf("\\]") != -1)
+                {
+                    shape = "ParallelogramAlt";
+
+                    firstIndex = element.IndexOf("[\\");
+                    middleIndex = firstIndex + 2;
+                    lastIndex = element.IndexOf("\\]");
+                }
+                else if (element.IndexOf("[/") < element.IndexOf("\\]") && element.IndexOf("[/") != -1 && element.IndexOf("\\]") != -1)
+                {
+                    shape = "Trapezoid";
+
+                    firstIndex = element.IndexOf("[/");
+                    middleIndex = firstIndex + 2;
+                    lastIndex = element.IndexOf("\\]");
+                }
+                else if (element.IndexOf("[\\") < element.IndexOf("/]") && element.IndexOf("[\\") != -1 && element.IndexOf("/]") != -1)
+                {
+                    shape = "TrapezoidAlt";
+
+                    firstIndex = element.IndexOf("[\\");
+                    middleIndex = firstIndex + 2;
+                    lastIndex = element.IndexOf("/]");
+                }
+                else if (element.IndexOf("(") < element.IndexOf(")") && element.IndexOf("(") != -1 && element.IndexOf(")") != -1)
+                {
+                    shape = "RoundedRectangle";
+                    firstIndex = element.IndexOf("(");
+                    middleIndex = firstIndex + 1;
+                    lastIndex = element.IndexOf(")");
+                }
+                else if (element.IndexOf("[") < element.IndexOf("]") && element.IndexOf("[") != -1 && element.IndexOf("]") != -1)
+                {
+                    shape = "Rectangle";
+                    firstIndex = element.IndexOf("[");
+                    middleIndex = firstIndex + 1;
+                    lastIndex = element.IndexOf("]");
+                }
+                else
+                {
+                    throw new ArgumentException("Shape paranthesis is incorrect");
+                }
+
+                key = element.Substring(0, firstIndex);
+                text = element.Substring(middleIndex, lastIndex - middleIndex);
+
+                return (key, text, shape);
+            }
         }
     }
 }
