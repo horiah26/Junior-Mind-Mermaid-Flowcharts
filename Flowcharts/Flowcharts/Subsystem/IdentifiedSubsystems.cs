@@ -7,7 +7,7 @@ namespace Flowcharts
 {
     public class IdentifiedSubsystems
     {
-        Element[,] ElementArray;
+        readonly Element[,] ElementArray;
 
         public IdentifiedSubsystems(Element[,] ElementArray)
         {

@@ -6,8 +6,8 @@ namespace Flowcharts
 {
     public class SubsystemPosition
     {
-        Element[,] ElementArray;
-        Subsystem subsystem;
+        readonly Element[,] ElementArray;
+        readonly Subsystem subsystem;
         public SubsystemPosition(Element[,] ElementArray, Subsystem subsystem)
         {
             this.ElementArray = ElementArray;

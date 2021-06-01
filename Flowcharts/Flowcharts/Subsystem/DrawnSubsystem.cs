@@ -7,8 +7,8 @@ namespace Flowcharts
 {
     public class DrawnSubsystem
     {
-        Subsystem subsystem;
-        Element[,] ElementArray;
+        readonly Subsystem subsystem;
+        readonly Element[,] ElementArray;
         readonly XmlWriter xmlWriter = Writer.XmlWriter;
 
         public DrawnSubsystem(Subsystem subsystem, Element[,] ElementArray)

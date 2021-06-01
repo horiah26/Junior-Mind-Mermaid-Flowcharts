@@ -6,8 +6,8 @@ namespace Flowcharts.Tests
 {
     public class FlowchartTests
     {
-        string arrow = "Arrow";
-        string rectangle = "Rectangle";
+        readonly string arrow = "Arrow";
+        readonly string rectangle = "Rectangle";
 
         //GridSpacing 150 200 150, 150 200 200
 
@@ -1821,7 +1821,9 @@ namespace Flowcharts.Tests
             var flowchart = new Flowchart("LeftRight", stream);
             Subsystem sys = new Subsystem("Subystem 1");
 
-            flowchart.AddPair(("Start", "Start", "Stadium",sys), ("A1", "A1", "Rectangle", sys), "Arrow");
+            flowchart.AddPair(("Start", "Start", "Stadium"), ("A1", "A1", "Rectangle"), "Arrow");
+            flowchart.AddSubsystem("Start", sys);
+            flowchart.AddSubsystem("A1", sys);
 
             flowchart.DrawFlowchart();
 
@@ -1858,8 +1860,11 @@ namespace Flowcharts.Tests
             var flowchart = new Flowchart("LeftRight", stream);
             Subsystem sys = new Subsystem("Subystem 1");
 
-            flowchart.AddPair(("Start", "Start", "Stadium", sys), ("A1", "A1", "Rectangle"), "Arrow");
-            flowchart.AddPair("A1", ("B1", "B1", "Rectangle", sys), "Arrow");
+            flowchart.AddPair(("Start", "Start", "Stadium"), ("A1", "A1", "Rectangle"), "Arrow");
+            flowchart.AddPair("A1", ("B1", "B1", "Rectangle"), "Arrow");
+
+            flowchart.AddSubsystem("Start", sys);
+            flowchart.AddSubsystem("B1", sys);
 
             flowchart.DrawFlowchart();
 
@@ -1899,12 +1904,16 @@ namespace Flowcharts.Tests
             var flowchart = new Flowchart("LeftRight", stream);
             Subsystem sys = new Subsystem("Subystem 1");
 
-            flowchart.AddPair(("Start", "Start", "Stadium", sys), ("E1", "E1", "Rectangle", sys), "Arrow");
+            flowchart.AddPair(("Start", "Start", "Stadium"), ("E1", "E1", "Rectangle"), "Arrow");
             flowchart.AddPair("Start", ("B1", "B1", "Rectangle"), "Arrow");
             flowchart.AddPair("Start", ("C1", "C1", "Rectangle"), "Arrow");
             flowchart.AddPair("Start", ("D1", "D1", "Rectangle"), "Arrow");
             flowchart.AddPair("D1", ("E1", "E1", "Rectangle"), "Arrow");
             flowchart.AddPair("B1", "E1", "Arrow");
+
+
+            flowchart.AddSubsystem("Start", sys);
+            flowchart.AddSubsystem("E1", sys);
 
             flowchart.DrawFlowchart();
             
@@ -1955,15 +1964,21 @@ namespace Flowcharts.Tests
             var flowchart = new Flowchart("LeftRight", stream);
             Subsystem sys = new Subsystem("Subystem 1");
 
-            flowchart.AddPair(("Start", "Start", "Stadium", sys), ("A1", "A1", "Stadium", sys), "Arrow");
-            flowchart.AddPair("Start", ("A2", "A2", "Stadium", sys), "Arrow");
+            flowchart.AddPair(("Start", "Start", "Stadium"), ("A1", "A1", "Stadium"), "Arrow");
+            flowchart.AddPair("Start", ("A2", "A2", "Stadium"), "Arrow");
             flowchart.AddPair("A2", ("C3", "C3", "Rectangle"), "Arrow");
             flowchart.AddPair("A2", ("C2", "C2", "Stadium"), "Arrow");
             flowchart.AddPair("A2", ("C3", "C3", "Rectangle"), "Arrow");
-            flowchart.AddPair("A1", ("B1", "B1", "Rectangle", sys), "Arrow");
+            flowchart.AddPair("A1", ("B1", "B1", "Rectangle"), "Arrow");
             flowchart.AddPair("A1", ("B2", "B2", "Rectangle"), "Arrow");
             flowchart.AddPair("B1", ("C1", "C1", "Rectangle"), "Arrow");
             flowchart.AddPair("B2", ("C2", "C2", "Rectangle"), "SideArrow");
+
+
+            flowchart.AddSubsystem("Start", sys);
+            flowchart.AddSubsystem("A1", sys);
+            flowchart.AddSubsystem("A2", sys);
+            flowchart.AddSubsystem("B1", sys);
 
             flowchart.DrawFlowchart();
 
@@ -2030,13 +2045,14 @@ namespace Flowcharts.Tests
             Subsystem sys = new Subsystem("Subystem 1");
             Subsystem sys2 = new Subsystem("Subystem 2");
 
-            flowchart.AddPair(("Start", "Start", "Stadium", sys), ("E1", "E1", "Rectangle", sys), "Arrow");
+            flowchart.AddPair(("Start", "Start", "Stadium"), ("E1", "E1", "Rectangle"), "Arrow");
             flowchart.AddPair("Start", ("B1", "B1", "Rectangle"), "Arrow");
             flowchart.AddPair("Start", ("C1", "C1", "Rectangle"), "Arrow");
             flowchart.AddPair("Start", ("D1", "D1", "Rectangle"), "Arrow");
             flowchart.AddPair("D1", ("E1", "E1", "Rectangle"), "Arrow");
             flowchart.AddPair("B1", "E1", "Arrow");
 
+            flowchart.AddSubsystem("Start", sys);
             flowchart.AddSubsystem("B1", sys2);
             flowchart.AddSubsystem("E1", sys2);
 
@@ -2047,7 +2063,7 @@ namespace Flowcharts.Tests
 
             var elements = xmlDoc.SelectNodes("/*[name()='svg']/*[name()='polygon']");
             Assert.Equal("350,75 350,375 750,375 750,75", elements[0].Attributes[0].Value);
-            Assert.Equal("150,225 150,375 750,375 750,225", elements[1].Attributes[0].Value);
+            Assert.Equal("150,225 150,375 350,375 350,225", elements[1].Attributes[0].Value);
             Assert.Equal("468.5,153 468.5,113 431.5,113 431.5,153", elements[2].Attributes[0].Value);
             Assert.Equal("277.5,301.8 277.5,264.2 222.5,264.2 222.5,301.8", elements[3].Attributes[0].Value);
             Assert.Equal("668.5,303 668.5,263 631.5,263 631.5,303", elements[4].Attributes[0].Value);
