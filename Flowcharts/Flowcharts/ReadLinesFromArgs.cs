@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 
@@ -22,18 +23,21 @@ namespace Flowcharts
             {
                 writeTo = args[1];
             }
+            else
+            {
+                writeTo = Path.GetDirectoryName(inputLocation) + "\\";
+            }
         }
 
         public void ReadFromFile()
         {
-            lines = System.IO.File.ReadAllLines(inputLocation);
+            lines = File.ReadAllLines(inputLocation);
             string fileName = lines[0];
             string orientation = lines[1];
 
             flowchart = Factory.Flowchart(orientation, fileName, writeTo);
             GridSpacing.SetLarge();
                        
-
             for (int i = 2; i < lines.Length; i++)
             {
                 if (lines[i].ToLower() == "end")
