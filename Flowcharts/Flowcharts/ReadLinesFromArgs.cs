@@ -19,13 +19,17 @@ namespace Flowcharts
         {
             inputLocation = args[0];
 
-            if (args.Length > 1)
+            if (args.Length == 1)
+            {
+                writeTo = Path.GetDirectoryName(inputLocation) + "\\";
+            }
+            else if(args.Length == 2)
             {
                 writeTo = args[1];
             }
             else
             {
-                writeTo = Path.GetDirectoryName(inputLocation) + "\\";
+                throw new ArgumentException("Too many arguments");
             }
         }
 

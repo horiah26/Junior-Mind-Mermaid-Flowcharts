@@ -2,7 +2,7 @@
   "profiles": {
     "Flowcharts": {
       "commandName": "Project",
-      "commandLineArgs": "C:\\Users\\Horia\\source\\repos\\horiah26\\HanganHoriaJuniorMind\\Flowcharts\\Flowcharts.Tests\\FileTests\\test4.txt C:\\Users\\Horia\\source\\repos\\horiah26\\HanganHoriaJuniorMind\\Flowcharts\\Flowcharts.Tests\\"
+      "commandLineArgs": "C:\\Users\\Horia\\source\\repos\\horiah26\\HanganHoriaJuniorMind\\Flowcharts\\Flowcharts.Tests\\FileTests\\test4.txt "
     }
   }
 }
