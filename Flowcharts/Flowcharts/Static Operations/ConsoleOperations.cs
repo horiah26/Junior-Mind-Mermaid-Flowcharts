@@ -36,9 +36,14 @@ namespace Flowcharts
             new LineToFlowchart(flowchart, subsystems, element1, element2, arrow, text).AddToFlowchart();
         }
 
-       public static void Read()
+        public static void ReadFromConsole()
         {
-            new ReadFromConsole().Read();
+            new ReadLinesFromConsole().ReadFromConsole();
+        }
+
+        public static void ReadArgs(string[] lines)
+        {
+            new ReadLinesFromArgs(lines).ReadFromFile();
         }
     }
 }

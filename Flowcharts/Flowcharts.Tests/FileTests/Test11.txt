@@ -1,24 +1,30 @@
-(("Start", "Start", "Rectangle"), ("Meet 1", "Meet criteria?", "Rectangle"), "Arrow");
-   (("Meet 1"), ("Yes1", "Yes", "Rectangle"), "Arrow");
-   (("Meet 1"), ("No1", "No", "Rectangle"), "Arrow");
-   (("Yes1"), ("Meet 2", "Meet criteria?", "Rectangle"), "Arrow");
-   (("Meet 2"), ("Yes2", "Yes", "Rectangle"), "Arrow");
-   (("Meet 2"), ("No2", "No", "Rectangle"), "Arrow");
-   (("Yes2"), ("Meet 3", "Meet criteria?", "Rectangle"), "Arrow");
-   (("Meet 3"), ("Yes3", "Yes", "Rectangle"), "Arrow");
-   (("Meet 3"), ("No3", "No", "Rectangle"), "Arrow");
-   (("Yes3"), ("Meet 4", "Meet criteria?", "Rectangle"), "Arrow");
-   (("Meet 4"), ("Yes4", "Yes", "Rectangle"), "Arrow");
-   (("Meet 4"), ("No4", "No", "Rectangle"), "Arrow");
-   (("Yes4"), ("Meet 5", "Meet criteria?", "Rectangle"), "Arrow");
-   (("Meet 5"), ("Yes5", "Yes", "Rectangle"), "Arrow");
-   (("Meet 5"), ("No4"), "SideArrow");
-   (("Yes5"), ("Meet 6", "Meet criteria?", "Rectangle"), "Arrow");
-   (("Meet 6"), ("Yes6", "Yes", "Rectangle"), "Arrow");
-   (("Meet 6"), ("No6", "No", "Rectangle"), "Arrow");
-   (("No1"), ("END1", "Process Ended (Option 1)", "Rectangle"), "Arrow");
-   (("No2"), ("END1"), "Arrow");   
-   (("No3"), ("END1"), "SideArrow");
-   (("No4"), ("END1"), "SideArrow");
-   (("No6"), ("END2", "Process Ended (Option 2)", "Rectangle"), "Arrow");
-   (("Yes6"), ("END3", "End goal met", "Rectangle"), "Arrow");
+test11
+TopDown
+
+Start [Start]--> Meet 1[Meet criteria?]
+ Meet 1 --> Yes1[Yes]
+ Meet 1--> No1[No]
+ Yes1--> Meet 2[Meet criteria?]
+ Meet 2--> Yes2[Yes]
+ Meet 2--> No2[No] 
+ Yes2--> Meet 3[Meet criteria?]
+ Meet 3--> Yes3[Yes]
+ Meet 3--> No3 [No]
+ Yes3--> Meet 4 [Meet criteria?]
+ Meet 4--> Yes4 [Yes]
+ Meet 4--> No4 [No]
+ Yes4--> Meet 5 [Meet criteria?]
+ Meet 5--> Yes5 [Yes]
+ Meet 5 /--> No4
+ Yes5--> Meet 6 [Meet criteria?]
+ Meet 6--> Yes6 [Yes]
+ Meet 6--> No6 [No]
+ No1--> END1 [Process Ended Option 1]
+ No2--> END1 
+ No3 /--> END1
+ No4 /--> END1
+ No6 --> END2 [Process Ended Option 2]
+ Yes6 --> END3 [End goal met]
+
+end
+.

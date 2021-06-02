@@ -114,19 +114,19 @@ namespace Flowcharts
                 middleIndex = firstIndex + 2;
                 lastIndex = component.IndexOf("/]");
             }
-            else if (component.IndexOf("(") < component.IndexOf(")") && component.IndexOf("(") != -1 && component.IndexOf(")") != -1)
-            {
-                shape = "RoundedRectangle";
-                firstIndex = component.IndexOf("(");
-                middleIndex = firstIndex + 1;
-                lastIndex = component.IndexOf(")");
-            }
             else if (component.IndexOf("[") < component.IndexOf("]") && component.IndexOf("[") != -1 && component.IndexOf("]") != -1)
             {
                 shape = "Rectangle";
                 firstIndex = component.IndexOf("[");
                 middleIndex = firstIndex + 1;
                 lastIndex = component.IndexOf("]");
+            }
+            else if (component.IndexOf("(") < component.IndexOf(")") && component.IndexOf("(") != -1 && component.IndexOf(")") != -1)
+            {
+                shape = "RoundedRectangle";
+                firstIndex = component.IndexOf("(");
+                middleIndex = firstIndex + 1;
+                lastIndex = component.IndexOf(")");
             }
             else
             {
@@ -136,12 +136,11 @@ namespace Flowcharts
                 {
                     key = dictionary[component].Key;
                     text = dictionary[component].Text;
-                    //shape = dictionary[component].ShapeType;
 
                     return (key, text, null);
                 }
 
-                throw new ArgumentException("Shape paranthesis is incorrect");
+                throw new ArgumentException("Shape paranthesis is incorrect or new element to dictionary");
             }
 
             key = component.Substring(0, firstIndex).Trim();

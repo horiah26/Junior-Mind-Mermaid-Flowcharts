@@ -1,13 +1,21 @@
-(("Start", "Patient exposed to TB", "Stadium"), ("Adult", "Adult", "Rectangle"), "Arrow");
-(("Adult"), ("Common symptoms?", "Has common TB symptoms?", "Rectangle"), "Arrow");
-(("Common symptoms?"), ("Report back", "Have patient report back if unwell; return in 1 month for checkup", "Rectangle"), "Arrow", "No");
-(("Common symptoms?"), ("Treat", "Treat as likely TB patient and perform full TB exam", "Rectangle"), "Arrow", "Yes");
- (("Start"), ("Child", "Child", "Rectangle"), "Arrow"); ("Child", ("TB test?", "Can TB test be given?", "Rhombus"), "Arrow" ,"Yes"); 
-(("TB test?"), ("Administer test", "Administer TB test", "Rectangle"), "Arrow"); 
-(("Administer test"), ("Assess results", "Assess TB test results and child condition", "Rectangle"), "Arrow");
- (("Assess results"), ("A", "A", "Circle"), "Arrow"); ("Child", ("Child well?", "Child well?", "Rhombus"), "Arrow", "No");
- (("Child well?"), ("6 months", "6 months preventive isoniazid", "Rectangle"), "Arrow", "Yes"); 
-(("6 months"), ("Parent", "Have parent bring in if child shows any symptoms", "Rectangle"), "Arrow");
- (("Child well?"), ("History", "Take full history. Examine for TB", "Rectangle"), "Arrow", "No"); 
-(("History"), ("TreatTB", "If likely TB diagnosis, treat TB", "Rectangle"), "Arrow"); 
-(("TreatTB"), ("Treat Other", "If other diagnosis more likely, treat as needed and watch for TB symptoms", "Rectangle"), "Arrow");
+test10
+DownTop
+
+Start([Patient exposed to TB]) --> Adult[Adult]
+ Adult --> Common symptoms?[Has common TB symptoms?]
+ Common symptoms? -->|No| Report back[Have patient report back if unwell return in 1 month for checkup]
+ Common symptoms? --> |Yes| Treat[Treat as likely TB patient and perform full TB exam]
+ Start --> Child[Child]
+ Child--> |Yes| TB test?{ Can TB test be given?} 
+ TB test? --> Administer test[Administer TB test]
+ Administer test --> Assess results[Assess TB test results and child condition]
+ Assess results --> A((A))
+Child--> |No| Child well?{Child well?} Rhombus
+ Child well? --> |Yes| 6 months[6 months preventive isoniazid]
+ 6 months --> Parent[Have parent bring in if child shows any symptoms]
+ Child well? --> |No| History[Take full history. Examine for TB]
+ History --> TreatTB[If likely TB diagnosis, treat TB]
+ TreatTB --> Treat Other[If other diagnosis more likely, treat as needed and watch for TB symptoms]
+
+end
+.

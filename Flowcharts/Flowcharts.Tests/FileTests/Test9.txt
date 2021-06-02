@@ -1,18 +1,23 @@
-(("Start", "Start", "Stadium"), ("Emergency?", "Is it an Emergency?", "Rhombus"), "Arrow"); 
-(("Emergency?"), ("War?", "Did the US declare War?", "Rhombus"), "Arrow", "Yes");  
-(("War?"), ("Zombie?", "Is it a Zombie Attack?", "Rhombus"), "Arrow", "No");  
-(("Zombie?"), ("Fire?", "Is there a Fire?", "Rhombus"), "Arrow", "No");  
-(("Fire?"), ("Dead?", "Is Someone Dead?", "Rhombus"), "Arrow", "No");  
-(("Dead?"), ("Sad later", "I'll be sad later. Let me be happy now", "Rectangle"), "Arrow", "Yes");  
-(("Sad later"), ("End", "End", "Stadium"), "Arrow");
-(("War?"), ("Evacuating?", "Are we evacuating?", "Rhombus"), "Arrow", "Yes");  
-(("Zombie?"), ("Evacuating?"), "SideArrow", "Yes");  
-(("Fire?"), ("Evacuating?"), "SideArrow", "Yes"); 
-(("Evacuating?"), ("Knock", "KNOCK!", "Rectangle"), "Arrow", "Yes");
-(("Emergency?"), ("Visiting?", "Is someone visiting?", "Rhombus"), "Arrow", "No");
-(("Visiting?"), ("They can wait", "They can wait", "Rectangle"), "Arrow", "Yes");  
-(("Visiting?"), ("Going somewhere?", "Are you going somewhere?", "Rhombus"), "Arrow", "No"); 
-(("Going somewhere?"), ("Tell me later", "Tell me later", "Rectangle"), "Arrow", "No");  
-(("Going somewhere?"), ("Leave a note", "Leave a note", "Rectangle"), "Arrow", "Yes");
-(("Evacuating?"), ("Tell me later"), "Arrow", "Yes");  
-(("Dead?"), ("Tell me later"), "SideArrow", "Yes");
+test9
+RightLeft
+
+ Start ([Start])  Stadium  -->   Emergency? {Is it an Emergency?}  
+   Emergency?  --> |Yes|  War? {Did the US declare War?}  
+   War? --> |No|  Zombie? {Is it a Zombie Attack?} 
+   Zombie?-->|no| Fire? {Is there a Fire?}
+   Fire? --> |No| Dead? {Is Someone Dead?} 
+   Dead?  -->   |Yes| Sad later [I'll be sad later. Let me be happy now]
+   Sad later -->   End ([End])
+   War?  --> |Yes| Evacuating? { Are we evacuating?} 
+   Zombie?  /-->|Yes|   Evacuating?
+   Fire?  /-->|Yes|   Evacuating? 
+   Evacuating?  --> |Yes|  Knock [KNOCK!] 
+   Emergency? --> |No|   Visiting? {Is someone visiting?}
+   Visiting?  -->  |Yes| They can wait [They can wait]
+   Visiting?  --> |No|   Going somewhere? {Are you going somewhere?}
+   Going somewhere?  -->  |No| Tell me later [Tell me later]  
+   Going somewhere? --> |Yes| Leave a note[Leave a note]
+   Evacuating?  --> |Yes|   Tell me later
+   Dead?  /--> |Yes| Tell me later   
+end
+.

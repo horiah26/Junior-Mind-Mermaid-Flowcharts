@@ -1,13 +1,16 @@
+test2
+TopDown
 
-(("Collect", "Collect late payments", "Stadium"), ("Send", "Send Collection Letter", "Rectangle"), "Arrow");
-(("Send"), ("Rhombus1", "Payment received within one week?", "Rhombus"), "Arrow");
-(("Rhombus1"), ("Assistant", "Accounting Assistant Calls Customer for Payment", "Rectangle"), "Arrow", "No");
-(("Rhombus1"), ("Forward", "Forward Payment to Payment Processing", "Parallelogram"), "Arrow", "Yes");
-(("Assistant"), ("Received?", "Payment Received?", "Rhombus"), "Arrow");
-(("Received?"), ("Forward"), "BackArrow", "Yes");
-(("Received?"), ("Payment>1000", "Payment > $1000?", "Rectangle"), "Arrow", "No");
-(("Payment>1000"), ("Invoice", "Write Off Invoice as closed", "Rectangle"), "Arrow", "No");
-(("Payment>1000"), ("Agency", "Contact Collection Agency", "Rectangle"), "Arrow", "Yes");
-(("Agency"), ("End", "End", "Stadium"), "Arrow");
-(("Invoice"), ("End"), "Arrow");
-(("Forward"), ("End"), "Arrow");
+Collect ([Collect late payments]) --> Send[Send Collection Letter]
+Send --> Rhombus1 {Payment received within one week?}
+Rhombus1 -->|No| Assistant[Accounting Assistant Calls Customer for Payment]
+Rhombus1 --> |Yes| Forward [/Forward Payment to Payment Processing/]
+Assistant --> Received? {Payment received?}
+Received? -->|No| Payment [Payment over $1000?"]
+Payment -->|No| Invoice[Write off Invoice as closed]
+Payment -->|Yes| Agency [Contact Collection Agency]
+Agency --> End ([End])
+Invoice --> End
+Forward --> End
+end
+.

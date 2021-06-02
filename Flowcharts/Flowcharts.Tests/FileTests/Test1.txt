@@ -1,13 +1,19 @@
-("A1", "Ordering services", "Stadium"), ("A2", "Complete purchace requisition form (Use CCPR if payment is made by credit card)", "Rectangle"), "Arrow"
-("A2"), ("A3", "Approved ?", "Rectangle"), "Arrow"
-("A3"), ("A4", "Is service to be provided by an independednt contractor?", "Rectangle"), "Arrow", "Yes"
-("A3"), ("A5", "Modify terms and conditions to Comply with requirements", "Rectangle"), "Arrow", "No"
-("A5"), ("A2", "Complete purchace requisition form (Use CCPR if payment is made by credit card)", "Rectangle"), "BackArrow"
-("A4"), ("A6", "Are there an independent Contractor's Agreement and W-9 on file?", "Rectangle"), "Arrow", "Yes"
-("A4"), ("A7", "Obtain P.O. from Controller", "Rectangle"), "Arrow", "No"
-("A6"), ("A9", "No", "Rectangle"), "Arrow"
-("A6"), ("A10",  "Yes", "Rectangle"), "Arrow"
-("A7"), ("A8", "Place Request for services with Vendor or contractor", "Circle"), "Arrow"
-("A9"), ("A11", "Obtain independent contractor's agreement and W-9", "Rectangle"), "Arrow"
-("A11"), ("A6"), "BackArrow"
-("A10"), ("A7"), "BackArrow"
+test1
+LeftRight
+
+Ordering ([Ordering services]) --> Complete[Complete purchace requisition form (Use CCPR if payment is made by credit card)]
+Complete --> Approved? [Approved?]
+Approved? -->|Yes| Independent?[Is service to be provided by an independednt contractor?]
+Approved? --> |No| Modify [Modify terms and conditions to Comply with requirements]
+Modify <-- Complete
+Independent? -->|Yes| W9 [Are there an independent Contractor's Agreement and W-9 on file?]
+Independent? -->|No| P.O.[Obtain P.O. from Controller]
+W9 --> No[No]
+W9 --> Yes[Yes]
+P.O. --> Request (("Place Request for services with Vendor or contractor"))
+No-->Obtain[Obtain independent contractor's agreement and W-9]
+Obtain <--W9
+Yes <-- P.O.
+end
+.
+

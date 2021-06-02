@@ -1,19 +1,33 @@
-(("Start", "Receive order from customer", "Rectangle"), ("Design?", "Is design required?", "Rhombus"), "Arrow");
- (("Design?"), ("Design", "Design to requirements", "Rectangle"), "Arrow", "Yes");
- (("Design?"), ("Buy materials", "Buy materials", "Rectangle"), "Arrow", "No");
- (("Buy materials"), ("Receive parts", "Receive parts from customers", "Rectangle"), "Arrow");
- (("Buy materials"), ("Receive material", "Receive material", "Rectangle"), "Arrow");
- (("Design"), ("Buy materials"), "SideArrow");
- (("Receive parts"), ("Acceptable?", "Is material acceptable?", "Rhombus"), "Arrow");
- (("Receive material"), ("Acceptable?"), "Arrow");
- (("Acceptable?"), ("Inspection results", "Inspection results", "Parallelogram"), "Arrow");
- (("Acceptable?"), ("Build", "Build to requirements", "Rectangle"), "Arrow", "Yes");
- (("Acceptable?"), ("Return", "Return to subcontractors", "Rectangle"), "Arrow", "No");
- (("Return"), ("Receive material"), "BackArrow");
- (("Build"), ("Verify", "Verify built to requirements", "Rectangle"), "Arrow");
- (("Verify"), ("Acceptable product?", "Is product acceptable?", "Rhombus"), "Arrow");
- (("Acceptable product?"), ("Inspection results2", "Inspection results", "Parallelogram"), "Arrow");
- (("Acceptable product?"), ("Package", "Package and ship finished product", "Rectangle"), "Arrow", "Yes");
- (("Acceptable product?"), ("Rework", "Rework to requirements", "Rectangle"), "Arrow", "No");
- (("Rework"), ("Verify"), "BackArrow");
- (("Package"), ("Support", "Provide service support", "Rectangle"), "Arrow");
+test5
+DownTop
+
+Start [Receive order from customer] --> Design? {Is design required?}
+Design? -->|Yes| Design [Design to requirements] 
+Design? -->|No| Buy materials [Buy materials]
+Buy materials --> Receive parts [Receive parts from customers]
+Buy materials --> Receive material [Receive material]
+
+ Design /--> Buy materials
+
+Receive parts --> Acceptable?{Is material acceptable?} 
+
+Receive material --> Acceptable?
+
+Acceptable? --> Inspection results[/Inspection results/]
+
+ Acceptable? --> |Yes| Build [Build to requirements]
+ Acceptable? -->|No| Return  [Return to subcontractors] 
+
+ Return <--Receive material 
+
+ Build --> Verify[Verify built to requirements]
+
+ Verify --> Acceptable product? {Is product acceptable?}
+ Acceptable product? --> Inspection results2[/Inspection results/]
+ Acceptable product? -->|Yes| Package[Package and ship finished product]
+ Acceptable product? --> |No| Rework [Rework to requirements]
+ Rework <-- Verify 
+ Package --> Support[Provide service support]
+
+end
+.

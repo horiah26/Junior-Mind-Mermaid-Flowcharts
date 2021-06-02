@@ -1,18 +1,23 @@
- (("Start", "Customer Payment Processing", "Stadium"), ("Receive Payment", "Receive Payment in Mail", "Rectangle"), "Arrow");
- (("Receive Payment"), ("Invoice?", "Does Payment Correspond To Outsanding Invoice?", "Rhombus"), "Arrow");
- (("Invoice?"), ("Forward copy", "Forward Copy of Check to Sales Department to Write Order?", "Rectangle"), "Arrow", "No");
- (("Forward copy"), ("Create Invoice", "Create Invoice For Order", "Rectangle"), "Arrow");
- (("Invoice?"), ("Match Payment", "Match Payment to Invoice", "Rectangle"), "Arrow", "Yes");
- (("Create Invoice"), ("Match Payment"), "SideArrow");
- (("Match Payment"), ("Accounts Match?", "Accounts Match?", "Rectangle"), "Arrow");
- (("Accounts Match?"), ("Record Receipt", "Record Receipt in Accounting System and Deposit Check", "Stadium"), "Arrow", "Yes");
- (("Accounts Match?"), ("Discrepancy?", "Is Discrepancy Over $500?", "Rectangle"), "Arrow", "No");
- (("Discrepancy?"), ("Write off", "Write off Discrepancy", "Rectangle"), "Arrow", "No");
- (("Discrepancy?"), ("Overpayment?", "Is Discrepancy an Overpayment?", "Rectangle"), "Arrow", "Yes");
- (("Write off"), ("Record Receipt"), "BackArrow");
+test8
+RightLeft
 
- (("Overpayment?"), ("Issue Refund", "Issue Refund for Amount of Overpayment", "Rectangle"), "Arrow", "Yes");
- (("Overpayment?"), ("Contact Costumer", "Contact Customer to Request Balance of Payment", "Rectangle"), "Arrow", "No");
+Start([Customer Payment Processing]) --> Receive Payment[Receive Payment in Mail]
+ Receive Payment--> Invoice?{Does Payment Correspond To Outsanding Invoice?}
+ Invoice? --> |No| Forward copy[Forward Copy of Check to Sales Department to Write Order?]
+ Forward copy--> Create Invoice[Create Invoice For Order]
+ Invoice?--> |Yes| Match Payment[Match Payment to Invoice]
+ Create Invoice /--> Match Payment
+ Match Payment --> Accounts Match?[Accounts Match?]
+ Accounts Match? -->|Yes| Record Receipt([Record Receipt in Accounting System and Deposit Check])
+ Accounts Match? -->|No| Discrepancy?[Is Discrepancy Over $500?]
+ Discrepancy?--> |No| Write off[Write off Discrepancy, Rectangle]
+ Discrepancy?--> |Yes| Overpayment?[Is Discrepancy an Overpayment?]
+ Overpayment? -->|Yes| Issue Refund[Issue Refund for Amount of Overpayment]
+ Overpayment? --> |No| Contact Costumer[Contact Customer to Request Balance of Payment]
 
- (("Issue Refund"), ("Record Receipt"), "BackArrow");
- (("Contact Costumer"), ("Receive Payment"), "BackArrow");
+ Issue Refund <-- Record Receipt
+ Contact Costumer<-- Receive Payment
+ Write off <-- Record Receipt
+
+end
+.

@@ -21,21 +21,21 @@ namespace Flowcharts
             string arrow = null;
             string text = null;
 
-            if (line.IndexOf("-->") != -1)
-            {
-                var index = line.IndexOf("-->");
-                element1 = line.Substring(0, index).Trim();
-                secondHalf = line[(index + 3)..].Trim();
-                (text, element2) = SeparateArrowTextFromElement2(secondHalf);
-                arrow = "Arrow";
-            }
-            else if (line.IndexOf("/-->") != -1)
+            if (line.IndexOf("/-->") != -1)
             {
                 var index = line.IndexOf("/-->");
                 element1 = line.Substring(0, index).Trim();
                 secondHalf = line[(index + 4)..].Trim();
                 (text, element2) = SeparateArrowTextFromElement2(secondHalf);
                 arrow = "SideArrow";
+            }
+            else if(line.IndexOf("-->") != -1)
+            {
+                var index = line.IndexOf("-->");
+                element1 = line.Substring(0, index).Trim();
+                secondHalf = line[(index + 3)..].Trim();
+                (text, element2) = SeparateArrowTextFromElement2(secondHalf);
+                arrow = "Arrow";
             }
             else if (line.IndexOf("<--") != -1)
             {
