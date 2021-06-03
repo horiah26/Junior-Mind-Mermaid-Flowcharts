@@ -35,24 +35,30 @@ namespace Flowcharts
 
         public void ReadFromFile()
         {
-            lines = File.ReadAllLines(inputLocation);
-            string fileName = lines[0];
-            string orientation = lines[1];
+            var fileType = Path.GetExtension(inputLocation);
 
-            flowchart = Factory.Flowchart(orientation, fileName, writeTo);
-            GridSpacing.SetLarge();
-                       
-            for (int i = 2; i < lines.Length; i++)
+            if (fileType == ".txt" || fileType == ".rtf" || fileType == ".doc" || fileType == ".docx") 
             {
-                if (lines[i].ToLower() == "end")
+                lines = File.ReadAllLines(inputLocation);
+
+                string fileName = lines[0];
+                string orientation = lines[1];
+
+                flowchart = Factory.Flowchart(orientation, fileName, writeTo);
+                GridSpacing.SetLarge();
+
+                for (int i = 2; i < lines.Length; i++)
                 {
-                    break;
+                    if (lines[i].ToLower() == "end")
+                    {
+                        break;
+                    }
+
+                    ProcessLineFromConsole(lines[i]);
                 }
 
-                ProcessLineFromConsole(lines[i]);
+                flowchart.DrawFlowchart();
             }
-
-            flowchart.DrawFlowchart();
         }
 
         public void ProcessLineFromConsole(string line)
