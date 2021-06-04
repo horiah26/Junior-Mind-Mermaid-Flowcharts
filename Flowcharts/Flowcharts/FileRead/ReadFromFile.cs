@@ -27,7 +27,7 @@ namespace Flowcharts
                     var element2 = ExtractSecondElementFromLine(trimmedLine);
                     var arrowAndText = ExtractArrowAndText(trimmedLine);
 
-                    elementSpecs.Add(new ElementSpecs(element1, element2, arrowAndText));
+                    elementSpecs.Add(ConsoleOperations.CreateElementSpecs(element1, element2, arrowAndText));
                 }
             }
 

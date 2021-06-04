@@ -45,5 +45,15 @@ namespace Flowcharts
         {
             new ReadLinesFromArgs(lines).ReadFromFile();
         }
+
+        public static ElementSpecs CreateElementSpecs(IEnumerable<string> element1, IEnumerable<string> element2, IEnumerable<string> arrowAndText)
+        {
+            return new ElementSpecs(element1, element2, arrowAndText);
+        }
+
+        public static void VerifyFormat(string[] lines)
+        {
+            new FormatVerification(lines).CheckIfGoodFormat();
+        }
     }
 }
