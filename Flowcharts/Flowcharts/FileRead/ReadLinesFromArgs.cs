@@ -37,8 +37,6 @@ namespace Flowcharts
         {
             lines = File.ReadAllLines(inputLocation);
 
-            ConsoleOperations.VerifyFormat(lines);
-
             string fileName = lines[0];
             string orientation = lines[1];
 

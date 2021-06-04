@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
 
 namespace Flowcharts
 {
@@ -20,17 +21,17 @@ namespace Flowcharts
             {
                 throw new InputFormatException("File is empty");
             }
-            if (lines.Length == 1)
+            if (lines.Where(x=> x.Trim() != "").ToList().Count < 3) 
             {
-                throw new InputFormatException("Input file cannot have only one line");
+                throw new InputFormatException("File must have at least 3 lines");
             }
             if (lines[0].Trim() == "" || lines[0] == null)
             {
-                throw new InputFormatException("The first line is the output file name and cannot be empty");
+                throw new InputFormatException("The first line is the resulting SVG filename and cannot be empty");
             }
             if(!orientations.Contains(lines[1]))
             {
-                throw new InputFormatException("The second line is the flowchart orientation and must be either LeftRight, RightLeft, TopDown or DownTop");
+                throw new InputFormatException("The second line must be one of the following: LeftRight, RightLeft, TopDown or DownTop");
             }
 
             for (int i = 2; i< lines.Length; i++)
@@ -44,7 +45,7 @@ namespace Flowcharts
 
                 if(line != "" && !ContainsArrow(line) && !ContainsSubsystem(line))
                 {
-                    throw new InputFormatException("Line must contain either one of the arrow symbols or subsystem commands");
+                    throw new InputFormatException("Line must contain one of the following: \"-->\", \"/-->\", \"<--\", \"==>\", \"---\", \"-.->\", \"end\", \"subsystem\" or \"end subsystem\"");
                 }               
             }
         }

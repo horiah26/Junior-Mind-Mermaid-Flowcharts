@@ -140,7 +140,7 @@ namespace Flowcharts
                     return (key, text, null);
                 }
 
-                throw new InputFormatException("Shape paranthesis is incorrect or key is not in dictionary");
+                throw new InputFormatException("Shape paranthesis is incorrect or id does not belong to a previously declared element");
             }
 
             key = component.Substring(0, firstIndex).Trim();
