@@ -38,7 +38,7 @@ namespace Flowcharts
             {
                 string line = lines[i].Trim();
 
-                if(line == "end")
+                if(line.ToLower() == "end")
                 {
                     break;
                 }

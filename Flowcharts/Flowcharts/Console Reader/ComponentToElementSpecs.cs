@@ -132,15 +132,17 @@ namespace Flowcharts
             {
                 var dictionary = flowchart.elementRegister.dictionary;
 
-                if (dictionary.ContainsKey(component.Trim()))
+                try
                 {
                     key = dictionary[component].Key;
                     text = dictionary[component].Text;
-
                     return (key, text, null);
                 }
+                catch (Exception)
+                {
+                    throw new InputFormatException("Shape declaration is incorrect or id does not belong to a known element");
+                }
 
-                throw new InputFormatException("Shape paranthesis is incorrect or id does not belong to a previously declared element");
             }
 
             key = component.Substring(0, firstIndex).Trim();
